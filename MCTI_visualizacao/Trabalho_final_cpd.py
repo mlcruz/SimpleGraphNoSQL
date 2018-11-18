@@ -29,8 +29,7 @@ for tabela in lista_tabelas:
     insert(tabela.table_label,tabela,t.root)
 
 
-
-
+t.yield_strings()
 
 
 
