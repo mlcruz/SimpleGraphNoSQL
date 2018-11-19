@@ -3,7 +3,6 @@ import xlrd
 from collections import defaultdict
 
 
-
 class Cell(object):
     '''Classe que representa uma celula da tabela. Recebe um objeto do tipo sheet do xrld como entrada
         e uma posicao X referente a linha e Y referente a celula. Cria um objeto do tipo celula classificando o tipo de celula e guardando dados'''
@@ -13,13 +12,18 @@ class Cell(object):
         ###Inicializa celula, definindo atribuitos e o tipo da celula
         #self.cell_type define o tipo da variavel:
         #Tipos possiveis: Leaf -> Representa uma celula do excel contendo dados e mais nada. É relacionada a duas chaves, uma de linha(key) e outra de coluna(key_col)
-        #               : Key_Row -> Representa uma chave que ordena outras chaves(exemplo: ANO). Uma por tabela
-        #                 Key_Col ->Representa uma chave que dá sentido a uma coluna. Podem existir varias por tabela
-        #                 Key -> Representa uma chave presente em uma Key_col
-        #                 Super_Key -> Representa uma chave que é pai de outras chaves ou de uma chave coluna. 
-        #                 Label -> Representa o nome da tabela, é a raiz da arvore e pai de todos os outros nodos
-        #                 Merge -> Representa uma celula que foi unida uma outra celula e não tem dados
-        #                 Blank ->Não faz parte da tabela, dado vazio que pode ser removido sem alterações
+        ##               : Key_Row -> Representa uma chave que ordena outras chaves(exemplo: ANO). Uma por tabela
+        ##                 Key_Col ->Representa uma chave que dá sentido a uma coluna. Podem existir varias por tabela
+        ##                 Key -> Representa uma chave presente em uma Key_col
+        ##                 Super_Key -> Representa uma chave que é pai de outras chaves ou de uma chave coluna. 
+        ##                 Label -> Representa o nome da tabela, é a raiz da arvore e pai de todos os outros nodos
+        ##                 Merge -> Representa uma celula que foi unida uma outra celula e não tem dados
+        ##                 Blank ->Não faz parte da tabela, dado vazio que pode ser removido sem alterações
+        ################################################################################################################################
+
+
+
+
 
         #Atributos usados para organização da tabela:
         
@@ -30,7 +34,6 @@ class Cell(object):
         #self.sizex = indica tamanho x da celula
         #self.sizex = indica tamanho y da celula
 
-
         
         #Inicializa data boundary como 2, indicando primeira chave se col_row não é merged
         self.data_boundary = 2
@@ -39,14 +42,27 @@ class Cell(object):
         self.originy = Y
         self.sizex = 1
         self.sizey = 1
+        self.x = X
+        self.y = Y
         self.bounds = (X,X+1,Y,Y+1)
         self.cell_type = '0' #indica tipo ainda não classificado
         self.data = sheet.cell_value(rowx=X, colx=Y)
 
+        #Representa o local da celula pai da celula atual. Key_Row é pai de Key, Super_key é pai de Key_col.
+        #Inicializado com -1 para indicar que ainda não está atribuido. Somente para não folhas
+        self.parent_node = -1
+
+
+        #Lista representando todos os nodos filhos da celula. Somente para não folhas
+        self.child_nodes = []
+
+        #Variaveis representando as chaves de ordenação da celula.
+        self.key_row = -1
+        self.key_col = -1
 
 
 
-    #Calcula tamanho da celula, merges e data boundaries da folha.
+        #Calcula tamanho da celula, merges e data boundaries da folha.
         for merged in sheet.merged_cells:
        
             #Calcula onde inicia cada campo de dados a partir do tamanho da coluna indexadora no caminho
@@ -90,8 +106,8 @@ class Cell(object):
                     
 
 
-        #Se não é um merge e nem é raiz
-        if (self.cell_type == '0') and not( (Y == 0) and (Y == 0)) :
+        #Se não é um merge e nem é raiz, classifica celula dentro dos outros tipos possiveis
+        if (self.cell_type == '0') and not( (Y == 0) and (X == 0)) :
             #Se Y é menor que blank_boundary, não é blank
             if Y >= self.blank_boundary:
                 self.cell_type = "Blank"
@@ -116,11 +132,18 @@ class Cell(object):
                         self.cell_type = 'Key'
                     else:
                         self.cell_type = 'Leaf'
-        else:
+        elif self.cell_type == '0':
             #Se é raiz, é raiz
             self.cell_type = 'Label'
+
+
+                    
+def get_cell(cell,table_data):
+    '''Retorna uma celula tratando merges. Recebe um objeto do tipo Cell e uma table_data de uma tabela e Sempre retorna uma celula origem, é reflixiva para celulas não merge'''
+    return table_data[cell.originx][cell.originy]
         
-  
+
+         
 ##########    
 ##########
 
@@ -148,14 +171,28 @@ class Table(object):
         for X in range(self.raw_sheet.nrows):
             for Y in range (self.raw_sheet.ncols):
                 self.table_data[X][Y] = Cell(self.raw_sheet,X,Y)
+        
+        #Gera atributos de pai, filhos e chaves de ordenação a partir do tipo da celula da tabela logica para cada celula
+        for X in range(self.raw_sheet.nrows):
+            for Y in range (self.raw_sheet.ncols):
+                #Classifica dependendo do tipo
+                if self.table_data[X][Y].cell_type == "Leaf":
+                    #Se leaf, aponta celulas que ordenam a mesma
+                    #Aponta celula ordenadora de linha, definida pela sua linha e coluna. 
+                    self.table_data[X][Y].key_row = self.table_data[X][0]
+
+                    #Aponta para ordenadora de coluna, tratando merges. Indicado pela primeira linha antes da data boundary
+                    self.table_data[X][Y].key_col = get_cell(self.table_data[(self.table_data[X][Y].data_boundary - 1)][Y],self.table_data)
 
 
 
 
         
-        
 
 
+
+
+     
             
             
         

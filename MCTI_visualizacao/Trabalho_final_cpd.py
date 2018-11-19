@@ -1,5 +1,5 @@
 #classe tabela representando um objeto tabela
-from Tabela import Table, Cell
+from Tabela import Table, Cell, get_cell
 
 from Trie import Trie, insert
 
