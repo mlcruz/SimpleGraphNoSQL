@@ -20,18 +20,30 @@ class Trie(object):
         '''Inicializa raiz da trie como um defaultdict com uma factory de dicionarios'''
         #A ideia aqui é representar uma Trie como grupos de dicionarios aninhados. A ideia era usar defaultsdicts anilnhados, mas não deu certo
         self.root = Nodo(0,0)
-        self.strings = []
+        
+        #Strings resultados da ultima busca da função yield_strings. Formato de dicionario para acesso mais eficiente
+        self.strings_dict = defaultdict()
+
+        #Formato de lista para acesso sequencial caso necessario
+        self.strings_list = []
+        
         
     def yield_strings(self,trie):
-        self.strings.clear()
+        self.strings_dict.clear()
+        self.strings_list.clear()
         self.__yield_strings_aux(trie)
+        return self.strings_dict
 
 
     def __yield_strings_aux(self,trie,string = "" ):
         """Retorna todas as palavras na trie especificada. Usa como criterio de ser palavra a existencia de um "dados" não nulo"""
     
         if(trie.data != 0):
-            self.strings.append(string)   
+            #Ao encontrar uma folha, cria uma chave para um dicionario com a string da folha como chave e os dados como valor
+            self.strings_dict[string] = trie.data
+
+            #Cria uma lista de strings encontradas
+            self.strings_list.append(string)
 
         elif(not bool(trie.child)):
             print("fim nodo - {0}".format(string))
@@ -40,11 +52,6 @@ class Trie(object):
             key_list = trie.child.keys()
             for key in key_list:
                 self.__yield_strings_aux(trie.child[key],string+key)
-
-    
-
-
-
 
 
 def insert(string, data, trie):
@@ -83,7 +90,6 @@ def insert(string, data, trie):
         trie.child[last_char] = Nodo(last_char,data)
 
 
-#Função geradora para cada string na trie
 
 
 

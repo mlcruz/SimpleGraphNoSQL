@@ -1,5 +1,5 @@
 #classe tabela representando um objeto tabela
-from Tabela import Tabela
+from Tabela import Table
 
 from Trie import Trie
 from Trie import insert
@@ -21,7 +21,7 @@ t = Trie()
 
 #Cria lista de objetos tabela
 for tabela in tabs:
-    lista_tabelas.append(Tabela(tabela))
+    lista_tabelas.append(Table(tabela))
 
 
 #Insere labes de tabela na trie
@@ -29,7 +29,7 @@ for tabela in lista_tabelas:
     insert(tabela.table_label,tabela,t.root)
 
 
-t.yield_strings()
+t.yield_strings(t.root)
 
 
 
