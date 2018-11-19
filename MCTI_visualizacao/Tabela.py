@@ -204,7 +204,7 @@ class RawTable(object):
                     for node in range(self.table_data[X][Y].data_boundary,self.raw_sheet.nrows):
                         self.table_data[X][Y].child_nodes.append(self.table_data[node][Y])
                
-               #Se é label         
+                #Se é label         
                 if self.table_data[X][Y].cell_type == "Label": 
                    #parent_node 0 pois é raiz
                    self.table_data[X][Y].parent_node = 0
@@ -212,6 +212,12 @@ class RawTable(object):
                    for node in range(self.raw_sheet.ncols):
                        if (self.table_data[1][node].cell_type != "Merge") and (self.table_data[1][node].cell_type != "Blank"):
                            self.table_data[X][Y].child_nodes.append(self.table_data[1][node])
+
+                if self.table_data[X][Y].cell_type == "Merge":
+                    #Se é merge, aponta filhos e pais para o do nodo origem
+                    self.table_data[X][Y].child_nodes = self.table_data[self.table_data[X][Y].originx][self.table_data[X][Y].originy].child_nodes
+                    self.table_data[X][Y].parent_node = self.table_data[self.table_data[X][Y].originx][self.table_data[X][Y].originy].parent_node
+
 
 
 

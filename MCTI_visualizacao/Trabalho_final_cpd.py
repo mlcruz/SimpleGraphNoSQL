@@ -2,7 +2,7 @@
 import aux_lib
 import sys
 
-sys.setrecursionlimit(15000)
+sys.setrecursionlimit(3000)
 
 
 
