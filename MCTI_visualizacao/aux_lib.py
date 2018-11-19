@@ -64,8 +64,6 @@ def load_trie(loc):
     #Retorna trie
     return t
 
-
-
 def generate_db_trie(loc):
     '''Recebe um local de pasta contendo tabelas pre formatadas e gera uma trie contendo as tabelas como folha e os caracteres das labels como nodo
        Retorna trie gerada

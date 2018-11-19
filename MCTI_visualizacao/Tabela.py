@@ -11,7 +11,7 @@ class Cell(object):
         
         ###Inicializa celula, definindo atribuitos e o tipo da celula
         #self.cell_type define o tipo da variavel:
-        #Tipos possiveis: Leaf -> Representa uma celula do excel contendo dados e mais nada. É relacionada a duas chaves, uma de linha(key) e outra de coluna(key_col)
+        #Tipos possiveis:  Leaf -> Representa uma celula do excel contendo dados e mais nada. É relacionada a duas chaves, uma de linha(key) e outra de coluna(key_col)
         ##               : Key_Row -> Representa uma chave que ordena outras chaves(exemplo: ANO). Uma por tabela
         ##                 Key_Col ->Representa uma chave que dá sentido a uma coluna. Podem existir varias por tabela
         ##                 Key -> Representa uma chave presente em uma Key_col
@@ -142,7 +142,6 @@ def get_cell(cell,table_data):
     '''Retorna uma celula tratando merges. Recebe um objeto do tipo Cell e uma table_data de uma tabela e Sempre retorna uma celula origem, é reflixiva para celulas não merge'''
     return table_data[cell.originx][cell.originy]
         
-
          
 ##########    
 ##########
@@ -166,6 +165,8 @@ class RawTable(object):
 
         #Representa matriz como dicionarios aninhados
         self.table_data = defaultdict(dict)
+        self.bound_x = self.raw_sheet.nrows
+        self.bound_y = self.raw_sheet.ncols
 
         #Gera tabela logica
         for X in range(self.raw_sheet.nrows):
@@ -181,8 +182,40 @@ class RawTable(object):
                     #Aponta celula ordenadora de linha, definida pela sua linha e coluna. 
                     self.table_data[X][Y].key_row = self.table_data[X][0]
 
+                    #Aponta nodo pai como chave
+                    self.table_data[X][Y].parent_node = self.table_data[X][Y].key_row
+
                     #Aponta para ordenadora de coluna, tratando merges. Indicado pela primeira linha antes da data boundary
                     self.table_data[X][Y].key_col = get_cell(self.table_data[(self.table_data[X][Y].data_boundary - 1)][Y],self.table_data)
+                if self.table_data[X][Y].cell_type == "Key":
+
+                    
+                    #Se Chave, aponta para ultimo Row_key como parente tratando merges
+                    self.table_data[X][Y].parent_node = get_cell(self.table_data[(self.table_data[X][Y].data_boundary - 1)][Y],self.table_data)
+                    #Aponta para todas os dados indexados por essa chave
+                    for node in range(1,self.raw_sheet.ncols):
+                        self.table_data[X][Y].child_nodes.append(self.table_data[X][node])
+
+                if (self.table_data[X][Y].cell_type == "Key_Row") or (self.table_data[X][Y].cell_type == "Key_Col"):
+                    #Usa a boudary superior do merge para apontar para o pai. Pai sempre vai ser a celula acima considerando merge
+                    self.table_data[X][Y].parent_node = get_cell(self.table_data[self.table_data[X][Y].bounds[0] - 1][Y],self.table_data)
+                    
+                    #Filhos da Key_Row/Col são as chaves abaixo da mesma
+                    for node in range(self.table_data[X][Y].data_boundary,self.raw_sheet.nrows):
+                        self.table_data[X][Y].child_nodes.append(self.table_data[node][Y])
+               
+               #Se é label         
+                if self.table_data[X][Y].cell_type == "Label": 
+                   #parent_node 0 pois é raiz
+                   self.table_data[X][Y].parent_node = 0
+                   #Filhos são todos os nodos da linha abaixo não Merge
+                   for node in range(self.raw_sheet.ncols):
+                       if (self.table_data[1][node].cell_type != "Merge") and (self.table_data[1][node].cell_type != "Blank"):
+                           self.table_data[X][Y].child_nodes.append(self.table_data[1][node])
+
+
+
+                        
 
 class Table(object):
     """Classe que representa uma tabela logica. Recebema uma Raw_Table e remove os campos desnecessarios Pode ser picklada"""
@@ -192,6 +225,8 @@ class Table(object):
         self.loc_source = raw_table.loc_source
         self.table_label = raw_table.table_label
         self.table_data = raw_table.table_data
+        self.bound_x = raw_table.raw_sheet.nrows
+        self.bound_y = raw_table.raw_sheet.ncols
 
 
 
