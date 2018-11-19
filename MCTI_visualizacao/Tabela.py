@@ -147,8 +147,8 @@ def get_cell(cell,table_data):
 ##########    
 ##########
 
-class Table(object):
-    """Classe que representa uma tabela"""
+class RawTable(object):
+    """Classe que representa uma tabela do excel na memoria. Guarda mais dados do que o necessario e não consegue ser pickleada"""
 
     def __init__(self, loc):
         """Inicializa uma tabela a partir de um local loc"""
@@ -183,6 +183,17 @@ class Table(object):
 
                     #Aponta para ordenadora de coluna, tratando merges. Indicado pela primeira linha antes da data boundary
                     self.table_data[X][Y].key_col = get_cell(self.table_data[(self.table_data[X][Y].data_boundary - 1)][Y],self.table_data)
+
+class Table(object):
+    """Classe que representa uma tabela logica. Recebema uma Raw_Table e remove os campos desnecessarios Pode ser picklada"""
+
+    def __init__(self, raw_table):
+        '''Inicializa Tabela com dados da raw table'''
+        self.loc_source = raw_table.loc_source
+        self.table_label = raw_table.table_label
+        self.table_data = raw_table.table_data
+
+
 
 
 
