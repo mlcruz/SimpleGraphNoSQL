@@ -1,8 +1,7 @@
 #classe tabela representando um objeto tabela
-from Tabela import Table
+from Tabela import Table, Cell
 
-from Trie import Trie
-from Trie import insert
+from Trie import Trie, insert
 
 #biblioteca de funcoes auxiliares
 import aux_lib
@@ -31,8 +30,7 @@ for tabela in lista_tabelas:
 
 t.yield_strings(t.root)
 
-
-
+teste = t.strings_dict[t.strings_list[0]]
 
 
 
