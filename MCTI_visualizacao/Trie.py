@@ -18,7 +18,7 @@ class Trie(object):
     """Implementa uma Trie para pesquisa de no nome de tabelas de maneira eficiente"""
     def __init__(self):
         '''Inicializa raiz da trie como um defaultdict com uma factory de dicionarios'''
-        #A ideia aqui é representar uma Trie como grupos de dicionarios aninhados. A ideia era usar defaultsdicts anilnhados, mas não deu certo
+        #A ideia aqui é representar uma Trie como grupos de dicionarios aninhados.
         self.root = Nodo(0,0)
         
         #Strings resultados da ultima busca da função yield_strings. Formato de dicionario para acesso mais eficiente

@@ -1,5 +1,5 @@
 #classe tabela representando um objeto tabela
-from Tabela import RawTable, Cell, get_cell, Table
+from Tabela import RawTable, Cell, get_cell, Table, get_name, normalize
 
 #Classe representados tries
 from Trie import Trie, insert
@@ -50,7 +50,7 @@ def save_trie(trie,loc):
         dill.dump(trie.strings_dict,file)
 
 def load_trie(loc):
-    '''Recebe um arquivo de memoria contendo um objeto gerado por load_trie e retorna uma trie com dos dados'''
+    '''Recebe um arquivo de memoria contendo um objeto gerado por save_trie e retorna uma trie com dos dados'''
     with open(loc,'rb') as file:
         data_dict = dill.load(file)
 

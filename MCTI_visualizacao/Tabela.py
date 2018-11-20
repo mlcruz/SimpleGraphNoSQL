@@ -1,6 +1,84 @@
 #xlrd é uma biblioteca para facilitar o parsing de tabelas xls do excel
 import xlrd
+#Default dics são dicionarios que ao receber uma chave que não existe, cria a chave a atribui um valor padrão
 from collections import defaultdict
+
+#Suporte para expressões regulares
+import regex
+
+#Para normalizar para NFKD
+import unicodedata
+
+def normalize(input_text):
+    """Normaliza String e lida com caracteres especiais. """
+    return_str = regex.sub(r'\u00DF','ss',input_text,)
+    return_str = regex.sub(r'\u1E9E','SS',return_str) # scharfes S
+    return_str = regex.sub(r'\u0111','d',return_str,)
+    return_str = regex.sub(r'\u0110','D',return_str) # crossed D
+    return_str = regex.sub(r'\u00F0','d',return_str,)
+    return_str = regex.sub(r'\u00D0','D',return_str) # eth
+    return_str = regex.sub(r'\u00FE','th',return_str,)
+    return_str = regex.sub(r'\u00DE','TH',return_str) # thorn
+    return_str = regex.sub(r'\u0127','h',return_str,)
+    return_str = regex.sub(r'\u0126','H',return_str) # H-bar
+    return_str = regex.sub(r'\u0142','l',return_str,)
+    return_str = regex.sub(r'\u0141','L',return_str) # L with stroke
+    return_str = regex.sub(r'\u0153','oe',return_str,)
+    return_str = regex.sub(r'\u0152','Oe',return_str) # Oe ligature
+    return_str = regex.sub(r'\u00E6','ae',return_str,)
+    return_str = regex.sub(r'\u00C6','Ae',return_str) # Ae ligature
+    return_str = regex.sub(r'\u0131','i',return_str,) #dotless i
+    return_str = regex.sub(r'\u00F8','o',return_str)
+    return_str = regex.sub(r'\u00D8','O',return_str) # o with stroke
+    return_str = regex.sub(r'[\u00B7\u02BA\uFFFD]','',return_str) # Catalan middle dot, double prime
+    return_str = unicodedata.normalize('NFKD',return_str)
+    return_str = regex.sub(r'[\u0300-\u036f]','',return_str) #Splits string into simple characters + modifiers and remove them
+    return_str = regex.sub(r'\%','',return_str) #Remove comments on normalization step
+    return return_str
+
+
+def get_name_labelless(cell, string =""):
+    '''Recursivamente percorre uma tabela em formato de arvore a partir de uma celula e retorna uma string com seu nome. Usa o caractere > como indicador de relacionamento pai-filho entre celulas
+       Diferentemente de get_name, essa função retorna a string do nome sem o nome da raiz
+        '''
+
+    #Se é raiz, fim.
+    if cell.cell_type == 'Label':
+        return string
+    #Se não, nome é nome do filho + > + nome do pai
+    if cell.cell_type == 'Merge' or cell.cell_type == 'Blank':
+        #Se é  merge/branco retorna merge vazio
+        return ""
+    else:
+        if string == "":
+            if cell.cell_type == 'Leaf':
+                #Se é folha, alem do nodo pai indica a chave de coluna no nome após o da chave de linha
+                return get_name_labelless(cell.parent_node,get_name_labelless(cell.key_col)+'>'+str(cell.data))
+            else:
+                return get_name_labelless(cell.parent_node,str(cell.data))
+        else:
+            return get_name_labelless(cell.parent_node,str(cell.data)+">"+string)
+
+def get_name(cell, string =""):
+    '''Recursivamente percorre uma tabela em formato de arvore a partir de uma celula e retorna uma string com seu nome. Usa o caractere > como indicador de relacionamento pai-filho entre celulas'''
+
+    #Se é raiz, fim.
+    if cell.cell_type == 'Label':
+        return cell.data + ">" + string
+    #Se não, nome é nome do filho + > + nome do pai
+    if cell.cell_type == 'Merge' or cell.cell_type == 'Blank':
+        #Se é  merge/branco retorna merge vazio
+        return ""
+    else:
+        if string == "":
+            if cell.cell_type == 'Leaf':
+                #Se é folha, alem do nodo pai indica a chave de coluna no nome após o da chave de linha
+                return get_name(cell.parent_node,get_name_labelless(cell.key_col)+'>'+str(cell.data))
+            else:
+                return get_name(cell.parent_node,str(cell.data))
+        else:
+            return get_name(cell.parent_node,str(cell.data)+">"+string)
+
 
 
 class Cell(object):
@@ -59,7 +137,9 @@ class Cell(object):
         #Variaveis representando as chaves de ordenação da celula.
         self.key_row = -1
         self.key_col = -1
-
+        
+        #Variavel representando nome completo da celula, que leva em conta as chaves que à ordenam e sua label da tabela
+        self.cell_name = ""
 
 
         #Calcula tamanho da celula, merges e data boundaries da folha.
@@ -187,6 +267,11 @@ class RawTable(object):
 
                     #Aponta para ordenadora de coluna, tratando merges. Indicado pela primeira linha antes da data boundary
                     self.table_data[X][Y].key_col = get_cell(self.table_data[(self.table_data[X][Y].data_boundary - 1)][Y],self.table_data)
+
+                elif(self.table_data[X][Y].cell_type != "Key"):
+                     self.table_data[X][Y].data = ((normalize(str(self.table_data[X][Y].data))).lstrip()).rstrip() 
+                    #Se não é leaf nem key, normaliza data e converte para string e tira espaços
+                
                 if self.table_data[X][Y].cell_type == "Key":
 
                     
@@ -196,7 +281,7 @@ class RawTable(object):
                     for node in range(1,self.raw_sheet.ncols):
                         self.table_data[X][Y].child_nodes.append(self.table_data[X][node])
 
-                if (self.table_data[X][Y].cell_type == "Key_Row") or (self.table_data[X][Y].cell_type == "Key_Col"):
+                if (self.table_data[X][Y].cell_type == "Key_Row") or (self.table_data[X][Y].cell_type == "Key_Col") or (self.table_data[X][Y].cell_type == "Super_Key"):
                     #Usa a boudary superior do merge para apontar para o pai. Pai sempre vai ser a celula acima considerando merge
                     self.table_data[X][Y].parent_node = get_cell(self.table_data[self.table_data[X][Y].bounds[0] - 1][Y],self.table_data)
                     
@@ -213,16 +298,44 @@ class RawTable(object):
                        if (self.table_data[1][node].cell_type != "Merge") and (self.table_data[1][node].cell_type != "Blank"):
                            self.table_data[X][Y].child_nodes.append(self.table_data[1][node])
 
+                
                 if self.table_data[X][Y].cell_type == "Merge":
                     #Se é merge, aponta filhos e pais para o do nodo origem
                     self.table_data[X][Y].child_nodes = self.table_data[self.table_data[X][Y].originx][self.table_data[X][Y].originy].child_nodes
                     self.table_data[X][Y].parent_node = self.table_data[self.table_data[X][Y].originx][self.table_data[X][Y].originy].parent_node
+          
+                    
+
+        #Completa nomes nas celulas
+        for X in range(self.raw_sheet.nrows):
+            for Y in range (self.raw_sheet.ncols):    
+                if(self.table_data[X][Y].cell_type == "Merge"):
+                    #Se é merge, completa nome dependendo do nome da origem
+                    if(self.table_data[X][Y].parent_node != 0 and self.table_data[X][Y].parent_node != -1):
+                    #Se não é merge da raiz, atribui nome pelo nome da origem
+                        self.table_data[X][Y].cell_name = self.table_data[X][Y].parent_node.cell_name
+                    else:
+                        #Atribui nome da raiz se merge da raiz
+                        self.table_data[X][Y].cell_name = get_cell(self.table_data[X][Y],self.table_data).data
+
+
+                elif(self.table_data[X][Y].cell_type == "Label"):
+                    self.table_data[X][Y].cell_name = self.table_data[X][Y]
+                else:
+                    #Se não é merge, atribui nome
+                    self.table_data[X][Y].cell_name = get_name(self.table_data[X][Y])
 
 
 
+                
 
-                        
+        
 
+
+        
+
+
+                      
 class Table(object):
     """Classe que representa uma tabela logica. Recebema uma Raw_Table e remove os campos desnecessarios Pode ser picklada"""
 

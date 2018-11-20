@@ -1,8 +1,8 @@
-#biblioteca de funcoes auxiliares
+#biblioteca de funcoes auxiliares contendo todas as outras bibliotecas. Ver codigo para mais detalhes
 import aux_lib
 import sys
 
-sys.setrecursionlimit(3000)
+sys.setrecursionlimit(15000)
 
 
 
