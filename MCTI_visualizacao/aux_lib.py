@@ -2,7 +2,7 @@
 from Tabela import RawTable, Cell, get_cell, Table, get_name, normalize
 
 #Classe representados tries
-from Trie import Trie, insert
+from Trie import Trie, insert, walk_to
 
 #Persistencia
 import dill
@@ -41,6 +41,7 @@ def generate_loc(tab_loc):
     while(get != 0):
         yield loc+get
         get = next(tabs)
+
 
 def save_trie(trie,loc):
     '''Cria um arquivo em disco representando a Trie contendo todos os dados como um arquivo binario. Pode ser revertido com load_trie

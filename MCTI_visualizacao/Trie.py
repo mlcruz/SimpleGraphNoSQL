@@ -1,6 +1,6 @@
 #Default dict para implementar tries
-
 from collections import defaultdict
+from Tabela import normalize
 
 
 class Nodo(object):
@@ -8,14 +8,19 @@ class Nodo(object):
 
     def __init__(self,char_data, data):
         '''Inicializa nodos com dados. char_data é o caractere, e data são os dados ligados aquele nodo. Representar nenhum dado como 0 '''
+        #Filhos do nodo
         self.child = defaultdict(dict)
+
+        #Pai do nodo. 0 indica raiz, -1 não atribuido
+        self.parent = -1
+
         #0 em chard indica raiz
         self.chard = char_data
         self.data = data
 
 
 class Trie(object):
-    """Implementa uma Trie para pesquisa de no nome de tabelas de maneira eficiente"""
+    """Implementa uma Trie para pesquisa no nome de tabelas de maneira eficiente"""
     def __init__(self):
         '''Inicializa raiz da trie como um defaultdict com uma factory de dicionarios'''
         #A ideia aqui é representar uma Trie como grupos de dicionarios aninhados.
@@ -55,14 +60,21 @@ class Trie(object):
 
 
 def insert(string, data, trie):
-    '''Insere a string no ultimo nodo da trie especificada'''
-    char_list = list(string)
+    '''Insere a string como chave ligada a um dado no ultimo nodo da trie especificada'''
+    char_list = list(normalize(string.lower()))
         
+    #Define proximo pai como nodo atual
+    current_parent = trie
+
     #Recursivamente insere na lista
     #Se a lista não esta no ultimo elemento, inseere recursivamente começando pelo primeiro caractere
     if(len(char_list) != 1):
+
+
         #testa se o nodo referente ao primeiro caractere existe. Se nao existir, retorna um dicionario vazio(ver defaultdict)
         current_child = trie.child[char_list[0]]
+        
+
 
         #testa se o filho tem dados antes de gravar 0. Se não é vazio, existe um nodo no filho
         if(current_child):
@@ -70,24 +82,51 @@ def insert(string, data, trie):
             #Se os dados não são vazios, vai pro proximo nodo sem inserir
 
             #Remove primeiro caractere da lista de caracteres
-            last_char = char_list.pop(0)
+            first_char = char_list.pop(0)
 
             #Chamada recursiva na string sem o primeiro char
-            insert(''.join(char_list),data,trie.child[last_char])
+            insert(''.join(char_list),data,trie.child[first_char])
         else:
             #Se é vazio, cria nodo no local e insere no proximo char
             trie.child[char_list[0]] = Nodo(char_list[0],0)
-                    
+
+            #Aponta pai do nodo
+            trie.child[char_list[0]].parent = current_parent
+            
             #Remove primeiro caractere da lista de caracteres
-            last_char = char_list.pop(0)
+            first_char = char_list.pop(0)
 
             #Chamada recursiva na string sem o primeiro char
-            insert(''.join(char_list),data,trie.child[last_char])
+            insert(''.join(char_list),data,trie.child[first_char])
 
     else:
         #Se está na ultima letra, fim
-        last_char = char_list.pop(0)
-        trie.child[last_char] = Nodo(last_char,data)
+        first_char = char_list.pop(0)
+        trie.child[first_char] = Nodo(first_char,data)
+        trie.child[first_char].parent = current_parent
+        
+
+def walk_to(trie, string):
+    '''Caminha a string na trie da raiz até o nodo onde termina a string recebida. Retorna o nodo destino ou -1 em caso de falha'''
+    
+    #Lista de caracteres a inserir
+    char_list = list(normalize(string.lower()))
+    #Se a lista não está vazia
+    if (char_list):
+        first_char = char_list.pop(0)
+        #Se existem nodos filhos
+        if (trie.child[first_char]):
+            return walk_to(trie.child[first_char],"".join(char_list))
+        else:
+            return -1
+    else:
+        #Se de caracteres está vazia, chegou no fim
+        return trie
+
+    
+
+#def moonwalk_to(nodo, string):
+    '''Caminha a string desejada saindo do nodo e indo no sentido da raiz. Retorna o nodo destino ou -1 em caso de falha'''
 
 
 

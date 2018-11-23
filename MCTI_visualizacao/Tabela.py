@@ -1,5 +1,6 @@
 #xlrd é uma biblioteca para facilitar o parsing de tabelas xls do excel
 import xlrd
+
 #Default dics são dicionarios que ao receber uma chave que não existe, cria a chave a atribui um valor padrão
 from collections import defaultdict
 
@@ -10,7 +11,8 @@ import regex
 import unicodedata
 
 def normalize(input_text):
-    """Normaliza String e lida com caracteres especiais. """
+    """Normaliza String e lida com caracteres especiais. Transforma qualquer string para uma string contendo somente caracteres não acentuados
+    """
     return_str = regex.sub(r'\u00DF','ss',input_text,)
     return_str = regex.sub(r'\u1E9E','SS',return_str) # scharfes S
     return_str = regex.sub(r'\u0111','d',return_str,)
@@ -79,7 +81,9 @@ def get_name(cell, string =""):
         else:
             return get_name(cell.parent_node,str(cell.data)+">"+string)
 
-
+def get_cell(cell,table_data):
+    '''Retorna uma celula tratando merges. Recebe um objeto do tipo Cell e uma table_data de uma tabela e Sempre retorna uma celula origem, é reflixiva para celulas não merge'''
+    return table_data[cell.originx][cell.originy]
 
 class Cell(object):
     '''Classe que representa uma celula da tabela. Recebe um objeto do tipo sheet do xrld como entrada
@@ -215,17 +219,7 @@ class Cell(object):
         elif self.cell_type == '0':
             #Se é raiz, é raiz
             self.cell_type = 'Label'
-
-
-                    
-def get_cell(cell,table_data):
-    '''Retorna uma celula tratando merges. Recebe um objeto do tipo Cell e uma table_data de uma tabela e Sempre retorna uma celula origem, é reflixiva para celulas não merge'''
-    return table_data[cell.originx][cell.originy]
-        
-         
-##########    
-##########
-
+              
 class RawTable(object):
     """Classe que representa uma tabela do excel na memoria. Guarda mais dados do que o necessario e não consegue ser pickleada"""
 
@@ -324,18 +318,7 @@ class RawTable(object):
                 else:
                     #Se não é merge, atribui nome
                     self.table_data[X][Y].cell_name = get_name(self.table_data[X][Y])
-
-
-
-                
-
-        
-
-
-        
-
-
-                      
+                         
 class Table(object):
     """Classe que representa uma tabela logica. Recebema uma Raw_Table e remove os campos desnecessarios Pode ser picklada"""
 
