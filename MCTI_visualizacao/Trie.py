@@ -199,7 +199,14 @@ def suffix_search(trie, string):
     w = walk_to(trie.reverse.root,r_string)
 
     #Retorna dados
-    data = get_all_data(w)
+    r_data = get_all_data(w)
+
+    data = defaultdict()
+
+    #Reverte a chave dos dados retornados
+    for key, value in r_data.items():
+        data[''.join(list(key)[::-1])] = value
+
     return data
 
 

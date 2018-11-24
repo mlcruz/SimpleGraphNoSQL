@@ -4,7 +4,7 @@
 from Tabela import RawTable, Cell, get_cell, Table, get_name, normalize, get_name_labelless
 
 #Importa Trie suas funções relacionadas
-from Trie import Trie, insert, walk_to, generate_reverse_trie, moonwalk_to, prefix_search, get_all_data, get_label
+from Trie import Trie, insert, walk_to, generate_reverse_trie, moonwalk_to, prefix_search, get_all_data, get_label, suffix_search
 
 #Persistencia
 import dill

@@ -17,8 +17,8 @@ teste = aux_lib.generate_db_trie(prefix_loc)
 #aux_lib.save_trie(teste,'teste.obj')
 #retorno = aux_lib.load_trie('teste.obj')
 
-aux_lib.prefix_search(teste,"brasil")
-
+p = aux_lib.prefix_search(teste,"brasil")
+s = aux_lib.suffix_search(teste,"atividade")
 
 
 
