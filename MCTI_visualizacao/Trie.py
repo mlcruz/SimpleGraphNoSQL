@@ -31,7 +31,9 @@ class Trie(object):
 
         #Formato de lista para acesso sequencial caso necessario
         self.strings_list = []
-        
+
+        #Apontador futuro para trie reversa
+        self.reverse = -1
         
     def yield_strings(self,trie):
         self.strings_dict.clear()
@@ -57,6 +59,7 @@ class Trie(object):
             key_list = trie.child.keys()
             for key in key_list:
                 self.__yield_strings_aux(trie.child[key],string+key)
+
 
 
 def insert(string, data, trie):
@@ -104,8 +107,26 @@ def insert(string, data, trie):
         first_char = char_list.pop(0)
         trie.child[first_char] = Nodo(first_char,data)
         trie.child[first_char].parent = current_parent
-        
 
+def generate_reverse_trie(trie):
+    '''Recebe uma trie e retorna a trie reversa(para busca por sufixo)
+    '''
+    
+    #Cria trie de retorno
+    t = Trie()
+
+    #Insere na trie os dados da trie original, mas com o nome reverso
+    for key in trie.strings_dict:
+        insert(key[::-1],trie.strings_dict[key],t.root)
+
+    t.yield_strings(t.root)
+
+    t.reverse = trie
+    trie.reverse = t
+
+    #Retorna trie
+    return t     
+    
 def walk_to(trie, string):
     '''Caminha a string na trie da raiz até o nodo onde termina a string recebida. Retorna o nodo destino ou -1 em caso de falha'''
     
@@ -123,13 +144,91 @@ def walk_to(trie, string):
         #Se de caracteres está vazia, chegou no fim
         return trie
 
+def moonwalk_to(nodo, string):
+    '''Caminha a string do fim pro começo na trie, saindo do nodo e indo no sentido da raiz. Retorna o nodo destino ou -1 em caso de falha'''
     
+    #Lista de caracteres a inserir
+    char_list = list(normalize(string.lower()))
 
-#def moonwalk_to(nodo, string):
-    '''Caminha a string desejada saindo do nodo e indo no sentido da raiz. Retorna o nodo destino ou -1 em caso de falha'''
+    #Se a lista não está vazia
+    if (char_list):
+        last_char = char_list.pop()
+        
+        #Se existem nodos pai que satisfazem o ultimo caractere removido(após normalização)
+        if (nodo.parent.chard == normalize(last_char)):
+            return moonwalk_to(nodo.parent,"".join(char_list))
+        #Se raiz
+        elif (nodo.parent.chard == 0):
+            return 0
+        else:
+            return -1
+    else:
+        #Se de caracteres está vazia, chegou no fim
+        return nodo
+
+def get_label(nodo, string = ""):
+    '''Caminha um nodo no sentido nodo raiz até a raiz e devolve os caracteres encontrados no camniho'''
+    if nodo.chard == 0:
+        #Se é raiz, termina
+        return string
+    else:
+        string =  nodo.chard + string 
+        return get_label(nodo.parent, string)
+
+
+def prefix_search(trie, string):
+    '''Retorna o dicionario {label,data} de todos os objetos encontrados, usando a string recebida como prefixo para buscar na trie recebida
+    '''
+    
+    #Caminha até string
+    w = walk_to(trie,string)
+ 
+    #Recebe dados
+    data = get_all_data(w)
+
+    return data
 
 
 
+
+
+
+def get_all_data(trie ,r_type = 'dict'):
+    #Retorna dicionario no formato {label,table} contendo todos os dados n]ao nulos da trie especificada. Se r_type = 'list', retorna uma lista em vez de um dict
+    
+    #Dicionario para receber resultados da função auxliar
+    def_dict = defaultdict(dict)
+
+    #list para dados
+    def_list = []
+
+    #Pega label do nodo encontrado
+    w_label = get_label(trie)
+
+    __get_all_data_aux(trie,def_dict,def_list,w_label)
+
+
+    if r_type == 'dict':
+        return def_dict
+    else:
+        return def_list
+
+def __get_all_data_aux(trie,def_dict,def_list,label,string = ""):
+    """Auxiliar para get_all data. Insere na lista recebida todas as palavras na trie especificada. Usa como criterio de ser palavra a existencia de "dados" não nulos"""   
+    if(trie.data != 0):
+        #Ao encontrar uma folha, cria uma chave para um dicionario com a string da folha como chave e os dados como valor
+        def_dict[label+string] = trie.data
+
+        #Cria uma lista de strings encontradas
+        def_list.append(label+string)
+
+    elif(not bool(trie.child)):
+        print("fim nodo - {0}".format(string))
+
+    else:
+        key_list = trie.child.keys()
+        for key in key_list:
+            __get_all_data_aux(trie.child[key],def_dict,def_list,label,string+key)
 
 
 

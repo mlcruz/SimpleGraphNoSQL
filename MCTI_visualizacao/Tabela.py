@@ -10,80 +10,6 @@ import regex
 #Para normalizar para NFKD
 import unicodedata
 
-def normalize(input_text):
-    """Normaliza String e lida com caracteres especiais. Transforma qualquer string para uma string contendo somente caracteres não acentuados
-    """
-    return_str = regex.sub(r'\u00DF','ss',input_text,)
-    return_str = regex.sub(r'\u1E9E','SS',return_str) # scharfes S
-    return_str = regex.sub(r'\u0111','d',return_str,)
-    return_str = regex.sub(r'\u0110','D',return_str) # crossed D
-    return_str = regex.sub(r'\u00F0','d',return_str,)
-    return_str = regex.sub(r'\u00D0','D',return_str) # eth
-    return_str = regex.sub(r'\u00FE','th',return_str,)
-    return_str = regex.sub(r'\u00DE','TH',return_str) # thorn
-    return_str = regex.sub(r'\u0127','h',return_str,)
-    return_str = regex.sub(r'\u0126','H',return_str) # H-bar
-    return_str = regex.sub(r'\u0142','l',return_str,)
-    return_str = regex.sub(r'\u0141','L',return_str) # L with stroke
-    return_str = regex.sub(r'\u0153','oe',return_str,)
-    return_str = regex.sub(r'\u0152','Oe',return_str) # Oe ligature
-    return_str = regex.sub(r'\u00E6','ae',return_str,)
-    return_str = regex.sub(r'\u00C6','Ae',return_str) # Ae ligature
-    return_str = regex.sub(r'\u0131','i',return_str,) #dotless i
-    return_str = regex.sub(r'\u00F8','o',return_str)
-    return_str = regex.sub(r'\u00D8','O',return_str) # o with stroke
-    return_str = regex.sub(r'[\u00B7\u02BA\uFFFD]','',return_str) # Catalan middle dot, double prime
-    return_str = unicodedata.normalize('NFKD',return_str)
-    return_str = regex.sub(r'[\u0300-\u036f]','',return_str) #Splits string into simple characters + modifiers and remove them
-    return_str = regex.sub(r'\%','',return_str) #Remove comments on normalization step
-    return return_str
-
-
-def get_name_labelless(cell, string =""):
-    '''Recursivamente percorre uma tabela em formato de arvore a partir de uma celula e retorna uma string com seu nome. Usa o caractere > como indicador de relacionamento pai-filho entre celulas
-       Diferentemente de get_name, essa função retorna a string do nome sem o nome da raiz
-        '''
-
-    #Se é raiz, fim.
-    if cell.cell_type == 'Label':
-        return string
-    #Se não, nome é nome do filho + > + nome do pai
-    if cell.cell_type == 'Merge' or cell.cell_type == 'Blank':
-        #Se é  merge/branco retorna merge vazio
-        return ""
-    else:
-        if string == "":
-            if cell.cell_type == 'Leaf':
-                #Se é folha, alem do nodo pai indica a chave de coluna no nome após o da chave de linha
-                return get_name_labelless(cell.parent_node,get_name_labelless(cell.key_col)+'>'+str(cell.data))
-            else:
-                return get_name_labelless(cell.parent_node,str(cell.data))
-        else:
-            return get_name_labelless(cell.parent_node,str(cell.data)+">"+string)
-
-def get_name(cell, string =""):
-    '''Recursivamente percorre uma tabela em formato de arvore a partir de uma celula e retorna uma string com seu nome. Usa o caractere > como indicador de relacionamento pai-filho entre celulas'''
-
-    #Se é raiz, fim.
-    if cell.cell_type == 'Label':
-        return cell.data + ">" + string
-    #Se não, nome é nome do filho + > + nome do pai
-    if cell.cell_type == 'Merge' or cell.cell_type == 'Blank':
-        #Se é  merge/branco retorna merge vazio
-        return ""
-    else:
-        if string == "":
-            if cell.cell_type == 'Leaf':
-                #Se é folha, alem do nodo pai indica a chave de coluna no nome após o da chave de linha
-                return get_name(cell.parent_node,get_name_labelless(cell.key_col)+'>'+str(cell.data))
-            else:
-                return get_name(cell.parent_node,str(cell.data))
-        else:
-            return get_name(cell.parent_node,str(cell.data)+">"+string)
-
-def get_cell(cell,table_data):
-    '''Retorna uma celula tratando merges. Recebe um objeto do tipo Cell e uma table_data de uma tabela e Sempre retorna uma celula origem, é reflixiva para celulas não merge'''
-    return table_data[cell.originx][cell.originy]
 
 class Cell(object):
     '''Classe que representa uma celula da tabela. Recebe um objeto do tipo sheet do xrld como entrada
@@ -331,10 +257,87 @@ class Table(object):
         self.bound_y = raw_table.raw_sheet.ncols
 
 
+def normalize(input_text):
+    """Normaliza String e lida com caracteres especiais. Transforma qualquer string para uma string contendo somente caracteres não acentuados
+    """
+    return_str = regex.sub(r'\u00DF','ss',input_text,)
+    return_str = regex.sub(r'\u1E9E','SS',return_str) # scharfes S
+    return_str = regex.sub(r'\u0111','d',return_str,)
+    return_str = regex.sub(r'\u0110','D',return_str) # crossed D
+    return_str = regex.sub(r'\u00F0','d',return_str,)
+    return_str = regex.sub(r'\u00D0','D',return_str) # eth
+    return_str = regex.sub(r'\u00FE','th',return_str,)
+    return_str = regex.sub(r'\u00DE','TH',return_str) # thorn
+    return_str = regex.sub(r'\u0127','h',return_str,)
+    return_str = regex.sub(r'\u0126','H',return_str) # H-bar
+    return_str = regex.sub(r'\u0142','l',return_str,)
+    return_str = regex.sub(r'\u0141','L',return_str) # L with stroke
+    return_str = regex.sub(r'\u0153','oe',return_str,)
+    return_str = regex.sub(r'\u0152','Oe',return_str) # Oe ligature
+    return_str = regex.sub(r'\u00E6','ae',return_str,)
+    return_str = regex.sub(r'\u00C6','Ae',return_str) # Ae ligature
+    return_str = regex.sub(r'\u0131','i',return_str,) #dotless i
+    return_str = regex.sub(r'\u00F8','o',return_str)
+    return_str = regex.sub(r'\u00D8','O',return_str) # o with stroke
+    return_str = regex.sub(r'[\u00B7\u02BA\uFFFD]','',return_str) # Catalan middle dot, double prime
+    return_str = unicodedata.normalize('NFKD',return_str)
+    return_str = regex.sub(r'[\u0300-\u036f]','',return_str) #Splits string into simple characters + modifiers and remove them
+    return_str = regex.sub(r'\s',' ',return_str) #remobe double whitespaces
+    
+    return return_str
 
+      
+def get_name_labelless(cell, string =""):
+    '''Recursivamente percorre uma tabela em formato de arvore a partir de uma celula e retorna uma string com seu nome. Usa o caractere > como indicador de relacionamento pai-filho entre celulas
+       Diferentemente de get_name, essa função retorna a string do nome sem o nome da raiz
+        '''
 
+    #Se é raiz, fim.
+    if cell.cell_type == 'Label':
+        return string
+    #Se não, nome é nome do filho + > + nome do pai
+    if cell.cell_type == 'Merge' or cell.cell_type == 'Blank':
+        #Se é  merge/branco retorna merge vazio
+        return ""
+    else:
+        if string == "":
+            if cell.cell_type == 'Leaf':
+                #Se é folha, alem do nodo pai indica a chave de coluna no nome após o da chave de linha
+                return get_name_labelless(cell.parent_node,get_name_labelless(cell.key_col)+'>'+str(cell.data))
+            else:
+                return get_name_labelless(cell.parent_node,str(cell.data))
+        else:
+            return get_name_labelless(cell.parent_node,str(cell.data)+">"+string)
 
+def get_name(cell, string =""):
+    '''Recursivamente percorre uma tabela em formato de arvore a partir de uma celula e retorna uma string com seu nome. Usa o caractere > como indicador de relacionamento pai-filho entre celulas'''
 
+    #Se é raiz, fim.
+    if (cell.cell_type == 'Label') and string != "":
+        return cell.data + ">" + string
+    #Se não, nome é nome do filho + > + nome do pai
+    if cell.cell_type == 'Merge' or cell.cell_type == 'Blank':
+        #Se é  merge/branco retorna merge vazio
+        return ""
+    else:
+        if string == "":
+            if cell.cell_type == 'Leaf':
+                #Se é folha, alem do nodo pai indica a chave de coluna no nome após o da chave de linha
+                return get_name(cell.parent_node,get_name_labelless(cell.key_col)+'>'+str(cell.data))
+            
+            elif cell.cell_type == "Label":
+                #Se é raiz, remove retorna sem > no fim
+                return cell.data
+
+            else:
+                return get_name(cell.parent_node,str(cell.data))
+
+        else:
+            return get_name(cell.parent_node,str(cell.data)+">"+string)
+
+def get_cell(cell,table_data):
+    '''Retorna uma celula tratando merges. Recebe um objeto do tipo Cell e uma table_data de uma tabela e Sempre retorna uma celula origem, é reflixiva para celulas não merge'''
+    return table_data[cell.originx][cell.originy]
         
 
 

@@ -1,8 +1,10 @@
-#classe tabela representando um objeto tabela
-from Tabela import RawTable, Cell, get_cell, Table, get_name, normalize
+##Biblioteca com funções auxiliares para o trabalho
 
-#Classe representados tries
-from Trie import Trie, insert, walk_to
+#importa classe tabela e suas funções relacionadas
+from Tabela import RawTable, Cell, get_cell, Table, get_name, normalize, get_name_labelless
+
+#Importa Trie suas funções relacionadas
+from Trie import Trie, insert, walk_to, generate_reverse_trie, moonwalk_to, prefix_search, get_all_data, get_label
 
 #Persistencia
 import dill
@@ -10,7 +12,6 @@ import dill
 #Lista diretorios
 from os import listdir
 
-##Biblioteca com funções auxiliares para o trabalho
 
 #Gerador para numeros de tabelas
 def generate_num(tab_loc):
@@ -41,7 +42,6 @@ def generate_loc(tab_loc):
     while(get != 0):
         yield loc+get
         get = next(tabs)
-
 
 def save_trie(trie,loc):
     '''Cria um arquivo em disco representando a Trie contendo todos os dados como um arquivo binario. Pode ser revertido com load_trie
@@ -89,18 +89,9 @@ def generate_db_trie(loc):
 
     #Preenche dicionario de acesso da trie e outros com strings pertencentes a mesma
     t.yield_strings(t.root)
+
+    #Gera trie reversa para busca por sufixo
+    generate_reverse_trie(t)
         
     return t
-
-
-
-
-
-
-
-
-
-
-
-
 
