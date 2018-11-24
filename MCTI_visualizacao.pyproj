@@ -29,6 +29,9 @@
     <Compile Include="main.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="menus.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tabela.py" />
     <Compile Include="db.py" />
     <Compile Include="Trie.py" />

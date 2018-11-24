@@ -13,6 +13,7 @@ import dill
 #Lista diretorios
 from os import listdir
 
+import curses
 
 #Gerador para numeros de tabelas
 def generate_num(tab_loc):
@@ -100,5 +101,35 @@ def generate_table_trie(loc):
     generate_reverse_trie(t)
         
     return t
+
+
+
+
+    
+
+
+def write_stdscr(stdscr,string, loc):
+    '''Write string in the stdscr using tuple loc(x,y) as x and y coordinates. Aligns new lines and restores cursor position after'''
+    
+    #Salvo local original do cursor
+    loc_cursor = stdscr.getyx()
+
+    #Separa por new lines    
+    str_split = string.split('\n')
+    counter = 0
+
+    for line in str_split:
+
+        stdscr.addstr(loc[0]+counter,loc[1],line)
+        stdscr.refresh()
+        counter += 1
+
+    stdscr.move(loc_cursor[0],loc_cursor[1])
+
+
+def write_stdscr_a(stdscr,string, loc, attrb):
+    '''Write string in the stdscr using tuple loc(x,y) as x and y coordinates and attrb'''
+    stdscr.addstr(loc[0],loc[1],string,attrb)
+
 
 
