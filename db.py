@@ -11,23 +11,37 @@ class DB(object):
 
         self.tables = trie
 
-        #Cria trie de chaves
+        #Cria trie de linhas chaves
         self.key_rows = aux_lib.Trie()
+
+        #Cria trie de colunas chaves
+        self.key_cols = aux_lib.Trie()
 
         #Insere colunas ordenadores nas tries de chaves
         for label,table in trie.strings_dict.items():
             for X in range(table.bound_x):
                 for Y in range(table.bound_y):
+                    #Celula atual
                     cell = table.table_data[X][Y]
-                    #Insere somente celulas do tipo key_row
+
+                    #Insere celulas do tipo Key_row na trie especificada
                     if cell.cell_type == "Key_Row":
                         aux_lib.insert(cell.cell_name,cell.child_nodes,self.key_rows.root)
 
+                    #Insere celulas do tipo Key_Col na trie especificada
+                    if cell.cell_type == "Key_Col":
+                        aux_lib.insert(cell.cell_name,cell.child_nodes,self.key_cols.root)
+
+
         #cria dicionario de strings da trie de colunas chave
         self.key_rows.yield_strings(self.key_rows.root)
+        self.key_cols.yield_strings(self.key_cols.root)
 
-        #Gera trie reversa
+        #Gera trie reversa da trie de colunas e linhas chaves
         aux_lib.generate_reverse_trie(self.key_rows)
+        aux_lib.generate_reverse_trie(self.key_cols)
+
+
 
 
             

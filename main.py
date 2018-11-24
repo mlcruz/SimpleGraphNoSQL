@@ -14,5 +14,6 @@ teste = aux_lib.generate_table_trie(prefix_loc)
 
 db_teste = DB(teste)
 
+#s = aux_lib.suffix_search(db_teste.key_cols,'ano')
 
 

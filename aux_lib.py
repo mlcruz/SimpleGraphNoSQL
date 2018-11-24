@@ -1,4 +1,4 @@
-##Biblioteca com funções auxiliares para o trabalho
+##Biblioteca com funções auxiliares
 
 #importa classe tabela e suas funções relacionadas
 from Tabela import RawTable, Cell, get_cell, Table, get_name, normalize, get_name_labelless

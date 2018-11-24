@@ -36,6 +36,11 @@ class Trie(object):
         #Apontador futuro para trie reversa
         self.reverse = -1
         
+        #Inicializa chard e parent do nodo raiz como 0
+        self.root.chard = 0
+
+        self.root.parent = 0
+
     def yield_strings(self,trie):
         self.strings_dict.clear()
         self.strings_list.clear()
@@ -168,8 +173,8 @@ def moonwalk_to(nodo, string):
 
 def get_label(nodo, string = ""):
     '''Caminha um nodo no sentido nodo raiz até a raiz e devolve os caracteres encontrados no camniho'''
+
     if nodo.chard == 0:
-        #Se é raiz, termina
         return string
     else:
         string =  nodo.chard + string 
@@ -247,9 +252,8 @@ def get_all_data(n_trie ,r_type = 'dict'):
 
     #Pega label do nodo encontrado
     w_label = get_label(n_trie)
-
+    
     __get_all_data_aux(n_trie,def_dict,def_list,w_label)
-
 
     if r_type == 'dict':
         return def_dict
@@ -257,6 +261,7 @@ def get_all_data(n_trie ,r_type = 'dict'):
         return def_list
 
 def __get_all_data_aux(n_trie,def_dict,def_list,label,string = ""):
+
     """Auxiliar para get_all data. Insere na lista recebida todas as palavras no nodo da trie especificada. Usa como criterio de ser palavra a existencia de "dados" não nulos"""   
     if(n_trie.data != 0):
         #Ao encontrar uma folha, cria uma chave para um dicionario com a string da folha como chave e os dados como valor
