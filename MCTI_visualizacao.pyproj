@@ -25,9 +25,9 @@
     <Compile Include="main.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="tabela.py" />
+    <Compile Include="Tabela.py" />
     <Compile Include="db.py" />
-    <Compile Include="trie.py" />
+    <Compile Include="Trie.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
