@@ -11,6 +11,48 @@ import os
 
 from aux_lib import write_stdscr, write_stdscr_a
 
+class Container(object):
+    '''Classe representando um objeto que pode ser um Nodo ou uma Tabela ou uma Lista de celulas ou uma Celula'''
+
+    def __init__(self, data):
+        #Guarda tipo do objeto
+        self.raw_type = type(data)
+        self.name = ""
+        self.data = 0
+        self.type = ""
+
+        #Inicializa nome e dados dependo do tipo
+        if self.raw_type == aux_lib.Nodo:
+            #Se é um nodo de uma trie
+            self.name = "(" + aux_lib.get_label(data) + ")->"
+            self.data = data
+            self.type = "Node"
+            
+
+        elif self.raw_type == aux_lib.Table:
+            #Se é uma tabela
+            self.data = data
+            self.name = data.table_label
+            self.type = "Table"
+             
+        
+        elif self.raw_type == list:
+            #Se é uma lista de celulas
+            self.data = data
+            parent = data[0].parent_node
+            self.name = aux_lib.get_name(parent) + "->[]"
+            self.type = "Cell List"
+        
+        elif self.raw_type == aux_lib.Cell:
+            #Se é uma celula
+            self.data = data
+            self.name = aux_lib.get_name(data)
+            self.type = "Cell"
+
+
+            
+        
+
 
 
 def start_menu(state_dict):
@@ -56,10 +98,10 @@ def main_menu(stdscr, state_dict):
     loc_menu_inicial = (0,0)
 
     str_saving = "Saving db...\n"
-    loc_saving = (8,0)
+    loc_saving = (4,40)
 
     str_done = "Done\n"
-    loc_done = (10,0)
+    loc_done = (4,80)
 
 
     #escreve menu na tela
@@ -70,6 +112,8 @@ def main_menu(stdscr, state_dict):
 
     #loop de repl local
     while(local_exit == False):
+        stdscr.move((state_dict['loc_data_entry'])[0],(state_dict['loc_data_entry'])[1])
+
         draw_state(stdscr,state_dict)
         #Entrada do usuario
         c = chr(stdscr.getch())
@@ -106,30 +150,46 @@ def search_db(stdscr, state_dict):
 def draw_state(stdscr, state_dict):
     '''Desenha gui na tela e atualiza os estados visiveis ao usuario'''
 
+    state_dict['containers'] = dict()
+
+
     #Linha separando input do usuario
-    str_user_input_line = drawline(52) + "User Input Area" + drawline(52)
-    loc_user_input_line = (35,0)
+    str_user_input_line = drawline(72) + "User input area" + drawline(72)
+    loc_user_input_line = (50,0)
 
     #Linha seperando area de estados
-    str_state_area_line = drawbar(35) + "+"
-    loc_state_area_line = (0,80)
+    str_state_area_line = drawbar(50) + "+"
+    loc_state_area_line = (0,120)
+
+    #Linha separando area de tabela
+    loc_table_area_line = (10,0)
+    str_table_area_line = drawline(53) + "Table data area" + drawline(52) + "+"
+
+    #Linha horizontal de estados
+    loc_h_state_area_line = (0,120)
+    str_h_state_area_line = "+" + drawline(14) + "State area" + drawline(15)
+
 
     write_stdscr(stdscr,str_user_input_line,loc_user_input_line)
     write_stdscr(stdscr,str_state_area_line,loc_state_area_line)
+    write_stdscr(stdscr,str_table_area_line,loc_table_area_line)
+    write_stdscr(stdscr,str_h_state_area_line,loc_h_state_area_line)
+
+
 
 
 
 
 
 def drawline(intr):
-    '''Returns the '-' char repeated 9 times in a string'''
+    '''Returns the '-' char repeated n times in a string'''
     returns = ''
     for x in range(intr):
         returns = returns + '-'
     return returns
 
 def drawbar(intr):
-    '''Returns the '-' char repeated 9 times in a string'''
+    '''Returns the '-' char repeated n times in a string'''
     returns = ''
     for x in range(intr):
         returns = returns + '|\n'
