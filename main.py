@@ -13,48 +13,57 @@ sys.setrecursionlimit(15000)
 ##Prefixo do local das tabelas fonte para a extração de dados
 prefix_loc = "tabelas_mcti\\formatada\\2"
 
+#Cria dicionario de estados
 state_dict = defaultdict()
+
 
 #Indica se deve sair do loop
 state_dict['f_exit'] = False
+state_dict['state'] = 'start_menu'
 
-menus.menu_inicial(state_dict)
+
+#Inicializa banco de dados e seus estados
+menus.start_menu(state_dict)
 
 
 #################INICIALIZA REPL###################
-#Inicializa estado da tela
 
 #inicializa callable para ser wrapado
 def main(stdscr,state_dict):
 
     #Sem enter para entrada
-    curses.cbreak()
     
-    #####Strings e respectivos locs e estados possiveis#####
-    str_menu_inicial = "9:Save Current DB\n0:Exit"
-    loc_menu_inicial = (0,0)
-
-
-
+    
+  
     #Local da linha de entrada de dados no programa
-    loc_data_entry = (20,0)
+    state_dict['loc_data_entry'] = (20,0)
     #move cursor para local de entrada de dados
 
-    stdscr.move(loc_data_entry[0],loc_data_entry[1])
+    stdscr.move((state_dict['loc_data_entry'])[0],(state_dict['loc_data_entry'])[1])
 
     while(state_dict['f_exit'] == False):
         
-        c = stdscr.getkey()
-        stdscr.refresh()
+        menus.main_menu(stdscr,state_dict)
+
+
+
+        #Fim dos menus de estado
+        #stdscr.getch()
+       
              
     #Encerra ao sair do loop   
-    curses.endwin()
+    
 
     
 #Chama main
 if(state_dict['f_exit'] == False):
+    #Inicializa estado da tela
     stdscr = curses.initscr()
-    curses.wrapper(main(stdscr,state_dict))
+    try :
+        curses.wrapper(main(stdscr,state_dict))
+    except:
+        menus.os.system('cls')
+        print("fim")
 
 
 
