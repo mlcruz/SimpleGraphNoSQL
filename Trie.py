@@ -22,6 +22,7 @@ class Nodo(object):
 
 class Trie(object):
     """Implementa uma Trie para pesquisa no nome de tabelas de maneira eficiente"""
+    
     def __init__(self):
         '''Inicializa raiz da trie como um defaultdict com uma factory de dicionarios'''
         #A ideia aqui é representar uma Trie como grupos de dicionarios aninhados.

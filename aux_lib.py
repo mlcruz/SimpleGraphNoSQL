@@ -70,7 +70,9 @@ def generate_table_trie(loc):
     '''Recebe um local de pasta contendo tabelas pre formatadas e gera uma trie contendo as tabelas como folha e os caracteres das labels como nodo
        Retorna trie gerada
     '''
-    
+
+    print("Generating Table Trie...\n")
+
     #gera um local de uma tabela fonte a cada passo
     tabs = generate_loc(loc)
 
@@ -88,9 +90,12 @@ def generate_table_trie(loc):
     for tabela in list_tables:
         insert(tabela.table_label,tabela,t.root)
 
+    
     #Preenche dicionario de acesso da trie e outros com strings pertencentes a mesma
     t.yield_strings(t.root)
 
+    print("Generating Reverse Table Trie...\n")
+    
     #Gera trie reversa para busca por sufixo
     generate_reverse_trie(t)
         

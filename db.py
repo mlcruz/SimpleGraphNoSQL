@@ -9,8 +9,11 @@ class DB(object):
     def __init__(self, trie):
         '''Inicialize banco de dados com uma trie recebida'''
 
+        print("Generating database...\n")
+
         self.tables = trie
 
+        
         #Cria trie de linhas chaves
         self.key_rows = aux_lib.Trie()
 
@@ -20,6 +23,8 @@ class DB(object):
         #Cria trie de super chaves
         self.super_key = aux_lib.Trie()
 
+
+        print("\tPopulating indexing tries...\n")
         #Insere colunas ordenadores nas tries de chaves
         for label,table in trie.strings_dict.items():
             for X in range(table.bound_x):
@@ -41,14 +46,23 @@ class DB(object):
 
 
         #cria dicionario de strings da trie de colunas chave
+        print("\tInitializing key_row cache...\n")
         self.key_rows.yield_strings(self.key_rows.root)
+
+        print("\tInitializing key_col cache...\n")
         self.key_cols.yield_strings(self.key_cols.root)
+
+        print("\tInitializing super_key cache...\n")
         self.super_key.yield_strings(self.super_key.root)
 
+        print("\tReversing index_tries for suffix search...\n")
         #Gera trie reversa da trie de colunas e linhas chaves
         aux_lib.generate_reverse_trie(self.key_rows)
         aux_lib.generate_reverse_trie(self.key_cols)
         aux_lib.generate_reverse_trie(self.super_key)
+
+
+        print("Done!")
 
 
 
