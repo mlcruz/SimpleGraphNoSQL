@@ -2,6 +2,12 @@
 import aux_lib
 from db import DB
 
+
+
+#Curses para interface grafica
+import curses
+
+
 import sys
 
 sys.setrecursionlimit(15000)
@@ -14,6 +20,11 @@ teste = aux_lib.generate_table_trie(prefix_loc)
 
 db_teste = DB(teste)
 
-#s = aux_lib.suffix_search(db_teste.key_cols,'ano')
+#aux_lib.save_trie(db_teste.key_cols,'key_col')
+
+#################INICIALIZA REPL###################
+
+#Inicializa estado da tela
+#stdscr = curses.initscr()
 
 

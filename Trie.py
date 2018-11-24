@@ -186,9 +186,12 @@ def prefix_search(trie, string):
     
     #Caminha até string
     w = walk_to(trie.root,string)
- 
-    #Recebe dados
-    data = get_all_data(w)
+    
+    if w != -1:
+        #Recebe dados se existe algum
+        data = get_all_data(w)
+    else:
+        data = []
 
     return data
 
@@ -201,14 +204,17 @@ def suffix_search(trie, string):
     #Caminha até a string na arvore reversa
     w = walk_to(trie.reverse.root,r_string)
 
-    #Retorna dados
-    r_data = get_all_data(w)
+    if w != -1:
+        #Retorna dados
+        r_data = get_all_data(w)
 
-    data = defaultdict()
+        data = defaultdict()
 
-    #Reverte a chave dos dados retornados
-    for key, value in r_data.items():
-        data[''.join(list(key)[::-1])] = value
+        #Reverte a chave dos dados retornados
+        for key, value in r_data.items():
+            data[''.join(list(key)[::-1])] = value
+    else:
+        data = []
 
     return data
 
@@ -276,7 +282,9 @@ def __get_all_data_aux(n_trie,def_dict,def_list,label,string = ""):
     else:
         key_list = n_trie.child.keys()
         for key in key_list:
-            __get_all_data_aux(n_trie.child[key],def_dict,def_list,label,string+key)
+            #Se existe o filho, desce
+            if bool(n_trie.child[key]):
+                __get_all_data_aux(n_trie.child[key],def_dict,def_list,label,string+key)
 
 
 
