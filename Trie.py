@@ -220,6 +220,18 @@ def regex_search(trie, re_string):
     return matched
 
 
+def regex_dict_search(dict, re_string):
+    '''Pesquisa expressão regular no default dict em formato de trie recebido. Retorna dicionario de todos os nodos onde a chave contem o valor da expressão'''
+    data = dict
+    matched = defaultdict()
+
+    c_pattern = regex.compile(re_string)
+
+    for key, value in data.items():
+        if (bool(c_pattern.findall(key))):
+            matched[key] = value
+    return matched
+
 
 
 

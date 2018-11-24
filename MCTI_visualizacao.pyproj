@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>1b1ff14c-6eaa-4955-9f4e-15f0e9baa10d</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Trabalho_final_cpd.py</StartupFile>
+    <StartupFile>main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,9 +22,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="aux_lib.py" />
-    <Compile Include="Tabela.py" />
-    <Compile Include="Trabalho_final_cpd.py" />
-    <Compile Include="Trie.py" />
+    <Compile Include="main.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tabela.py" />
+    <Compile Include="db.py" />
+    <Compile Include="trie.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

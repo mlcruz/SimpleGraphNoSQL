@@ -3,8 +3,9 @@
 #importa classe tabela e suas funções relacionadas
 from Tabela import RawTable, Cell, get_cell, Table, get_name, normalize, get_name_labelless
 
+
 #Importa Trie suas funções relacionadas
-from Trie import Trie, insert, walk_to, generate_reverse_trie, moonwalk_to, prefix_search, get_all_data, get_label, suffix_search, regex_search
+from Trie import Trie, insert, walk_to, generate_reverse_trie, moonwalk_to, prefix_search, get_all_data, get_label, suffix_search, regex_search, regex_dict_search
 
 #Persistencia
 import dill
@@ -65,7 +66,7 @@ def load_trie(loc):
     #Retorna trie
     return t
 
-def generate_db_trie(loc):
+def generate_table_trie(loc):
     '''Recebe um local de pasta contendo tabelas pre formatadas e gera uma trie contendo as tabelas como folha e os caracteres das labels como nodo
        Retorna trie gerada
     '''
