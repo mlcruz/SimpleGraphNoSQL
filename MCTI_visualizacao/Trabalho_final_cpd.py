@@ -19,6 +19,7 @@ teste = aux_lib.generate_db_trie(prefix_loc)
 
 p = aux_lib.prefix_search(teste,"brasil")
 s = aux_lib.suffix_search(teste,"atividade")
+r = aux_lib.regex_search(teste,r'atividade')
 
 
 

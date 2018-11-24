@@ -256,7 +256,6 @@ class Table(object):
         self.bound_x = raw_table.raw_sheet.nrows
         self.bound_y = raw_table.raw_sheet.ncols
 
-
 def normalize(input_text):
     """Normaliza String e lida com caracteres especiais. Transforma qualquer string para uma string contendo somente caracteres não acentuados
     """
@@ -285,7 +284,6 @@ def normalize(input_text):
     return_str = regex.sub(r'\s',' ',return_str) #remobe double whitespaces
     
     return return_str
-
       
 def get_name_labelless(cell, string =""):
     '''Recursivamente percorre uma tabela em formato de arvore a partir de uma celula e retorna uma string com seu nome. Usa o caractere > como indicador de relacionamento pai-filho entre celulas

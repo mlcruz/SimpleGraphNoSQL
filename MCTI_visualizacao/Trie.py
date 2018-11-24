@@ -2,6 +2,7 @@
 from collections import defaultdict
 from Tabela import normalize
 
+import regex
 
 class Nodo(object):
     '''Representa um nodo de uma trie'''
@@ -59,8 +60,6 @@ class Trie(object):
             key_list = trie.child.keys()
             for key in key_list:
                 self.__yield_strings_aux(trie.child[key],string+key)
-
-
 
 def insert(string, data, n_trie):
     '''Insere a string como chave ligada a um dado no ultimo nodo da trie especificada'''
@@ -176,7 +175,6 @@ def get_label(nodo, string = ""):
         string =  nodo.chard + string 
         return get_label(nodo.parent, string)
 
-
 def prefix_search(trie, string):
     '''Retorna o dicionario {label,data} de todos os objetos encontrados, usando a string recebida como prefixo para buscar na trie recebida
     '''
@@ -208,6 +206,20 @@ def suffix_search(trie, string):
         data[''.join(list(key)[::-1])] = value
 
     return data
+
+def regex_search(trie, re_string):
+    '''Pesquisa expressão regular na trie recebida. Retorna dicionario de todos os nodos onde a chave contem o valor da expressão'''
+    data = get_all_data(trie.root)
+    matched = defaultdict()
+
+    c_pattern = regex.compile(re_string)
+
+    for key, value in data.items():
+        if (bool(c_pattern.findall(key))):
+            matched[key] = value
+    return matched
+
+
 
 
 
