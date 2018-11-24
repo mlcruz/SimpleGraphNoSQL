@@ -224,7 +224,7 @@ class RawTable(object):
                     self.table_data[X][Y].child_nodes = self.table_data[self.table_data[X][Y].originx][self.table_data[X][Y].originy].child_nodes
                     self.table_data[X][Y].parent_node = self.table_data[self.table_data[X][Y].originx][self.table_data[X][Y].originy].parent_node
           
-                    
+                   
 
         #Completa nomes nas celulas
         for X in range(self.raw_sheet.nrows):
@@ -240,7 +240,7 @@ class RawTable(object):
 
 
                 elif(self.table_data[X][Y].cell_type == "Label"):
-                    self.table_data[X][Y].cell_name = self.table_data[X][Y]
+                    self.table_data[X][Y].cell_name = self.table_data[X][Y].data
                 else:
                     #Se não é merge, atribui nome
                     self.table_data[X][Y].cell_name = get_name(self.table_data[X][Y])
