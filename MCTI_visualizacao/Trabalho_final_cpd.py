@@ -17,8 +17,7 @@ teste = aux_lib.generate_db_trie(prefix_loc)
 #aux_lib.save_trie(teste,'teste.obj')
 #retorno = aux_lib.load_trie('teste.obj')
 
-r = aux_lib.walk_to(teste.root,'br')
-w = aux_lib.walk_to(teste.root,'brasil: dispendio')
+aux_lib.prefix_search(teste,"brasil")
 
 
 
