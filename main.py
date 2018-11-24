@@ -36,7 +36,7 @@ def main(stdscr,state_dict):
     
   
     #Local da linha de entrada de dados no programa
-    state_dict['loc_data_entry'] = (20,0)
+    state_dict['loc_data_entry'] = (37,0)
     #move cursor para local de entrada de dados
 
     stdscr.move((state_dict['loc_data_entry'])[0],(state_dict['loc_data_entry'])[1])
@@ -59,6 +59,7 @@ def main(stdscr,state_dict):
 if(state_dict['f_exit'] == False):
     #Inicializa estado da tela
     stdscr = curses.initscr()
+    curses.resize_term(40,120)
     try :
         curses.wrapper(main(stdscr,state_dict))
     except:

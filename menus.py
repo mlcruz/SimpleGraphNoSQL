@@ -45,13 +45,14 @@ def start_menu(state_dict):
 
 def main_menu(stdscr, state_dict):
     '''Função que representa o menu principal e seus estados'''
-
+    
+    
     curses.cbreak()
     curses.noecho()
 
     #Strings e locais
 
-    str_menu_inicial = "9:Save Current DB\n0:Exit"
+    str_menu_inicial = "1:Access Table\n2:Search DB\n3:Search Table\n9:Save Current DB\n0:Exit"
     loc_menu_inicial = (0,0)
 
     str_saving = "Saving db...\n"
@@ -69,10 +70,12 @@ def main_menu(stdscr, state_dict):
 
     #loop de repl local
     while(local_exit == False):
+        draw_state(stdscr,state_dict)
         #Entrada do usuario
         c = chr(stdscr.getch())
 
-
+        if c == '2':
+            search_db(stdscr, state_dict)
         if c == '0':
             state_dict['f_exit'] = True
             local_exit = True
@@ -92,5 +95,43 @@ def main_menu(stdscr, state_dict):
 
 
 
+def search_db(stdscr, state_dict):
+    '''Menu representando as opções de busca no banco de dados'''
 
+    curses.nocbreak()
+    curses.echo()
+
+    str_menu_db = "1:Search Table trie\n2:Search Key_cols\n3:Seach Key_rows\n4:Search Super_keys"
+
+def draw_state(stdscr, state_dict):
+    '''Desenha gui na tela e atualiza os estados visiveis ao usuario'''
+
+    #Linha separando input do usuario
+    str_user_input_line = drawline(52) + "User Input Area" + drawline(52)
+    loc_user_input_line = (35,0)
+
+    #Linha seperando area de estados
+    str_state_area_line = drawbar(35) + "+"
+    loc_state_area_line = (0,80)
+
+    write_stdscr(stdscr,str_user_input_line,loc_user_input_line)
+    write_stdscr(stdscr,str_state_area_line,loc_state_area_line)
+
+
+
+
+
+def drawline(intr):
+    '''Returns the '-' char repeated 9 times in a string'''
+    returns = ''
+    for x in range(intr):
+        returns = returns + '-'
+    return returns
+
+def drawbar(intr):
+    '''Returns the '-' char repeated 9 times in a string'''
+    returns = ''
+    for x in range(intr):
+        returns = returns + '|\n'
+    return returns
 

@@ -1,7 +1,7 @@
 #biblioteca de funcoes auxiliares contendo todas as outras bibliotecas. Ver codigo para mais detalhes
 import aux_lib
 from db import DB
-
+import menus
 
 
 #Curses para interface grafica
