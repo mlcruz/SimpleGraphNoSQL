@@ -251,6 +251,7 @@ def access_table(stdscr,state_dict):
             str_query = get_input(stdscr)
             try:
                 state_dict['containers'][set_container] = query_table(str_query,state_dict['containers'][set_table],state_dict['containers'][set_container])
+                write_stdscr(stdscr,"Success!",(4,60))
             except:
                 write_stdscr(stdscr,"Failed to run query. Press any key to continue",(4,60))
                 stdscr.getch()
@@ -596,6 +597,7 @@ def query_table(query, container_i, container_o):
     #Queries são formatadas da seguinte maneira:
     # Separador de queries -> #
     # Separador de <tipo, query>  -> ;
+    # Dado contido no container "n"(somente no campo de dado da query) -> !
 
     #Separa queries
     query_list = query.split("#")
@@ -611,11 +613,28 @@ def query_table(query, container_i, container_o):
 def __query_table(query_key,query_data,container):
     '''Função auxiliar para executar uma query sobre o container recebido. Salva o resultado da query no proprio container'''
 
+    #Lista de queries:
+    #key_col;<null | col_name> -> Retorna todas colunas chave da tabela se nulo, ou todos os dados da coluna especificada
+    #
+
     #key = 'key_col'
     #key_col;<null | col_name> -> Retorna todas colunas chave da tabela se nulo, ou todos os dados da coluna especificada
     if query_key == 'key_col':
-        if bool(query_key):
+        if not bool(query_data):
             return Container(container.data.key_cols)
+        else:
+            cell_container = []
+            for item in container.data.key_cols:
+                if item.data == query_data:
+                    for n_item in item.child_nodes:
+                        cell_container.append(n_item)
+            #Remove duplicados
+            cell_contaier = list(set(cell_container))
+
+            return Container(cell_container)
+
+
+
 
 
 
