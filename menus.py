@@ -43,7 +43,7 @@ class Container(object):
             #Se é uma lista de celulas
             self.data = data
             parent = data[0].parent_node
-            self.name = aux_lib.get_name_labelless(parent) + "->[]"
+            self.name = aux_lib.get_name(parent) + "->[]"
             self.type = "Cell List"
         
         elif self.raw_type == aux_lib.Cell:
@@ -51,6 +51,19 @@ class Container(object):
             self.data = data
             self.name = aux_lib.get_name_labelless(data)
             self.type = "Cell"
+        
+        elif self.raw_type == type(defaultdict()) or self.raw_type == type(dict()) or self.raw_type == type(defaultdict(dict)):
+            #Se é um dicionario
+            self.data = data
+            data_string = ""
+
+            key = list(data.keys())[0]
+            value = list(data.items())[0]
+
+            data_string = data_string + '{0} : {1} and others'.format(str(key),str(type(value)))
+
+            self.name = "".join(list(data_string)[0:108])
+            self.type = "Data Dict"
 
 
             
@@ -96,6 +109,8 @@ def start_menu(state_dict):
     state_dict['containers']['b'] = Container(t.table_data[8][0].child_nodes)
     state_dict['containers']['c'] = Container(t.table_data[8][3])
 
+    state_dict['containers']['d'] = Container(state_dict['db'].tables.strings_dict)
+    
     state_dict['containers']['n'] = Container(aux_lib.walk_to(state_dict['db'].tables.root,'brasil: dispendio nacional em ciencia e tecnologia (c&t) por atividade'))
     
 
