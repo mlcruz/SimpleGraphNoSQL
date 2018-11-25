@@ -65,12 +65,6 @@ class Container(object):
             self.name = "".join(list(data_string)[0:108])
             self.type = "Data Dict"
 
-
-            
-        
-
-
-
 def start_menu(state_dict):
     '''Função que representa o menu inicial e seus estados'''
     #Strings de menus e seus locais na tela em tuplas
@@ -113,8 +107,6 @@ def start_menu(state_dict):
     
     state_dict['containers']['n'] = Container(aux_lib.walk_to(state_dict['db'].tables.root,'brasil: dispendio nacional em ciencia e tecnologia (c&t) por atividade'))
     
-
-
 def main_menu(stdscr, state_dict):
     '''Função que representa o menu principal e seus estados'''
     
@@ -134,14 +126,17 @@ def main_menu(stdscr, state_dict):
     loc_done = (4,80)
 
 
-    #escreve menu na tela
-    write_stdscr(stdscr,str_menu_inicial,loc_menu_inicial)
-
     #Controle de loop
     local_exit = False
 
     #loop de repl local
     while(local_exit == False):
+        #limpa
+        clear_menu_area(stdscr)
+       
+       #escreve menu na tela
+        write_stdscr(stdscr,str_menu_inicial,loc_menu_inicial)
+
         stdscr.move((state_dict['loc_data_entry'])[0],(state_dict['loc_data_entry'])[1])
 
         draw_state(stdscr,state_dict)
@@ -152,7 +147,8 @@ def main_menu(stdscr, state_dict):
         if (c > 140) and (c < 173):
             #Se é letra, cria container no dicionario de containers
             state_dict['containers'][chr(c)] = Container()
-
+        if chr(c) == '1':
+            access_table(stdscr, state_dict)
         if chr(c) == '2':
             search_db(stdscr, state_dict)
         if chr(c) == '0':
@@ -172,7 +168,39 @@ def main_menu(stdscr, state_dict):
     curses.nocbreak()
     curses.echo()
 
+def access_table(stdscr,state_dict):
+    '''Menu representando as opções de accesso a tabela'''
 
+    curses.cbreak()
+    curses.noecho()
+
+    str_access_menu = "[a-z]: Container containing a table object\n0:back"
+    loc_access_menu = (0 ,0)
+
+    str_table_menu = ''
+    local_exit = False
+
+    while(local_exit == False):
+
+        clear_menu_area(stdscr)
+        write_stdscr(stdscr,str_access_menu,loc_access_menu)
+        c = stdscr.getch()
+        
+        #Trata letras de a até z
+        if (c > 96) and (c < 123):
+             current_table = state_dict['containers'][chr(c)]
+             draw_table(stdscr,current_table)
+
+
+
+        if chr(c) == '0':
+            local_exit = True
+
+        
+
+
+
+    
 
 def search_db(stdscr, state_dict):
     '''Menu representando as opções de busca no banco de dados'''
@@ -228,7 +256,7 @@ def draw_state(stdscr, state_dict):
         str_current_conteiner_name_1 = "".join(str_current_conteiner_name[0:36])
         str_current_conteiner_name_2 = ''.join(str_current_conteiner_name[36:72])
         str_current_conteiner_name_3 = ''.join(str_current_conteiner_name[72:108])
-        str_line = drawline(40)
+        str_line = drawline(39)
 
         str_current_conteiner_type = "Type : " + value.type
 
@@ -245,17 +273,6 @@ def draw_state(stdscr, state_dict):
         write_stdscr(stdscr,str_current_conteiner_name_3,loc_current_conteiner_name_3)
         write_stdscr(stdscr,str_current_conteiner_type,loc_current_conteiner_type)
         write_stdscr(stdscr,str_line,loc_line)
-
-
-
-
-
-
-
-
-
-    
-
 
 
     write_stdscr(stdscr,str_user_input_line,loc_user_input_line)
@@ -277,4 +294,51 @@ def drawbar(intr):
     for x in range(intr):
         returns = returns + '|\n'
     return returns
+
+def clear_menu_area(stdscr):
+    str_clr_menu_area = "                                                                                                                        \n                                                                                                                        \n                                                                                                                        \n                                                                                                                        \n                                                                                                                        \n                                                                                                                        \n                                                                                                                        \n                                                                                                                        \n                                                                                                                        \n                                                                                                                        \n"
+    loc_clr_menu_area = (0,0)
+    write_stdscr(stdscr,str_clr_menu_area,loc_clr_menu_area)
+
+
+def draw_table(stdscr,table_container):
+    '''Draw a table in the table area from table_container data'''
+
+    table = table_container.data
+
+    ##Table area: From 10,0 to 55,120
+    #upper_x = (13,3)
+    #lower_x = (upper_x[0]+table.bound_x,3)
+
+    #upper_y = (upper_x[0]+1,upper_x[1])
+    #lower_y = (upper_x[0]+1,)
+    cell_size = 4
+
+    #Linhas e barras da tabela
+    table_line = "+" + drawline(table.bound_y * (cell_size+2) - 1) + "+"
+    table_bar = drawbar(table.bound_x - 1)
+
+    loc_upper_table_line = (13,3)
+    loc_lower_table_line = (13+table.bound_x,3)
+
+    loc_left_bar = (14,3)
+    loc_right_bar = (14,(table.bound_y) * (cell_size+2) + 3)
+
+    write_stdscr(stdscr,table_line,loc_upper_table_line)
+    write_stdscr(stdscr,table_line,loc_lower_table_line)
+    
+    write_stdscr(stdscr,table_bar,loc_left_bar)
+    write_stdscr(stdscr,table_bar,loc_right_bar)
+
+
+
+
+
+
+
+
+
+
+    
+
 
