@@ -190,10 +190,9 @@ def access_table(stdscr,state_dict):
         if (c > 96) and (c < 123):
              current_table = state_dict['containers'][chr(c)]
              draw_table(stdscr,current_table)
+             c = stdscr.getch()
 
-
-
-        if chr(c) == '0':
+        elif chr(c) == '0':
             local_exit = True
 
         
@@ -312,14 +311,14 @@ def draw_table(stdscr,table_container):
 
     #upper_y = (upper_x[0]+1,upper_x[1])
     #lower_y = (upper_x[0]+1,)
-    cell_size = 4
+    cell_size = 5
 
     #Linhas e barras da tabela
     table_line = "+" + drawline(table.bound_y * (cell_size+2) - 1) + "+"
-    table_bar = drawbar(table.bound_x - 1)
+    table_bar = drawbar(table.bound_x +1)
 
     loc_upper_table_line = (13,3)
-    loc_lower_table_line = (13+table.bound_x,3)
+    loc_lower_table_line = (13+table.bound_x+2,3)
 
     loc_left_bar = (14,3)
     loc_right_bar = (14,(table.bound_y) * (cell_size+2) + 3)
@@ -329,6 +328,12 @@ def draw_table(stdscr,table_container):
     
     write_stdscr(stdscr,table_bar,loc_left_bar)
     write_stdscr(stdscr,table_bar,loc_right_bar)
+
+    for X in range(table.bound_x):
+        for Y in range (table.bound_y):
+            loc = (loc_upper_table_line[0]+X+1,1+loc_upper_table_line[1]+Y*6)
+            
+            write_stdscr(stdscr," "+ str(table.table_data[X][Y].data)[:cell_size] + " ",loc)
 
 
 
