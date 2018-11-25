@@ -95,6 +95,8 @@ def start_menu(state_dict):
     state_dict['containers']['a'] = Container(t)
     state_dict['containers']['b'] = Container(t.table_data[8][0].child_nodes)
     state_dict['containers']['c'] = Container(t.table_data[8][3])
+
+    state_dict['containers']['n'] = Container(aux_lib.walk_to(state_dict['db'].tables.root,'brasil: dispendio nacional em ciencia e tecnologia (c&t) por atividade'))
     
 
 
@@ -184,13 +186,13 @@ def draw_state(stdscr, state_dict):
 
     #Linha horizontal de estados
     loc_h_state_area_line = (0,120)
-    str_h_state_area_line = "+" + drawline(14) + "State area" + drawline(15)
+    str_h_state_area_line = "+" + drawline(12) + "Container area" + drawline(13)
 
     #Area de estados vai de (0,120) até (49,120)
     #Total = 40*50 = 2000 caracteres para a area de estados
     #Divididos em 10 celulas de 48*4
     
-    loc_first_container = (2,122)
+    loc_first_container = (1,122)
 
     offset_container_y = 6
 
@@ -211,21 +213,23 @@ def draw_state(stdscr, state_dict):
         str_current_conteiner_name_1 = "".join(str_current_conteiner_name[0:36])
         str_current_conteiner_name_2 = ''.join(str_current_conteiner_name[36:72])
         str_current_conteiner_name_3 = ''.join(str_current_conteiner_name[72:108])
+        str_line = drawline(40)
 
-        str_current_conteiner_type = value.type
+        str_current_conteiner_type = "Type : " + value.type
 
         loc_current_conteiner_label = (loc_first_container[0] + current_offset,loc_first_container[1]-1)
         loc_current_conteiner_name_1 = (loc_first_container[0] + current_offset +1,loc_first_container[1])
         loc_current_conteiner_name_2 = (loc_first_container[0] + current_offset +2,loc_first_container[1])
         loc_current_conteiner_name_3 = (loc_first_container[0] + current_offset +3,loc_first_container[1])
         loc_current_conteiner_type = (loc_first_container[0] + current_offset + 4,loc_first_container[1])
-        
+        loc_line = (loc_first_container[0] + current_offset + 5,loc_first_container[1]-1)
 
         write_stdscr(stdscr,str_current_conteiner_label, loc_current_conteiner_label)
         write_stdscr(stdscr,str_current_conteiner_name_1,loc_current_conteiner_name_1)
         write_stdscr(stdscr,str_current_conteiner_name_2,loc_current_conteiner_name_2)
         write_stdscr(stdscr,str_current_conteiner_name_3,loc_current_conteiner_name_3)
         write_stdscr(stdscr,str_current_conteiner_type,loc_current_conteiner_type)
+        write_stdscr(stdscr,str_line,loc_line)
 
 
 
