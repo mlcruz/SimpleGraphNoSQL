@@ -55,6 +55,7 @@ class Cell(object):
         self.bounds = (X,X+1,Y,Y+1)
         self.cell_type = '0' #indica tipo ainda não classificado
         self.data = sheet.cell_value(rowx=X, colx=Y)
+        self.table_label = ""
 
         #Representa o local da celula pai da celula atual. Key_Row é pai de Key, Super_key é pai de Key_col.
         #Inicializado com -1 para indicar que ainda não está atribuido. Somente para não folhas
@@ -185,6 +186,8 @@ class RawTable(object):
         #Gera atributos de pai, filhos e chaves de ordenação a partir do tipo da celula da tabela logica para cada celula
         for X in range(self.raw_sheet.nrows):
             for Y in range (self.raw_sheet.ncols):
+                #Adiciona tabela como label
+                self.table_data[X][Y].table_label = self.table_label
                 #Classifica dependendo do tipo
                 if self.table_data[X][Y].cell_type == "Leaf":
                     #Se leaf, aponta celulas que ordenam a mesma

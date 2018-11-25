@@ -152,7 +152,7 @@ def main_menu(stdscr, state_dict):
     while(local_exit == False):
         #limpa
         clear_menu_area(stdscr)
-       
+        restore_cursor(stdscr)
        
        #escreve menu na tela
         write_stdscr(stdscr,str_menu_principal,loc_menu_principal)
@@ -166,7 +166,8 @@ def main_menu(stdscr, state_dict):
         #Trata letras de a até z
         if (c > 96) and (c < 123):
             #Se é letra, desenha container
-            draw_container(stdscr,state_dict['containers'][chr(c)])
+            if(chr(c) in state_dict['containers'].keys()):
+                draw_container(stdscr,state_dict['containers'][chr(c)])
         if chr(c) == '-':
             clear_table_area(stdscr)
 
@@ -187,9 +188,6 @@ def main_menu(stdscr, state_dict):
             aux_lib.save_trie(state_dict['table_trie'],loc)
             write_stdscr(stdscr,str_done,loc_done)
 
-    
-    curses.nocbreak()
-    curses.echo()
 
 def access_table(stdscr,state_dict):
     '''Menu representando as opções de accesso a tabela'''
@@ -222,15 +220,14 @@ def access_table(stdscr,state_dict):
         
         #Trata letras de a até z
         if (c > 96) and (c < 123):
-             current_table = state_dict['containers'][chr(c)].data
-             str_selected_table = "Selected table: ["+ current_table.table_label +"]"
-             write_stdscr(stdscr,str_selected_table,loc_selected_table)
-             set_table = chr(c)
-             draw_container(stdscr,state_dict['containers'][chr(c)])
+            if(chr(c) in state_dict['containers'].keys()):             
+                 if state_dict['containers'][chr(c)].type == "Table" :
+                     current_table = state_dict['containers'][chr(c)].data
+                     str_selected_table = "Selected table: ["+ current_table.table_label +"]"
+                     write_stdscr(stdscr,str_selected_table,loc_selected_table)
+                     set_table = chr(c)
+                     draw_container(stdscr,state_dict['containers'][chr(c)])
 
-
-
-             c = stdscr.getch()
 
         elif chr(c) == '0':
             local_exit = True
@@ -252,35 +249,14 @@ def access_table(stdscr,state_dict):
             write_stdscr(stdscr,"Enter Query. CTRL+G to exit. Control-H	to delete",(51,40))
             
             str_query = get_input(stdscr)
+            try:
+                state_dict['containers'][set_container] = query_table(str_query,state_dict['containers'][set_table],state_dict['containers'][set_container])
+            except:
+                write_stdscr(stdscr,"Failed to run query. Press any key to continue",(4,60))
+                stdscr.getch()
 
-            state_dict['containers'][set_container] = query_table(str_query,state_dict['containers'][set_table],state_dict['containers'][set_container])
             draw_state(stdscr,state_dict)
             
-
-def get_input(stdscr):
-            input_area = curses.newwin(1, 118, 53, 1)
-            ret_input_box = curses.textpad.rectangle(stdscr,52,0,54,120)
-            input_box = curses.textpad.Textbox(input_area)
-            stdscr.refresh()
-
-            input_txt = input_box.edit()
-            stdscr.keypad(False)
-
-            #Por algum motivo as strings vem duplicadas. Trata esse bug(?)
-            input_txt = list(str(input_txt).rstrip().lstrip())
-            metade = int(len(input_txt)/2)
-
-            input_txt = "".join(input_txt[:metade])
-
-            #Limpa area de input
-            stdscr.refresh()
-            clear_input_area(stdscr)
-            curses.cbreak()
-            curses.noecho()
-            restore_cursor(stdscr)
-            return input_txt
-
-     
 def search_db(stdscr, state_dict):
     '''Menu representando as opções de busca no banco de dados'''
 
@@ -288,6 +264,10 @@ def search_db(stdscr, state_dict):
     curses.echo()
 
     str_menu_db = "1:Search Table trie\n2:Search Key_cols\n3:Seach Key_rows\n4:Search Super_keys"
+
+
+
+##Funcions
 
 def draw_state(stdscr, state_dict):
     '''Desenha gui na tela e atualiza os estados visiveis ao usuario'''
@@ -362,8 +342,29 @@ def draw_state(stdscr, state_dict):
 
 
 
+def get_input(stdscr):
+            input_area = curses.newwin(1, 118, 53, 1)
+            ret_input_box = curses.textpad.rectangle(stdscr,52,0,54,120)
+            input_box = curses.textpad.Textbox(input_area)
+            stdscr.refresh()
 
-##Funcions
+            input_txt = input_box.edit()
+            stdscr.keypad(False)
+
+            #Por algum motivo as strings vem duplicadas. Trata esse bug(?)
+            input_txt = list(str(input_txt).rstrip().lstrip())
+            metade = int(len(input_txt)/2)
+
+            input_txt = "".join(input_txt[:metade])
+
+            #Limpa area de input
+            stdscr.refresh()
+            clear_input_area(stdscr)
+            curses.cbreak()
+            curses.noecho()
+            restore_cursor(stdscr)
+            return input_txt
+     
 def drawline(intr):
     '''Returns the '-' char repeated n times in a string'''
     returns = ''
@@ -453,7 +454,13 @@ def draw_cell(stdscr, y ,x , container):
             key_row_data = str(cell_container.parent_node.data)
             key = str(cell_container.data)
             key_col_data = "Data"
-   
+
+        elif(cell_container.cell_type == "Key_Col"):
+            data = "<Cell.child_nodes>"
+            key_row_data = str(cell_container.table_label)
+            key = str(cell_container.data)
+            key_col_data = "Data"
+            
         else:
 
             key_col_first_parent = cell_container.key_col.parent_node
