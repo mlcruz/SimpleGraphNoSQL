@@ -171,8 +171,11 @@ class RawTable(object):
         #Lista com todas as Key_col da tabela
         self.key_cols = []
 
-        #Lista com todas as Key_row da tabela
-        self.key_rows = []
+        #Key_row da tabela
+        self.key_row = ""
+
+        #Lista com todas as chaves da tabela
+        self.keys = []
 
         #Gera tabela logica
         for X in range(self.raw_sheet.nrows):
@@ -203,6 +206,10 @@ class RawTable(object):
                     
                     #Se Chave, aponta para ultimo Row_key como parente tratando merges
                     self.table_data[X][Y].parent_node = get_cell(self.table_data[(self.table_data[X][Y].data_boundary - 1)][Y],self.table_data)
+                    self.table_data[X][Y].key_row = self.key_row
+                    self.table_data[X][Y].key_col = self.table_data[X][Y].parent_node
+                    self.keys.append(self.table_data[X][Y])
+                    
                     #Aponta para todas os dados indexados por essa chave
                     for node in range(1,self.raw_sheet.ncols):
                         self.table_data[X][Y].child_nodes.append(self.table_data[X][node])
@@ -213,6 +220,15 @@ class RawTable(object):
 
                     #Se é key_row ou Key_ col
                     if (self.table_data[X][Y].cell_type == "Key_Row") or (self.table_data[X][Y].cell_type == "Key_Col"):
+                        if self.table_data[X][Y].cell_type =="Key_Col":
+                            self.key_cols.append(self.table_data[X][Y])
+                            self.table_data[X][Y].key_col = self.table_data[X][Y]
+                            self.table_data[X][Y].key_row = self.key_row
+                        else:
+                            self.key_row = self.table_data[X][Y]
+                            self.table_data[X][Y].key_row = self.table_data[X][Y]
+                            self.table_data[X][Y].key_col = self.table_data[X][Y]
+
                         #Filhos da Key_Row/Col são as chaves abaixo da mesma
                         for node in range(self.table_data[X][Y].data_boundary,self.raw_sheet.nrows):
                             self.table_data[X][Y].child_nodes.append(self.table_data[node][Y])
@@ -270,6 +286,10 @@ class Table(object):
         self.table_data = raw_table.table_data
         self.bound_x = raw_table.raw_sheet.nrows
         self.bound_y = raw_table.raw_sheet.ncols
+        self.key_cols = raw_table.key_cols
+        self.key_row = raw_table.key_row
+        self.keys = raw_table.keys
+
 
 def normalize(input_text):
     """Normaliza String e lida com caracteres especiais. Transforma qualquer string para uma string contendo somente caracteres não acentuados

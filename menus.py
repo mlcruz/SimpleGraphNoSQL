@@ -206,6 +206,7 @@ def access_table(stdscr,state_dict):
     loc_last_container = (7,0)
     str_selected_table = "Selected table: []"
     loc_selected_table = (8,0)
+    set_table = ""
 
     str_table_menu = ''
     local_exit = False
@@ -224,7 +225,7 @@ def access_table(stdscr,state_dict):
              current_table = state_dict['containers'][chr(c)].data
              str_selected_table = "Selected table: ["+ current_table.table_label +"]"
              write_stdscr(stdscr,str_selected_table,loc_selected_table)
-
+             set_table = chr(c)
              draw_container(stdscr,state_dict['containers'][chr(c)])
 
 
@@ -250,12 +251,11 @@ def access_table(stdscr,state_dict):
            
             write_stdscr(stdscr,"Enter Query. CTRL+G to exit. Control-H	to delete",(51,40))
             
-            Entrada = get_input(stdscr)
+            str_query = get_input(stdscr)
+
+            state_dict['containers'][set_container] = query_table(str_query,state_dict['containers'][set_table],state_dict['containers'][set_container])
+            draw_state(stdscr,state_dict)
             
-
-            
-
-
 
 def get_input(stdscr):
             input_area = curses.newwin(1, 118, 53, 1)
@@ -279,11 +279,6 @@ def get_input(stdscr):
             curses.noecho()
             restore_cursor(stdscr)
             return input_txt
-
-
-
-
-
 
      
 def search_db(stdscr, state_dict):
@@ -363,6 +358,7 @@ def draw_state(stdscr, state_dict):
     write_stdscr(stdscr,str_state_area_line,loc_state_area_line)
     write_stdscr(stdscr,str_table_area_line,loc_table_area_line)
     write_stdscr(stdscr,str_h_state_area_line,loc_h_state_area_line)
+    stdscr.refresh()
 
 
 
@@ -586,6 +582,38 @@ def draw_container(stdscr, container):
             
             write_stdscr(stdscr,str_output,(y_pos,x_pos))
             y_pos = y_pos + 1
+
+def query_table(query, container_i, container_o):
+    '''Parses a string into a querry table'''
+
+    #Queries são formatadas da seguinte maneira:
+    # Separador de queries -> #
+    # Separador de <tipo, query>  -> ;
+
+    #Separa queries
+    query_list = query.split("#")
+
+    #Executa as queries sequencialmente 
+    for item in query_list:
+        (query_key,query_data)  = item.split(';')
+        container_o = __query_table(query_key,query_data,container_i)
+    
+    return container_o
+
+    
+def __query_table(query_key,query_data,container):
+    '''Função auxiliar para executar uma query sobre o container recebido. Salva o resultado da query no proprio container'''
+
+    #key = 'key_col'
+    #key_col;<null | col_name> -> Retorna todas colunas chave da tabela se nulo, ou todos os dados da coluna especificada
+    if query_key == 'key_col':
+        if bool(query_key):
+            return Container(container.data.key_cols)
+
+
+
+
+
 
 def restore_cursor(stdscr,state_dict):
     stdscr.move((state_dict['loc_data_entry'])[0],(state_dict['loc_data_entry'])[1])
