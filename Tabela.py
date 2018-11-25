@@ -168,6 +168,12 @@ class RawTable(object):
         self.bound_x = self.raw_sheet.nrows
         self.bound_y = self.raw_sheet.ncols
 
+        #Lista com todas as Key_col da tabela
+        self.key_cols = []
+
+        #Lista com todas as Key_row da tabela
+        self.key_rows = []
+
         #Gera tabela logica
         for X in range(self.raw_sheet.nrows):
             for Y in range (self.raw_sheet.ncols):

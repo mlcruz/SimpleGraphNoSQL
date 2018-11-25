@@ -102,12 +102,6 @@ def generate_table_trie(loc):
         
     return t
 
-
-
-
-    
-
-
 def write_stdscr(stdscr,string, loc):
     '''Write string in the stdscr using tuple loc(x,y) as x and y coordinates. Aligns new lines and restores cursor position after'''
     
@@ -125,7 +119,6 @@ def write_stdscr(stdscr,string, loc):
         counter += 1
 
     stdscr.move(loc_cursor[0],loc_cursor[1])
-
 
 def write_stdscr_a(stdscr,string, loc, attrb):
     '''Write string in the stdscr using tuple loc(x,y) as x and y coordinates and attrb'''

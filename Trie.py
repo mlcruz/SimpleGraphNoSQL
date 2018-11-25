@@ -19,7 +19,6 @@ class Nodo(object):
         self.chard = char_data
         self.data = data
 
-
 class Trie(object):
     """Implementa uma Trie para pesquisa no nome de tabelas de maneira eficiente"""
     
@@ -231,7 +230,6 @@ def regex_search(trie, re_string):
             matched[key] = value
     return matched
 
-
 def regex_dict_search(dict, re_string):
     '''Pesquisa expressão regular no default dict em formato de trie recebido. Retorna dicionario de todos os nodos onde a chave contem o valor da expressão'''
     data = dict
@@ -243,10 +241,6 @@ def regex_dict_search(dict, re_string):
         if (bool(c_pattern.findall(key))):
             matched[key] = value
     return matched
-
-
-
-
 
 def get_all_data(n_trie ,r_type = 'dict'):
     '''Recebe um nodo de trie e Retorna dicionario no formato {label,table} contendo todos os dados não nulos da trie especificada. Se r_type = 'list', retorna uma lista em vez de um dict'''

@@ -42,8 +42,21 @@ class Container(object):
         elif self.raw_type == list:
             #Se é uma lista de celulas
             self.data = data
-            parent = data[0].parent_node
-            self.name = aux_lib.get_name(parent) + "->[]"
+            parent_list = []
+            for item in data:
+                if (item.cell_type != "Blank") and (item.cell_type != "Merge"):
+                    parent_list.append(item.parent_node)
+
+            #Se todos os nodos tem o mesmo pai, aponta para chave
+            if len(set(parent_list)) == 1:
+                parent = data[0].parent_node
+                self.name = aux_lib.get_name(parent) + "->[]"
+            else:
+                parent = data[0].key_col
+                self.name = aux_lib.get_name_labelless(parent) + "->[]"
+            
+            
+            
             self.type = "Cell_List"
         
         elif self.raw_type == aux_lib.Cell:
@@ -65,6 +78,7 @@ class Container(object):
             self.name = "".join(list(data_string)[0:108])
             self.type = "Data_Dict"
 
+##Menus
 def start_menu(state_dict):
     '''Função que representa o menu inicial e seus estados'''
     #Strings de menus e seus locais na tela em tuplas
@@ -106,6 +120,10 @@ def start_menu(state_dict):
     state_dict['containers']['d'] = Container(state_dict['db'].tables.strings_dict)
     
     state_dict['containers']['n'] = Container(aux_lib.walk_to(state_dict['db'].tables.root,'brasil: dispendio nacional em ciencia e tecnologia (c&t) por atividade'))
+
+    state_dict['containers']['g'] = Container(t.table_data[3][2].child_nodes)
+    state_dict['containers']['s'] = Container(t.table_data[1][1].child_nodes)
+    state_dict['containers']['k'] = Container(t.table_data[1][0].child_nodes)
     
 def main_menu(stdscr, state_dict):
     '''Função que representa o menu principal e seus estados'''
@@ -178,8 +196,15 @@ def access_table(stdscr,state_dict):
     curses.cbreak()
     curses.noecho()
 
-    str_access_menu = "[a-z]: Container containing a table object\n0:back"
+    str_access_menu = "[a-z]: Container containing a table object\n6:Set Container\n0:back"
     loc_access_menu = (0 ,0)
+    set_container = ""
+
+
+    str_last_container = "Output Container: ["+set_container+"]"
+    loc_last_container = (7,0)
+    str_selected_table = "Selected table: []"
+    loc_selected_table = (8,0)
 
     str_table_menu = ''
     local_exit = False
@@ -188,19 +213,34 @@ def access_table(stdscr,state_dict):
 
         clear_menu_area(stdscr)
         write_stdscr(stdscr,str_access_menu,loc_access_menu)
+        write_stdscr(stdscr,str_selected_table,loc_selected_table)
+        write_stdscr(stdscr,str_last_container,loc_last_container)
+        
         c = stdscr.getch()
         
         #Trata letras de a até z
         if (c > 96) and (c < 123):
-             current_table = state_dict['containers'][chr(c)]
-             draw_table(stdscr,current_table)
+             current_table = state_dict['containers'][chr(c)].data
+             str_selected_table = "Selected table: ["+ current_table.table_label +"]"
+             write_stdscr(stdscr,str_selected_table,loc_selected_table)
+
+             draw_container(stdscr,state_dict['containers'][chr(c)])
+
+
+
              c = stdscr.getch()
 
         elif chr(c) == '0':
             local_exit = True
+        elif chr(c) == '6':
+            write_stdscr(stdscr,"Press any key to save as container key",(4,60))
+            c = stdscr.getch()
+            set_container = chr(c)
+            str_last_container = "Output Container: ["+set_container+"]"
 
-      
 
+
+     
 def search_db(stdscr, state_dict):
     '''Menu representando as opções de busca no banco de dados'''
 
@@ -280,6 +320,9 @@ def draw_state(stdscr, state_dict):
     write_stdscr(stdscr,str_h_state_area_line,loc_h_state_area_line)
 
 
+
+
+##Funcions
 def drawline(intr):
     '''Returns the '-' char repeated n times in a string'''
     returns = ''
@@ -415,9 +458,6 @@ def draw_cell(stdscr, y ,x , container):
         write_stdscr(stdscr,str_bar,loc_right_bar)
         write_stdscr(stdscr,str_bar,loc_upper_cell_line)
         write_stdscr(stdscr,str_middle_bar,loc_middle_bar)
-
-
-
 
 def draw_container(stdscr, container):
     '''Desenha container na tela, na area de tabela'''
