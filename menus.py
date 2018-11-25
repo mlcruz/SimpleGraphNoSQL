@@ -356,7 +356,31 @@ def draw_cell(stdscr, y ,x , container):
 
     if (cell_container.cell_type != 'Blank') and (cell_container.cell_type != 'Merge') :
 
-        key_col_data = str(cell_container.key_col.data)
+        
+        key_col_first_parent = cell_container.key_col.parent_node
+        key_col_second_parent = key_col_first_parent.parent_node
+        
+        key_col_label_t = str(aux_lib.get_name(cell_container))
+
+        #Label truncada par 6 char
+        key_col_label_t = "".join(list(key_col_label_t)[:5])
+
+        #Segundo pai trunkado para 6 char
+        key_col_second_parent_t = str(key_col_second_parent.data)
+        key_col_second_parent_t = "".join(list(key_col_second_parent_t)[:5])
+
+        #Primeiro pai trunkada para 8 char
+        key_col_first_parent_t = str(key_col_first_parent.data)
+        key_col_first_parent_t = "".join(list(key_col_first_parent_t)[:8])
+
+        #Se segundo pai é label
+        if(key_col_label_t == key_col_second_parent_t):
+            key_col_data = key_col_label_t + "-" + key_col_first_parent_t + "-" + str(cell_container.key_col.data)
+        else:
+            key_col_data = key_col_label_t + "-" + key_col_second_parent_t + "-" + key_col_first_parent_t + "-" + str(cell_container.key_col.data)
+
+
+        #key_col_data = str(cell_container.key_col.data)
         key_row_data = str(cell_container.key_row.parent_node.data)
         data = str(cell_container.data)
         key = str(cell_container.parent_node.data)
