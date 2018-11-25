@@ -12,14 +12,17 @@ import os
 from aux_lib import write_stdscr, write_stdscr_a
 
 class Container(object):
-    '''Classe representando um objeto que pode ser um Nodo ou uma Tabela ou uma Lista de celulas ou uma Celula'''
+    '''Classe representando um objeto que pode ser um Nodo ou uma Tabela ou uma Lista de celulas ou uma Celula. data representa o objeto a gerar o container
+    '''
 
-    def __init__(self, data):
+    def __init__(self,data):
         #Guarda tipo do objeto
         self.raw_type = type(data)
         self.name = ""
         self.data = 0
         self.type = ""
+
+
 
         #Inicializa nome e dados dependo do tipo
         if self.raw_type == aux_lib.Nodo:
@@ -40,13 +43,13 @@ class Container(object):
             #Se é uma lista de celulas
             self.data = data
             parent = data[0].parent_node
-            self.name = aux_lib.get_name(parent) + "->[]"
+            self.name = aux_lib.get_name_labelless(parent) + "->[]"
             self.type = "Cell List"
         
         elif self.raw_type == aux_lib.Cell:
             #Se é uma celula
             self.data = data
-            self.name = aux_lib.get_name(data)
+            self.name = aux_lib.get_name_labelless(data)
             self.type = "Cell"
 
 
@@ -85,6 +88,16 @@ def start_menu(state_dict):
     #Muda estado para menu principal
     state_dict['state'] = 'main_menu'
 
+    #Cria estado de containers
+    state_dict['containers'] = dict()
+
+    t = state_dict['db'].tables.strings_dict[state_dict['db'].tables.strings_list[0]]
+    state_dict['containers']['a'] = Container(t)
+    state_dict['containers']['b'] = Container(t.table_data[8][0].child_nodes)
+    state_dict['containers']['c'] = Container(t.table_data[8][3])
+    
+
+
 def main_menu(stdscr, state_dict):
     '''Função que representa o menu principal e seus estados'''
     
@@ -116,14 +129,19 @@ def main_menu(stdscr, state_dict):
 
         draw_state(stdscr,state_dict)
         #Entrada do usuario
-        c = chr(stdscr.getch())
+        c = stdscr.getch()
 
-        if c == '2':
+        #Trata letras de a até z
+        if (c > 140) and (c < 173):
+            #Se é letra, cria container no dicionario de containers
+            state_dict['containers'][chr(c)] = Container()
+
+        if chr(c) == '2':
             search_db(stdscr, state_dict)
-        if c == '0':
+        if chr(c) == '0':
             state_dict['f_exit'] = True
             local_exit = True
-        elif c == '9':
+        elif chr(c) == '9':
             loc = easygui.filesavebox('Select location for obj file')
         
             #Salva trie
@@ -150,8 +168,7 @@ def search_db(stdscr, state_dict):
 def draw_state(stdscr, state_dict):
     '''Desenha gui na tela e atualiza os estados visiveis ao usuario'''
 
-    state_dict['containers'] = dict()
-
+    
 
     #Linha separando input do usuario
     str_user_input_line = drawline(72) + "User input area" + drawline(72)
@@ -169,16 +186,63 @@ def draw_state(stdscr, state_dict):
     loc_h_state_area_line = (0,120)
     str_h_state_area_line = "+" + drawline(14) + "State area" + drawline(15)
 
+    #Area de estados vai de (0,120) até (49,120)
+    #Total = 40*50 = 2000 caracteres para a area de estados
+    #Divididos em 10 celulas de 48*4
+    
+    loc_first_container = (2,122)
+
+    offset_container_y = 6
+
+
+    #Trata x e y do container como offset de loc_fisrt container
+    for n,tuple in enumerate(state_dict['containers'].items()):
+        #Desenha containers
+        
+        key = tuple[0]
+        value = tuple[1]
+
+
+
+        current_offset = offset_container_y * n
+        str_current_conteiner_label = "Container " + str(key) + ":"
+        
+        str_current_conteiner_name = list(value.name)
+        str_current_conteiner_name_1 = "".join(str_current_conteiner_name[0:36])
+        str_current_conteiner_name_2 = ''.join(str_current_conteiner_name[36:72])
+        str_current_conteiner_name_3 = ''.join(str_current_conteiner_name[72:108])
+
+        str_current_conteiner_type = value.type
+
+        loc_current_conteiner_label = (loc_first_container[0] + current_offset,loc_first_container[1]-1)
+        loc_current_conteiner_name_1 = (loc_first_container[0] + current_offset +1,loc_first_container[1])
+        loc_current_conteiner_name_2 = (loc_first_container[0] + current_offset +2,loc_first_container[1])
+        loc_current_conteiner_name_3 = (loc_first_container[0] + current_offset +3,loc_first_container[1])
+        loc_current_conteiner_type = (loc_first_container[0] + current_offset + 4,loc_first_container[1])
+        
+
+        write_stdscr(stdscr,str_current_conteiner_label, loc_current_conteiner_label)
+        write_stdscr(stdscr,str_current_conteiner_name_1,loc_current_conteiner_name_1)
+        write_stdscr(stdscr,str_current_conteiner_name_2,loc_current_conteiner_name_2)
+        write_stdscr(stdscr,str_current_conteiner_name_3,loc_current_conteiner_name_3)
+        write_stdscr(stdscr,str_current_conteiner_type,loc_current_conteiner_type)
+
+
+
+
+
+
+
+
+
+    
+
+
 
     write_stdscr(stdscr,str_user_input_line,loc_user_input_line)
     write_stdscr(stdscr,str_state_area_line,loc_state_area_line)
     write_stdscr(stdscr,str_table_area_line,loc_table_area_line)
     write_stdscr(stdscr,str_h_state_area_line,loc_h_state_area_line)
-
-
-
-
-
 
 
 def drawline(intr):
