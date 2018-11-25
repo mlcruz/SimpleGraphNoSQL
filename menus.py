@@ -612,10 +612,12 @@ def query_table(query, container_i, container_o):
     
 def __query_table(query_key,query_data,container):
     '''Função auxiliar para executar uma query sobre o container recebido. Salva o resultado da query no proprio container'''
-
+    
+    cell_container = []
     #Lista de queries:
     #key_col;<null | col_name> -> Retorna todas colunas chave da tabela se nulo, ou todos os dados da coluna especificada
-    #
+    #key_row;<null |a,b > -> Retorna todas as chaves da tabela se nulo, ou todas as chaves de indice entre a e b
+    #get_cell;<y,x> -> Retorna celula na posicao y,x
 
     #key = 'key_col'
     #key_col;<null | col_name> -> Retorna todas colunas chave da tabela se nulo, ou todos os dados da coluna especificada
@@ -623,7 +625,7 @@ def __query_table(query_key,query_data,container):
         if not bool(query_data):
             return Container(container.data.key_cols)
         else:
-            cell_container = []
+            
             for item in container.data.key_cols:
                 if item.data == query_data:
                     for n_item in item.child_nodes:
@@ -632,6 +634,19 @@ def __query_table(query_key,query_data,container):
             cell_contaier = list(set(cell_container))
 
             return Container(cell_container)
+    #key_row;<null |a,b > -> Retorna todas as chaves da tabela se nulo, ou todas as chaves de indice entre a e b
+    if query_key =='key_row':
+        if not bool(query_data):
+            return Container(container.key_row.child_nodes)
+        else:
+            (a,b) = query_data.split(',')
+            for key,item in enumerate(container.key_row.child_nodes):
+                if key >= int(a) and key < int(b):
+                    cell_container.append(item)
+            return Container(cell_container)
+                    
+
+
 
 
 
