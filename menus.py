@@ -44,7 +44,7 @@ class Container(object):
             self.data = data
             parent = data[0].parent_node
             self.name = aux_lib.get_name(parent) + "->[]"
-            self.type = "Cell List"
+            self.type = "Cell_List"
         
         elif self.raw_type == aux_lib.Cell:
             #Se é uma celula
@@ -63,7 +63,7 @@ class Container(object):
             data_string = data_string + '{0} : {1} and others'.format(str(key),str(type(value)))
 
             self.name = "".join(list(data_string)[0:108])
-            self.type = "Data Dict"
+            self.type = "Data_Dict"
 
 def start_menu(state_dict):
     '''Função que representa o menu inicial e seus estados'''
@@ -116,8 +116,8 @@ def main_menu(stdscr, state_dict):
 
     #Strings e locais
 
-    str_menu_inicial = "1:Access Table\n2:Search DB\n3:Search Table\n9:Save Current DB\n0:Exit"
-    loc_menu_inicial = (0,0)
+    str_menu_principal = "[a-z]:Draw container\n1:Access Table\n2:Search DB\n3:Search Table\n9:Save Current DB\n-:clear table area\n0:Exit"
+    loc_menu_principal = (0,0)
 
     str_saving = "Saving db...\n"
     loc_saving = (4,40)
@@ -134,8 +134,9 @@ def main_menu(stdscr, state_dict):
         #limpa
         clear_menu_area(stdscr)
        
+       
        #escreve menu na tela
-        write_stdscr(stdscr,str_menu_inicial,loc_menu_inicial)
+        write_stdscr(stdscr,str_menu_principal,loc_menu_principal)
 
         stdscr.move((state_dict['loc_data_entry'])[0],(state_dict['loc_data_entry'])[1])
 
@@ -144,9 +145,12 @@ def main_menu(stdscr, state_dict):
         c = stdscr.getch()
 
         #Trata letras de a até z
-        if (c > 140) and (c < 173):
-            #Se é letra, cria container no dicionario de containers
-            state_dict['containers'][chr(c)] = Container()
+        if (c > 96) and (c < 123):
+            #Se é letra, desenha container
+            draw_container(stdscr,state_dict['containers'][chr(c)])
+        if chr(c) == '-':
+            clear_table_area(stdscr)
+
         if chr(c) == '1':
             access_table(stdscr, state_dict)
         if chr(c) == '2':
@@ -195,11 +199,7 @@ def access_table(stdscr,state_dict):
         elif chr(c) == '0':
             local_exit = True
 
-        
-
-
-
-    
+      
 
 def search_db(stdscr, state_dict):
     '''Menu representando as opções de busca no banco de dados'''
@@ -299,19 +299,26 @@ def clear_menu_area(stdscr):
     loc_clr_menu_area = (0,0)
     write_stdscr(stdscr,str_clr_menu_area,loc_clr_menu_area)
 
+def clear_table_area(stdscr):
+    ##Table area: From 10,0 to 50,120
+    str_clr_table_line = "                                                                                                                      \n"
+    str_clr_table_line_x_5 = str_clr_table_line + str_clr_table_line + str_clr_table_line + str_clr_table_line + str_clr_table_line
+    str_clr_table_area =  str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line + str_clr_table_line + str_clr_table_line
+    loc_clr_table_area = (11,0)
+
+    write_stdscr(stdscr,str_clr_table_area,loc_clr_table_area)
 
 def draw_table(stdscr,table_container):
     '''Draw a table in the table area from table_container data'''
-
+    
     table = table_container.data
 
-    ##Table area: From 10,0 to 55,120
-    #upper_x = (13,3)
-    #lower_x = (upper_x[0]+table.bound_x,3)
+    ##Table area: From 10,0 to 50,120
 
-    #upper_y = (upper_x[0]+1,upper_x[1])
-    #lower_y = (upper_x[0]+1,)
-    cell_size = 5
+
+    cell_size = int(110/(table.bound_y + 2))
+
+
 
     #Linhas e barras da tabela
     table_line = "+" + drawline(table.bound_y * (cell_size+2) - 1) + "+"
@@ -331,19 +338,130 @@ def draw_table(stdscr,table_container):
 
     for X in range(table.bound_x):
         for Y in range (table.bound_y):
-            loc = (loc_upper_table_line[0]+X+1,1+loc_upper_table_line[1]+Y*6)
+            loc = (loc_upper_table_line[0]+X+1,1+loc_upper_table_line[1]+Y*cell_size)
             
             write_stdscr(stdscr," "+ str(table.table_data[X][Y].data)[:cell_size] + " ",loc)
 
-
-
-
-
-
-
-
-
-
+def draw_cell(stdscr, y ,x , container):
+    '''Desenha celula na tela'''
     
+
+
+    #+-------------------
+    #|Key_row   | Key_Col
+    #|-------------------
+    #|Key[-len-]| Data
+    #+-------------------
+    cell_container = container.data
+
+    if (cell_container.cell_type != 'Blank') and (cell_container.cell_type != 'Merge') :
+
+        key_col_data = str(cell_container.key_col.data)
+        key_row_data = str(cell_container.key_row.parent_node.data)
+        data = str(cell_container.data)
+        key = str(cell_container.parent_node.data)
+        key_len = len(list(key))
+        data_len = len(list(data))
+    
+
+        #Trunka tamanhos
+        key_col_data = "".join(list(key_col_data)[:(38 - (key_len+1))])
+
+        key_row_data = "".join(list(key_row_data)[:key_len])
+
+        ##Table area: From 10,0 to 50,120
+        loc_upper_cell_line = (y,x)
+        loc_middle_cell_line = (y+2,x)
+        loc_lower_cell_line = (y+4,x)
+        loc_left_bar = (y,x)
+        loc_right_bar = (y,x+38)
+        loc_middle_bar = (y,x+key_len+1)
+    
+        str_middle_bar = "-\n|\n-\n|\n-"
+        str_line = drawline(38)
+        str_bar = "+\n" +drawbar(3) + "+\n"
+
+        write_stdscr(stdscr,key_row_data,(loc_left_bar[0] + 1, loc_left_bar[1] + 1))
+        write_stdscr(stdscr,key_col_data,(loc_left_bar[0] + 1, loc_middle_bar[1] + 1))
+        write_stdscr(stdscr,key,(loc_left_bar[0] + 3, loc_left_bar[1] + 1))
+        write_stdscr(stdscr,data,(loc_left_bar[0] + 3, loc_middle_bar[1] + 1))
+        write_stdscr(stdscr,str_line,loc_upper_cell_line)
+        write_stdscr(stdscr,str_line,loc_middle_cell_line)
+        write_stdscr(stdscr,str_line,loc_lower_cell_line)
+        write_stdscr(stdscr,str_bar,loc_right_bar)
+        write_stdscr(stdscr,str_bar,loc_upper_cell_line)
+        write_stdscr(stdscr,str_middle_bar,loc_middle_bar)
+
+
+
+
+def draw_container(stdscr, container):
+    '''Desenha container na tela, na area de tabela'''
+    if container.type == 'Table':
+        clear_table_area(stdscr)
+        draw_table(stdscr,container)
+    if container.type == 'Cell':
+        clear_table_area(stdscr)
+        draw_cell(stdscr,13,3,container)
+    if container.type == 'Cell_List':
+        clear_table_area(stdscr)
+
+        #Desenha as 6 primeiras celulas se lista
+        y_pos = 13
+
+        t_list = container.data[:7]
+        y_list = container.data[7:15]
+        u_list = container.data[15:23]
+
+        for cell in t_list:
+            if type(cell) == aux_lib.Cell:
+                draw_cell(stdscr,y_pos,3,Container(cell))
+                y_pos = y_pos + 4
+        
+        y_pos = 13
+
+        for cell in y_list:
+            if type(cell) == aux_lib.Cell:
+                draw_cell(stdscr,y_pos,41,Container(cell))
+                if (cell.cell_type != "Blank") and (cell.cell_type != "Merge"):
+                    y_pos = y_pos + 4
+        
+        y_pos = 13
+        for cell in u_list:
+            if type(cell) == aux_lib.Cell:
+                draw_cell(stdscr,y_pos,79,Container(cell))
+                y_pos = y_pos + 4
+
+    if container.type == "Data_Dict":
+        clear_table_area(stdscr)
+        y_pos = 13
+        x_pos = 2
+        
+        for key, value in container.data.items():
+            str_output = "".join(list(str(key))[:90]) + ":" + str(value)
+            #trunka
+            str_output = "".join(list(str_output)[:114])
+
+            #Trata fim da tabela
+            if(y_pos > 48):
+                break
+            
+                
+            
+            write_stdscr(stdscr,str_output,(y_pos,x_pos))
+            y_pos = y_pos + 1
+
+
+
+
+
+
+
+        
+
+
+
+
+
 
 
