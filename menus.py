@@ -250,7 +250,14 @@ def access_table(stdscr,state_dict):
            
             write_stdscr(stdscr,"Enter Query. CTRL+G to exit. Control-H	to delete",(51,40))
             
+            Entrada = get_input(stdscr)
+            
 
+            
+
+
+
+def get_input(stdscr):
             input_area = curses.newwin(1, 118, 53, 1)
             ret_input_box = curses.textpad.rectangle(stdscr,52,0,54,120)
             input_box = curses.textpad.Textbox(input_area)
@@ -268,11 +275,10 @@ def access_table(stdscr,state_dict):
             #Limpa area de input
             stdscr.refresh()
             clear_input_area(stdscr)
-            restore_cursor(stdscr,state_dict)
-
             curses.cbreak()
             curses.noecho()
-
+            restore_cursor(stdscr)
+            return input_txt
 
 
 
@@ -585,18 +591,5 @@ def restore_cursor(stdscr,state_dict):
     stdscr.move((state_dict['loc_data_entry'])[0],(state_dict['loc_data_entry'])[1])
 
 
-
-
-
-        
-
-def exit_on_enter(char):
-
-    if int(char) == 13:
-        return False
-    else:
-        return True
-
-
-
-
+def restore_cursor(stdscr):
+    stdscr.move(52,0)
