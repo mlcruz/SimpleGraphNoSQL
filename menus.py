@@ -400,33 +400,43 @@ def draw_cell(stdscr, y ,x , container):
     if (cell_container.cell_type != 'Blank') and (cell_container.cell_type != 'Merge') :
 
         
-        key_col_first_parent = cell_container.key_col.parent_node
-        key_col_second_parent = key_col_first_parent.parent_node
-        
-        key_col_label_t = str(aux_lib.get_name(cell_container))
-
-        #Label truncada par 6 char
-        key_col_label_t = "".join(list(key_col_label_t)[:5])
-
-        #Segundo pai trunkado para 6 char
-        key_col_second_parent_t = str(key_col_second_parent.data)
-        key_col_second_parent_t = "".join(list(key_col_second_parent_t)[:5])
-
-        #Primeiro pai trunkada para 8 char
-        key_col_first_parent_t = str(key_col_first_parent.data)
-        key_col_first_parent_t = "".join(list(key_col_first_parent_t)[:8])
-
-        #Se segundo pai é label
-        if(key_col_label_t == key_col_second_parent_t):
-            key_col_data = key_col_label_t + "-" + key_col_first_parent_t + "-" + str(cell_container.key_col.data)
+        if(cell_container.cell_type == "Key"):
+            data = "<Cell.child_nodes>"
+            key_row_data = str(cell_container.parent_node.data)
+            key = str(cell_container.data)
+            key_col_data = "Data"
+   
         else:
-            key_col_data = key_col_label_t + "-" + key_col_second_parent_t + "-" + key_col_first_parent_t + "-" + str(cell_container.key_col.data)
+
+            key_col_first_parent = cell_container.key_col.parent_node
+            key_col_second_parent = key_col_first_parent.parent_node
+    
+            key_col_label_t = str(aux_lib.get_name(cell_container))
+
+            #Label truncada par 6 char
+            key_col_label_t = "".join(list(key_col_label_t)[:5])
+
+            #Segundo pai trunkado para 6 char
+            key_col_second_parent_t = str(key_col_second_parent.data)
+            key_col_second_parent_t = "".join(list(key_col_second_parent_t)[:5])
+
+            #Primeiro pai trunkada para 8 char
+            key_col_first_parent_t = str(key_col_first_parent.data)
+            key_col_first_parent_t = "".join(list(key_col_first_parent_t)[:8])
+
+            #Se segundo pai é label
+            if(key_col_label_t == key_col_second_parent_t):
+                key_col_data = key_col_label_t + "-" + key_col_first_parent_t + "-" + str(cell_container.key_col.data)
+            else:
+                key_col_data = key_col_label_t + "-" + key_col_second_parent_t + "-" + key_col_first_parent_t + "-" + str(cell_container.key_col.data)
 
 
         #key_col_data = str(cell_container.key_col.data)
-        key_row_data = str(cell_container.key_row.parent_node.data)
-        data = str(cell_container.data)
-        key = str(cell_container.parent_node.data)
+            key_row_data = str(cell_container.key_row.parent_node.data)
+            data = str(cell_container.data)
+
+            key = str(cell_container.parent_node.data)
+
         key_len = len(list(key))
         data_len = len(list(data))
     
@@ -473,14 +483,23 @@ def draw_container(stdscr, container):
         #Desenha as 6 primeiras celulas se lista
         y_pos = 13
 
-        t_list = container.data[:7]
-        y_list = container.data[7:15]
-        u_list = container.data[15:23]
+        #Limpa lista de celulas vazias
+
+        cleaned_list = []
+
+        for cell in container.data:
+            if (cell.cell_type != "Blank") and (cell.cell_type != "Merge"):
+                cleaned_list.append(cell)
+
+        t_list = cleaned_list[:7]
+        y_list = cleaned_list[7:15]
+        u_list = cleaned_list[15:23]
 
         for cell in t_list:
             if type(cell) == aux_lib.Cell:
                 draw_cell(stdscr,y_pos,3,Container(cell))
-                y_pos = y_pos + 4
+                if (cell.cell_type != "Blank") and (cell.cell_type != "Merge"):
+                    y_pos = y_pos + 4
         
         y_pos = 13
 
@@ -494,7 +513,8 @@ def draw_container(stdscr, container):
         for cell in u_list:
             if type(cell) == aux_lib.Cell:
                 draw_cell(stdscr,y_pos,79,Container(cell))
-                y_pos = y_pos + 4
+                if (cell.cell_type != "Blank") and (cell.cell_type != "Merge"):
+                    y_pos = y_pos + 4
 
     if container.type == "Data_Dict":
         clear_table_area(stdscr)

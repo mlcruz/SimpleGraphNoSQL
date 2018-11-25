@@ -210,11 +210,20 @@ class RawTable(object):
                 if (self.table_data[X][Y].cell_type == "Key_Row") or (self.table_data[X][Y].cell_type == "Key_Col") or (self.table_data[X][Y].cell_type == "Super_Key"):
                     #Usa a boudary superior do merge para apontar para o pai. Pai sempre vai ser a celula acima considerando merge
                     self.table_data[X][Y].parent_node = get_cell(self.table_data[self.table_data[X][Y].bounds[0] - 1][Y],self.table_data)
+
+                    #Se é key_row ou Key_ col
+                    if (self.table_data[X][Y].cell_type == "Key_Row") or (self.table_data[X][Y].cell_type == "Key_Col"):
+                        #Filhos da Key_Row/Col são as chaves abaixo da mesma
+                        for node in range(self.table_data[X][Y].data_boundary,self.raw_sheet.nrows):
+                            self.table_data[X][Y].child_nodes.append(self.table_data[node][Y])
                     
-                    #Filhos da Key_Row/Col são as chaves abaixo da mesma
-                    for node in range(self.table_data[X][Y].data_boundary,self.raw_sheet.nrows):
-                        self.table_data[X][Y].child_nodes.append(self.table_data[node][Y])
-               
+                    #Se é Super_key, busca embaixo de todas as colunas abaixo
+                    else:
+                        #para cada coluna abaixo
+                        for col in range(self.table_data[X][Y].sizey):
+                            for node in range(self.table_data[X][Y].data_boundary,self.raw_sheet.nrows):
+                                self.table_data[X][Y].child_nodes.append(self.table_data[node][Y+col])
+
                 #Se é label         
                 if self.table_data[X][Y].cell_type == "Label": 
                    #parent_node 0 pois é raiz
