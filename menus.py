@@ -10,6 +10,7 @@ import os
 
 
 from aux_lib import write_stdscr, write_stdscr_a
+import curses.textpad
 
 class Container(object):
     '''Classe representando um objeto que pode ser um Nodo ou uma Tabela ou uma Lista de celulas ou uma Celula. data representa o objeto a gerar o container
@@ -196,7 +197,7 @@ def access_table(stdscr,state_dict):
     curses.cbreak()
     curses.noecho()
 
-    str_access_menu = "[a-z]: Container containing a table object\n6:Set Container\n0:back"
+    str_access_menu = "[a-z]: Container containing a table object\n1:Query Table\n6:Set Container\n0:back"
     loc_access_menu = (0 ,0)
     set_container = ""
 
@@ -237,6 +238,44 @@ def access_table(stdscr,state_dict):
             c = stdscr.getch()
             set_container = chr(c)
             str_last_container = "Output Container: ["+set_container+"]"
+        elif chr(c) == '1':
+
+            #Inicializa tratamento de querry
+            curses.nocbreak()
+            curses.echo()
+
+            stdscr.keypad(True)
+            #restore_cursor(stdscr,state_dict)
+            clear_input_area(stdscr)
+           
+            write_stdscr(stdscr,"Enter Query. CTRL+G to exit. Control-H	to delete",(51,40))
+            
+
+            input_area = curses.newwin(1, 118, 53, 1)
+            ret_input_box = curses.textpad.rectangle(stdscr,52,0,54,120)
+            input_box = curses.textpad.Textbox(input_area)
+            stdscr.refresh()
+
+            input_txt = input_box.edit()
+            stdscr.keypad(False)
+
+            #Por algum motivo as strings vem duplicadas. Trata esse bug(?)
+            input_txt = list(str(input_txt).rstrip().lstrip())
+            metade = int(len(input_txt)/2)
+
+            input_txt = "".join(input_txt[:metade])
+
+            #Limpa area de input
+            stdscr.refresh()
+            clear_input_area(stdscr)
+            restore_cursor(stdscr,state_dict)
+
+            curses.cbreak()
+            curses.noecho()
+
+
+
+
 
 
 
@@ -350,6 +389,13 @@ def clear_table_area(stdscr):
     loc_clr_table_area = (11,0)
 
     write_stdscr(stdscr,str_clr_table_area,loc_clr_table_area)
+
+def clear_input_area(stdscr):
+    #Input é do 50,0 ao 55,120
+    str_clr_table_line = "                                                                                                                         \n"
+    str_clr_table_line_x_4 = str_clr_table_line + str_clr_table_line + str_clr_table_line + "                                                                                                                         "
+    loc_clr_table_area = (51,0)
+    write_stdscr(stdscr,str_clr_table_line_x_4,loc_clr_table_area)
 
 def draw_table(stdscr,table_container):
     '''Draw a table in the table area from table_container data'''
@@ -535,7 +581,8 @@ def draw_container(stdscr, container):
             write_stdscr(stdscr,str_output,(y_pos,x_pos))
             y_pos = y_pos + 1
 
-
+def restore_cursor(stdscr,state_dict):
+    stdscr.move((state_dict['loc_data_entry'])[0],(state_dict['loc_data_entry'])[1])
 
 
 
@@ -543,8 +590,12 @@ def draw_container(stdscr, container):
 
         
 
+def exit_on_enter(char):
 
-
+    if int(char) == 13:
+        return False
+    else:
+        return True
 
 
 
