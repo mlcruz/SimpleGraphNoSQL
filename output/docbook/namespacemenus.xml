@@ -1,0 +1,267 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="namespacemenus">
+<title>menus</title>
+        <section>
+            <title> Classes </title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="classmenus_1_1_container">menus::Container</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title>Functions</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1a12efed78c1322ba3c869a9c6f370abfa">start_menu</link> (
+state_dict )<para><emphasis>Menus.</emphasis></para>
+</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1a2b766869a5cecbdaddb2f4cdc5ad5ac4">main_menu</link> (
+stdscr , state_dict )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1a8421c970c86545c096207aa273559448">access_table</link> (
+stdscr , state_dict )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1ab1aca23b23c7caee64a16eacbc353edb">access_db</link> (
+stdscr , state_dict )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1a55bbacd595d970bdc9e8302f9f129917">run_query_menu</link> (
+stdscr , state_dict )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1a204ed3bb2566c883a3ef157e1a5fdfc8">draw_state</link> (
+stdscr , state_dict )<para><emphasis>Funcions.</emphasis></para>
+</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1a0f36427d382fffd6ace7b6125aa06eb5">restore_cursor</link> (
+stdscr , state_dict )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1a3d8a1498795def3813a9df4e0b4fa5cd">restore_cursor</link> (
+stdscr )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1ab1069daa9dd5a7d5afea5354d5af1ea1">get_input</link> (
+stdscr )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1a2ff38314f72ccc68198110b4e1bd1a35">drawline</link> (
+intr )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1a80878694dd6445a22e8c003ee6c8e6ad">drawbar</link> (
+intr )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1aa3223ae9cda0bdf35fcffc7c1687d79d">clear_menu_area</link> (
+stdscr )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1af99eb3869ab5f8e49c23961714e5d9c7">clear_table_area</link> (
+stdscr )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1aa1400dfe81c9f33e6b1b1338ffb33a01">clear_container_area</link> (
+stdscr )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1a11d268554a987e01a41ac04fb214809c">clear_input_area</link> (
+stdscr )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1a2ee43f05d3a08f70461b3c6253717d50">draw_table</link> (
+stdscr , table_container )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1a71f31dba7fe11533c37e4071fa00885b">draw_cell</link> (
+stdscr , y , x , container )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1aa0db8394bafeb67e81ac8dbbd2545079">draw_container</link> (
+stdscr , container )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1a8be816877faa48774eefaca84942d64f">query_table</link> (
+query , container_i , container_o )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1a0e4f14ab941c0b7a826ed422a6647609">__query_table</link> (
+query_key , query_data , container , container_o )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1aab5b06b0e7d72cbd4fc253cd4e3d159e">query_dict</link> (
+query , container_i , container_o )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1acd6bd1c7a3ca20dec96ab9698a141f1e">__query_dict</link> (
+query_key , query_data , container , container_o )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1a267281827ba1f83715d6095c551fe00c">query_node</link> (
+query , container_i , container_o )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1a061505d3e563b302f7359781379d5261">__query_node</link> (
+query_key , query_data , container , container_o )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1a6a7a09c89cf272bffd7fb04c1c3ba5fe">query_list</link> (
+query , container_i , container_o )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1ab0e3a3850d5d96399b896734ed835f55">__query_list</link> (
+query_key , query_data , container , container_o )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1ab9c2b49829ad18b7f0be808d6b6ee534">query_cell</link> (
+query , container_i , container_o )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1a6e92d38330340b1d2dc9226e6781de7d">__query_cell</link> (
+query_key , query_data , container , container_o )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1adb87f32cd406edebb946127bb97a9a1b">query_run</link> (
+query , container_i , container_o , db )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1a9c82078d4d2e571622f2097469229bb1">query_db</link> (
+query , container_i , container_o , db )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="menus_8py_1a9af79bbbb639def4228764bd516c80b6">__query_db</link> (
+query_key , query_data , container , container_o , db )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+</section>

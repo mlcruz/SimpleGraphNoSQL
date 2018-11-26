@@ -1,0 +1,725 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="namespacemenus" kind="namespace" language="Python">
+    <compoundname>menus</compoundname>
+    <innerclass refid="classmenus_1_1_container" prot="public">menus::Container</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="menus_8py_1a12efed78c1322ba3c869a9c6f370abfa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.start_menu</definition>
+        <argsstring>(state_dict)</argsstring>
+        <name>start_menu</name>
+        <param>
+          <type>state_dict</type>
+          <defname>state_dict</defname>
+        </param>
+        <briefdescription>
+<para>Menus. </para>        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Função que representa o menu inicial e seus estados</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="85" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="85" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1a2b766869a5cecbdaddb2f4cdc5ad5ac4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.main_menu</definition>
+        <argsstring>(stdscr, state_dict)</argsstring>
+        <name>main_menu</name>
+        <param>
+          <type>stdscr</type>
+          <defname>stdscr</defname>
+        </param>
+        <param>
+          <type>state_dict</type>
+          <defname>state_dict</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Função que representa o menu principal e seus estados</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="128" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="128" bodyend="273"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1a8421c970c86545c096207aa273559448" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.access_table</definition>
+        <argsstring>(stdscr, state_dict)</argsstring>
+        <name>access_table</name>
+        <param>
+          <type>stdscr</type>
+          <defname>stdscr</defname>
+        </param>
+        <param>
+          <type>state_dict</type>
+          <defname>state_dict</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Menu representando as opções de accesso a tabela</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="274" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="274" bodyend="375"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1ab1aca23b23c7caee64a16eacbc353edb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.access_db</definition>
+        <argsstring>(stdscr, state_dict)</argsstring>
+        <name>access_db</name>
+        <param>
+          <type>stdscr</type>
+          <defname>stdscr</defname>
+        </param>
+        <param>
+          <type>state_dict</type>
+          <defname>state_dict</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Menu representando as opções de busca no banco de dados</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="376" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="376" bodyend="472"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1a55bbacd595d970bdc9e8302f9f129917" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.run_query_menu</definition>
+        <argsstring>(stdscr, state_dict)</argsstring>
+        <name>run_query_menu</name>
+        <param>
+          <type>stdscr</type>
+          <defname>stdscr</defname>
+        </param>
+        <param>
+          <type>state_dict</type>
+          <defname>state_dict</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Menu representando as opções de busca no banco de dados</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="473" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="473" bodyend="634"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1a204ed3bb2566c883a3ef157e1a5fdfc8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.draw_state</definition>
+        <argsstring>(stdscr, state_dict)</argsstring>
+        <name>draw_state</name>
+        <param>
+          <type>stdscr</type>
+          <defname>stdscr</defname>
+        </param>
+        <param>
+          <type>state_dict</type>
+          <defname>state_dict</defname>
+        </param>
+        <briefdescription>
+<para>Funcions. </para>        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Desenha gui na tela e atualiza os estados visiveis ao usuario</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="637" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="637" bodyend="708"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1a0f36427d382fffd6ace7b6125aa06eb5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.restore_cursor</definition>
+        <argsstring>(stdscr, state_dict)</argsstring>
+        <name>restore_cursor</name>
+        <param>
+          <type>stdscr</type>
+          <defname>stdscr</defname>
+        </param>
+        <param>
+          <type>state_dict</type>
+          <defname>state_dict</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Restore cursor to input_line pos</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="709" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="709" bodyend="713"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1a3d8a1498795def3813a9df4e0b4fa5cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.restore_cursor</definition>
+        <argsstring>(stdscr)</argsstring>
+        <name>restore_cursor</name>
+        <param>
+          <type>stdscr</type>
+          <defname>stdscr</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>restore cursor w/o statedict</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="714" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="714" bodyend="718"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1ab1069daa9dd5a7d5afea5354d5af1ea1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.get_input</definition>
+        <argsstring>(stdscr)</argsstring>
+        <name>get_input</name>
+        <param>
+          <type>stdscr</type>
+          <defname>stdscr</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="719" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="719" bodyend="741"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1a2ff38314f72ccc68198110b4e1bd1a35" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.drawline</definition>
+        <argsstring>(intr)</argsstring>
+        <name>drawline</name>
+        <param>
+          <type>intr</type>
+          <defname>intr</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Returns the &apos;-&apos; char repeated n times in a string</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="742" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="742" bodyend="748"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1a80878694dd6445a22e8c003ee6c8e6ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.drawbar</definition>
+        <argsstring>(intr)</argsstring>
+        <name>drawbar</name>
+        <param>
+          <type>intr</type>
+          <defname>intr</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Returns the &apos;-&apos; char repeated n times in a string</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="749" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="749" bodyend="755"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1aa3223ae9cda0bdf35fcffc7c1687d79d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.clear_menu_area</definition>
+        <argsstring>(stdscr)</argsstring>
+        <name>clear_menu_area</name>
+        <param>
+          <type>stdscr</type>
+          <defname>stdscr</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="756" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="756" bodyend="760"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1af99eb3869ab5f8e49c23961714e5d9c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.clear_table_area</definition>
+        <argsstring>(stdscr)</argsstring>
+        <name>clear_table_area</name>
+        <param>
+          <type>stdscr</type>
+          <defname>stdscr</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="761" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="761" bodyend="769"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1aa1400dfe81c9f33e6b1b1338ffb33a01" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.clear_container_area</definition>
+        <argsstring>(stdscr)</argsstring>
+        <name>clear_container_area</name>
+        <param>
+          <type>stdscr</type>
+          <defname>stdscr</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="770" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="770" bodyend="777"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1a11d268554a987e01a41ac04fb214809c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.clear_input_area</definition>
+        <argsstring>(stdscr)</argsstring>
+        <name>clear_input_area</name>
+        <param>
+          <type>stdscr</type>
+          <defname>stdscr</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="778" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="778" bodyend="784"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1a2ee43f05d3a08f70461b3c6253717d50" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.draw_table</definition>
+        <argsstring>(stdscr, table_container)</argsstring>
+        <name>draw_table</name>
+        <param>
+          <type>stdscr</type>
+          <defname>stdscr</defname>
+        </param>
+        <param>
+          <type>table_container</type>
+          <defname>table_container</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Draw a table in the table area from table_container data</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="785" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="785" bodyend="818"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1a71f31dba7fe11533c37e4071fa00885b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.draw_cell</definition>
+        <argsstring>(stdscr, y, x, container)</argsstring>
+        <name>draw_cell</name>
+        <param>
+          <type>stdscr</type>
+          <defname>stdscr</defname>
+        </param>
+        <param>
+          <type>y</type>
+          <defname>y</defname>
+        </param>
+        <param>
+          <type>x</type>
+          <defname>x</defname>
+        </param>
+        <param>
+          <type>container</type>
+          <defname>container</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Desenha celula na tela</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="819" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="819" bodyend="908"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1aa0db8394bafeb67e81ac8dbbd2545079" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.draw_container</definition>
+        <argsstring>(stdscr, container)</argsstring>
+        <name>draw_container</name>
+        <param>
+          <type>stdscr</type>
+          <defname>stdscr</defname>
+        </param>
+        <param>
+          <type>container</type>
+          <defname>container</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Desenha container na tela, na area de tabela</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="909" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="909" bodyend="974"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1a8be816877faa48774eefaca84942d64f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.query_table</definition>
+        <argsstring>(query, container_i, container_o)</argsstring>
+        <name>query_table</name>
+        <param>
+          <type>query</type>
+          <defname>query</defname>
+        </param>
+        <param>
+          <type>container_i</type>
+          <defname>container_i</defname>
+        </param>
+        <param>
+          <type>container_o</type>
+          <defname>container_o</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Parses a string into a query and query a table</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="975" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="975" bodyend="992"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1a0e4f14ab941c0b7a826ed422a6647609" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.__query_table</definition>
+        <argsstring>(query_key, query_data, container, container_o)</argsstring>
+        <name>__query_table</name>
+        <param>
+          <type>query_key</type>
+          <defname>query_key</defname>
+        </param>
+        <param>
+          <type>query_data</type>
+          <defname>query_data</defname>
+        </param>
+        <param>
+          <type>container</type>
+          <defname>container</defname>
+        </param>
+        <param>
+          <type>container_o</type>
+          <defname>container_o</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Função auxiliar para executar uma query sobre o container recebido. Salva o resultado da query no proprio container.</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="993" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="993" bodyend="1057"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1aab5b06b0e7d72cbd4fc253cd4e3d159e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.query_dict</definition>
+        <argsstring>(query, container_i, container_o)</argsstring>
+        <name>query_dict</name>
+        <param>
+          <type>query</type>
+          <defname>query</defname>
+        </param>
+        <param>
+          <type>container_i</type>
+          <defname>container_i</defname>
+        </param>
+        <param>
+          <type>container_o</type>
+          <defname>container_o</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Parses a string into a query and query a table</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="1058" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="1058" bodyend="1075"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1acd6bd1c7a3ca20dec96ab9698a141f1e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.__query_dict</definition>
+        <argsstring>(query_key, query_data, container, container_o)</argsstring>
+        <name>__query_dict</name>
+        <param>
+          <type>query_key</type>
+          <defname>query_key</defname>
+        </param>
+        <param>
+          <type>query_data</type>
+          <defname>query_data</defname>
+        </param>
+        <param>
+          <type>container</type>
+          <defname>container</defname>
+        </param>
+        <param>
+          <type>container_o</type>
+          <defname>container_o</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Função auxiliar para executar uma query sobre o container recebido. Salva o resultado da query no proprio container.</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="1076" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="1076" bodyend="1085"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1a267281827ba1f83715d6095c551fe00c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.query_node</definition>
+        <argsstring>(query, container_i, container_o)</argsstring>
+        <name>query_node</name>
+        <param>
+          <type>query</type>
+          <defname>query</defname>
+        </param>
+        <param>
+          <type>container_i</type>
+          <defname>container_i</defname>
+        </param>
+        <param>
+          <type>container_o</type>
+          <defname>container_o</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Parses a string into a query and query a node</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="1086" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="1086" bodyend="1103"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1a061505d3e563b302f7359781379d5261" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.__query_node</definition>
+        <argsstring>(query_key, query_data, container, container_o)</argsstring>
+        <name>__query_node</name>
+        <param>
+          <type>query_key</type>
+          <defname>query_key</defname>
+        </param>
+        <param>
+          <type>query_data</type>
+          <defname>query_data</defname>
+        </param>
+        <param>
+          <type>container</type>
+          <defname>container</defname>
+        </param>
+        <param>
+          <type>container_o</type>
+          <defname>container_o</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Função auxiliar para executar uma query sobre o container recebido. Salva o resultado da query no proprio container.</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="1104" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="1104" bodyend="1115"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1a6a7a09c89cf272bffd7fb04c1c3ba5fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.query_list</definition>
+        <argsstring>(query, container_i, container_o)</argsstring>
+        <name>query_list</name>
+        <param>
+          <type>query</type>
+          <defname>query</defname>
+        </param>
+        <param>
+          <type>container_i</type>
+          <defname>container_i</defname>
+        </param>
+        <param>
+          <type>container_o</type>
+          <defname>container_o</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Parses a string into a query and query a list</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="1116" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="1116" bodyend="1133"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1ab0e3a3850d5d96399b896734ed835f55" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.__query_list</definition>
+        <argsstring>(query_key, query_data, container, container_o)</argsstring>
+        <name>__query_list</name>
+        <param>
+          <type>query_key</type>
+          <defname>query_key</defname>
+        </param>
+        <param>
+          <type>query_data</type>
+          <defname>query_data</defname>
+        </param>
+        <param>
+          <type>container</type>
+          <defname>container</defname>
+        </param>
+        <param>
+          <type>container_o</type>
+          <defname>container_o</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Função auxiliar para executar uma query sobre o container recebido. Salva o resultado da query no proprio container.</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="1134" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="1134" bodyend="1162"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1ab9c2b49829ad18b7f0be808d6b6ee534" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.query_cell</definition>
+        <argsstring>(query, container_i, container_o)</argsstring>
+        <name>query_cell</name>
+        <param>
+          <type>query</type>
+          <defname>query</defname>
+        </param>
+        <param>
+          <type>container_i</type>
+          <defname>container_i</defname>
+        </param>
+        <param>
+          <type>container_o</type>
+          <defname>container_o</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Parses a string into a query and query a cell</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="1163" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="1163" bodyend="1180"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1a6e92d38330340b1d2dc9226e6781de7d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.__query_cell</definition>
+        <argsstring>(query_key, query_data, container, container_o)</argsstring>
+        <name>__query_cell</name>
+        <param>
+          <type>query_key</type>
+          <defname>query_key</defname>
+        </param>
+        <param>
+          <type>query_data</type>
+          <defname>query_data</defname>
+        </param>
+        <param>
+          <type>container</type>
+          <defname>container</defname>
+        </param>
+        <param>
+          <type>container_o</type>
+          <defname>container_o</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Função auxiliar para executar uma query sobre o container recebido. Salva o resultado da query no proprio container.</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="1181" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="1181" bodyend="1193"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1adb87f32cd406edebb946127bb97a9a1b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.query_run</definition>
+        <argsstring>(query, container_i, container_o, db)</argsstring>
+        <name>query_run</name>
+        <param>
+          <type>query</type>
+          <defname>query</defname>
+        </param>
+        <param>
+          <type>container_i</type>
+          <defname>container_i</defname>
+        </param>
+        <param>
+          <type>container_o</type>
+          <defname>container_o</defname>
+        </param>
+        <param>
+          <type>db</type>
+          <defname>db</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Runs a query depending on input object type</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="1194" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="1194" bodyend="1219"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1a9c82078d4d2e571622f2097469229bb1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.query_db</definition>
+        <argsstring>(query, container_i, container_o, db)</argsstring>
+        <name>query_db</name>
+        <param>
+          <type>query</type>
+          <defname>query</defname>
+        </param>
+        <param>
+          <type>container_i</type>
+          <defname>container_i</defname>
+        </param>
+        <param>
+          <type>container_o</type>
+          <defname>container_o</defname>
+        </param>
+        <param>
+          <type>db</type>
+          <defname>db</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Parses a string into a query and query a table</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="1220" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="1220" bodyend="1229"/>
+      </memberdef>
+      <memberdef kind="function" id="menus_8py_1a9af79bbbb639def4228764bd516c80b6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def menus.__query_db</definition>
+        <argsstring>(query_key, query_data, container, container_o, db)</argsstring>
+        <name>__query_db</name>
+        <param>
+          <type>query_key</type>
+          <defname>query_key</defname>
+        </param>
+        <param>
+          <type>query_data</type>
+          <defname>query_data</defname>
+        </param>
+        <param>
+          <type>container</type>
+          <defname>container</defname>
+        </param>
+        <param>
+          <type>container_o</type>
+          <defname>container_o</defname>
+        </param>
+        <param>
+          <type>db</type>
+          <defname>db</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Aux to query_db</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="1230" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" bodystart="1230" bodyend="1313"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

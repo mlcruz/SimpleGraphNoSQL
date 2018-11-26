@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="namespaceaux__lib" kind="namespace" language="Python">
+    <compoundname>aux_lib</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="aux__lib_8py_1a901a6b4b3f04f27eb8c1af8d5e79b03e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def aux_lib.generate_num</definition>
+        <argsstring>(tab_loc)</argsstring>
+        <name>generate_num</name>
+        <param>
+          <type>tab_loc</type>
+          <defname>tab_loc</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Gera o nome do arquivo de tabela a cada passo</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py" line="19" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py" bodystart="19" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="aux__lib_8py_1ac9518f4193e8fdf95c0d221220382959" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def aux_lib.generate_loc</definition>
+        <argsstring>(tab_loc)</argsstring>
+        <name>generate_loc</name>
+        <param>
+          <type>tab_loc</type>
+          <defname>tab_loc</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Gera o local da tabela a cada passo</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py" line="36" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py" bodystart="36" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="aux__lib_8py_1a14b1bddc4d9359b0659e27e285c3304e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def aux_lib.save_trie</definition>
+        <argsstring>(trie, loc)</argsstring>
+        <name>save_trie</name>
+        <param>
+          <type>trie</type>
+          <defname>trie</defname>
+        </param>
+        <param>
+          <type>loc</type>
+          <defname>loc</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Cria um arquivo em disco representando a Trie contendo todos os dados como um arquivo binario. Pode ser revertido com load_trie
+    Recebe uma trie e um local para salvar o arquivo</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py" line="48" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py" bodystart="48" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="aux__lib_8py_1ab7a47b47c761e7f7552e6e53a3b73799" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def aux_lib.load_trie</definition>
+        <argsstring>(loc)</argsstring>
+        <name>load_trie</name>
+        <param>
+          <type>loc</type>
+          <defname>loc</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Recebe um arquivo de memoria contendo um objeto gerado por save_trie e retorna uma trie com dos dados</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py" line="55" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py" bodystart="55" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="aux__lib_8py_1a804c7ea1653177c19f29aac9c92e5560" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def aux_lib.generate_table_trie</definition>
+        <argsstring>(loc)</argsstring>
+        <name>generate_table_trie</name>
+        <param>
+          <type>loc</type>
+          <defname>loc</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Recebe um local de pasta contendo tabelas pre formatadas e gera uma trie contendo as tabelas como folha e os caracteres das labels como nodo
+   Retorna trie gerada
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py" line="70" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py" bodystart="70" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="aux__lib_8py_1ae66bc734553d97786c8374529ba818a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def aux_lib.write_stdscr</definition>
+        <argsstring>(stdscr, string, loc)</argsstring>
+        <name>write_stdscr</name>
+        <param>
+          <type>stdscr</type>
+          <defname>stdscr</defname>
+        </param>
+        <param>
+          <type>string</type>
+          <defname>string</defname>
+        </param>
+        <param>
+          <type>loc</type>
+          <defname>loc</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Write string in the stdscr using tuple loc(x,y) as x and y coordinates. Aligns new lines and restores cursor position after</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py" line="105" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py" bodystart="105" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="aux__lib_8py_1a840bf91ce062a53e3f2de1b28f333035" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def aux_lib.write_stdscr_a</definition>
+        <argsstring>(stdscr, string, loc, attrb)</argsstring>
+        <name>write_stdscr_a</name>
+        <param>
+          <type>stdscr</type>
+          <defname>stdscr</defname>
+        </param>
+        <param>
+          <type>string</type>
+          <defname>string</defname>
+        </param>
+        <param>
+          <type>loc</type>
+          <defname>loc</defname>
+        </param>
+        <param>
+          <type>attrb</type>
+          <defname>attrb</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Write string in the stdscr using tuple loc(x,y) as x and y coordinates and attrb</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py" line="123" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py" bodystart="123" bodyend="129"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

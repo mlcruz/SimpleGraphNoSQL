@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="curseless_8py" kind="file" language="Python">
+    <compoundname>curseless.py</compoundname>
+    <innernamespace refid="namespacecurseless">curseless</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">#biblioteca<sp/>de<sp/>funcoes<sp/>auxiliares<sp/>contendo<sp/>todas<sp/>as<sp/>outras<sp/>bibliotecas.<sp/>Ver<sp/>codigo<sp/>para<sp/>mais<sp/>detalhes</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>aux_lib</highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>db<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>DB</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>menus</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>menus<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>Container</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">#Curses<sp/>para<sp/>interface<sp/>grafica</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>curses</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>sys</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal">sys.setrecursionlimit(15000)</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal">prefix_loc<sp/>=<sp/></highlight><highlight class="stringliteral">r&quot;C:\Users\PC\source\repos\Trabalho_final_cpd\SimpleGraphNoSQL\fast&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">#Trie<sp/>de<sp/>testes</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal">teste<sp/>=<sp/><ref refid="aux__lib_8py_1a804c7ea1653177c19f29aac9c92e5560" kindref="member">aux_lib.generate_table_trie</ref>(prefix_loc)</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal">db_teste<sp/>=<sp/>DB(teste)</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="comment">#aux_lib.save_trie(db_teste.key_cols,&apos;key_col&apos;)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal">t<sp/>=<sp/>db_teste.tables.strings_dict[db_teste.tables.strings_list[0]]</highlight></codeline>
+<codeline lineno="28"><highlight class="normal">l<sp/>=<sp/>t.table_data[6][0].child_nodes</highlight></codeline>
+    </programlisting>
+    <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/curseless.py"/>
+  </compounddef>
+</doxygen>

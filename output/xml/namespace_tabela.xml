@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="namespace_tabela" kind="namespace" language="Python">
+    <compoundname>Tabela</compoundname>
+    <innerclass refid="class_tabela_1_1_cell" prot="public">Tabela::Cell</innerclass>
+    <innerclass refid="class_tabela_1_1_raw_table" prot="public">Tabela::RawTable</innerclass>
+    <innerclass refid="class_tabela_1_1_table" prot="public">Tabela::Table</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_tabela_8py_1a2fbfbcdc39efc74fd6626e78bbf5444d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def Tabela.normalize</definition>
+        <argsstring>(input_text)</argsstring>
+        <name>normalize</name>
+        <param>
+          <type>input_text</type>
+          <defname>input_text</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Normaliza String e lida com caracteres especiais. Transforma qualquer string para uma string contendo somente caracteres não acentuados
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" line="297" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" bodystart="297" bodyend="325"/>
+      </memberdef>
+      <memberdef kind="function" id="_tabela_8py_1ad0c46f3dba700f58ba25062a64012477" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def Tabela.get_name_labelless</definition>
+        <argsstring>(cell, string=&quot;&quot;)</argsstring>
+        <name>get_name_labelless</name>
+        <param>
+          <type>cell</type>
+          <defname>cell</defname>
+        </param>
+        <param>
+          <type>string</type>
+          <defname>string</defname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Recursivamente percorre uma tabela em formato de arvore a partir de uma celula e retorna uma string com seu nome. Usa o caractere &gt; como indicador de relacionamento pai-filho entre celulas
+   Diferentemente de get_name, essa função retorna a string do nome sem o nome da raiz</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" line="326" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" bodystart="326" bodyend="347"/>
+      </memberdef>
+      <memberdef kind="function" id="_tabela_8py_1a4cb56cd7f17958f7d4ca6e7e4d9373d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def Tabela.get_name</definition>
+        <argsstring>(cell, string=&quot;&quot;)</argsstring>
+        <name>get_name</name>
+        <param>
+          <type>cell</type>
+          <defname>cell</defname>
+        </param>
+        <param>
+          <type>string</type>
+          <defname>string</defname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Recursivamente percorre uma tabela em formato de arvore a partir de uma celula e retorna uma string com seu nome. Usa o caractere &gt; como indicador de relacionamento pai-filho entre celulas</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" line="348" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" bodystart="348" bodyend="373"/>
+      </memberdef>
+      <memberdef kind="function" id="_tabela_8py_1ada54f9641e23578cc070e3f385eca23f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def Tabela.get_cell</definition>
+        <argsstring>(cell, table_data)</argsstring>
+        <name>get_cell</name>
+        <param>
+          <type>cell</type>
+          <defname>cell</defname>
+        </param>
+        <param>
+          <type>table_data</type>
+          <defname>table_data</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Retorna uma celula tratando merges. Recebe um objeto do tipo Cell e uma table_data de uma tabela e Sempre retorna uma celula origem, é reflixiva para celulas não merge</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" line="374" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" bodystart="374" bodyend="417"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

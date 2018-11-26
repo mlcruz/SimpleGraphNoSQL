@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="namespace_tabela">
+<title>Tabela</title>
+        <section>
+            <title> Classes </title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="class_tabela_1_1_cell">Tabela::Cell</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="class_tabela_1_1_raw_table">Tabela::RawTable</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="class_tabela_1_1_table">Tabela::Table</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title>Functions</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="_tabela_8py_1a2fbfbcdc39efc74fd6626e78bbf5444d">normalize</link> (
+input_text )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="_tabela_8py_1ad0c46f3dba700f58ba25062a64012477">get_name_labelless</link> (
+cell , string )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="_tabela_8py_1a4cb56cd7f17958f7d4ca6e7e4d9373d3">get_name</link> (
+cell , string )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="_tabela_8py_1ada54f9641e23578cc070e3f385eca23f">get_cell</link> (
+cell , table_data )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+</section>

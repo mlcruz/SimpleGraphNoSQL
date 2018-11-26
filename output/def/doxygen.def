@@ -1,0 +1,3766 @@
+AutoGen Definitions dummy;
+class = {
+  cp-id     = 'class_tabela_1_1_cell';
+  cp-name   = 'Tabela::Cell';
+  cp-ref     = {
+    ref-type = base;
+    ref-id   = 'classobject';
+    ref-prot = public;
+    ref-virt = non-virtual;
+  };
+  cp-section = {
+    sec-kind = 'public-func';
+    sec-member = {
+      sec-mem-kind = 'function';
+      sec-mem-id   = 'class_tabela_1_1_cell_1a0cc729a89011b7ebd701ca6f1405f122';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = '__init__';
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+self
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'self';
+      }; /*        sec-mem-param--param */
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+sheet
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'sheet';
+      }; /*        sec-mem-param--param */
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+X
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'X';
+      }; /*        sec-mem-param--param */
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+Y
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'Y';
+      }; /*        sec-mem-param--param */
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '17';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+  }; /* cp-section */
+  cp-section = {
+    sec-kind = 'public-attrib';
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_cell_1a81d6743175d93342642a052894df99a2';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'data_boundary';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '47';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+Inicializa celula, definindo atribuitos e o tipo da celula
+self.cell_type define o tipo da variavel:
+Tipos possiveis:  Leaf -> Representa uma celula do excel contendo dados e mais nada.
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+ É relacionada a duas chaves, uma de linha(key) e outra de coluna(key_col)
+               : Key_Row -> Representa uma chave que ordena outras chaves(exemplo: ANO). Uma por tabela
+                 Key_Col ->Representa uma chave que dá sentido a uma coluna. Podem existir varias por tabela
+                 Key -> Representa uma chave presente em uma Key_col
+                 Super_Key -> Representa uma chave que é pai de outras chaves ou de uma chave coluna. 
+                 Label -> Representa o nome da tabela, é a raiz da arvore e pai de todos os outros nodos
+                 Merge -> Representa uma celula que foi unida uma outra celula e não tem dados
+                 Blank ->Não faz parte da tabela, dado vazio que pode ser removido sem alterações
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_cell_1a595c89589e45916787b38d9bbcf41bf7';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'blank_boundary';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '48';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_cell_1a543900af4f49d7f7dce5be24aaddcd43';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'originx';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '49';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_cell_1ac06d52d26c63f8b64c206f3a090bf91b';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'originy';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '50';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_cell_1a8e5d57b52807b55546c2443470e0f85f';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'sizex';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '51';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_cell_1a226e9b058ada2e873243f45136b2a9ce';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'sizey';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '52';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_cell_1a6601b87d017e8dc40c575858bb9aefab';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'x';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '53';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_cell_1aec268ed0feba78f5d5affd5b1affbc67';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'y';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '54';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_cell_1ad31ac1bf3ec1335d25343f113ef6a564';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'bounds';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '55';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_cell_1a822efbac3e8b7c912a2e33ce0d106c84';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'cell_type';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '56';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_cell_1aae4fd1ac2cefbce827ff7713e6db3a52';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'data';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '57';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_cell_1adc1415ea59c977255d5d5c9ee0235453';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'table_label';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '58';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_cell_1ac37f9319e055d0ca765ba3c77d68252c';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'parent_node';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '62';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_cell_1a6c52a49677bbce958aa0b7c037892942';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'child_nodes';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '66';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_cell_1a9086096bb2d966a75e18722fcb2659d1';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'key_row';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '69';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_cell_1a9d9b117373e9ddef7a2ad8832d4da842';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'key_col';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '70';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_cell_1a54bfaf35d099a9c6bd88a032618a2528';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'cell_name';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '73';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+  }; /* cp-section */
+  cp-filename  = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+  cp-fileline  = '14';
+  cp-briefdesc = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+  cp-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Classe que representa uma celula da tabela. Recebe um objeto do tipo sheet do xrld como entrada
+    e uma posicao X referente a linha e Y referente a celula. Cria um objeto do tipo celula classificando o tipo de celula e guardando dados\endverbatim  
+_EnD_oF_dEf_TeXt_;
+  cp-inheritancegraph = <<_EnD_oF_dEf_TeXt_
+      node = {
+        node-id    = 28;
+        node-label = 'Tabela.Cell';
+        node-link = {
+          node-link-id = 'class_tabela_1_1_cell';
+        };
+        node-child = {
+          child-id = '29';
+          relation = public-inheritance;
+        }; /* node-child */
+      }; /* node */
+      node = {
+        node-id    = 29;
+        node-label = 'object';
+      }; /* node */
+
+_EnD_oF_dEf_TeXt_;
+  cp-collaborationgraph = <<_EnD_oF_dEf_TeXt_
+      node = {
+        node-id    = 30;
+        node-label = 'Tabela.Cell';
+        node-link = {
+          node-link-id = 'class_tabela_1_1_cell';
+        };
+        node-child = {
+          child-id = '31';
+          relation = public-inheritance;
+        }; /* node-child */
+      }; /* node */
+      node = {
+        node-id    = 31;
+        node-label = 'object';
+      }; /* node */
+
+_EnD_oF_dEf_TeXt_;
+}; /* class */
+class = {
+  cp-id     = 'classmenus_1_1_container';
+  cp-name   = 'menus::Container';
+  cp-ref     = {
+    ref-type = base;
+    ref-id   = 'classobject';
+    ref-prot = public;
+    ref-virt = non-virtual;
+  };
+  cp-section = {
+    sec-kind = 'public-func';
+    sec-member = {
+      sec-mem-kind = 'function';
+      sec-mem-id   = 'classmenus_1_1_container_1ace093b51d065a19a56b39467aa1cfe66';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = '__init__';
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+self
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'self';
+      }; /*        sec-mem-param--param */
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+data
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'data';
+      }; /*        sec-mem-param--param */
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      sec-mem-desc-line = '19';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+  }; /* cp-section */
+  cp-section = {
+    sec-kind = 'public-attrib';
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'classmenus_1_1_container_1ac6d2c5aabad726f4fe51f22f96c3f12e';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'raw_type';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      sec-mem-desc-line = '21';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'classmenus_1_1_container_1a926a48b4cde967e8ca8c394abc09e690';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'name';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      sec-mem-desc-line = '22';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'classmenus_1_1_container_1ace4ff1a1c445f0bba0026fbc3df35f63';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'data';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      sec-mem-desc-line = '23';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'classmenus_1_1_container_1a96af1c60b4ea020510e940361a0008c9';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'type';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      sec-mem-desc-line = '24';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+  }; /* cp-section */
+  cp-filename  = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+  cp-fileline  = '15';
+  cp-briefdesc = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+  cp-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Classe representando um objeto que pode ser um Nodo ou uma Tabela ou uma Lista de celulas ou uma Celula. data representa o objeto a gerar o container
+\endverbatim  
+_EnD_oF_dEf_TeXt_;
+  cp-inheritancegraph = <<_EnD_oF_dEf_TeXt_
+      node = {
+        node-id    = 33;
+        node-label = 'object';
+      }; /* node */
+      node = {
+        node-id    = 32;
+        node-label = 'menus.Container';
+        node-link = {
+          node-link-id = 'classmenus_1_1_container';
+        };
+        node-child = {
+          child-id = '33';
+          relation = public-inheritance;
+        }; /* node-child */
+      }; /* node */
+
+_EnD_oF_dEf_TeXt_;
+  cp-collaborationgraph = <<_EnD_oF_dEf_TeXt_
+      node = {
+        node-id    = 35;
+        node-label = 'object';
+      }; /* node */
+      node = {
+        node-id    = 34;
+        node-label = 'menus.Container';
+        node-link = {
+          node-link-id = 'classmenus_1_1_container';
+        };
+        node-child = {
+          child-id = '35';
+          relation = public-inheritance;
+        }; /* node-child */
+      }; /* node */
+
+_EnD_oF_dEf_TeXt_;
+}; /* class */
+class = {
+  cp-id     = 'classdb_1_1_d_b';
+  cp-name   = 'db::DB';
+  cp-ref     = {
+    ref-type = base;
+    ref-id   = 'classobject';
+    ref-prot = public;
+    ref-virt = non-virtual;
+  };
+  cp-section = {
+    sec-kind = 'public-func';
+    sec-member = {
+      sec-mem-kind = 'function';
+      sec-mem-id   = 'classdb_1_1_d_b_1af1e6dda03c0f1c1a5bf4b993865a5b3a';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = '__init__';
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+self
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'self';
+      }; /*        sec-mem-param--param */
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+trie
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'trie';
+      }; /*        sec-mem-param--param */
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/db.py';
+      sec-mem-desc-line = '9';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Inicialize banco de dados com uma trie recebida\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+  }; /* cp-section */
+  cp-section = {
+    sec-kind = 'public-attrib';
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'classdb_1_1_d_b_1afa64c6cf6218f2423e0894a5cf0102bb';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'tables';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/db.py';
+      sec-mem-desc-line = '14';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'classdb_1_1_d_b_1a5993ee8357b3bb993484d83a98a8b828';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'key_rows';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/db.py';
+      sec-mem-desc-line = '18';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'classdb_1_1_d_b_1ad162712835b5eb50f3cce0bfd39ba244';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'key_cols';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/db.py';
+      sec-mem-desc-line = '21';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'classdb_1_1_d_b_1a47d36e897b9f59edde9fdc23e0d9a5f0';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'super_key';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/db.py';
+      sec-mem-desc-line = '24';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+  }; /* cp-section */
+  cp-filename  = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/db.py';
+  cp-fileline  = '6';
+  cp-briefdesc = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+  cp-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Cria banco de dados a partir de uma trie de tabelas\endverbatim  
+_EnD_oF_dEf_TeXt_;
+  cp-inheritancegraph = <<_EnD_oF_dEf_TeXt_
+      node = {
+        node-id    = 37;
+        node-label = 'object';
+      }; /* node */
+      node = {
+        node-id    = 36;
+        node-label = 'db.DB';
+        node-link = {
+          node-link-id = 'classdb_1_1_d_b';
+        };
+        node-child = {
+          child-id = '37';
+          relation = public-inheritance;
+        }; /* node-child */
+      }; /* node */
+
+_EnD_oF_dEf_TeXt_;
+  cp-collaborationgraph = <<_EnD_oF_dEf_TeXt_
+      node = {
+        node-id    = 39;
+        node-label = 'object';
+      }; /* node */
+      node = {
+        node-id    = 38;
+        node-label = 'db.DB';
+        node-link = {
+          node-link-id = 'classdb_1_1_d_b';
+        };
+        node-child = {
+          child-id = '39';
+          relation = public-inheritance;
+        }; /* node-child */
+      }; /* node */
+
+_EnD_oF_dEf_TeXt_;
+}; /* class */
+class = {
+  cp-id     = 'class_trie_1_1_nodo';
+  cp-name   = 'Trie::Nodo';
+  cp-ref     = {
+    ref-type = base;
+    ref-id   = 'classobject';
+    ref-prot = public;
+    ref-virt = non-virtual;
+  };
+  cp-section = {
+    sec-kind = 'public-func';
+    sec-member = {
+      sec-mem-kind = 'function';
+      sec-mem-id   = 'class_trie_1_1_nodo_1a14edf9313e0cb711a55c47d8250b566b';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = '__init__';
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+self
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'self';
+      }; /*        sec-mem-param--param */
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+char_data
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'char_data';
+      }; /*        sec-mem-param--param */
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+data
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'data';
+      }; /*        sec-mem-param--param */
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      sec-mem-desc-line = '10';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Inicializa nodos com dados. char_data é o caractere, e data são os dados ligados aquele nodo. Representar nenhum dado como 0 \endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+  }; /* cp-section */
+  cp-section = {
+    sec-kind = 'public-attrib';
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_trie_1_1_nodo_1a4d02f803001c14b673ec515096536cf5';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'child';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      sec-mem-desc-line = '13';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_trie_1_1_nodo_1a554b24962e680d0641df132499788c01';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'parent';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      sec-mem-desc-line = '16';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_trie_1_1_nodo_1ac3ea66bba593e72a8b0db4b7b70c48a9';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'chard';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      sec-mem-desc-line = '19';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_trie_1_1_nodo_1ad96070f8122b253194611b8f8b0d4e86';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'data';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      sec-mem-desc-line = '20';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+  }; /* cp-section */
+  cp-filename  = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+  cp-fileline  = '7';
+  cp-briefdesc = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+  cp-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Representa um nodo de uma trie\endverbatim  
+_EnD_oF_dEf_TeXt_;
+  cp-inheritancegraph = <<_EnD_oF_dEf_TeXt_
+      node = {
+        node-id    = 41;
+        node-label = 'object';
+      }; /* node */
+      node = {
+        node-id    = 40;
+        node-label = 'Trie.Nodo';
+        node-link = {
+          node-link-id = 'class_trie_1_1_nodo';
+        };
+        node-child = {
+          child-id = '41';
+          relation = public-inheritance;
+        }; /* node-child */
+      }; /* node */
+
+_EnD_oF_dEf_TeXt_;
+  cp-collaborationgraph = <<_EnD_oF_dEf_TeXt_
+      node = {
+        node-id    = 43;
+        node-label = 'object';
+      }; /* node */
+      node = {
+        node-id    = 42;
+        node-label = 'Trie.Nodo';
+        node-link = {
+          node-link-id = 'class_trie_1_1_nodo';
+        };
+        node-child = {
+          child-id = '43';
+          relation = public-inheritance;
+        }; /* node-child */
+      }; /* node */
+
+_EnD_oF_dEf_TeXt_;
+}; /* class */
+class = {
+  cp-id     = 'classobject';
+  cp-name   = 'object';
+  cp-ref     = {
+    ref-type = derived;
+    ref-id   = 'classdb_1_1_d_b';
+    ref-prot = public;
+    ref-virt = non-virtual;
+  };
+  cp-ref     = {
+    ref-type = derived;
+    ref-id   = 'classmenus_1_1_container';
+    ref-prot = public;
+    ref-virt = non-virtual;
+  };
+  cp-ref     = {
+    ref-type = derived;
+    ref-id   = 'class_tabela_1_1_cell';
+    ref-prot = public;
+    ref-virt = non-virtual;
+  };
+  cp-ref     = {
+    ref-type = derived;
+    ref-id   = 'class_tabela_1_1_raw_table';
+    ref-prot = public;
+    ref-virt = non-virtual;
+  };
+  cp-ref     = {
+    ref-type = derived;
+    ref-id   = 'class_tabela_1_1_table';
+    ref-prot = public;
+    ref-virt = non-virtual;
+  };
+  cp-ref     = {
+    ref-type = derived;
+    ref-id   = 'class_trie_1_1_nodo';
+    ref-prot = public;
+    ref-virt = non-virtual;
+  };
+  cp-ref     = {
+    ref-type = derived;
+    ref-id   = 'class_trie_1_1_trie';
+    ref-prot = public;
+    ref-virt = non-virtual;
+  };
+  cp-filename  = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+  cp-fileline  = '15';
+  cp-briefdesc = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+  cp-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+  cp-inheritancegraph = <<_EnD_oF_dEf_TeXt_
+      node = {
+        node-id    = 48;
+        node-label = 'Tabela.RawTable';
+        node-link = {
+          node-link-id = 'class_tabela_1_1_raw_table';
+        };
+        node-child = {
+          child-id = '44';
+          relation = public-inheritance;
+        }; /* node-child */
+      }; /* node */
+      node = {
+        node-id    = 47;
+        node-label = 'Tabela.Cell';
+        node-link = {
+          node-link-id = 'class_tabela_1_1_cell';
+        };
+        node-child = {
+          child-id = '44';
+          relation = public-inheritance;
+        }; /* node-child */
+      }; /* node */
+      node = {
+        node-id    = 49;
+        node-label = 'Tabela.Table';
+        node-link = {
+          node-link-id = 'class_tabela_1_1_table';
+        };
+        node-child = {
+          child-id = '44';
+          relation = public-inheritance;
+        }; /* node-child */
+      }; /* node */
+      node = {
+        node-id    = 44;
+        node-label = 'object';
+      }; /* node */
+      node = {
+        node-id    = 45;
+        node-label = 'db.DB';
+        node-link = {
+          node-link-id = 'classdb_1_1_d_b';
+        };
+        node-child = {
+          child-id = '44';
+          relation = public-inheritance;
+        }; /* node-child */
+      }; /* node */
+      node = {
+        node-id    = 46;
+        node-label = 'menus.Container';
+        node-link = {
+          node-link-id = 'classmenus_1_1_container';
+        };
+        node-child = {
+          child-id = '44';
+          relation = public-inheritance;
+        }; /* node-child */
+      }; /* node */
+      node = {
+        node-id    = 51;
+        node-label = 'Trie.Trie';
+        node-link = {
+          node-link-id = 'class_trie_1_1_trie';
+        };
+        node-child = {
+          child-id = '44';
+          relation = public-inheritance;
+        }; /* node-child */
+      }; /* node */
+      node = {
+        node-id    = 50;
+        node-label = 'Trie.Nodo';
+        node-link = {
+          node-link-id = 'class_trie_1_1_nodo';
+        };
+        node-child = {
+          child-id = '44';
+          relation = public-inheritance;
+        }; /* node-child */
+      }; /* node */
+
+_EnD_oF_dEf_TeXt_;
+}; /* class */
+class = {
+  cp-id     = 'class_tabela_1_1_raw_table';
+  cp-name   = 'Tabela::RawTable';
+  cp-ref     = {
+    ref-type = base;
+    ref-id   = 'classobject';
+    ref-prot = public;
+    ref-virt = non-virtual;
+  };
+  cp-section = {
+    sec-kind = 'public-func';
+    sec-member = {
+      sec-mem-kind = 'function';
+      sec-mem-id   = 'class_tabela_1_1_raw_table_1afceb720336b1c4ac7084cfc2719514fa';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = '__init__';
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+self
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'self';
+      }; /*        sec-mem-param--param */
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+loc
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'loc';
+      }; /*        sec-mem-param--param */
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '153';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Inicializa uma tabela a partir de um local loc\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+  }; /* cp-section */
+  cp-section = {
+    sec-kind = 'public-attrib';
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_raw_table_1a8c34690e14cf866b1477a88cee953ce5';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'loc_source';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '156';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_raw_table_1a2e27d60b90222e80510e3d39b6856142';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'raw_table';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '159';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_raw_table_1ad954dccabbbdbd2616c4e48620a5b121';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'raw_sheet';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '162';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_raw_table_1a31c6abc84cf6f1fb1df2e9b14406746e';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'table_label';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '165';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'table_data';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '168';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_raw_table_1a2d905e086c422c2cc296c60d4c4e729b';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'bound_x';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '169';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_raw_table_1af4c910628f1271516d6cba7b5117c0f5';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'bound_y';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '170';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_raw_table_1a9298050415197ab6c56c409107676362';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'key_cols';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '173';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_raw_table_1aadade37b733a5ffeacfa6afd63247124';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'key_row';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '176';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_raw_table_1a10fc3b2dcf218f5121d2688869889d8c';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'keys';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '179';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+  }; /* cp-section */
+  cp-filename  = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+  cp-fileline  = '150';
+  cp-briefdesc = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+  cp-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Classe que representa uma tabela do excel na memoria. Guarda mais dados do que o necessario e não consegue ser pickleada\endverbatim  
+_EnD_oF_dEf_TeXt_;
+  cp-inheritancegraph = <<_EnD_oF_dEf_TeXt_
+      node = {
+        node-id    = 53;
+        node-label = 'Tabela.RawTable';
+        node-link = {
+          node-link-id = 'class_tabela_1_1_raw_table';
+        };
+        node-child = {
+          child-id = '54';
+          relation = public-inheritance;
+        }; /* node-child */
+      }; /* node */
+      node = {
+        node-id    = 54;
+        node-label = 'object';
+      }; /* node */
+
+_EnD_oF_dEf_TeXt_;
+  cp-collaborationgraph = <<_EnD_oF_dEf_TeXt_
+      node = {
+        node-id    = 55;
+        node-label = 'Tabela.RawTable';
+        node-link = {
+          node-link-id = 'class_tabela_1_1_raw_table';
+        };
+        node-child = {
+          child-id = '56';
+          relation = public-inheritance;
+        }; /* node-child */
+      }; /* node */
+      node = {
+        node-id    = 56;
+        node-label = 'object';
+      }; /* node */
+
+_EnD_oF_dEf_TeXt_;
+}; /* class */
+class = {
+  cp-id     = 'class_tabela_1_1_table';
+  cp-name   = 'Tabela::Table';
+  cp-ref     = {
+    ref-type = base;
+    ref-id   = 'classobject';
+    ref-prot = public;
+    ref-virt = non-virtual;
+  };
+  cp-section = {
+    sec-kind = 'public-func';
+    sec-member = {
+      sec-mem-kind = 'function';
+      sec-mem-id   = 'class_tabela_1_1_table_1a10c29642d83aa4daf8124db325f0a761';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = '__init__';
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+self
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'self';
+      }; /*        sec-mem-param--param */
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+raw_table
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'raw_table';
+      }; /*        sec-mem-param--param */
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '285';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Inicializa Tabela com dados da raw table\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+  }; /* cp-section */
+  cp-section = {
+    sec-kind = 'public-attrib';
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_table_1ab9ebb4ae6437d100c1ebdf046fa43bff';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'loc_source';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '287';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_table_1acf4034972f8ca45d84f255eee35be31d';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'table_label';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '288';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_table_1a8f4f53b31818b05a2d512a4ffe670ed3';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'table_data';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '289';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_table_1a6d45ff17a28fa07c40cebc2af231a645';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'bound_x';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '290';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_table_1ac28a8176c31fa193847311967c5d993a';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'bound_y';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '291';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_table_1a38f8e9cd9b88c014664c0d908f8b931c';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'key_cols';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '292';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_table_1a8432925ee02ec678d2b2f823749c85bb';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'key_row';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '293';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_tabela_1_1_table_1a3528cb5d55a61bad4dba988b698445f2';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'keys';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      sec-mem-desc-line = '294';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+  }; /* cp-section */
+  cp-filename  = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+  cp-fileline  = '282';
+  cp-briefdesc = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+  cp-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Classe que representa uma tabela logica. Recebema uma Raw_Table e remove os campos desnecessarios Pode ser picklada\endverbatim  
+_EnD_oF_dEf_TeXt_;
+  cp-inheritancegraph = <<_EnD_oF_dEf_TeXt_
+      node = {
+        node-id    = 57;
+        node-label = 'Tabela.Table';
+        node-link = {
+          node-link-id = 'class_tabela_1_1_table';
+        };
+        node-child = {
+          child-id = '58';
+          relation = public-inheritance;
+        }; /* node-child */
+      }; /* node */
+      node = {
+        node-id    = 58;
+        node-label = 'object';
+      }; /* node */
+
+_EnD_oF_dEf_TeXt_;
+  cp-collaborationgraph = <<_EnD_oF_dEf_TeXt_
+      node = {
+        node-id    = 59;
+        node-label = 'Tabela.Table';
+        node-link = {
+          node-link-id = 'class_tabela_1_1_table';
+        };
+        node-child = {
+          child-id = '60';
+          relation = public-inheritance;
+        }; /* node-child */
+      }; /* node */
+      node = {
+        node-id    = 60;
+        node-label = 'object';
+      }; /* node */
+
+_EnD_oF_dEf_TeXt_;
+}; /* class */
+class = {
+  cp-id     = 'class_trie_1_1_trie';
+  cp-name   = 'Trie::Trie';
+  cp-ref     = {
+    ref-type = base;
+    ref-id   = 'classobject';
+    ref-prot = public;
+    ref-virt = non-virtual;
+  };
+  cp-section = {
+    sec-kind = 'public-func';
+    sec-member = {
+      sec-mem-kind = 'function';
+      sec-mem-id   = 'class_trie_1_1_trie_1a9b9de44cd1cfcf4001d34b1c435c0dd0';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = '__init__';
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+self
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'self';
+      }; /*        sec-mem-param--param */
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      sec-mem-desc-line = '25';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Inicializa raiz da trie como um defaultdict com uma factory de dicionarios\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'function';
+      sec-mem-id   = 'class_trie_1_1_trie_1a670d8832bdbe3b2f8f630188b4a3f997';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'yield_strings';
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+self
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'self';
+      }; /*        sec-mem-param--param */
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+trie
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'trie';
+      }; /*        sec-mem-param--param */
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      sec-mem-desc-line = '44';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+  }; /* cp-section */
+  cp-section = {
+    sec-kind = 'public-attrib';
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_trie_1_1_trie_1a323873a709ecdd62ebe123fa9c3abff4';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'root';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      sec-mem-desc-line = '28';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_trie_1_1_trie_1a83967a78c562d8aca0a9f979a14d6c98';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'strings_dict';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      sec-mem-desc-line = '31';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_trie_1_1_trie_1aa4cff19308fc0f8647bd6b3fd06fc1af';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'strings_list';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      sec-mem-desc-line = '34';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_trie_1_1_trie_1acfbb76a3f77a007fbef4f7e270842f64';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'reverse';
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      sec-mem-desc-line = '37';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+  }; /* cp-section */
+  cp-section = {
+    sec-kind = 'private-func';
+    sec-member = {
+      sec-mem-kind = 'function';
+      sec-mem-id   = 'class_trie_1_1_trie_1a4330187a6c01542433e3debf288f7567';
+      sec-mem-virt = normal;
+      sec-mem-prot = private;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = '__yield_strings_aux';
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+self
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'self';
+      }; /*        sec-mem-param--param */
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+trie
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'trie';
+      }; /*        sec-mem-param--param */
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+string
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'string';
+        sec-mem-param-defval = <<_EnD_oF_dEf_TeXt_
+""
+_EnD_oF_dEf_TeXt_;
+      }; /*        sec-mem-param--param */
+      sec-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      sec-mem-desc-line = '51';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Retorna todas as palavras na trie especificada. Usa como criterio de ser palavra a existencia de um "dados" não nulo\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+  }; /* cp-section */
+  cp-filename  = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+  cp-fileline  = '22';
+  cp-briefdesc = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+  cp-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Implementa uma Trie para pesquisa no nome de tabelas de maneira eficiente\endverbatim  
+_EnD_oF_dEf_TeXt_;
+  cp-inheritancegraph = <<_EnD_oF_dEf_TeXt_
+      node = {
+        node-id    = 62;
+        node-label = 'object';
+      }; /* node */
+      node = {
+        node-id    = 61;
+        node-label = 'Trie.Trie';
+        node-link = {
+          node-link-id = 'class_trie_1_1_trie';
+        };
+        node-child = {
+          child-id = '62';
+          relation = public-inheritance;
+        }; /* node-child */
+      }; /* node */
+
+_EnD_oF_dEf_TeXt_;
+  cp-collaborationgraph = <<_EnD_oF_dEf_TeXt_
+      node = {
+        node-id    = 64;
+        node-label = 'object';
+      }; /* node */
+      node = {
+        node-id    = 63;
+        node-label = 'Trie.Trie';
+        node-link = {
+          node-link-id = 'class_trie_1_1_trie';
+        };
+        node-child = {
+          child-id = '64';
+          relation = public-inheritance;
+        }; /* node-child */
+      }; /* node */
+
+_EnD_oF_dEf_TeXt_;
+}; /* class */
+file = {
+  file-id   = 'aux__lib_8py';
+  file-name = 'aux_lib.py';
+    func = {
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'aux__lib_8py_1a901a6b4b3f04f27eb8c1af8d5e79b03e';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'generate_num';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+tab_loc
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'tab_loc';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py';
+      func-mem-desc-line = '19';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Gera o nome do arquivo de tabela a cada passo\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'aux__lib_8py_1ac9518f4193e8fdf95c0d221220382959';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'generate_loc';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+tab_loc
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'tab_loc';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py';
+      func-mem-desc-line = '36';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Gera o local da tabela a cada passo\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'aux__lib_8py_1a14b1bddc4d9359b0659e27e285c3304e';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'save_trie';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+trie
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'trie';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+loc
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'loc';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py';
+      func-mem-desc-line = '48';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Cria um arquivo em disco representando a Trie contendo todos os dados como um arquivo binario. Pode ser revertido com load_trie
+    Recebe uma trie e um local para salvar o arquivo\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'aux__lib_8py_1ab7a47b47c761e7f7552e6e53a3b73799';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'load_trie';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+loc
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'loc';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py';
+      func-mem-desc-line = '55';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Recebe um arquivo de memoria contendo um objeto gerado por save_trie e retorna uma trie com dos dados\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'aux__lib_8py_1a804c7ea1653177c19f29aac9c92e5560';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'generate_table_trie';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+loc
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'loc';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py';
+      func-mem-desc-line = '70';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Recebe um local de pasta contendo tabelas pre formatadas e gera uma trie contendo as tabelas como folha e os caracteres das labels como nodo
+   Retorna trie gerada
+\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'aux__lib_8py_1ae66bc734553d97786c8374529ba818a5';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'write_stdscr';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+stdscr
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'stdscr';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+string
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'string';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+loc
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'loc';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py';
+      func-mem-desc-line = '105';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Write string in the stdscr using tuple loc(x,y) as x and y coordinates. Aligns new lines and restores cursor position after\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'aux__lib_8py_1a840bf91ce062a53e3f2de1b28f333035';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'write_stdscr_a';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+stdscr
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'stdscr';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+string
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'string';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+loc
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'loc';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+attrb
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'attrb';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py';
+      func-mem-desc-line = '123';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Write string in the stdscr using tuple loc(x,y) as x and y coordinates and attrb\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    };
+  file-full-name  = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/aux_lib.py';
+  file-first-line = '1';
+  file-briefdesc  = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+  file-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+}; /* file */
+file = {
+  file-id   = 'curseless_8py';
+  file-name = 'curseless.py';
+    var = {
+    var-member = {
+      var-mem-kind = 'variable';
+      var-mem-id   = 'curseless_8py_1a783eb06794b8285219b167030f90bb85';
+      var-mem-virt = normal;
+      var-mem-prot = public;
+      var-mem-type = <<_EnD_oF_dEf_TeXt_
+string
+_EnD_oF_dEf_TeXt_;
+      var-mem-name = 'prefix_loc';
+      var-mem-initializer = <<_EnD_oF_dEf_TeXt_
+=  r"C:\Users\PC\source\repos\Trabalho_final_cpd\SimpleGraphNoSQL\fast"
+_EnD_oF_dEf_TeXt_;
+      var-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/curseless.py';
+      var-mem-desc-line = '16';
+      var-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+Prefixo do local das tabelas fonte para a extração de dados.
+_EnD_oF_dEf_TeXt_;
+      var-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* var-member */
+    var-member = {
+      var-mem-kind = 'variable';
+      var-mem-id   = 'curseless_8py_1a773b6138277a7e072d93fedde4bd2edf';
+      var-mem-virt = normal;
+      var-mem-prot = public;
+      var-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      var-mem-name = 'teste';
+      var-mem-initializer = <<_EnD_oF_dEf_TeXt_
+=  aux_lib.generate_table_trie(prefix_loc)
+_EnD_oF_dEf_TeXt_;
+      var-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/curseless.py';
+      var-mem-desc-line = '19';
+      var-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      var-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* var-member */
+    var-member = {
+      var-mem-kind = 'variable';
+      var-mem-id   = 'curseless_8py_1a2c4b753bf7b23fd5adb129d307dd0164';
+      var-mem-virt = normal;
+      var-mem-prot = public;
+      var-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      var-mem-name = 'db_teste';
+      var-mem-initializer = <<_EnD_oF_dEf_TeXt_
+=  DB(teste)
+_EnD_oF_dEf_TeXt_;
+      var-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/curseless.py';
+      var-mem-desc-line = '21';
+      var-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      var-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* var-member */
+    var-member = {
+      var-mem-kind = 'variable';
+      var-mem-id   = 'curseless_8py_1abb864a6764e82541dbf5f7217d5afcab';
+      var-mem-virt = normal;
+      var-mem-prot = public;
+      var-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      var-mem-name = 't';
+      var-mem-initializer = <<_EnD_oF_dEf_TeXt_
+=  db_teste.tables.strings_dict[db_teste.tables.strings_list[0]]
+_EnD_oF_dEf_TeXt_;
+      var-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/curseless.py';
+      var-mem-desc-line = '27';
+      var-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+INICIALIZA REPL###################.
+_EnD_oF_dEf_TeXt_;
+      var-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* var-member */
+    var-member = {
+      var-mem-kind = 'variable';
+      var-mem-id   = 'curseless_8py_1a773c9d42f18e74b621ab68f8ce7056e5';
+      var-mem-virt = normal;
+      var-mem-prot = public;
+      var-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      var-mem-name = 'l';
+      var-mem-initializer = <<_EnD_oF_dEf_TeXt_
+=  t.table_data[6][0].child_nodes
+_EnD_oF_dEf_TeXt_;
+      var-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/curseless.py';
+      var-mem-desc-line = '28';
+      var-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      var-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* var-member */
+    };
+  file-full-name  = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/curseless.py';
+  file-first-line = '1';
+  file-briefdesc  = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+  file-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+}; /* file */
+file = {
+  file-id   = 'db_8py';
+  file-name = 'db.py';
+  file-full-name  = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/db.py';
+  file-first-line = '1';
+  file-briefdesc  = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+  file-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+}; /* file */
+file = {
+  file-id   = 'main_8py';
+  file-name = 'main.py';
+    func = {
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'main_8py_1a3a087067811a8b8e2e42e5579c44b233';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'main';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+stdscr
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'stdscr';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+state_dict
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'state_dict';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/main.py';
+      func-mem-desc-line = '33';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+INICIALIZA REPL###################.
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    };
+    var = {
+    var-member = {
+      var-mem-kind = 'variable';
+      var-mem-id   = 'main_8py_1a6d0a2c36290e41ce7ebea8156a947398';
+      var-mem-virt = normal;
+      var-mem-prot = public;
+      var-mem-type = <<_EnD_oF_dEf_TeXt_
+string
+_EnD_oF_dEf_TeXt_;
+      var-mem-name = 'prefix_loc';
+      var-mem-initializer = <<_EnD_oF_dEf_TeXt_
+=  "tabelas_mcti\\formatada\\2"
+_EnD_oF_dEf_TeXt_;
+      var-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/main.py';
+      var-mem-desc-line = '15';
+      var-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+Prefixo do local das tabelas fonte para a extração de dados.
+_EnD_oF_dEf_TeXt_;
+      var-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* var-member */
+    var-member = {
+      var-mem-kind = 'variable';
+      var-mem-id   = 'main_8py_1abeee8f8158db847456e25c56a06c534a';
+      var-mem-virt = normal;
+      var-mem-prot = public;
+      var-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      var-mem-name = 'state_dict';
+      var-mem-initializer = <<_EnD_oF_dEf_TeXt_
+=  defaultdict()
+_EnD_oF_dEf_TeXt_;
+      var-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/main.py';
+      var-mem-desc-line = '18';
+      var-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      var-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* var-member */
+    };
+  file-full-name  = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/main.py';
+  file-first-line = '1';
+  file-briefdesc  = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+  file-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+}; /* file */
+file = {
+  file-id   = 'menus_8py';
+  file-name = 'menus.py';
+    func = {
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1a12efed78c1322ba3c869a9c6f370abfa';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'start_menu';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+state_dict
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'state_dict';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '85';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+Menus.
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Função que representa o menu inicial e seus estados\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1a2b766869a5cecbdaddb2f4cdc5ad5ac4';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'main_menu';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+stdscr
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'stdscr';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+state_dict
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'state_dict';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '128';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Função que representa o menu principal e seus estados\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1a8421c970c86545c096207aa273559448';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'access_table';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+stdscr
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'stdscr';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+state_dict
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'state_dict';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '274';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Menu representando as opções de accesso a tabela\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1ab1aca23b23c7caee64a16eacbc353edb';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'access_db';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+stdscr
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'stdscr';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+state_dict
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'state_dict';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '376';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Menu representando as opções de busca no banco de dados\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1a55bbacd595d970bdc9e8302f9f129917';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'run_query_menu';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+stdscr
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'stdscr';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+state_dict
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'state_dict';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '473';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Menu representando as opções de busca no banco de dados\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1a204ed3bb2566c883a3ef157e1a5fdfc8';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'draw_state';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+stdscr
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'stdscr';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+state_dict
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'state_dict';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '637';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+Funcions.
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Desenha gui na tela e atualiza os estados visiveis ao usuario\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1a0f36427d382fffd6ace7b6125aa06eb5';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'restore_cursor';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+stdscr
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'stdscr';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+state_dict
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'state_dict';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '709';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Restore cursor to input_line pos\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1a3d8a1498795def3813a9df4e0b4fa5cd';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'restore_cursor';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+stdscr
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'stdscr';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '714';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim restore cursor w/o statedict\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1ab1069daa9dd5a7d5afea5354d5af1ea1';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'get_input';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+stdscr
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'stdscr';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '719';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1a2ff38314f72ccc68198110b4e1bd1a35';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'drawline';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+intr
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'intr';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '742';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Returns the '-' char repeated n times in a string\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1a80878694dd6445a22e8c003ee6c8e6ad';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'drawbar';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+intr
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'intr';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '749';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Returns the '-' char repeated n times in a string\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1aa3223ae9cda0bdf35fcffc7c1687d79d';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'clear_menu_area';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+stdscr
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'stdscr';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '756';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1af99eb3869ab5f8e49c23961714e5d9c7';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'clear_table_area';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+stdscr
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'stdscr';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '761';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1aa1400dfe81c9f33e6b1b1338ffb33a01';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'clear_container_area';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+stdscr
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'stdscr';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '770';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1a11d268554a987e01a41ac04fb214809c';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'clear_input_area';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+stdscr
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'stdscr';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '778';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1a2ee43f05d3a08f70461b3c6253717d50';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'draw_table';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+stdscr
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'stdscr';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+table_container
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'table_container';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '785';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Draw a table in the table area from table_container data\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1a71f31dba7fe11533c37e4071fa00885b';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'draw_cell';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+stdscr
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'stdscr';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+y
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'y';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+x
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'x';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '819';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Desenha celula na tela\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1aa0db8394bafeb67e81ac8dbbd2545079';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'draw_container';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+stdscr
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'stdscr';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '909';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Desenha container na tela, na area de tabela\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1a8be816877faa48774eefaca84942d64f';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'query_table';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+query
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'query';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container_i
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container_i';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container_o
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container_o';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '975';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Parses a string into a query and query a table\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1a0e4f14ab941c0b7a826ed422a6647609';
+      func-mem-virt = normal;
+      func-mem-prot = private;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = '__query_table';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+query_key
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'query_key';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+query_data
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'query_data';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container_o
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container_o';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '993';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Função auxiliar para executar uma query sobre o container recebido. Salva o resultado da query no proprio container.\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1aab5b06b0e7d72cbd4fc253cd4e3d159e';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'query_dict';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+query
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'query';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container_i
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container_i';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container_o
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container_o';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '1058';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Parses a string into a query and query a table\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1acd6bd1c7a3ca20dec96ab9698a141f1e';
+      func-mem-virt = normal;
+      func-mem-prot = private;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = '__query_dict';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+query_key
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'query_key';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+query_data
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'query_data';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container_o
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container_o';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '1076';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Função auxiliar para executar uma query sobre o container recebido. Salva o resultado da query no proprio container.\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1a267281827ba1f83715d6095c551fe00c';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'query_node';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+query
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'query';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container_i
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container_i';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container_o
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container_o';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '1086';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Parses a string into a query and query a node\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1a061505d3e563b302f7359781379d5261';
+      func-mem-virt = normal;
+      func-mem-prot = private;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = '__query_node';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+query_key
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'query_key';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+query_data
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'query_data';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container_o
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container_o';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '1104';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Função auxiliar para executar uma query sobre o container recebido. Salva o resultado da query no proprio container.\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1a6a7a09c89cf272bffd7fb04c1c3ba5fe';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'query_list';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+query
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'query';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container_i
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container_i';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container_o
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container_o';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '1116';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Parses a string into a query and query a list\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1ab0e3a3850d5d96399b896734ed835f55';
+      func-mem-virt = normal;
+      func-mem-prot = private;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = '__query_list';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+query_key
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'query_key';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+query_data
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'query_data';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container_o
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container_o';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '1134';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Função auxiliar para executar uma query sobre o container recebido. Salva o resultado da query no proprio container.\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1ab9c2b49829ad18b7f0be808d6b6ee534';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'query_cell';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+query
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'query';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container_i
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container_i';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container_o
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container_o';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '1163';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Parses a string into a query and query a cell\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1a6e92d38330340b1d2dc9226e6781de7d';
+      func-mem-virt = normal;
+      func-mem-prot = private;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = '__query_cell';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+query_key
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'query_key';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+query_data
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'query_data';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container_o
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container_o';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '1181';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Função auxiliar para executar uma query sobre o container recebido. Salva o resultado da query no proprio container.\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1adb87f32cd406edebb946127bb97a9a1b';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'query_run';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+query
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'query';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container_i
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container_i';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container_o
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container_o';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+db
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'db';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '1194';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Runs a query depending on input object type\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1a9c82078d4d2e571622f2097469229bb1';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'query_db';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+query
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'query';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container_i
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container_i';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container_o
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container_o';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+db
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'db';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '1220';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Parses a string into a query and query a table\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = 'menus_8py_1a9af79bbbb639def4228764bd516c80b6';
+      func-mem-virt = normal;
+      func-mem-prot = private;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = '__query_db';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+query_key
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'query_key';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+query_data
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'query_data';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+container_o
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'container_o';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+db
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'db';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+      func-mem-desc-line = '1230';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Aux to query_db\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    };
+  file-full-name  = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py';
+  file-first-line = '1';
+  file-briefdesc  = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+  file-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+}; /* file */
+file = {
+  file-id   = '_tabela_8py';
+  file-name = 'Tabela.py';
+    func = {
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = '_tabela_8py_1a2fbfbcdc39efc74fd6626e78bbf5444d';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'normalize';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+input_text
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'input_text';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      func-mem-desc-line = '297';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Normaliza String e lida com caracteres especiais. Transforma qualquer string para uma string contendo somente caracteres não acentuados
+\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = '_tabela_8py_1ad0c46f3dba700f58ba25062a64012477';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'get_name_labelless';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+cell
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'cell';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+string
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'string';
+        func-mem-param-defval = <<_EnD_oF_dEf_TeXt_
+""
+_EnD_oF_dEf_TeXt_;
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      func-mem-desc-line = '326';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Recursivamente percorre uma tabela em formato de arvore a partir de uma celula e retorna uma string com seu nome. Usa o caractere > como indicador de relacionamento pai-filho entre celulas
+   Diferentemente de get_name, essa função retorna a string do nome sem o nome da raiz
+    \endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = '_tabela_8py_1a4cb56cd7f17958f7d4ca6e7e4d9373d3';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'get_name';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+cell
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'cell';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+string
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'string';
+        func-mem-param-defval = <<_EnD_oF_dEf_TeXt_
+""
+_EnD_oF_dEf_TeXt_;
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      func-mem-desc-line = '348';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Recursivamente percorre uma tabela em formato de arvore a partir de uma celula e retorna uma string com seu nome. Usa o caractere > como indicador de relacionamento pai-filho entre celulas\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = '_tabela_8py_1ada54f9641e23578cc070e3f385eca23f';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'get_cell';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+cell
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'cell';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+table_data
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'table_data';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+      func-mem-desc-line = '374';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Retorna uma celula tratando merges. Recebe um objeto do tipo Cell e uma table_data de uma tabela e Sempre retorna uma celula origem, é reflixiva para celulas não merge\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    };
+  file-full-name  = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py';
+  file-first-line = '1';
+  file-briefdesc  = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+  file-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+}; /* file */
+file = {
+  file-id   = '_trie_8py';
+  file-name = 'Trie.py';
+    func = {
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = '_trie_8py_1a871beca0cd26640b23151c62e6569f46';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'insert';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+string
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'string';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+data
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'data';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+n_trie
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'n_trie';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      func-mem-desc-line = '69';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Insere a string como chave ligada a um dado no ultimo nodo da trie especificada\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = '_trie_8py_1a906eab0ed910d3900a594642e231df43';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'generate_reverse_trie';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+trie
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'trie';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      func-mem-desc-line = '115';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Recebe uma trie e retorna a trie reversa(para busca por sufixo)
+\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = '_trie_8py_1aec449175e8b0f1832eb8354a889e4d6c';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'walk_to';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+n_trie
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'n_trie';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+string
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'string';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      func-mem-desc-line = '135';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Caminha a string no nodo da trie até o nodo onde termina a string recebida. Retorna o nodo destino ou -1 em caso de falha\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = '_trie_8py_1a1d3e625c1172c9558de0a9189d7fae78';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'moonwalk_to';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+nodo
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'nodo';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+string
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'string';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      func-mem-desc-line = '152';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Caminha a string do fim pro começo saindo do nodo e indo no sentido da raiz. Retorna o nodo destino ou -1 em caso de falha\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = '_trie_8py_1a3f44dbfd4ff3e81510eb0fbebae27562';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'get_label';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+nodo
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'nodo';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+string
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'string';
+        func-mem-param-defval = <<_EnD_oF_dEf_TeXt_
+""
+_EnD_oF_dEf_TeXt_;
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      func-mem-desc-line = '174';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Caminha um nodo no sentido nodo raiz até a raiz e devolve os caracteres encontrados no camniho\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = '_trie_8py_1a0f2a20baf30a1d7e7ff6e15c3626f610';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'prefix_search';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+trie
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'trie';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+string
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'string';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      func-mem-desc-line = '183';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Retorna o dicionario {label,data} de todos os objetos encontrados, usando a string recebida como prefixo para buscar na trie recebida
+\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = '_trie_8py_1ad9da1366cf9696d12ce3b84096b46f8d';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'suffix_search';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+trie
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'trie';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+string
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'string';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      func-mem-desc-line = '198';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Retorna o dicionario {label,data} de todos os objetos encontrados, usando a string recebida como sufixo para buscar na trie recebida\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = '_trie_8py_1a79c291cf9e13f88592535376d62d29ca';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'regex_search';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+trie
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'trie';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+re_string
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 're_string';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      func-mem-desc-line = '221';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Pesquisa expressão regular na trie recebida. Retorna dicionario de todos os nodos onde a chave contem o valor da expressão\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = '_trie_8py_1a0434b3b1e7773a7fa219ae67cecbc777';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'regex_dict_search';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+dict
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'dict';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+re_string
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 're_string';
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      func-mem-desc-line = '233';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Pesquisa expressão regular no default dict em formato de trie recebido. Retorna dicionario de todos os nodos onde a chave contem o valor da expressão\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = '_trie_8py_1a82241ceaf84b0729ed2fad82da21686a';
+      func-mem-virt = normal;
+      func-mem-prot = public;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = 'get_all_data';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+n_trie
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'n_trie';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+r_type
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'r_type';
+        func-mem-param-defval = <<_EnD_oF_dEf_TeXt_
+'dict'
+_EnD_oF_dEf_TeXt_;
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      func-mem-desc-line = '245';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Recebe um nodo de trie e Retorna dicionario no formato {label,table} contendo todos os dados não nulos da trie especificada. Se r_type = 'list', retorna uma lista em vez de um dict\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    func-member = {
+      func-mem-kind = 'function';
+      func-mem-id   = '_trie_8py_1a658e999484b7670eb2847429e1c61116';
+      func-mem-virt = normal;
+      func-mem-prot = private;
+      func-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      func-mem-name = '__get_all_data_aux';
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+n_trie
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'n_trie';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+def_dict
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'def_dict';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+def_list
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'def_list';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+label
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'label';
+      }; /*        func-mem-param--param */
+      func-mem-param = {
+        func-mem-param-type = <<_EnD_oF_dEf_TeXt_
+string
+_EnD_oF_dEf_TeXt_;
+        func-mem-param-defname = 'string';
+        func-mem-param-defval = <<_EnD_oF_dEf_TeXt_
+""
+_EnD_oF_dEf_TeXt_;
+      }; /*        func-mem-param--param */
+      func-mem-desc-file = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+      func-mem-desc-line = '264';
+      func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      func-mem-documentation = <<_EnD_oF_dEf_TeXt_
+@verbatim Auxiliar para get_all data. Insere na lista recebida todas as palavras no nodo da trie especificada. Usa como criterio de ser palavra a existencia de "dados" não nulos\endverbatim  
+_EnD_oF_dEf_TeXt_;
+    }; /* func-member */
+    };
+  file-full-name  = 'C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Trie.py';
+  file-first-line = '1';
+  file-briefdesc  = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+  file-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+}; /* file */

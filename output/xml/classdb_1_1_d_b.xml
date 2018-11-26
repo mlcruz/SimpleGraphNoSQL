@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="classdb_1_1_d_b" kind="class" language="Python" prot="public">
+    <compoundname>db::DB</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">object</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classdb_1_1_d_b_1afa64c6cf6218f2423e0894a5cf0102bb" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>db.DB::tables</definition>
+        <argsstring></argsstring>
+        <name>tables</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/db.py" line="14" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/db.py" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdb_1_1_d_b_1a5993ee8357b3bb993484d83a98a8b828" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>db.DB::key_rows</definition>
+        <argsstring></argsstring>
+        <name>key_rows</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/db.py" line="18" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/db.py" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdb_1_1_d_b_1ad162712835b5eb50f3cce0bfd39ba244" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>db.DB::key_cols</definition>
+        <argsstring></argsstring>
+        <name>key_cols</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/db.py" line="21" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/db.py" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdb_1_1_d_b_1a47d36e897b9f59edde9fdc23e0d9a5f0" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>db.DB::super_key</definition>
+        <argsstring></argsstring>
+        <name>super_key</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/db.py" line="24" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/db.py" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classdb_1_1_d_b_1af1e6dda03c0f1c1a5bf4b993865a5b3a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def db.DB.__init__</definition>
+        <argsstring>(self, trie)</argsstring>
+        <name>__init__</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>trie</type>
+          <defname>trie</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Inicialize banco de dados com uma trie recebida</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/db.py" line="9" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/db.py" bodystart="9" bodyend="79"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Cria banco de dados a partir de uma trie de tabelas</verbatim> </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="9">
+        <label>object</label>
+      </node>
+      <node id="8">
+        <label>db.DB</label>
+        <link refid="classdb_1_1_d_b"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="11">
+        <label>object</label>
+      </node>
+      <node id="10">
+        <label>db.DB</label>
+        <link refid="classdb_1_1_d_b"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/db.py" line="6" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/db.py" bodystart="6" bodyend="79"/>
+    <listofallmembers>
+      <member refid="classdb_1_1_d_b_1af1e6dda03c0f1c1a5bf4b993865a5b3a" prot="public" virt="non-virtual"><scope>db::DB</scope><name>__init__</name></member>
+      <member refid="classdb_1_1_d_b_1ad162712835b5eb50f3cce0bfd39ba244" prot="public" virt="non-virtual"><scope>db::DB</scope><name>key_cols</name></member>
+      <member refid="classdb_1_1_d_b_1a5993ee8357b3bb993484d83a98a8b828" prot="public" virt="non-virtual"><scope>db::DB</scope><name>key_rows</name></member>
+      <member refid="classdb_1_1_d_b_1a47d36e897b9f59edde9fdc23e0d9a5f0" prot="public" virt="non-virtual"><scope>db::DB</scope><name>super_key</name></member>
+      <member refid="classdb_1_1_d_b_1afa64c6cf6218f2423e0894a5cf0102bb" prot="public" virt="non-virtual"><scope>db::DB</scope><name>tables</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

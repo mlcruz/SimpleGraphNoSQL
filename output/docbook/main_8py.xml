@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="main_8py">
+    <title>main.py File Reference</title>
+        <simplesect>
+            <title> Namespaces </title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="namespacemain">main</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </simplesect>
+    <simplesect>
+        <title>Detailed Description</title>
+    <para>Definition in file C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/main.py</para>
+    </simplesect>
+    <literallayout><computeroutput>
+1 <emphasis class="comment">#biblioteca&#32;de&#32;funcoes&#32;auxiliares&#32;contendo&#32;todas&#32;as&#32;outras&#32;bibliotecas.&#32;Ver&#32;codigo&#32;para&#32;mais&#32;detalhes</emphasis>
+2 <emphasis class="keyword">import</emphasis>&#32;aux_lib
+3 
+4 <emphasis class="keyword">import</emphasis>&#32;menus
+5 <emphasis class="keyword">from</emphasis>&#32;menus&#32;<emphasis class="keyword">import</emphasis>&#32;Container
+6 <emphasis class="keyword">import</emphasis>&#32;sys
+7 
+8 <emphasis class="keyword">from</emphasis>&#32;collections&#32;<emphasis class="keyword">import</emphasis>&#32;defaultdict
+9 
+10 <emphasis class="keyword">import</emphasis>&#32;curses
+11 
+12 sys.setrecursionlimit(15000)
+13 
+14 
+15 prefix_loc&#32;=&#32;<emphasis class="stringliteral">&quot;tabelas_mcti\\formatada\\2&quot;</emphasis>
+16 
+17 <emphasis class="comment">#Cria&#32;dicionario&#32;de&#32;estados</emphasis>
+18 state_dict&#32;=&#32;defaultdict()
+19 
+20 
+21 <emphasis class="comment">#Indica&#32;se&#32;deve&#32;sair&#32;do&#32;loop</emphasis>
+22 state_dict[<emphasis class="stringliteral">&apos;f_exit&apos;</emphasis>]&#32;=&#32;<emphasis class="keyword">False</emphasis>
+23 state_dict[<emphasis class="stringliteral">&apos;state&apos;</emphasis>]&#32;=&#32;<emphasis class="stringliteral">&apos;start_menu&apos;</emphasis>
+24 
+25 
+26 <emphasis class="comment">#Inicializa&#32;banco&#32;de&#32;dados&#32;e&#32;seus&#32;estados</emphasis>
+27 <link linkend="menus_8py_1a12efed78c1322ba3c869a9c6f370abfa">menus.start_menu</link>(state_dict)
+28 
+29 
+30 
+31 
+32 <emphasis class="comment">#inicializa&#32;callable&#32;para&#32;ser&#32;wrapado</emphasis>
+33 <emphasis class="keyword">def&#32;</emphasis><link linkend="namespacemain">main</link>(stdscr,state_dict):
+34 
+35 &#32;&#32;&#32;&#32;<emphasis class="comment">#Sem&#32;enter&#32;para&#32;entrada</emphasis>
+36 &#32;&#32;&#32;&#32;
+37 &#32;&#32;&#32;&#32;
+38 &#32;&#32;
+39 &#32;&#32;&#32;&#32;<emphasis class="comment">#Local&#32;da&#32;linha&#32;de&#32;entrada&#32;de&#32;dados&#32;no&#32;programa</emphasis>
+40 &#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;loc_data_entry&apos;</emphasis>]&#32;=&#32;(52,0)
+41 &#32;&#32;&#32;&#32;<emphasis class="comment">#move&#32;cursor&#32;para&#32;local&#32;de&#32;entrada&#32;de&#32;dados</emphasis>
+42 
+43 &#32;&#32;&#32;&#32;stdscr.move((state_dict[<emphasis class="stringliteral">&apos;loc_data_entry&apos;</emphasis>])[0],(state_dict[<emphasis class="stringliteral">&apos;loc_data_entry&apos;</emphasis>])[1])
+44 
+45 &#32;&#32;&#32;&#32;while(state_dict[<emphasis class="stringliteral">&apos;f_exit&apos;</emphasis>]&#32;==&#32;<emphasis class="keyword">False</emphasis>):
+46 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+47 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="menus_8py_1a2b766869a5cecbdaddb2f4cdc5ad5ac4">menus.main_menu</link>(stdscr,state_dict)
+48 
+49 
+50 
+51 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Fim&#32;dos&#32;menus&#32;de&#32;estado</emphasis>
+52 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#stdscr.getch()</emphasis>
+53 &#32;&#32;&#32;&#32;&#32;&#32;&#32;
+54 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+55 &#32;&#32;&#32;&#32;<emphasis class="comment">#Encerra&#32;ao&#32;sair&#32;do&#32;loop&#32;&#32;&#32;</emphasis>
+56 &#32;&#32;&#32;&#32;
+57 
+58 &#32;&#32;&#32;&#32;
+59 <emphasis class="comment">#Chama&#32;main</emphasis>
+60 if(state_dict[<emphasis class="stringliteral">&apos;f_exit&apos;</emphasis>]&#32;==&#32;<emphasis class="keyword">False</emphasis>):
+61 &#32;&#32;&#32;&#32;<emphasis class="comment">#Inicializa&#32;estado&#32;da&#32;tela</emphasis>
+62 &#32;&#32;&#32;&#32;stdscr&#32;=&#32;curses.initscr()
+63 &#32;&#32;&#32;&#32;curses.resize_term(55,160)
+64 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">try</emphasis>&#32;:
+65 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;curses.wrapper(<link linkend="namespacemain">main</link>(stdscr,state_dict))
+66 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">except</emphasis>:
+67 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;menus.os.system(<emphasis class="stringliteral">&apos;cls&apos;</emphasis>)
+68 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;print(<emphasis class="stringliteral">&quot;fim&quot;</emphasis>)
+69 
+70 
+71 
+72 
+73 
+    </computeroutput></literallayout>
+</section>

@@ -1,0 +1,450 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_tabela_8py">
+    <title>Tabela.py File Reference</title>
+        <section>
+            <title> Classes </title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="class_tabela_1_1_cell">Tabela::Cell</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="class_tabela_1_1_raw_table">Tabela::RawTable</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="class_tabela_1_1_table">Tabela::Table</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <simplesect>
+            <title> Namespaces </title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="namespace_tabela">Tabela</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </simplesect>
+    <simplesect>
+        <title>Detailed Description</title>
+    <para>Definition in file C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py</para>
+    </simplesect>
+    <literallayout><computeroutput>
+1 <emphasis class="comment">#xlrd&#32;é&#32;uma&#32;biblioteca&#32;para&#32;facilitar&#32;o&#32;parsing&#32;de&#32;tabelas&#32;xls&#32;do&#32;excel</emphasis>
+2 <emphasis class="keyword">import</emphasis>&#32;xlrd
+3 
+4 <emphasis class="comment">#Default&#32;dics&#32;são&#32;dicionarios&#32;que&#32;ao&#32;receber&#32;uma&#32;chave&#32;que&#32;não&#32;existe,&#32;cria&#32;a&#32;chave&#32;a&#32;atribui&#32;um&#32;valor&#32;padrão</emphasis>
+5 <emphasis class="keyword">from</emphasis>&#32;collections&#32;<emphasis class="keyword">import</emphasis>&#32;defaultdict
+6 
+7 <emphasis class="comment">#Suporte&#32;para&#32;expressões&#32;regulares</emphasis>
+8 <emphasis class="keyword">import</emphasis>&#32;regex
+9 
+10 <emphasis class="comment">#Para&#32;normalizar&#32;para&#32;NFKD</emphasis>
+11 <emphasis class="keyword">import</emphasis>&#32;unicodedata
+12 
+13 
+<link linkend="class_tabela_1_1_cell">14 </link><emphasis class="keyword">class&#32;</emphasis><link linkend="class_tabela_1_1_cell">Cell</link>(object):
+15 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Classe&#32;que&#32;representa&#32;uma&#32;celula&#32;da&#32;tabela.&#32;Recebe&#32;um&#32;objeto&#32;do&#32;tipo&#32;sheet&#32;do&#32;xrld&#32;como&#32;entrada</emphasis>
+16 <emphasis class="stringliteral">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;e&#32;uma&#32;posicao&#32;X&#32;referente&#32;a&#32;linha&#32;e&#32;Y&#32;referente&#32;a&#32;celula.&#32;Cria&#32;um&#32;objeto&#32;do&#32;tipo&#32;celula&#32;classificando&#32;o&#32;tipo&#32;de&#32;celula&#32;e&#32;guardando&#32;dados&apos;&apos;&apos;</emphasis>
+17 &#32;&#32;&#32;&#32;<emphasis class="keyword">def&#32;</emphasis>__init__(self,sheet,X,Y):
+18 
+19 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+20 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+31 
+32 
+33 
+34 
+35 
+36 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Atributos&#32;usados&#32;para&#32;organização&#32;da&#32;tabela:</emphasis>
+37 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+38 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#&#32;A&#32;largura&#32;da&#32;celula&#32;raiz&#32;indica&#32;o&#32;numero&#32;de&#32;colunas&#32;da&#32;tabela</emphasis>
+39 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#self.data_boudary&#32;-&gt;&#32;Indica&#32;local&#32;da&#32;primeira&#32;chave&#32;na&#32;coluna&#32;indexadora</emphasis>
+40 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#self.originx&#32;=&#32;indica&#32;local&#32;y&#32;de&#32;origem&#32;do&#32;merge</emphasis>
+41 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#self.originy&#32;=&#32;indica&#32;local&#32;y&#32;de&#32;origem&#32;do&#32;merge</emphasis>
+42 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#self.sizex&#32;=&#32;indica&#32;tamanho&#32;x&#32;da&#32;celula</emphasis>
+43 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#self.sizex&#32;=&#32;indica&#32;tamanho&#32;y&#32;da&#32;celula</emphasis>
+44 
+45 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+46 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Inicializa&#32;data&#32;boundary&#32;como&#32;2,&#32;indicando&#32;primeira&#32;chave&#32;se&#32;col_row&#32;não&#32;é&#32;merged</emphasis>
+47 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a81d6743175d93342642a052894df99a2">data_boundary</link>&#32;=&#32;2
+48 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a595c89589e45916787b38d9bbcf41bf7">blank_boundary</link>&#32;=&#32;9999
+49 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a543900af4f49d7f7dce5be24aaddcd43">originx</link>&#32;=&#32;X
+50 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1ac06d52d26c63f8b64c206f3a090bf91b">originy</link>&#32;=&#32;Y
+51 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a8e5d57b52807b55546c2443470e0f85f">sizex</link>&#32;=&#32;1
+52 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a226e9b058ada2e873243f45136b2a9ce">sizey</link>&#32;=&#32;1
+53 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a6601b87d017e8dc40c575858bb9aefab">x</link>&#32;=&#32;X
+54 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1aec268ed0feba78f5d5affd5b1affbc67">y</link>&#32;=&#32;Y
+55 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1ad31ac1bf3ec1335d25343f113ef6a564">bounds</link>&#32;=&#32;(X,X+1,Y,Y+1)
+56 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a822efbac3e8b7c912a2e33ce0d106c84">cell_type</link>&#32;=&#32;<emphasis class="stringliteral">&apos;0&apos;</emphasis>&#32;<emphasis class="comment">#indica&#32;tipo&#32;ainda&#32;não&#32;classificado</emphasis>
+57 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1aae4fd1ac2cefbce827ff7713e6db3a52">data</link>&#32;=&#32;sheet.cell_value(rowx=X,&#32;colx=Y)
+58 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1adc1415ea59c977255d5d5c9ee0235453">table_label</link>&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>
+59 
+60 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Representa&#32;o&#32;local&#32;da&#32;celula&#32;pai&#32;da&#32;celula&#32;atual.&#32;Key_Row&#32;é&#32;pai&#32;de&#32;Key,&#32;Super_key&#32;é&#32;pai&#32;de&#32;Key_col.</emphasis>
+61 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Inicializado&#32;com&#32;-1&#32;para&#32;indicar&#32;que&#32;ainda&#32;não&#32;está&#32;atribuido.&#32;Somente&#32;para&#32;não&#32;folhas</emphasis>
+62 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1ac37f9319e055d0ca765ba3c77d68252c">parent_node</link>&#32;=&#32;-1
+63 
+64 
+65 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Lista&#32;representando&#32;todos&#32;os&#32;nodos&#32;filhos&#32;da&#32;celula.&#32;Somente&#32;para&#32;não&#32;folhas</emphasis>
+66 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a6c52a49677bbce958aa0b7c037892942">child_nodes</link>&#32;=&#32;[]
+67 
+68 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Variaveis&#32;representando&#32;as&#32;chaves&#32;de&#32;ordenação&#32;da&#32;celula.</emphasis>
+69 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a9086096bb2d966a75e18722fcb2659d1">key_row</link>&#32;=&#32;-1
+70 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a9d9b117373e9ddef7a2ad8832d4da842">key_col</link>&#32;=&#32;-1
+71 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+72 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Variavel&#32;representando&#32;nome&#32;completo&#32;da&#32;celula,&#32;que&#32;leva&#32;em&#32;conta&#32;as&#32;chaves&#32;que&#32;à&#32;ordenam&#32;e&#32;sua&#32;label&#32;da&#32;tabela</emphasis>
+73 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a54bfaf35d099a9c6bd88a032618a2528">cell_name</link>&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>
+74 
+75 
+76 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Calcula&#32;tamanho&#32;da&#32;celula,&#32;merges&#32;e&#32;data&#32;boundaries&#32;da&#32;folha.</emphasis>
+77 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;merged&#32;<emphasis class="keywordflow">in</emphasis>&#32;sheet.merged_cells:
+78 &#32;&#32;&#32;&#32;&#32;&#32;&#32;
+79 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Calcula&#32;onde&#32;inicia&#32;cada&#32;campo&#32;de&#32;dados&#32;a&#32;partir&#32;do&#32;tamanho&#32;da&#32;coluna&#32;indexadora&#32;no&#32;caminho</emphasis>
+80 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Verifica&#32;se&#32;é&#32;primeiro&#32;item&#32;não&#32;label&#32;da&#32;coluna&#32;indexadora</emphasis>
+81 
+82 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;a&#32;linha&#32;inicial&#32;é&#32;a&#32;primeira&#32;linha&#32;após&#32;a&#32;label&#32;e&#32;está&#32;na&#32;primeira&#32;coluna,&#32;é&#32;key_row&#32;da&#32;tabela</emphasis>
+83 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;(merged[0]&#32;==&#32;1)&#32;<emphasis class="keywordflow">and</emphasis>&#32;(merged[2]&#32;==&#32;0):
+84 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+85 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Define&#32;limite&#32;local&#32;onde&#32;iniciam&#32;os&#32;dados&#32;da&#32;tabela(em&#32;contrapartida&#32;com&#32;os&#32;outros&#32;tipos&#32;de&#32;celula&#32;acima)</emphasis>
+86 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Lembrando&#32;que&#32;data_boundary&#32;indica&#32;o&#32;local&#32;do&#32;primeiro&#32;item&#32;do&#32;tipo&#32;chave&#32;na&#32;coluna&#32;indexadora</emphasis>
+87 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a81d6743175d93342642a052894df99a2">data_boundary</link>&#32;=&#32;merged[1]
+88 
+89 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;raiz,&#32;calcula&#32;blank_boundary&#32;definindo&#32;limites&#32;da&#32;tabela&#32;a&#32;partir&#32;do&#32;limite&#32;X&#32;da&#32;label</emphasis>
+90 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if(merged[0]&#32;==&#32;0)&#32;<emphasis class="keywordflow">and</emphasis>&#32;(merged[2]&#32;==&#32;0):
+91 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a595c89589e45916787b38d9bbcf41bf7">blank_boundary</link>&#32;=&#32;merged[3]
+92 
+93 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;X&#32;e&#32;Y&#32;está&#32;entre&#32;os&#32;limites&#32;dos&#32;dados&#32;a&#32;respeito&#32;da&#32;celula&#32;merged&#32;recebida(ou&#32;seja,&#32;é&#32;uma&#32;celula&#32;unida)</emphasis>
+94 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Calcula&#32;tamanho&#32;e&#32;tipo&#32;da&#32;celula(se&#32;é&#32;do&#32;tipo&#32;merge&#32;ou&#32;outro)</emphasis>
+95 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+96 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+97 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;(X&#32;&gt;=&#32;merged[0])&#32;<emphasis class="keywordflow">and</emphasis>&#32;(X&#32;&lt;&#32;merged[1])&#32;<emphasis class="keywordflow">and</emphasis>&#32;(Y&#32;&gt;=&#32;merged[2])&#32;<emphasis class="keywordflow">and</emphasis>&#32;(Y&#32;&lt;&#32;merged[3]):
+98 
+99 
+100 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Calcula&#32;a&#32;celula&#32;origem</emphasis>
+101 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a543900af4f49d7f7dce5be24aaddcd43">originx</link>&#32;=&#32;merged[0]
+102 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1ac06d52d26c63f8b64c206f3a090bf91b">originy</link>&#32;=&#32;merged[2]
+103 
+104 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;a&#32;celula&#32;origem</emphasis>
+105 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;(X&#32;==&#32;self.<link linkend="class_tabela_1_1_cell_1a543900af4f49d7f7dce5be24aaddcd43">originx</link>)&#32;<emphasis class="keywordflow">and</emphasis>&#32;(Y&#32;==&#32;self.<link linkend="class_tabela_1_1_cell_1ac06d52d26c63f8b64c206f3a090bf91b">originy</link>):
+106 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+107 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Calcula&#32;o&#32;tamanho&#32;da&#32;celula</emphasis>
+108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a8e5d57b52807b55546c2443470e0f85f">sizex</link>&#32;=&#32;merged[1]&#32;-&#32;merged[0]
+109 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a226e9b058ada2e873243f45136b2a9ce">sizey</link>&#32;=&#32;merged[3]&#32;-&#32;merged[2]
+110 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+111 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Guarda&#32;a&#32;tupla&#32;merged&#32;para&#32;salvar&#32;os&#32;limites&#32;da&#32;celula</emphasis>
+112 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1ad31ac1bf3ec1335d25343f113ef6a564">bounds</link>&#32;=&#32;merged
+113 
+114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+115 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;uma&#32;celula&#32;unida,&#32;indica&#32;isso</emphasis>
+116 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a822efbac3e8b7c912a2e33ce0d106c84">cell_type</link>&#32;=&#32;<emphasis class="stringliteral">&apos;Merge&apos;</emphasis>
+117 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+118 
+119 
+120 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;não&#32;é&#32;um&#32;merge&#32;e&#32;nem&#32;é&#32;raiz,&#32;classifica&#32;celula&#32;dentro&#32;dos&#32;outros&#32;tipos&#32;possiveis</emphasis>
+121 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;(self.<link linkend="class_tabela_1_1_cell_1a822efbac3e8b7c912a2e33ce0d106c84">cell_type</link>&#32;==&#32;<emphasis class="stringliteral">&apos;0&apos;</emphasis>)&#32;<emphasis class="keywordflow">and</emphasis>&#32;not(&#32;(Y&#32;==&#32;0)&#32;<emphasis class="keywordflow">and</emphasis>&#32;(X&#32;==&#32;0))&#32;:
+122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;Y&#32;é&#32;menor&#32;que&#32;blank_boundary,&#32;não&#32;é&#32;blank</emphasis>
+123 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;Y&#32;&gt;=&#32;self.<link linkend="class_tabela_1_1_cell_1a595c89589e45916787b38d9bbcf41bf7">blank_boundary</link>:
+124 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a822efbac3e8b7c912a2e33ce0d106c84">cell_type</link>&#32;=&#32;<emphasis class="stringliteral">&quot;Blank&quot;</emphasis>
+125 
+126 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+127 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;X&#32;é&#32;menor&#32;que&#32;a&#32;data_boundary,&#32;é&#32;key_col,&#32;key_row&#32;ou&#32;super_key</emphasis>
+128 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;X&#32;&lt;&#32;self.<link linkend="class_tabela_1_1_cell_1a81d6743175d93342642a052894df99a2">data_boundary</link>:
+129 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;Y&#32;é&#32;0,&#32;é&#32;key_Row</emphasis>
+130 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;Y&#32;==&#32;0:
+131 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a822efbac3e8b7c912a2e33ce0d106c84">cell_type</link>&#32;=&#32;<emphasis class="stringliteral">&apos;Key_Row&apos;</emphasis>
+132 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;não,&#32;é&#32;key_col&#32;ou&#32;super_key</emphasis>
+133 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+134 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;tem&#32;largura&#32;1,&#32;é&#32;Key_Col</emphasis>
+135 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;self.<link linkend="class_tabela_1_1_cell_1a226e9b058ada2e873243f45136b2a9ce">sizey</link>&#32;==&#32;1:
+136 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a822efbac3e8b7c912a2e33ce0d106c84">cell_type</link>&#32;=&#32;<emphasis class="stringliteral">&apos;Key_Col&apos;</emphasis>
+137 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+138 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a822efbac3e8b7c912a2e33ce0d106c84">cell_type</link>&#32;=&#32;<emphasis class="stringliteral">&apos;Super_Key&apos;</emphasis>
+139 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;maior&#32;que&#32;a&#32;data&#32;boundary,&#32;é&#32;key&#32;ou&#32;leaf</emphasis>
+140 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+141 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;Y&#32;==&#32;0,&#32;é&#32;key</emphasis>
+142 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;Y&#32;==&#32;0:
+143 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a822efbac3e8b7c912a2e33ce0d106c84">cell_type</link>&#32;=&#32;<emphasis class="stringliteral">&apos;Key&apos;</emphasis>
+144 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+145 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a822efbac3e8b7c912a2e33ce0d106c84">cell_type</link>&#32;=&#32;<emphasis class="stringliteral">&apos;Leaf&apos;</emphasis>
+146 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;self.<link linkend="class_tabela_1_1_cell_1a822efbac3e8b7c912a2e33ce0d106c84">cell_type</link>&#32;==&#32;<emphasis class="stringliteral">&apos;0&apos;</emphasis>:
+147 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;raiz,&#32;é&#32;raiz</emphasis>
+148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_cell_1a822efbac3e8b7c912a2e33ce0d106c84">cell_type</link>&#32;=&#32;<emphasis class="stringliteral">&apos;Label&apos;</emphasis>
+149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<link linkend="class_tabela_1_1_raw_table">150 </link><emphasis class="keyword">class&#32;</emphasis><link linkend="class_tabela_1_1_raw_table">RawTable</link>(object):
+151 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&quot;&quot;&quot;Classe&#32;que&#32;representa&#32;uma&#32;tabela&#32;do&#32;excel&#32;na&#32;memoria.&#32;Guarda&#32;mais&#32;dados&#32;do&#32;que&#32;o&#32;necessario&#32;e&#32;não&#32;consegue&#32;ser&#32;pickleada&quot;&quot;&quot;</emphasis>
+152 
+153 &#32;&#32;&#32;&#32;<emphasis class="keyword">def&#32;</emphasis><link linkend="class_tabela_1_1_raw_table_1afceb720336b1c4ac7084cfc2719514fa">__init__</link>(self,&#32;loc):
+154 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="stringliteral">&quot;&quot;&quot;Inicializa&#32;uma&#32;tabela&#32;a&#32;partir&#32;de&#32;um&#32;local&#32;loc&quot;&quot;&quot;</emphasis>
+155 
+156 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a8c34690e14cf866b1477a88cee953ce5">loc_source</link>&#32;=&#32;loc
+157 
+158 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Tabela&#32;original&#32;como&#32;xls,&#32;parseada&#32;pelo&#32;xlrd</emphasis>
+159 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a2e27d60b90222e80510e3d39b6856142">raw_table</link>&#32;=&#32;xlrd.open_workbook(loc,formatting_info=<emphasis class="keyword">True</emphasis>)
+160 
+161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Folha&#32;da&#32;tabela&#32;original</emphasis>
+162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1ad954dccabbbdbd2616c4e48620a5b121">raw_sheet</link>&#32;=&#32;self.<link linkend="class_tabela_1_1_raw_table_1a2e27d60b90222e80510e3d39b6856142">raw_table</link>.sheet_by_index(0)
+163 
+164 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Label&#32;da&#32;tabela,&#32;primeira&#32;coluna&#32;primeira&#32;linha</emphasis>
+165 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a31c6abc84cf6f1fb1df2e9b14406746e">table_label</link>&#32;=&#32;self.<link linkend="class_tabela_1_1_raw_table_1ad954dccabbbdbd2616c4e48620a5b121">raw_sheet</link>.cell_value(rowx=0,&#32;colx=0)
+166 
+167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Representa&#32;matriz&#32;como&#32;dicionarios&#32;aninhados</emphasis>
+168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>&#32;=&#32;defaultdict(dict)
+169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a2d905e086c422c2cc296c60d4c4e729b">bound_x</link>&#32;=&#32;self.<link linkend="class_tabela_1_1_raw_table_1ad954dccabbbdbd2616c4e48620a5b121">raw_sheet</link>.nrows
+170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1af4c910628f1271516d6cba7b5117c0f5">bound_y</link>&#32;=&#32;self.<link linkend="class_tabela_1_1_raw_table_1ad954dccabbbdbd2616c4e48620a5b121">raw_sheet</link>.ncols
+171 
+172 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Lista&#32;com&#32;todas&#32;as&#32;Key_col&#32;da&#32;tabela</emphasis>
+173 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a9298050415197ab6c56c409107676362">key_cols</link>&#32;=&#32;[]
+174 
+175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Key_row&#32;da&#32;tabela</emphasis>
+176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1aadade37b733a5ffeacfa6afd63247124">key_row</link>&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>
+177 
+178 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Lista&#32;com&#32;todas&#32;as&#32;chaves&#32;da&#32;tabela</emphasis>
+179 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a10fc3b2dcf218f5121d2688869889d8c">keys</link>&#32;=&#32;[]
+180 
+181 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Gera&#32;tabela&#32;logica</emphasis>
+182 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;X&#32;<emphasis class="keywordflow">in</emphasis>&#32;range(self.<link linkend="class_tabela_1_1_raw_table_1ad954dccabbbdbd2616c4e48620a5b121">raw_sheet</link>.nrows):
+183 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;Y&#32;<emphasis class="keywordflow">in</emphasis>&#32;range&#32;(self.<link linkend="class_tabela_1_1_raw_table_1ad954dccabbbdbd2616c4e48620a5b121">raw_sheet</link>.ncols):
+184 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y]&#32;=&#32;<link linkend="class_tabela_1_1_cell">Cell</link>(self.<link linkend="class_tabela_1_1_raw_table_1ad954dccabbbdbd2616c4e48620a5b121">raw_sheet</link>,X,Y)
+185 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+186 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Gera&#32;atributos&#32;de&#32;pai,&#32;filhos&#32;e&#32;chaves&#32;de&#32;ordenação&#32;a&#32;partir&#32;do&#32;tipo&#32;da&#32;celula&#32;da&#32;tabela&#32;logica&#32;para&#32;cada&#32;celula</emphasis>
+187 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;X&#32;<emphasis class="keywordflow">in</emphasis>&#32;range(self.<link linkend="class_tabela_1_1_raw_table_1ad954dccabbbdbd2616c4e48620a5b121">raw_sheet</link>.nrows):
+188 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;Y&#32;<emphasis class="keywordflow">in</emphasis>&#32;range&#32;(self.<link linkend="class_tabela_1_1_raw_table_1ad954dccabbbdbd2616c4e48620a5b121">raw_sheet</link>.ncols):
+189 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Adiciona&#32;tabela&#32;como&#32;label</emphasis>
+190 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].table_label&#32;=&#32;self.<link linkend="class_tabela_1_1_raw_table_1a31c6abc84cf6f1fb1df2e9b14406746e">table_label</link>
+191 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Classifica&#32;dependendo&#32;do&#32;tipo</emphasis>
+192 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].cell_type&#32;==&#32;<emphasis class="stringliteral">&quot;Leaf&quot;</emphasis>:
+193 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;leaf,&#32;aponta&#32;celulas&#32;que&#32;ordenam&#32;a&#32;mesma</emphasis>
+194 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Aponta&#32;celula&#32;ordenadora&#32;de&#32;linha,&#32;definida&#32;pela&#32;sua&#32;linha&#32;e&#32;coluna.&#32;</emphasis>
+195 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].key_row&#32;=&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][0]
+196 
+197 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Aponta&#32;nodo&#32;pai&#32;como&#32;chave</emphasis>
+198 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].parent_node&#32;=&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].key_row
+199 
+200 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Aponta&#32;para&#32;ordenadora&#32;de&#32;coluna,&#32;tratando&#32;merges.&#32;Indicado&#32;pela&#32;primeira&#32;linha&#32;antes&#32;da&#32;data&#32;boundary</emphasis>
+201 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].key_col&#32;=&#32;get_cell(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].data_boundary&#32;-&#32;1)][Y],self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>)
+202 
+203 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;elif(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].cell_type&#32;!=&#32;<emphasis class="stringliteral">&quot;Key&quot;</emphasis>):
+204 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].data&#32;=&#32;((normalize(str(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].data))).lstrip()).rstrip()&#32;
+205 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;não&#32;é&#32;leaf&#32;nem&#32;key,&#32;normaliza&#32;data&#32;e&#32;converte&#32;para&#32;string&#32;e&#32;tira&#32;espaços</emphasis>
+206 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+207 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].cell_type&#32;==&#32;<emphasis class="stringliteral">&quot;Key&quot;</emphasis>:
+208 
+209 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+210 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;Chave,&#32;aponta&#32;para&#32;ultimo&#32;Row_key&#32;como&#32;parente&#32;tratando&#32;merges</emphasis>
+211 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].parent_node&#32;=&#32;get_cell(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].data_boundary&#32;-&#32;1)][Y],self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>)
+212 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].key_row&#32;=&#32;self.<link linkend="class_tabela_1_1_raw_table_1aadade37b733a5ffeacfa6afd63247124">key_row</link>
+213 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].key_col&#32;=&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].parent_node
+214 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a10fc3b2dcf218f5121d2688869889d8c">keys</link>.append(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y])
+215 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+216 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Aponta&#32;para&#32;todas&#32;os&#32;dados&#32;indexados&#32;por&#32;essa&#32;chave</emphasis>
+217 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;node&#32;<emphasis class="keywordflow">in</emphasis>&#32;range(1,self.<link linkend="class_tabela_1_1_raw_table_1ad954dccabbbdbd2616c4e48620a5b121">raw_sheet</link>.ncols):
+218 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].child_nodes.append(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][node])
+219 
+220 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].cell_type&#32;==&#32;<emphasis class="stringliteral">&quot;Key_Row&quot;</emphasis>)&#32;<emphasis class="keywordflow">or</emphasis>&#32;(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].cell_type&#32;==&#32;<emphasis class="stringliteral">&quot;Key_Col&quot;</emphasis>)&#32;<emphasis class="keywordflow">or</emphasis>&#32;(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].cell_type&#32;==&#32;<emphasis class="stringliteral">&quot;Super_Key&quot;</emphasis>):
+221 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Usa&#32;a&#32;boudary&#32;superior&#32;do&#32;merge&#32;para&#32;apontar&#32;para&#32;o&#32;pai.&#32;Pai&#32;sempre&#32;vai&#32;ser&#32;a&#32;celula&#32;acima&#32;considerando&#32;merge</emphasis>
+222 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].parent_node&#32;=&#32;get_cell(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].bounds[0]&#32;-&#32;1][Y],self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>)
+223 
+224 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;key_row&#32;ou&#32;Key_&#32;col</emphasis>
+225 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].cell_type&#32;==&#32;<emphasis class="stringliteral">&quot;Key_Row&quot;</emphasis>)&#32;<emphasis class="keywordflow">or</emphasis>&#32;(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].cell_type&#32;==&#32;<emphasis class="stringliteral">&quot;Key_Col&quot;</emphasis>):
+226 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].cell_type&#32;==<emphasis class="stringliteral">&quot;Key_Col&quot;</emphasis>:
+227 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a9298050415197ab6c56c409107676362">key_cols</link>.append(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y])
+228 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].key_col&#32;=&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y]
+229 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].key_row&#32;=&#32;self.<link linkend="class_tabela_1_1_raw_table_1aadade37b733a5ffeacfa6afd63247124">key_row</link>
+230 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+231 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1aadade37b733a5ffeacfa6afd63247124">key_row</link>&#32;=&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y]
+232 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].key_row&#32;=&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y]
+233 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].key_col&#32;=&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y]
+234 
+235 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Filhos&#32;da&#32;Key_Row/Col&#32;são&#32;as&#32;chaves&#32;abaixo&#32;da&#32;mesma</emphasis>
+236 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;node&#32;<emphasis class="keywordflow">in</emphasis>&#32;range(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].data_boundary,self.<link linkend="class_tabela_1_1_raw_table_1ad954dccabbbdbd2616c4e48620a5b121">raw_sheet</link>.nrows):
+237 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].child_nodes.append(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[node][Y])
+238 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+239 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;Super_key,&#32;busca&#32;embaixo&#32;de&#32;todas&#32;as&#32;colunas&#32;abaixo</emphasis>
+240 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+241 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#para&#32;cada&#32;coluna&#32;abaixo</emphasis>
+242 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;col&#32;<emphasis class="keywordflow">in</emphasis>&#32;range(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].sizey):
+243 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;node&#32;<emphasis class="keywordflow">in</emphasis>&#32;range(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].data_boundary,self.<link linkend="class_tabela_1_1_raw_table_1ad954dccabbbdbd2616c4e48620a5b121">raw_sheet</link>.nrows):
+244 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].child_nodes.append(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[node][Y+col])
+245 
+246 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;label&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</emphasis>
+247 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].cell_type&#32;==&#32;<emphasis class="stringliteral">&quot;Label&quot;</emphasis>:&#32;
+248 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#parent_node&#32;0&#32;pois&#32;é&#32;raiz</emphasis>
+249 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].parent_node&#32;=&#32;0
+250 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Filhos&#32;são&#32;todos&#32;os&#32;nodos&#32;da&#32;linha&#32;abaixo&#32;não&#32;Merge</emphasis>
+251 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;node&#32;<emphasis class="keywordflow">in</emphasis>&#32;range(self.<link linkend="class_tabela_1_1_raw_table_1ad954dccabbbdbd2616c4e48620a5b121">raw_sheet</link>.ncols):
+252 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[1][node].cell_type&#32;!=&#32;<emphasis class="stringliteral">&quot;Merge&quot;</emphasis>)&#32;<emphasis class="keywordflow">and</emphasis>&#32;(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[1][node].cell_type&#32;!=&#32;<emphasis class="stringliteral">&quot;Blank&quot;</emphasis>):
+253 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].child_nodes.append(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[1][node])
+254 
+255 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+256 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].cell_type&#32;==&#32;<emphasis class="stringliteral">&quot;Merge&quot;</emphasis>:
+257 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;merge,&#32;aponta&#32;filhos&#32;e&#32;pais&#32;para&#32;o&#32;do&#32;nodo&#32;origem</emphasis>
+258 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].child_nodes&#32;=&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].originx][self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].originy].child_nodes
+259 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].parent_node&#32;=&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].originx][self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].originy].parent_node
+260 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+261 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+262 
+263 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Completa&#32;nomes&#32;nas&#32;celulas</emphasis>
+264 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;X&#32;<emphasis class="keywordflow">in</emphasis>&#32;range(self.<link linkend="class_tabela_1_1_raw_table_1ad954dccabbbdbd2616c4e48620a5b121">raw_sheet</link>.nrows):
+265 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;Y&#32;<emphasis class="keywordflow">in</emphasis>&#32;range&#32;(self.<link linkend="class_tabela_1_1_raw_table_1ad954dccabbbdbd2616c4e48620a5b121">raw_sheet</link>.ncols):&#32;&#32;&#32;&#32;
+266 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].cell_type&#32;==&#32;<emphasis class="stringliteral">&quot;Merge&quot;</emphasis>):
+267 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;merge,&#32;completa&#32;nome&#32;dependendo&#32;do&#32;nome&#32;da&#32;origem</emphasis>
+268 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].parent_node&#32;!=&#32;0&#32;<emphasis class="keywordflow">and</emphasis>&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].parent_node&#32;!=&#32;-1):
+269 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;não&#32;é&#32;merge&#32;da&#32;raiz,&#32;atribui&#32;nome&#32;pelo&#32;nome&#32;da&#32;origem</emphasis>
+270 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].cell_name&#32;=&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].parent_node.cell_name
+271 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+272 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Atribui&#32;nome&#32;da&#32;raiz&#32;se&#32;merge&#32;da&#32;raiz</emphasis>
+273 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].cell_name&#32;=&#32;get_cell(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y],self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>).data
+274 
+275 
+276 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;elif(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].cell_type&#32;==&#32;<emphasis class="stringliteral">&quot;Label&quot;</emphasis>):
+277 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].cell_name&#32;=&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].data
+278 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+279 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;não&#32;é&#32;merge,&#32;atribui&#32;nome</emphasis>
+280 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y].cell_name&#32;=&#32;get_name(self.<link linkend="class_tabela_1_1_raw_table_1a47a68a2235c0bafa906cd122db44cb85">table_data</link>[X][Y])
+281 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+<link linkend="class_tabela_1_1_table">282 </link><emphasis class="keyword">class&#32;</emphasis><link linkend="class_tabela_1_1_table">Table</link>(object):
+283 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&quot;&quot;&quot;Classe&#32;que&#32;representa&#32;uma&#32;tabela&#32;logica.&#32;Recebema&#32;uma&#32;Raw_Table&#32;e&#32;remove&#32;os&#32;campos&#32;desnecessarios&#32;Pode&#32;ser&#32;picklada&quot;&quot;&quot;</emphasis>
+284 
+285 &#32;&#32;&#32;&#32;<emphasis class="keyword">def&#32;</emphasis><link linkend="class_tabela_1_1_table_1a10c29642d83aa4daf8124db325f0a761">__init__</link>(self,&#32;raw_table):
+286 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Inicializa&#32;Tabela&#32;com&#32;dados&#32;da&#32;raw&#32;table&apos;&apos;&apos;</emphasis>
+287 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_table_1ab9ebb4ae6437d100c1ebdf046fa43bff">loc_source</link>&#32;=&#32;raw_table.loc_source
+288 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_table_1acf4034972f8ca45d84f255eee35be31d">table_label</link>&#32;=&#32;raw_table.table_label
+289 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_table_1a8f4f53b31818b05a2d512a4ffe670ed3">table_data</link>&#32;=&#32;raw_table.table_data
+290 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_table_1a6d45ff17a28fa07c40cebc2af231a645">bound_x</link>&#32;=&#32;raw_table.raw_sheet.nrows
+291 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_table_1ac28a8176c31fa193847311967c5d993a">bound_y</link>&#32;=&#32;raw_table.raw_sheet.ncols
+292 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_table_1a38f8e9cd9b88c014664c0d908f8b931c">key_cols</link>&#32;=&#32;raw_table.key_cols
+293 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_table_1a8432925ee02ec678d2b2f823749c85bb">key_row</link>&#32;=&#32;raw_table.key_row
+294 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="class_tabela_1_1_table_1a3528cb5d55a61bad4dba988b698445f2">keys</link>&#32;=&#32;raw_table.keys
+295 
+296 
+297 <emphasis class="keyword">def&#32;</emphasis>normalize(input_text):
+298 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&quot;&quot;&quot;Normaliza&#32;String&#32;e&#32;lida&#32;com&#32;caracteres&#32;especiais.&#32;Transforma&#32;qualquer&#32;string&#32;para&#32;uma&#32;string&#32;contendo&#32;somente&#32;caracteres&#32;não&#32;acentuados</emphasis>
+299 <emphasis class="stringliteral">&#32;&#32;&#32;&#32;&quot;&quot;&quot;</emphasis>
+300 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;\u00DF&apos;</emphasis>,<emphasis class="stringliteral">&apos;ss&apos;</emphasis>,input_text,)
+301 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;\u1E9E&apos;</emphasis>,<emphasis class="stringliteral">&apos;SS&apos;</emphasis>,return_str)&#32;<emphasis class="comment">#&#32;scharfes&#32;S</emphasis>
+302 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;\u0111&apos;</emphasis>,<emphasis class="stringliteral">&apos;d&apos;</emphasis>,return_str,)
+303 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;\u0110&apos;</emphasis>,<emphasis class="stringliteral">&apos;D&apos;</emphasis>,return_str)&#32;<emphasis class="comment">#&#32;crossed&#32;D</emphasis>
+304 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;\u00F0&apos;</emphasis>,<emphasis class="stringliteral">&apos;d&apos;</emphasis>,return_str,)
+305 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;\u00D0&apos;</emphasis>,<emphasis class="stringliteral">&apos;D&apos;</emphasis>,return_str)&#32;<emphasis class="comment">#&#32;eth</emphasis>
+306 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;\u00FE&apos;</emphasis>,<emphasis class="stringliteral">&apos;th&apos;</emphasis>,return_str,)
+307 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;\u00DE&apos;</emphasis>,<emphasis class="stringliteral">&apos;TH&apos;</emphasis>,return_str)&#32;<emphasis class="comment">#&#32;thorn</emphasis>
+308 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;\u0127&apos;</emphasis>,<emphasis class="stringliteral">&apos;h&apos;</emphasis>,return_str,)
+309 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;\u0126&apos;</emphasis>,<emphasis class="stringliteral">&apos;H&apos;</emphasis>,return_str)&#32;<emphasis class="comment">#&#32;H-bar</emphasis>
+310 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;\u0142&apos;</emphasis>,<emphasis class="stringliteral">&apos;l&apos;</emphasis>,return_str,)
+311 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;\u0141&apos;</emphasis>,<emphasis class="stringliteral">&apos;L&apos;</emphasis>,return_str)&#32;<emphasis class="comment">#&#32;L&#32;with&#32;stroke</emphasis>
+312 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;\u0153&apos;</emphasis>,<emphasis class="stringliteral">&apos;oe&apos;</emphasis>,return_str,)
+313 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;\u0152&apos;</emphasis>,<emphasis class="stringliteral">&apos;Oe&apos;</emphasis>,return_str)&#32;<emphasis class="comment">#&#32;Oe&#32;ligature</emphasis>
+314 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;\u00E6&apos;</emphasis>,<emphasis class="stringliteral">&apos;ae&apos;</emphasis>,return_str,)
+315 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;\u00C6&apos;</emphasis>,<emphasis class="stringliteral">&apos;Ae&apos;</emphasis>,return_str)&#32;<emphasis class="comment">#&#32;Ae&#32;ligature</emphasis>
+316 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;\u0131&apos;</emphasis>,<emphasis class="stringliteral">&apos;i&apos;</emphasis>,return_str,)&#32;<emphasis class="comment">#dotless&#32;i</emphasis>
+317 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;\u00F8&apos;</emphasis>,<emphasis class="stringliteral">&apos;o&apos;</emphasis>,return_str)
+318 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;\u00D8&apos;</emphasis>,<emphasis class="stringliteral">&apos;O&apos;</emphasis>,return_str)&#32;<emphasis class="comment">#&#32;o&#32;with&#32;stroke</emphasis>
+319 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;[\u00B7\u02BA\uFFFD]&apos;</emphasis>,<emphasis class="stringliteral">&apos;&apos;</emphasis>,return_str)&#32;<emphasis class="comment">#&#32;Catalan&#32;middle&#32;dot,&#32;double&#32;prime</emphasis>
+320 &#32;&#32;&#32;&#32;return_str&#32;=&#32;unicodedata.normalize(<emphasis class="stringliteral">&apos;NFKD&apos;</emphasis>,return_str)
+321 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;[\u0300-\u036f]&apos;</emphasis>,<emphasis class="stringliteral">&apos;&apos;</emphasis>,return_str)&#32;<emphasis class="comment">#Splits&#32;string&#32;into&#32;simple&#32;characters&#32;+&#32;modifiers&#32;and&#32;remove&#32;them</emphasis>
+322 &#32;&#32;&#32;&#32;return_str&#32;=&#32;regex.sub(<emphasis class="stringliteral">r&apos;\s&apos;</emphasis>,<emphasis class="stringliteral">&apos;&#32;&apos;</emphasis>,return_str)&#32;<emphasis class="comment">#remobe&#32;double&#32;whitespaces</emphasis>
+323 &#32;&#32;&#32;&#32;
+324 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;return_str
+325 &#32;&#32;&#32;&#32;&#32;&#32;
+326 <emphasis class="keyword">def&#32;</emphasis>get_name_labelless(cell,&#32;string&#32;=&quot;&quot;):
+327 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Recursivamente&#32;percorre&#32;uma&#32;tabela&#32;em&#32;formato&#32;de&#32;arvore&#32;a&#32;partir&#32;de&#32;uma&#32;celula&#32;e&#32;retorna&#32;uma&#32;string&#32;com&#32;seu&#32;nome.&#32;Usa&#32;o&#32;caractere&#32;&gt;&#32;como&#32;indicador&#32;de&#32;relacionamento&#32;pai-filho&#32;entre&#32;celulas</emphasis>
+328 <emphasis class="stringliteral">&#32;&#32;&#32;&#32;&#32;&#32;&#32;Diferentemente&#32;de&#32;get_name,&#32;essa&#32;função&#32;retorna&#32;a&#32;string&#32;do&#32;nome&#32;sem&#32;o&#32;nome&#32;da&#32;raiz</emphasis>
+329 <emphasis class="stringliteral">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&apos;&apos;&apos;</emphasis>
+330 
+331 &#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;raiz,&#32;fim.</emphasis>
+332 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;cell.cell_type&#32;==&#32;<emphasis class="stringliteral">&apos;Label&apos;</emphasis>:
+333 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;string
+334 &#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;não,&#32;nome&#32;é&#32;nome&#32;do&#32;filho&#32;+&#32;&gt;&#32;+&#32;nome&#32;do&#32;pai</emphasis>
+335 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;cell.cell_type&#32;==&#32;<emphasis class="stringliteral">&apos;Merge&apos;</emphasis>&#32;<emphasis class="keywordflow">or</emphasis>&#32;cell.cell_type&#32;==&#32;<emphasis class="stringliteral">&apos;Blank&apos;</emphasis>:
+336 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;&#32;merge/branco&#32;retorna&#32;merge&#32;vazio</emphasis>
+337 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>
+338 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+339 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;string&#32;==&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>:
+340 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;cell.cell_type&#32;==&#32;<emphasis class="stringliteral">&apos;Leaf&apos;</emphasis>:
+341 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;folha,&#32;alem&#32;do&#32;nodo&#32;pai&#32;indica&#32;a&#32;chave&#32;de&#32;coluna&#32;no&#32;nome&#32;após&#32;o&#32;da&#32;chave&#32;de&#32;linha</emphasis>
+342 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;get_name_labelless(cell.parent_node,get_name_labelless(cell.key_col)+<emphasis class="stringliteral">&apos;&gt;&apos;</emphasis>+str(cell.data))
+343 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+344 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;get_name_labelless(cell.parent_node,str(cell.data))
+345 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+346 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;get_name_labelless(cell.parent_node,str(cell.data)+<emphasis class="stringliteral">&quot;&gt;&quot;</emphasis>+string)
+347 
+348 <emphasis class="keyword">def&#32;</emphasis>get_name(cell,&#32;string&#32;=&quot;&quot;):
+349 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Recursivamente&#32;percorre&#32;uma&#32;tabela&#32;em&#32;formato&#32;de&#32;arvore&#32;a&#32;partir&#32;de&#32;uma&#32;celula&#32;e&#32;retorna&#32;uma&#32;string&#32;com&#32;seu&#32;nome.&#32;Usa&#32;o&#32;caractere&#32;&gt;&#32;como&#32;indicador&#32;de&#32;relacionamento&#32;pai-filho&#32;entre&#32;celulas&apos;&apos;&apos;</emphasis>
+350 
+351 &#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;raiz,&#32;fim.</emphasis>
+352 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;(cell.cell_type&#32;==&#32;<emphasis class="stringliteral">&apos;Label&apos;</emphasis>)&#32;<emphasis class="keywordflow">and</emphasis>&#32;string&#32;!=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>:
+353 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;cell.data&#32;+&#32;<emphasis class="stringliteral">&quot;&gt;&quot;</emphasis>&#32;+&#32;string
+354 &#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;não,&#32;nome&#32;é&#32;nome&#32;do&#32;filho&#32;+&#32;&gt;&#32;+&#32;nome&#32;do&#32;pai</emphasis>
+355 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;cell.cell_type&#32;==&#32;<emphasis class="stringliteral">&apos;Merge&apos;</emphasis>&#32;<emphasis class="keywordflow">or</emphasis>&#32;cell.cell_type&#32;==&#32;<emphasis class="stringliteral">&apos;Blank&apos;</emphasis>:
+356 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;&#32;merge/branco&#32;retorna&#32;merge&#32;vazio</emphasis>
+357 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>
+358 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+359 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;string&#32;==&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>:
+360 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;cell.cell_type&#32;==&#32;<emphasis class="stringliteral">&apos;Leaf&apos;</emphasis>:
+361 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;folha,&#32;alem&#32;do&#32;nodo&#32;pai&#32;indica&#32;a&#32;chave&#32;de&#32;coluna&#32;no&#32;nome&#32;após&#32;o&#32;da&#32;chave&#32;de&#32;linha</emphasis>
+362 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;get_name(cell.parent_node,get_name_labelless(cell.key_col)+<emphasis class="stringliteral">&apos;&gt;&apos;</emphasis>+str(cell.data))
+363 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+364 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;cell.cell_type&#32;==&#32;<emphasis class="stringliteral">&quot;Label&quot;</emphasis>:
+365 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;raiz,&#32;remove&#32;retorna&#32;sem&#32;&gt;&#32;no&#32;fim</emphasis>
+366 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;cell.data
+367 
+368 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+369 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;get_name(cell.parent_node,str(cell.data))
+370 
+371 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+372 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;get_name(cell.parent_node,str(cell.data)+<emphasis class="stringliteral">&quot;&gt;&quot;</emphasis>+string)
+373 
+374 <emphasis class="keyword">def&#32;</emphasis>get_cell(cell,table_data):
+375 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Retorna&#32;uma&#32;celula&#32;tratando&#32;merges.&#32;Recebe&#32;um&#32;objeto&#32;do&#32;tipo&#32;Cell&#32;e&#32;uma&#32;table_data&#32;de&#32;uma&#32;tabela&#32;e&#32;Sempre&#32;retorna&#32;uma&#32;celula&#32;origem,&#32;é&#32;reflixiva&#32;para&#32;celulas&#32;não&#32;merge&apos;&apos;&apos;</emphasis>
+376 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;table_data[cell.originx][cell.originy]
+377 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+378 
+379 
+380 
+381 
+382 &#32;&#32;&#32;&#32;&#32;
+383 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+384 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+385 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+386 
+387 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+388 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+389 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+390 
+391 
+392 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+393 
+394 
+395 
+396 
+397 
+398 
+399 
+400 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+401 
+402 
+403 
+404 
+405 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+406 
+407 
+408 
+409 
+410 
+411 
+412 
+413 
+414 
+415 
+416 
+    </computeroutput></literallayout>
+</section>

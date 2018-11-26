@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="namespacemain">
+<title>main</title>
+        <section>
+            <title>Variables</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string <link linkend="main_8py_1a6d0a2c36290e41ce7ebea8156a947398">prefix_loc</link><para><emphasis>Prefixo do local das tabelas fonte para a extração de dados.</emphasis></para>
+</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="main_8py_1abeee8f8158db847456e25c56a06c534a">state_dict</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title>Functions</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="main_8py_1a3a087067811a8b8e2e42e5579c44b233">main</link> (
+stdscr , state_dict )<para><emphasis>INICIALIZA REPL###################.</emphasis></para>
+</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+</section>

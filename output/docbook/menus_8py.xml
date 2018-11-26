@@ -1,0 +1,1343 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="menus_8py">
+    <title>menus.py File Reference</title>
+        <section>
+            <title> Classes </title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="classmenus_1_1_container">menus::Container</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <simplesect>
+            <title> Namespaces </title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="namespacemenus">menus</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </simplesect>
+    <simplesect>
+        <title>Detailed Description</title>
+    <para>Definition in file C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/menus.py</para>
+    </simplesect>
+    <literallayout><computeroutput>
+1 <emphasis class="comment">#Arquivos&#32;contendo&#32;os&#32;menus&#32;do&#32;programa.&#32;Cada&#32;menu&#32;recebe&#32;um&#32;strscr&#32;e&#32;um&#32;dicionario&#32;de&#32;estados,&#32;e&#32;os&#32;gerencia&#32;conforme&#32;a&#32;necessidade.</emphasis>
+2 
+3 <emphasis class="keyword">import</emphasis>&#32;curses
+4 <emphasis class="keyword">import</emphasis>&#32;aux_lib
+5 <emphasis class="keyword">import</emphasis>&#32;easygui
+6 
+7 <emphasis class="keyword">from</emphasis>&#32;db&#32;<emphasis class="keyword">import</emphasis>&#32;DB
+8 <emphasis class="keyword">from</emphasis>&#32;collections&#32;<emphasis class="keyword">import</emphasis>&#32;defaultdict
+9 <emphasis class="keyword">import</emphasis>&#32;os
+10 
+11 
+12 <emphasis class="keyword">from</emphasis>&#32;aux_lib&#32;<emphasis class="keyword">import</emphasis>&#32;write_stdscr,&#32;write_stdscr_a
+13 <emphasis class="keyword">import</emphasis>&#32;curses.textpad
+14 
+<link linkend="classmenus_1_1_container">15 </link><emphasis class="keyword">class&#32;</emphasis><link linkend="classmenus_1_1_container">Container</link>(object):
+16 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Classe&#32;representando&#32;um&#32;objeto&#32;que&#32;pode&#32;ser&#32;um&#32;Nodo&#32;ou&#32;uma&#32;Tabela&#32;ou&#32;uma&#32;Lista&#32;de&#32;celulas&#32;ou&#32;uma&#32;Celula.&#32;data&#32;representa&#32;o&#32;objeto&#32;a&#32;gerar&#32;o&#32;container</emphasis>
+17 <emphasis class="stringliteral">&#32;&#32;&#32;&#32;&apos;&apos;&apos;</emphasis>
+18 
+19 &#32;&#32;&#32;&#32;<emphasis class="keyword">def&#32;</emphasis>__init__(self,data):
+20 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Guarda&#32;tipo&#32;do&#32;objeto</emphasis>
+21 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="classmenus_1_1_container_1ac6d2c5aabad726f4fe51f22f96c3f12e">raw_type</link>&#32;=&#32;type(data)
+22 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="classmenus_1_1_container_1a926a48b4cde967e8ca8c394abc09e690">name</link>&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>
+23 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="classmenus_1_1_container_1ace4ff1a1c445f0bba0026fbc3df35f63">data</link>&#32;=&#32;0
+24 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="classmenus_1_1_container_1a96af1c60b4ea020510e940361a0008c9">type</link>&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>
+25 
+26 
+27 
+28 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Inicializa&#32;nome&#32;e&#32;dados&#32;dependo&#32;do&#32;tipo</emphasis>
+29 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;self.<link linkend="classmenus_1_1_container_1ac6d2c5aabad726f4fe51f22f96c3f12e">raw_type</link>&#32;==&#32;<link linkend="class_trie_1_1_nodo">aux_lib.Nodo</link>:
+30 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;um&#32;nodo&#32;de&#32;uma&#32;trie</emphasis>
+31 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="classmenus_1_1_container_1a926a48b4cde967e8ca8c394abc09e690">name</link>&#32;=&#32;<emphasis class="stringliteral">&quot;(&quot;</emphasis>&#32;+&#32;aux_lib.get_label(data)&#32;+&#32;<emphasis class="stringliteral">&quot;)-&gt;&quot;</emphasis>
+32 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="classmenus_1_1_container_1ace4ff1a1c445f0bba0026fbc3df35f63">data</link>&#32;=&#32;data
+33 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="classmenus_1_1_container_1a96af1c60b4ea020510e940361a0008c9">type</link>&#32;=&#32;<emphasis class="stringliteral">&quot;Node&quot;</emphasis>
+34 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+35 
+36 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;self.<link linkend="classmenus_1_1_container_1ac6d2c5aabad726f4fe51f22f96c3f12e">raw_type</link>&#32;==&#32;<link linkend="class_tabela_1_1_table">aux_lib.Table</link>:
+37 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;uma&#32;tabela</emphasis>
+38 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="classmenus_1_1_container_1ace4ff1a1c445f0bba0026fbc3df35f63">data</link>&#32;=&#32;data
+39 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="classmenus_1_1_container_1a926a48b4cde967e8ca8c394abc09e690">name</link>&#32;=&#32;data.table_label
+40 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="classmenus_1_1_container_1a96af1c60b4ea020510e940361a0008c9">type</link>&#32;=&#32;<emphasis class="stringliteral">&quot;Table&quot;</emphasis>
+41 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+42 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+43 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;self.<link linkend="classmenus_1_1_container_1ac6d2c5aabad726f4fe51f22f96c3f12e">raw_type</link>&#32;==&#32;list:
+44 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;uma&#32;lista&#32;de&#32;celulas</emphasis>
+45 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="classmenus_1_1_container_1ace4ff1a1c445f0bba0026fbc3df35f63">data</link>&#32;=&#32;data
+46 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;parent_list&#32;=&#32;[]
+47 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;item&#32;<emphasis class="keywordflow">in</emphasis>&#32;data:
+48 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;(item.cell_type&#32;!=&#32;<emphasis class="stringliteral">&quot;Blank&quot;</emphasis>)&#32;<emphasis class="keywordflow">and</emphasis>&#32;(item.cell_type&#32;!=&#32;<emphasis class="stringliteral">&quot;Merge&quot;</emphasis>):
+49 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;parent_list.append(item.parent_node)
+50 
+51 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;todos&#32;os&#32;nodos&#32;tem&#32;o&#32;mesmo&#32;pai,&#32;aponta&#32;para&#32;chave</emphasis>
+52 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;len(set(parent_list))&#32;==&#32;1:
+53 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;parent&#32;=&#32;data[0].parent_node
+54 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="classmenus_1_1_container_1a926a48b4cde967e8ca8c394abc09e690">name</link>&#32;=&#32;aux_lib.get_name(parent)&#32;+&#32;<emphasis class="stringliteral">&quot;-&gt;[]&quot;</emphasis>
+55 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+56 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;parent&#32;=&#32;data[0].key_col
+57 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="classmenus_1_1_container_1a926a48b4cde967e8ca8c394abc09e690">name</link>&#32;=&#32;aux_lib.get_name_labelless(parent)&#32;+&#32;<emphasis class="stringliteral">&quot;-&gt;[]&quot;</emphasis>
+58 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+59 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+60 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+61 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="classmenus_1_1_container_1a96af1c60b4ea020510e940361a0008c9">type</link>&#32;=&#32;<emphasis class="stringliteral">&quot;Cell_List&quot;</emphasis>
+62 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+63 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;self.<link linkend="classmenus_1_1_container_1ac6d2c5aabad726f4fe51f22f96c3f12e">raw_type</link>&#32;==&#32;<link linkend="class_tabela_1_1_cell">aux_lib.Cell</link>:
+64 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;uma&#32;celula</emphasis>
+65 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="classmenus_1_1_container_1ace4ff1a1c445f0bba0026fbc3df35f63">data</link>&#32;=&#32;data
+66 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="classmenus_1_1_container_1a926a48b4cde967e8ca8c394abc09e690">name</link>&#32;=&#32;aux_lib.get_name_labelless(data)
+67 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="classmenus_1_1_container_1a96af1c60b4ea020510e940361a0008c9">type</link>&#32;=&#32;<emphasis class="stringliteral">&quot;Cell&quot;</emphasis>
+68 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+69 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;self.<link linkend="classmenus_1_1_container_1ac6d2c5aabad726f4fe51f22f96c3f12e">raw_type</link>&#32;==&#32;type(defaultdict())&#32;<emphasis class="keywordflow">or</emphasis>&#32;self.<link linkend="classmenus_1_1_container_1ac6d2c5aabad726f4fe51f22f96c3f12e">raw_type</link>&#32;==&#32;type(dict())&#32;<emphasis class="keywordflow">or</emphasis>&#32;self.<link linkend="classmenus_1_1_container_1ac6d2c5aabad726f4fe51f22f96c3f12e">raw_type</link>&#32;==&#32;type(defaultdict(dict)):
+70 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;um&#32;dicionario</emphasis>
+71 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="classmenus_1_1_container_1ace4ff1a1c445f0bba0026fbc3df35f63">data</link>&#32;=&#32;data
+72 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;data_string&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>
+73 
+74 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key&#32;=&#32;list(data.keys())[0]
+75 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;value&#32;=&#32;list(data.items())[0]
+76 
+77 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;data_string&#32;=&#32;data_string&#32;+&#32;<emphasis class="stringliteral">&apos;{0}&#32;:&#32;{1}&#32;and&#32;others&apos;</emphasis>.format(str(key),str(type(value)))
+78 
+79 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="classmenus_1_1_container_1a926a48b4cde967e8ca8c394abc09e690">name</link>&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>.join(list(data_string)[0:108])
+80 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="classmenus_1_1_container_1a96af1c60b4ea020510e940361a0008c9">type</link>&#32;=&#32;<emphasis class="stringliteral">&quot;Data_Dict&quot;</emphasis>
+81 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+82 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;self.<link linkend="classmenus_1_1_container_1a96af1c60b4ea020510e940361a0008c9">type</link>&#32;=&#32;<emphasis class="stringliteral">&quot;Empty&quot;</emphasis>
+83 
+84 
+85 <emphasis class="keyword">def&#32;</emphasis>start_menu(state_dict):
+86 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Função&#32;que&#32;representa&#32;o&#32;menu&#32;inicial&#32;e&#32;seus&#32;estados&apos;&apos;&apos;</emphasis>
+87 &#32;&#32;&#32;&#32;<emphasis class="comment">#Strings&#32;de&#32;menus&#32;e&#32;seus&#32;locais&#32;na&#32;tela&#32;em&#32;tuplas</emphasis>
+88 &#32;&#32;&#32;&#32;str_menu_inicial&#32;=&#32;<emphasis class="stringliteral">&quot;Select&#32;option:\n1:Generate&#32;database&#32;from&#32;tables\n2:Load&#32;database&#32;from&#32;object&#32;file\n0:Exit&quot;</emphasis>
+89 &#32;&#32;&#32;&#32;
+90 
+91 
+92 &#32;&#32;&#32;&#32;print(str_menu_inicial)
+93 &#32;&#32;&#32;&#32;c&#32;=&#32;input()
+94 &#32;&#32;&#32;&#32;os.system(<emphasis class="stringliteral">&apos;cls&apos;</emphasis>)
+95 &#32;&#32;&#32;&#32;f_exit&#32;=&#32;<emphasis class="keyword">False</emphasis>
+96 
+97 
+98 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;c&#32;==&#32;<emphasis class="stringliteral">&apos;1&apos;</emphasis>:
+99 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Trie&#32;de&#32;tabelas</emphasis>
+100 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;loc&apos;</emphasis>]&#32;=&#32;easygui.diropenbox(<emphasis class="stringliteral">&quot;Select&#32;directory&quot;</emphasis>)
+101 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;table_trie&apos;</emphasis>]&#32;=&#32;<link linkend="aux__lib_8py_1a804c7ea1653177c19f29aac9c92e5560">aux_lib.generate_table_trie</link>(state_dict[<emphasis class="stringliteral">&apos;loc&apos;</emphasis>])
+102 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;db&apos;</emphasis>]&#32;=&#32;<link linkend="classdb_1_1_d_b">DB</link>(state_dict[<emphasis class="stringliteral">&apos;table_trie&apos;</emphasis>])
+103 
+104 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;c&#32;==&#32;<emphasis class="stringliteral">&apos;2&apos;</emphasis>:
+105 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;loc&apos;</emphasis>]&#32;=&#32;easygui.fileopenbox(<emphasis class="stringliteral">&quot;Select&#32;object&#32;file&quot;</emphasis>,filetypes&#32;=&#32;<emphasis class="stringliteral">&quot;*.obj&quot;</emphasis>)
+106 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;table_trie&apos;</emphasis>]&#32;=&#32;<link linkend="aux__lib_8py_1ab7a47b47c761e7f7552e6e53a3b73799">aux_lib.load_trie</link>(state_dict[<emphasis class="stringliteral">&apos;loc&apos;</emphasis>])
+107 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;db&apos;</emphasis>]&#32;=&#32;<link linkend="classdb_1_1_d_b">DB</link>(state_dict[<emphasis class="stringliteral">&apos;table_trie&apos;</emphasis>])
+108 
+109 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+110 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;f_exit&apos;</emphasis>]&#32;=&#32;<emphasis class="keyword">True</emphasis>
+111 
+112 &#32;&#32;&#32;&#32;<emphasis class="comment">#Muda&#32;estado&#32;para&#32;menu&#32;principal</emphasis>
+113 &#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;state&apos;</emphasis>]&#32;=&#32;<emphasis class="stringliteral">&apos;main_menu&apos;</emphasis>
+114 
+115 &#32;&#32;&#32;&#32;<emphasis class="comment">#Cria&#32;estado&#32;de&#32;containers</emphasis>
+116 &#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>]&#32;=&#32;dict()
+117 
+118 &#32;&#32;&#32;&#32;t&#32;=&#32;state_dict[<emphasis class="stringliteral">&apos;db&apos;</emphasis>].tables.strings_dict[state_dict[<emphasis class="stringliteral">&apos;db&apos;</emphasis>].tables.strings_list[0]]
+119 &#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][<emphasis class="stringliteral">&apos;a&apos;</emphasis>]&#32;=&#32;<link linkend="classmenus_1_1_container">Container</link>(t)
+120 &#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][<emphasis class="stringliteral">&apos;b&apos;</emphasis>]&#32;=&#32;<link linkend="classmenus_1_1_container">Container</link>(t.table_data[8][0].child_nodes)
+121 &#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][<emphasis class="stringliteral">&apos;c&apos;</emphasis>]&#32;=&#32;<link linkend="classmenus_1_1_container">Container</link>(t.table_data[8][3])
+122 &#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][<emphasis class="stringliteral">&apos;k&apos;</emphasis>]&#32;=&#32;<link linkend="classmenus_1_1_container">Container</link>(t.table_data[1][0].child_nodes)
+123 &#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][<emphasis class="stringliteral">&apos;d&apos;</emphasis>]&#32;=&#32;<link linkend="classmenus_1_1_container">Container</link>(state_dict[<emphasis class="stringliteral">&apos;db&apos;</emphasis>].tables.strings_dict)
+124 &#32;&#32;&#32;&#32;
+125 &#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][<emphasis class="stringliteral">&apos;n&apos;</emphasis>]&#32;=&#32;<link linkend="classmenus_1_1_container">Container</link>(aux_lib.walk_to(state_dict[<emphasis class="stringliteral">&apos;db&apos;</emphasis>].tables.root,<emphasis class="stringliteral">&apos;brasil:&#32;dispendio&#32;nacional&#32;em&#32;ciencia&#32;e&#32;tecnologia&#32;(c&amp;t)&#32;por&#32;atividade&apos;</emphasis>))
+126 
+127 &#32;&#32;&#32;&#32;
+128 <emphasis class="keyword">def&#32;</emphasis>main_menu(stdscr,&#32;state_dict):
+129 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Função&#32;que&#32;representa&#32;o&#32;menu&#32;principal&#32;e&#32;seus&#32;estados&apos;&apos;&apos;</emphasis>
+130 &#32;&#32;&#32;&#32;
+131 &#32;&#32;&#32;&#32;
+132 &#32;&#32;&#32;&#32;curses.cbreak()
+133 &#32;&#32;&#32;&#32;curses.noecho()
+134 
+135 &#32;&#32;&#32;&#32;<emphasis class="comment">#Strings&#32;e&#32;locais</emphasis>
+136 
+137 &#32;&#32;&#32;&#32;str_menu_principal&#32;=&#32;<emphasis class="stringliteral">&quot;[a-z]:Draw&#32;container\n1:Access&#32;Table\n2:Access&#32;Db\n3:Run&#32;Query\n4:Help\n9:Save&#32;Current&#32;DB\n-:clear&#32;table&#32;area\n0:Exit&quot;</emphasis>
+138 &#32;&#32;&#32;&#32;loc_menu_principal&#32;=&#32;(0,0)
+139 
+140 &#32;&#32;&#32;&#32;str_saving&#32;=&#32;<emphasis class="stringliteral">&quot;Saving&#32;db...\n&quot;</emphasis>
+141 &#32;&#32;&#32;&#32;loc_saving&#32;=&#32;(4,40)
+142 
+143 &#32;&#32;&#32;&#32;str_done&#32;=&#32;<emphasis class="stringliteral">&quot;Done\n&quot;</emphasis>
+144 &#32;&#32;&#32;&#32;loc_done&#32;=&#32;(4,80)
+145 
+146 
+147 &#32;&#32;&#32;&#32;<emphasis class="comment">#Controle&#32;de&#32;loop</emphasis>
+148 &#32;&#32;&#32;&#32;local_exit&#32;=&#32;<emphasis class="keyword">False</emphasis>
+149 
+150 &#32;&#32;&#32;&#32;<emphasis class="comment">#loop&#32;de&#32;repl&#32;local</emphasis>
+151 &#32;&#32;&#32;&#32;while(local_exit&#32;==&#32;<emphasis class="keyword">False</emphasis>):
+152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#limpa</emphasis>
+153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clear_menu_area(stdscr)
+154 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;restore_cursor(stdscr)
+155 &#32;&#32;&#32;&#32;&#32;&#32;&#32;
+156 &#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#escreve&#32;menu&#32;na&#32;tela</emphasis>
+157 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_menu_principal,loc_menu_principal)
+158 
+159 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;stdscr.move((state_dict[<emphasis class="stringliteral">&apos;loc_data_entry&apos;</emphasis>])[0],(state_dict[<emphasis class="stringliteral">&apos;loc_data_entry&apos;</emphasis>])[1])
+160 
+161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;draw_state(stdscr,state_dict)
+162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Entrada&#32;do&#32;usuario</emphasis>
+163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;c&#32;=&#32;stdscr.getch()
+164 
+165 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Trata&#32;letras&#32;de&#32;a&#32;até&#32;z</emphasis>
+166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;(c&#32;&gt;&#32;96)&#32;<emphasis class="keywordflow">and</emphasis>&#32;(c&#32;&lt;&#32;123):
+167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;é&#32;letra,&#32;desenha&#32;container</emphasis>
+168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if(chr(c)&#32;<emphasis class="keywordflow">in</emphasis>&#32;state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>].keys()):
+169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;draw_container(stdscr,state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][chr(c)])
+170 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;chr(c)&#32;==&#32;<emphasis class="stringliteral">&apos;-&apos;</emphasis>:
+171 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clear_table_area(stdscr)
+172 
+173 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;chr(c)&#32;==&#32;<emphasis class="stringliteral">&apos;1&apos;</emphasis>:
+174 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;access_table(stdscr,&#32;state_dict)
+175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;chr(c)&#32;==&#32;<emphasis class="stringliteral">&apos;2&apos;</emphasis>:
+176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;access_db(stdscr,&#32;state_dict)
+177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;chr(c)&#32;==&#32;<emphasis class="stringliteral">&apos;3&apos;</emphasis>:
+178 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;run_query_menu(stdscr,state_dict)
+179 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;chr(c)&#32;==&#32;<emphasis class="stringliteral">&apos;0&apos;</emphasis>:
+180 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;f_exit&apos;</emphasis>]&#32;=&#32;<emphasis class="keyword">True</emphasis>
+181 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;local_exit&#32;=&#32;<emphasis class="keyword">True</emphasis>
+182 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;chr(c)&#32;==&#32;<emphasis class="stringliteral">&apos;9&apos;</emphasis>:
+183 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;loc&#32;=&#32;easygui.filesavebox(<emphasis class="stringliteral">&apos;Select&#32;location&#32;for&#32;obj&#32;file&apos;</emphasis>)
+184 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+185 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Salva&#32;trie</emphasis>
+186 
+187 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_saving,loc_saving)
+188 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\n&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&quot;</emphasis>,loc_done)
+189 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="aux__lib_8py_1a14b1bddc4d9359b0659e27e285c3304e">aux_lib.save_trie</link>(state_dict[<emphasis class="stringliteral">&apos;table_trie&apos;</emphasis>],loc)
+190 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_done,loc_done)
+191 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+192 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;chr(c)&#32;==&#32;<emphasis class="stringliteral">&apos;4&apos;</emphasis>:
+193 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clear_table_area(stdscr)
+194 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Lista&#32;de&#32;queries&#32;-&gt;&#32;DB:</emphasis>
+195 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#&lt;trie&gt;&#32;options&#32;:&#32;tables,key_rows,key_cols,super_key</emphasis>
+196 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#pre;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Prefix&#32;search&#32;on&#32;DB.trie</emphasis>
+197 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#suf;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Suffix&#32;search&#32;on&#32;DB.trie</emphasis>
+198 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#reg;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;RegExp&#32;search&#32;on&#32;DB.trie</emphasis>
+199 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#get_all;&lt;trie&gt;&#32;-&gt;Get&#32;all&#32;tables&#32;in&#32;a&#32;db.trie</emphasis>
+200 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#insert;&lt;trie&gt;&#32;-&gt;&#32;Inserts&#32;input&#32;container&#32;into&#32;the&#32;trie(table&#32;only).&#32;Returns&#32;inserted&#32;table</emphasis>
+201 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#get;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Returns&#32;table&#32;where&#32;table_label&#32;==&#32;string</emphasis>
+202 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#yield;&lt;trie&gt;&#32;-&gt;&#32;Regen&#32;trie&#32;cache&#32;and&#32;returns&#32;Trie&#32;root</emphasis>
+203 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#walkto;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Walk&#32;to&#32;string&#32;in&#32;current&#32;trie&#32;and&#32;returns&#32;node</emphasis>
+204 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#moonwalkto;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Walk&#32;to&#32;root&#32;in&#32;current&#32;trie&#32;and&#32;returns&#32;node</emphasis>
+205 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#delete;trie!&lt;string&gt;&#32;-&gt;&#32;Walk&#32;to&#32;node&#32;in&#32;trie&#32;and&#32;deletes&#32;data.&#32;Returns&#32;deleted&#32;node</emphasis>
+206 
+207 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_DB_info&#32;=&#32;<emphasis class="stringliteral">&quot;&lt;trie&gt;&#32;options&#32;:&#32;tables,key_rows,key_cols,super_key&#32;\n&quot;</emphasis>&#32;&#32;+&#32;<emphasis class="stringliteral">&quot;pre;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Prefix&#32;search&#32;on&#32;DB.trie&#32;\n&quot;</emphasis>&#32;+&#32;<emphasis class="stringliteral">&quot;suf;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Suffix&#32;search&#32;on&#32;DB.trie&#32;\n&quot;</emphasis>&#32;+<emphasis class="stringliteral">&quot;reg;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;RegExp&#32;search&#32;on&#32;DB.trie&#32;\n&quot;</emphasis>&#32;+&#32;<emphasis class="stringliteral">&quot;get_all;&lt;trie&gt;&#32;-&gt;Get&#32;all&#32;tables&#32;in&#32;a&#32;db.trie&#32;\n&quot;</emphasis>
+208 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_DB_info&#32;=&#32;str_DB_info&#32;+&#32;<emphasis class="stringliteral">&quot;insert;&lt;trie&gt;&#32;-&gt;&#32;Inserts&#32;input&#32;container&#32;into&#32;the&#32;trie(table&#32;only).&#32;Returns&#32;inserted&#32;table&#32;\n&quot;</emphasis>&#32;+&#32;<emphasis class="stringliteral">&quot;get;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Returns&#32;table&#32;where&#32;table_label&#32;==&#32;string\n&quot;</emphasis>&#32;+&#32;<emphasis class="stringliteral">&apos;yield;&lt;trie&gt;&#32;-&gt;&#32;Regen&#32;trie&#32;cache&#32;and&#32;returns&#32;Trie&#32;root&#32;\n&apos;</emphasis>&#32;+&#32;<emphasis class="stringliteral">&apos;walkto;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Walk&#32;to&#32;string&#32;in&#32;current&#32;trie&#32;and&#32;returns&#32;node&#32;\n&apos;</emphasis>&#32;+&#32;<emphasis class="stringliteral">&apos;moonwalkto;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Walk&#32;to&#32;root&#32;in&#32;current&#32;trie&#32;and&#32;returns&#32;node&#32;\n&apos;</emphasis>&#32;+&#32;<emphasis class="stringliteral">&apos;delete;trie!&lt;string&gt;&#32;-&gt;&#32;Walk&#32;to&#32;node&#32;in&#32;trie&#32;and&#32;deletes&#32;data.&#32;Returns&#32;deleted&#32;node&#32;\n&apos;</emphasis>
+209 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+210 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Lista&#32;de&#32;queries&#32;-&gt;&#32;Table:</emphasis>
+211 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#key_col;&lt;null&#32;|&#32;col_name&gt;&#32;-&gt;&#32;Retorna&#32;todas&#32;colunas&#32;chave&#32;da&#32;tabela&#32;se&#32;nulo,&#32;ou&#32;todos&#32;os&#32;dados&#32;da&#32;coluna&#32;especificada</emphasis>
+212 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#key_row;&lt;null&#32;|a,b&#32;&gt;&#32;-&gt;&#32;Retorna&#32;todas&#32;as&#32;chaves&#32;da&#32;tabela&#32;se&#32;nulo,&#32;ou&#32;todas&#32;as&#32;chaves&#32;de&#32;indice&#32;entre&#32;a&#32;e&#32;b</emphasis>
+213 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#get_cell;&lt;y,x&gt;&#32;-&gt;&#32;Retorna&#32;celula&#32;na&#32;posicao&#32;y,x</emphasis>
+214 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#insert_cell;&lt;y,x&gt;&#32;-&gt;Inserts&#32;output&#32;cell&#32;into&#32;table&#32;and&#32;returns&#32;the&#32;inserted&#32;cell</emphasis>
+215 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#delete_cell;&lt;y,x&gt;&#32;-&gt;&#32;Deletes&#32;cell&#32;at&#32;X,y&#32;and&#32;returns&#32;the&#32;deleted&#32;cell</emphasis>
+216 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#get_cells;&lt;uy,ux,ly,lx&gt;&#32;-&gt;&#32;Gets&#32;a&#32;list&#32;containing&#32;the&#32;cells&#32;starting&#32;at&#32;&lt;uy,ux&gt;&#32;and&#32;ending&#32;at&#32;&lt;ly,lx&gt;</emphasis>
+217 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+218 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_t_query_1&#32;=&#32;<emphasis class="stringliteral">&apos;key_col;&lt;null&#32;|&#32;col_name&gt;&#32;-&gt;Returns&#32;every&#32;key_col&#32;if&#32;null&#32;or(|)&#32;every&#32;cell&#32;in&#32;a&#32;key_col&#32;if&#32;not&#32;null\n&apos;</emphasis>
+219 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_t_query_2&#32;=&#32;<emphasis class="stringliteral">&apos;key_row;&lt;null&#32;|a,b&#32;&gt;&#32;-&gt;&#32;Returns&#32;every&#32;Key&#32;if&#32;null&#32;|&#32;Every&#32;key&#32;from&#32;index&#32;a&#32;to&#32;b\n&apos;</emphasis>
+220 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_t_query_3&#32;=&#32;<emphasis class="stringliteral">&quot;insert_cell;&lt;y,x&gt;&#32;-&gt;Inserts&#32;output&#32;cell&#32;into&#32;table&#32;and&#32;returns&#32;the&#32;inserted&#32;cell\n&quot;</emphasis>
+221 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_t_query_4&#32;=&#32;<emphasis class="stringliteral">&quot;delete_cell;&lt;y,x&gt;&#32;-&gt;&#32;Deletes&#32;cell&#32;at&#32;X,y&#32;and&#32;returns&#32;the&#32;deleted&#32;cell\n&quot;</emphasis>
+222 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_t_query_5&#32;=&#32;<emphasis class="stringliteral">&apos;get_cells;&lt;uy,ux,ly,lx&gt;&#32;-&gt;Gets&#32;a&#32;list&#32;containing&#32;the&#32;cells&#32;starting&#32;at&#32;&lt;uy,ux&gt;&#32;and&#32;ending&#32;at&#32;&lt;ly,lx&gt;\n&apos;</emphasis>
+223 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_t_query_final&#32;=&#32;<emphasis class="stringliteral">&apos;get_cell;&lt;y,x&gt;&#32;-&gt;&#32;Returns&#32;Cell&#32;at&#32;y,x&#32;\n&apos;</emphasis>
+224 
+225 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_Table_info&#32;=&#32;&#32;str_t_query_1&#32;+&#32;str_t_query_2&#32;+&#32;str_t_query_3&#32;+&#32;str_t_query_4&#32;+str_t_query_5+&#32;str_t_query_final&#32;&#32;&#32;&#32;
+226 
+227 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+228 
+229 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#lista&#32;de&#32;queries&#32;-&gt;&#32;Cell:</emphasis>
+230 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#edit&lt;data&gt;&#32;-&gt;&#32;change&#32;a&#32;cell&#32;data</emphasis>
+231 
+232 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_Cell_info&#32;=&#32;<emphasis class="stringliteral">&apos;edit&lt;data&gt;&#32;-&gt;&#32;change&#32;a&#32;cell&#32;data&#32;\n&apos;</emphasis>
+233 
+234 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#lista&#32;de&#32;queries&#32;-&gt;&#32;List:</emphasis>
+235 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#unpack;&lt;null&gt;&#32;-&gt;&#32;creates&#32;a&#32;single&#32;list&#32;with&#32;every&#32;child&#32;in&#32;the&#32;list</emphasis>
+236 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#first;&lt;null&gt;&#32;-&gt;&#32;pop&#32;the&#32;first&#32;item&#32;in&#32;the&#32;list</emphasis>
+237 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#rest;&lt;null&gt;&#32;-&gt;&#32;returns&#32;listw/o&#32;first&#32;item</emphasis>
+238 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#select;&lt;index&gt;&#32;-&gt;&#32;copy&#32;item&#32;from&#32;index</emphasis>
+239 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#remove;&lt;index&gt;&#32;-&gt;&#32;remove&#32;selected&#32;item</emphasis>
+240 
+241 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_List_info&#32;=&#32;<emphasis class="stringliteral">&quot;unpack;&lt;null&gt;&#32;-&gt;&#32;creates&#32;a&#32;single&#32;list&#32;with&#32;every&#32;child&#32;in&#32;the&#32;list\nfirst;&lt;null&gt;&#32;-&gt;&#32;pop&#32;the&#32;first&#32;item&#32;in&#32;the&#32;list\nrest;&lt;null&gt;&#32;-&gt;&#32;returns&#32;list&#32;without&#32;first&#32;item\nselect;&lt;index&gt;&#32;-&gt;&#32;copy&#32;item&#32;from&#32;index\nremove;&lt;index&gt;&#32;-&gt;&#32;remove&#32;selected&#32;item\n&quot;</emphasis>
+242 
+243 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#lista&#32;de&#32;queries:&#32;-&gt;&#32;Dict:</emphasis>
+244 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#pop;&lt;null&gt;&#32;remove&#32;a&#32;random&#32;item&#32;from&#32;dict</emphasis>
+245 
+246 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_Dict_info&#32;=&#32;<emphasis class="stringliteral">&apos;pop;&lt;null&gt;&#32;remove&#32;a&#32;random&#32;item&#32;from&#32;dict&apos;</emphasis>
+247 
+248 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#lista&#32;de&#32;queries&#32;-&gt;&#32;Node:</emphasis>
+249 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#get_all;&lt;null&gt;&#32;get&#32;all&#32;data&#32;below&#32;a&#32;node</emphasis>
+250 
+251 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_Node_info&#32;=&#32;<emphasis class="stringliteral">&quot;get_all;&lt;null&gt;&#32;get&#32;all&#32;data&#32;below&#32;a&#32;node\n&quot;</emphasis>
+252 
+253 
+254 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;DB&#32;commands:&quot;</emphasis>,(12,4))
+255 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_DB_info,(14,6))
+256 
+257 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Table&#32;commands:&quot;</emphasis>,(26,4))
+258 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_Table_info,(27,5))
+259 
+260 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;List&#32;commands:&quot;</emphasis>,(34,4))
+261 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_List_info,(35,5))
+262 
+263 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Cell&#32;commands:&quot;</emphasis>,(41,4))
+264 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_Cell_info,(42,5))
+265 
+266 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Dict&#32;commands:&quot;</emphasis>,(44,4))
+267 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_Dict_info,(45,5))
+268 
+269 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Node&#32;commands:&quot;</emphasis>,(47,4))
+270 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_Node_info,(48,5))
+271 
+272 
+273 
+274 <emphasis class="keyword">def&#32;</emphasis>access_table(stdscr,state_dict):
+275 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Menu&#32;representando&#32;as&#32;opções&#32;de&#32;accesso&#32;a&#32;tabela&apos;&apos;&apos;</emphasis>
+276 
+277 &#32;&#32;&#32;&#32;curses.cbreak()
+278 &#32;&#32;&#32;&#32;curses.noecho()
+279 
+280 &#32;&#32;&#32;&#32;str_access_menu&#32;=&#32;<emphasis class="stringliteral">&quot;[a-z]:&#32;Container&#32;containing&#32;a&#32;table&#32;object\n1:Query&#32;Table\n2:Set&#32;Container\n3:Help\n0:back&quot;</emphasis>
+281 &#32;&#32;&#32;&#32;loc_access_menu&#32;=&#32;(0&#32;,0)
+282 &#32;&#32;&#32;&#32;set_container&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>
+283 
+284 
+285 &#32;&#32;&#32;&#32;str_last_container&#32;=&#32;<emphasis class="stringliteral">&quot;Output&#32;Container:&#32;[&quot;</emphasis>+set_container+<emphasis class="stringliteral">&quot;]&quot;</emphasis>
+286 &#32;&#32;&#32;&#32;loc_last_container&#32;=&#32;(7,0)
+287 &#32;&#32;&#32;&#32;str_selected_table&#32;=&#32;<emphasis class="stringliteral">&quot;Selected&#32;table:&#32;[]&quot;</emphasis>
+288 &#32;&#32;&#32;&#32;loc_selected_table&#32;=&#32;(8,0)
+289 &#32;&#32;&#32;&#32;set_table&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>
+290 
+291 &#32;&#32;&#32;&#32;str_table_menu&#32;=&#32;<emphasis class="stringliteral">&apos;&apos;</emphasis>
+292 &#32;&#32;&#32;&#32;local_exit&#32;=&#32;<emphasis class="keyword">False</emphasis>
+293 
+294 &#32;&#32;&#32;&#32;while(local_exit&#32;==&#32;<emphasis class="keyword">False</emphasis>):
+295 
+296 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clear_menu_area(stdscr)
+297 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_access_menu,loc_access_menu)
+298 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_selected_table,loc_selected_table)
+299 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_last_container,loc_last_container)
+300 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+301 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;c&#32;=&#32;stdscr.getch()
+302 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+303 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Trata&#32;letras&#32;de&#32;a&#32;até&#32;z</emphasis>
+304 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;(c&#32;&gt;&#32;96)&#32;<emphasis class="keywordflow">and</emphasis>&#32;(c&#32;&lt;&#32;123):
+305 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if(chr(c)&#32;<emphasis class="keywordflow">in</emphasis>&#32;state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>].keys()):&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+306 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][chr(c)].type&#32;==&#32;<emphasis class="stringliteral">&quot;Table&quot;</emphasis>&#32;:
+307 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;current_table&#32;=&#32;state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][chr(c)].data
+308 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_selected_table&#32;=&#32;<emphasis class="stringliteral">&quot;Selected&#32;table:&#32;[&quot;</emphasis>+&#32;current_table.table_label&#32;+<emphasis class="stringliteral">&quot;]&quot;</emphasis>
+309 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_selected_table,loc_selected_table)
+310 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;set_table&#32;=&#32;chr(c)
+311 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;draw_container(stdscr,state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][chr(c)])
+312 
+313 
+314 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;chr(c)&#32;==&#32;<emphasis class="stringliteral">&apos;0&apos;</emphasis>:
+315 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;local_exit&#32;=&#32;<emphasis class="keyword">True</emphasis>
+316 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;chr(c)&#32;==&#32;<emphasis class="stringliteral">&apos;2&apos;</emphasis>:
+317 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Press&#32;any&#32;key&#32;to&#32;save&#32;as&#32;container&#32;key&quot;</emphasis>,(4,60))
+318 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;c&#32;=&#32;stdscr.getch()
+319 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;set_container&#32;=&#32;chr(c)
+320 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_last_container&#32;=&#32;<emphasis class="stringliteral">&quot;Output&#32;Container:&#32;[&quot;</emphasis>+set_container+<emphasis class="stringliteral">&quot;]&quot;</emphasis>
+321 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;chr(c)&#32;==&#32;<emphasis class="stringliteral">&apos;1&apos;</emphasis>:
+322 
+323 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Inicializa&#32;tratamento&#32;de&#32;querry</emphasis>
+324 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;curses.nocbreak()
+325 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;curses.echo()
+326 
+327 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;stdscr.keypad(<emphasis class="keyword">True</emphasis>)
+328 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#restore_cursor(stdscr,state_dict)</emphasis>
+329 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clear_input_area(stdscr)
+330 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+331 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Enter&#32;Query.&#32;CTRL+G&#32;to&#32;exit.&#32;Control-H&#32;to&#32;delete&quot;</emphasis>,(51,40))
+332 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+333 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_query&#32;=&#32;get_input(stdscr)
+334 
+335 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Lista&#32;de&#32;queries:</emphasis>
+336 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#key_col;&lt;null&#32;|&#32;col_name&gt;&#32;-&gt;&#32;Retorna&#32;todas&#32;colunas&#32;chave&#32;da&#32;tabela&#32;se&#32;nulo,&#32;ou&#32;todos&#32;os&#32;dados&#32;da&#32;coluna&#32;especificada</emphasis>
+337 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#key_row;&lt;null&#32;|a,b&#32;&gt;&#32;-&gt;&#32;Retorna&#32;todas&#32;as&#32;chaves&#32;da&#32;tabela&#32;se&#32;nulo,&#32;ou&#32;todas&#32;as&#32;chaves&#32;de&#32;indice&#32;entre&#32;a&#32;e&#32;b</emphasis>
+338 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#get_cell;&lt;y,x&gt;&#32;-&gt;&#32;Retorna&#32;celula&#32;na&#32;posicao&#32;y,x</emphasis>
+339 
+340 
+341 
+342 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">try</emphasis>:
+343 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][set_container]&#32;=&#32;query_table(str_query,state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][set_table],state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][set_container])
+344 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Success!&quot;</emphasis>,(4,60))
+345 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">except</emphasis>:
+346 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Failed&#32;to&#32;run&#32;query.&#32;Press&#32;any&#32;key&#32;to&#32;continue&quot;</emphasis>,(9,60))
+347 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;stdscr.getch()
+348 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+349 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;draw_state(stdscr,state_dict)
+350 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+351 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;chr(c)&#32;==&#32;<emphasis class="stringliteral">&apos;3&apos;</emphasis>:
+352 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clear_table_area(stdscr)
+353 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+354 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Lista&#32;de&#32;queries&#32;-&gt;&#32;Table:</emphasis>
+355 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#key_col;&lt;null&#32;|&#32;col_name&gt;&#32;-&gt;&#32;Retorna&#32;todas&#32;colunas&#32;chave&#32;da&#32;tabela&#32;se&#32;nulo,&#32;ou&#32;todos&#32;os&#32;dados&#32;da&#32;coluna&#32;especificada</emphasis>
+356 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#key_row;&lt;null&#32;|a,b&#32;&gt;&#32;-&gt;&#32;Retorna&#32;todas&#32;as&#32;chaves&#32;da&#32;tabela&#32;se&#32;nulo,&#32;ou&#32;todas&#32;as&#32;chaves&#32;de&#32;indice&#32;entre&#32;a&#32;e&#32;b</emphasis>
+357 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#get_cell;&lt;y,x&gt;&#32;-&gt;&#32;Retorna&#32;celula&#32;na&#32;posicao&#32;y,x</emphasis>
+358 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#insert_cell;&lt;y,x&gt;&#32;-&gt;Inserts&#32;output&#32;cell&#32;into&#32;table&#32;and&#32;returns&#32;the&#32;inserted&#32;cell</emphasis>
+359 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#delete_cell;&lt;y,x&gt;&#32;-&gt;&#32;Deletes&#32;cell&#32;at&#32;X,y&#32;and&#32;returns&#32;the&#32;deleted&#32;cell</emphasis>
+360 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#get_cells;&lt;uy,ux,ly,lx&gt;&#32;-&gt;&#32;Gets&#32;a&#32;list&#32;containing&#32;the&#32;cells&#32;starting&#32;at&#32;&lt;uy,ux&gt;&#32;and&#32;ending&#32;at&#32;&lt;ly,lx&gt;</emphasis>
+361 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+362 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_t_query_1&#32;=&#32;<emphasis class="stringliteral">&apos;key_col;&lt;null&#32;|&#32;col_name&gt;&#32;-&gt;Returns&#32;every&#32;key_col&#32;if&#32;null&#32;or(|)&#32;every&#32;cell&#32;in&#32;a&#32;key_col&#32;if&#32;not&#32;null\n&apos;</emphasis>
+363 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_t_query_2&#32;=&#32;<emphasis class="stringliteral">&apos;key_row;&lt;null&#32;|a,b&#32;&gt;&#32;-&gt;&#32;Returns&#32;every&#32;Key&#32;if&#32;null&#32;|&#32;Every&#32;key&#32;from&#32;index&#32;a&#32;to&#32;b\n&apos;</emphasis>
+364 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_t_query_3&#32;=&#32;<emphasis class="stringliteral">&quot;insert_cell;&lt;y,x&gt;&#32;-&gt;Inserts&#32;output&#32;cell&#32;into&#32;table&#32;and&#32;returns&#32;the&#32;inserted&#32;cell\n&quot;</emphasis>
+365 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_t_query_4&#32;=&#32;<emphasis class="stringliteral">&quot;delete_cell;&lt;y,x&gt;&#32;-&gt;&#32;Deletes&#32;cell&#32;at&#32;X,y&#32;and&#32;returns&#32;the&#32;deleted&#32;cell\n&quot;</emphasis>
+366 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_t_query_5&#32;=&#32;<emphasis class="stringliteral">&apos;get_cells;&lt;uy,ux,ly,lx&gt;&#32;-&gt;Gets&#32;a&#32;list&#32;containing&#32;the&#32;cells&#32;starting&#32;at&#32;&lt;uy,ux&gt;&#32;and&#32;ending&#32;at&#32;&lt;ly,lx&gt;\n&apos;</emphasis>
+367 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_t_query_final&#32;=&#32;<emphasis class="stringliteral">&apos;get_cell;&lt;y,x&gt;&#32;-&gt;&#32;Returns&#32;Cell&#32;at&#32;y,x&#32;\n&apos;</emphasis>
+368 
+369 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_Table_info&#32;=&#32;&#32;str_t_query_1&#32;+&#32;str_t_query_2&#32;+&#32;str_t_query_3&#32;+&#32;str_t_query_4&#32;+str_t_query_5+&#32;str_t_query_final&#32;&#32;&#32;&#32;
+370 
+371 &#32;&#32;&#32;
+372 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Table&#32;commands:&quot;</emphasis>,(26,4))
+373 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_Table_info,(27,5))
+374 
+375 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+376 <emphasis class="keyword">def&#32;</emphasis>access_db(stdscr,&#32;state_dict):
+377 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Menu&#32;representando&#32;as&#32;opções&#32;de&#32;busca&#32;no&#32;banco&#32;de&#32;dados&apos;&apos;&apos;</emphasis>
+378 
+379 &#32;&#32;&#32;&#32;curses.cbreak()
+380 &#32;&#32;&#32;&#32;curses.noecho()
+381 
+382 &#32;&#32;&#32;&#32;str_access_menu&#32;=&#32;<emphasis class="stringliteral">&quot;[a-z]:&#32;Set&#32;output&#32;container&#32;&#32;\n1:Query&#32;Db\n2:Set&#32;input&#32;container\n3:Help\n0:back&quot;</emphasis>
+383 &#32;&#32;&#32;&#32;loc_access_menu&#32;=&#32;(0&#32;,0)
+384 &#32;&#32;&#32;&#32;set_container_i&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>
+385 &#32;&#32;&#32;&#32;set_container_o&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>
+386 
+387 
+388 &#32;&#32;&#32;&#32;str_output_container&#32;=&#32;<emphasis class="stringliteral">&quot;Output&#32;Container:&#32;[]&quot;</emphasis>
+389 &#32;&#32;&#32;&#32;loc_output_container&#32;=&#32;(7,0)
+390 &#32;&#32;&#32;&#32;str_input_container&#32;=&#32;<emphasis class="stringliteral">&quot;Input&#32;Container:&#32;[]&quot;</emphasis>
+391 &#32;&#32;&#32;&#32;loc_input_container&#32;=&#32;(8,0)
+392 &#32;&#32;&#32;
+393 &#32;&#32;&#32;&#32;local_exit&#32;=&#32;<emphasis class="keyword">False</emphasis>
+394 &#32;&#32;&#32;&#32;while(local_exit&#32;==&#32;<emphasis class="keyword">False</emphasis>):
+395 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clear_menu_area(stdscr)
+396 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_output_container,loc_output_container)
+397 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_input_container,loc_input_container)
+398 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_access_menu,loc_access_menu)
+399 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;c&#32;=&#32;stdscr.getch()
+400 
+401 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Trata&#32;letras&#32;de&#32;a&#32;até&#32;z</emphasis>
+402 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;(c&#32;&gt;&#32;96)&#32;<emphasis class="keywordflow">and</emphasis>&#32;(c&#32;&lt;&#32;123):&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+403 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;set_container_o&#32;=&#32;chr(c)
+404 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_output_container&#32;=&#32;<emphasis class="stringliteral">&quot;Output&#32;Container:&#32;[&quot;</emphasis>&#32;+&#32;set_container_o+&#32;<emphasis class="stringliteral">&quot;]&quot;</emphasis>
+405 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_output_container,loc_output_container)
+406 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+407 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;chr(c)&#32;==&#32;<emphasis class="stringliteral">&apos;1&apos;</emphasis>:
+408 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Inicializa&#32;tratamento&#32;de&#32;querry</emphasis>
+409 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;curses.nocbreak()
+410 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;curses.echo()
+411 
+412 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;stdscr.keypad(<emphasis class="keyword">True</emphasis>)
+413 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#restore_cursor(stdscr,state_dict)</emphasis>
+414 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clear_input_area(stdscr)
+415 
+416 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Enter&#32;Query&quot;</emphasis>,(51,40))
+417 
+418 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_query&#32;=&#32;get_input(stdscr)
+419 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+420 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;não&#32;existe&#32;container&#32;de&#32;saida</emphasis>
+421 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;<emphasis class="keywordflow">not</emphasis>&#32;(set_container_o&#32;<emphasis class="keywordflow">in</emphasis>&#32;state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>].keys()):
+422 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][set_container_o]&#32;=&#32;<link linkend="classmenus_1_1_container">Container</link>(<emphasis class="stringliteral">&quot;&quot;</emphasis>)
+423 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+424 
+425 
+426 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">try</emphasis>:
+427 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][set_container_o]&#32;=&#32;query_db(str_query,state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][set_container_i],state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][set_container_o],state_dict[<emphasis class="stringliteral">&apos;db&apos;</emphasis>])
+428 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Success!&quot;</emphasis>,(4,60))
+429 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">except</emphasis>:
+430 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Failed&#32;to&#32;run&#32;query.&#32;Press&#32;any&#32;key&#32;to&#32;continue&quot;</emphasis>,(9,60))
+431 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;stdscr.getch()
+432 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+433 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;draw_state(stdscr,state_dict)
+434 
+435 
+436 
+437 
+438 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;chr(c)&#32;==&#32;<emphasis class="stringliteral">&apos;2&apos;</emphasis>:
+439 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Press&#32;any&#32;key&#32;to&#32;save&#32;as&#32;container&#32;key&quot;</emphasis>,(4,60))
+440 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;c&#32;=&#32;stdscr.getch()
+441 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if(chr(c)&#32;<emphasis class="keywordflow">in</emphasis>&#32;state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>].keys()):
+442 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;set_container_i&#32;=&#32;chr(c)
+443 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_input_container&#32;=&#32;<emphasis class="stringliteral">&quot;Input&#32;Container:&#32;[&quot;</emphasis>+&#32;set_container_i&#32;+&#32;<emphasis class="stringliteral">&apos;]&apos;</emphasis>
+444 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;draw_container(stdscr,state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][chr(c)])
+445 
+446 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;chr(c)&#32;==&#32;<emphasis class="stringliteral">&apos;3&apos;</emphasis>:
+447 
+448 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Lista&#32;de&#32;queries&#32;-&gt;&#32;DB:</emphasis>
+449 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#&lt;trie&gt;&#32;options&#32;:&#32;tables,key_rows,key_cols,super_key</emphasis>
+450 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#pre;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Prefix&#32;search&#32;on&#32;DB.trie</emphasis>
+451 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#suf;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Suffix&#32;search&#32;on&#32;DB.trie</emphasis>
+452 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#reg;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;RegExp&#32;search&#32;on&#32;DB.trie</emphasis>
+453 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#get_all;&lt;trie&gt;&#32;-&gt;Get&#32;all&#32;tables&#32;in&#32;a&#32;db.trie</emphasis>
+454 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#insert;&lt;trie&gt;&#32;-&gt;&#32;Inserts&#32;input&#32;container&#32;into&#32;the&#32;trie(table&#32;only).&#32;Returns&#32;inserted&#32;table</emphasis>
+455 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#get;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Returns&#32;table&#32;where&#32;table_label&#32;==&#32;string</emphasis>
+456 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#yield;&lt;trie&gt;&#32;-&gt;&#32;Regen&#32;trie&#32;cache&#32;and&#32;returns&#32;Trie&#32;root</emphasis>
+457 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#walkto;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Walk&#32;to&#32;string&#32;in&#32;current&#32;trie&#32;and&#32;returns&#32;node</emphasis>
+458 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#moonwalkto;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Walk&#32;to&#32;root&#32;in&#32;current&#32;trie&#32;and&#32;returns&#32;node</emphasis>
+459 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#delete;trie!&lt;string&gt;&#32;-&gt;&#32;Walk&#32;to&#32;node&#32;in&#32;trie&#32;and&#32;deletes&#32;data.&#32;Returns&#32;deleted&#32;node</emphasis>
+460 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clear_table_area(stdscr)
+461 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_DB_info&#32;=&#32;<emphasis class="stringliteral">&quot;&lt;trie&gt;&#32;options&#32;:&#32;tables,key_rows,key_cols,super_key&#32;\n&quot;</emphasis>&#32;&#32;+&#32;<emphasis class="stringliteral">&quot;pre;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Prefix&#32;search&#32;on&#32;DB.trie&#32;\n&quot;</emphasis>&#32;+&#32;<emphasis class="stringliteral">&quot;suf;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Suffix&#32;search&#32;on&#32;DB.trie&#32;\n&quot;</emphasis>&#32;+<emphasis class="stringliteral">&quot;reg;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;RegExp&#32;search&#32;on&#32;DB.trie&#32;\n&quot;</emphasis>&#32;+&#32;<emphasis class="stringliteral">&quot;get_all;&lt;trie&gt;&#32;-&gt;Get&#32;all&#32;tables&#32;in&#32;a&#32;db.trie&#32;\n&quot;</emphasis>
+462 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_DB_info&#32;=&#32;str_DB_info&#32;+&#32;<emphasis class="stringliteral">&quot;insert;&lt;trie&gt;&#32;-&gt;&#32;Inserts&#32;input&#32;container&#32;into&#32;the&#32;trie(table&#32;only).&#32;Returns&#32;inserted&#32;table&#32;\n&quot;</emphasis>&#32;+&#32;<emphasis class="stringliteral">&quot;get;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Returns&#32;table&#32;where&#32;table_label&#32;==&#32;string\n&quot;</emphasis>&#32;+&#32;<emphasis class="stringliteral">&apos;yield;&lt;trie&gt;&#32;-&gt;&#32;Regen&#32;trie&#32;cache&#32;and&#32;returns&#32;Trie&#32;root&#32;\n&apos;</emphasis>&#32;+&#32;<emphasis class="stringliteral">&apos;walkto;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Walk&#32;to&#32;string&#32;in&#32;current&#32;trie&#32;and&#32;returns&#32;node&#32;\n&apos;</emphasis>&#32;+&#32;<emphasis class="stringliteral">&apos;moonwalkto;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Walk&#32;to&#32;root&#32;in&#32;current&#32;trie&#32;and&#32;returns&#32;node&#32;\n&apos;</emphasis>&#32;+&#32;<emphasis class="stringliteral">&apos;delete;trie!&lt;string&gt;&#32;-&gt;&#32;Walk&#32;to&#32;node&#32;in&#32;trie&#32;and&#32;deletes&#32;data.&#32;Returns&#32;deleted&#32;node&#32;\n&apos;</emphasis>
+463 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+464 
+465 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;DB&#32;commands:&quot;</emphasis>,(12,4))
+466 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_DB_info,(14,6))
+467 
+468 
+469 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;chr(c)&#32;==&#32;<emphasis class="stringliteral">&apos;0&apos;</emphasis>:
+470 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;local_exit&#32;=&#32;<emphasis class="keyword">True</emphasis>
+471 
+472 
+473 <emphasis class="keyword">def&#32;</emphasis>run_query_menu(stdscr,state_dict):
+474 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Menu&#32;representando&#32;as&#32;opções&#32;de&#32;busca&#32;no&#32;banco&#32;de&#32;dados&apos;&apos;&apos;</emphasis>
+475 
+476 &#32;&#32;&#32;&#32;curses.cbreak()
+477 &#32;&#32;&#32;&#32;curses.noecho()
+478 
+479 &#32;&#32;&#32;&#32;str_access_menu&#32;=&#32;<emphasis class="stringliteral">&quot;[a-z]:&#32;Set&#32;output&#32;container&#32;&#32;\n1:Run&#32;Query\n2:Set&#32;input&#32;container\n3:Help\n0:back&quot;</emphasis>
+480 &#32;&#32;&#32;&#32;loc_access_menu&#32;=&#32;(0&#32;,0)
+481 &#32;&#32;&#32;&#32;set_container_i&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>
+482 &#32;&#32;&#32;&#32;set_container_o&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>
+483 
+484 
+485 &#32;&#32;&#32;&#32;str_output_container&#32;=&#32;<emphasis class="stringliteral">&quot;Output&#32;Container:&#32;[]&quot;</emphasis>
+486 &#32;&#32;&#32;&#32;loc_output_container&#32;=&#32;(7,0)
+487 &#32;&#32;&#32;&#32;str_input_container&#32;=&#32;<emphasis class="stringliteral">&quot;Input&#32;Container:&#32;[]&quot;</emphasis>
+488 &#32;&#32;&#32;&#32;loc_input_container&#32;=&#32;(8,0)
+489 &#32;&#32;&#32;
+490 &#32;&#32;&#32;&#32;local_exit&#32;=&#32;<emphasis class="keyword">False</emphasis>
+491 &#32;&#32;&#32;&#32;while(local_exit&#32;==&#32;<emphasis class="keyword">False</emphasis>):
+492 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clear_menu_area(stdscr)
+493 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_output_container,loc_output_container)
+494 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_input_container,loc_input_container)
+495 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_access_menu,loc_access_menu)
+496 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;c&#32;=&#32;stdscr.getch()
+497 
+498 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Trata&#32;letras&#32;de&#32;a&#32;até&#32;z</emphasis>
+499 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;(c&#32;&gt;&#32;96)&#32;<emphasis class="keywordflow">and</emphasis>&#32;(c&#32;&lt;&#32;123):&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+500 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;set_container_o&#32;=&#32;chr(c)
+501 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_output_container&#32;=&#32;<emphasis class="stringliteral">&quot;Output&#32;Container:&#32;[&quot;</emphasis>&#32;+&#32;set_container_o+&#32;<emphasis class="stringliteral">&quot;]&quot;</emphasis>
+502 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_output_container,loc_output_container)
+503 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+504 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;chr(c)&#32;==&#32;<emphasis class="stringliteral">&apos;1&apos;</emphasis>:
+505 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Inicializa&#32;tratamento&#32;de&#32;querry</emphasis>
+506 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;curses.nocbreak()
+507 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;curses.echo()
+508 
+509 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;stdscr.keypad(<emphasis class="keyword">True</emphasis>)
+510 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#restore_cursor(stdscr,state_dict)</emphasis>
+511 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clear_input_area(stdscr)
+512 
+513 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Enter&#32;Query&quot;</emphasis>,(51,40))
+514 
+515 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_query&#32;=&#32;get_input(stdscr)
+516 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+517 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;não&#32;existe&#32;container&#32;de&#32;saida</emphasis>
+518 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;<emphasis class="keywordflow">not</emphasis>&#32;(set_container_o&#32;<emphasis class="keywordflow">in</emphasis>&#32;state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>].keys()):
+519 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][set_container_o]&#32;=&#32;<link linkend="classmenus_1_1_container">Container</link>(<emphasis class="stringliteral">&quot;&quot;</emphasis>)
+520 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+521 
+522 
+523 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">try</emphasis>:
+524 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#state_dict[&apos;containers&apos;][set_container_o]&#32;=&#32;query_db(str_query,state_dict[&apos;containers&apos;][set_container_i],state_dict[&apos;containers&apos;][set_container_o],state_dict[&apos;db&apos;])</emphasis>
+525 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][set_container_o]&#32;=&#32;query_run(str_query,state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][set_container_i],state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][set_container_o],state_dict[<emphasis class="stringliteral">&apos;db&apos;</emphasis>])
+526 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Success!&quot;</emphasis>,(4,60))
+527 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">except</emphasis>:
+528 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Failed&#32;to&#32;run&#32;query.&#32;Press&#32;any&#32;key&#32;to&#32;continue&quot;</emphasis>,(9,60))
+529 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;stdscr.getch()
+530 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+531 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;draw_state(stdscr,state_dict)
+532 
+533 
+534 
+535 
+536 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;chr(c)&#32;==&#32;<emphasis class="stringliteral">&apos;2&apos;</emphasis>:
+537 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Press&#32;any&#32;key&#32;to&#32;save&#32;as&#32;container&#32;key&quot;</emphasis>,(4,60))
+538 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;c&#32;=&#32;stdscr.getch()
+539 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if(chr(c)&#32;<emphasis class="keywordflow">in</emphasis>&#32;state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>].keys()):
+540 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;set_container_i&#32;=&#32;chr(c)
+541 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_input_container&#32;=&#32;<emphasis class="stringliteral">&quot;Input&#32;Container:&#32;[&quot;</emphasis>+&#32;set_container_i&#32;+&#32;<emphasis class="stringliteral">&apos;]&apos;</emphasis>
+542 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;draw_container(stdscr,state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>][chr(c)])
+543 
+544 
+545 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;chr(c)&#32;==&#32;<emphasis class="stringliteral">&apos;3&apos;</emphasis>:
+546 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clear_table_area(stdscr)
+547 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Lista&#32;de&#32;queries&#32;-&gt;&#32;DB:</emphasis>
+548 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#&lt;trie&gt;&#32;options&#32;:&#32;tables,key_rows,key_cols,super_key</emphasis>
+549 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#pre;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Prefix&#32;search&#32;on&#32;DB.trie</emphasis>
+550 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#suf;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Suffix&#32;search&#32;on&#32;DB.trie</emphasis>
+551 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#reg;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;RegExp&#32;search&#32;on&#32;DB.trie</emphasis>
+552 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#get_all;&lt;trie&gt;&#32;-&gt;Get&#32;all&#32;tables&#32;in&#32;a&#32;db.trie</emphasis>
+553 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#insert;&lt;trie&gt;&#32;-&gt;&#32;Inserts&#32;input&#32;container&#32;into&#32;the&#32;trie(table&#32;only).&#32;Returns&#32;inserted&#32;table</emphasis>
+554 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#get;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Returns&#32;table&#32;where&#32;table_label&#32;==&#32;string</emphasis>
+555 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#yield;&lt;trie&gt;&#32;-&gt;&#32;Regen&#32;trie&#32;cache&#32;and&#32;returns&#32;Trie&#32;root</emphasis>
+556 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#walkto;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Walk&#32;to&#32;string&#32;in&#32;current&#32;trie&#32;and&#32;returns&#32;node</emphasis>
+557 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#moonwalkto;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Walk&#32;to&#32;root&#32;in&#32;current&#32;trie&#32;and&#32;returns&#32;node</emphasis>
+558 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#delete;trie!&lt;string&gt;&#32;-&gt;&#32;Walk&#32;to&#32;node&#32;in&#32;trie&#32;and&#32;deletes&#32;data.&#32;Returns&#32;deleted&#32;node</emphasis>
+559 
+560 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_DB_info&#32;=&#32;<emphasis class="stringliteral">&quot;&lt;trie&gt;&#32;options&#32;:&#32;tables,key_rows,key_cols,super_key&#32;\n&quot;</emphasis>&#32;&#32;+&#32;<emphasis class="stringliteral">&quot;pre;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Prefix&#32;search&#32;on&#32;DB.trie&#32;\n&quot;</emphasis>&#32;+&#32;<emphasis class="stringliteral">&quot;suf;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Suffix&#32;search&#32;on&#32;DB.trie&#32;\n&quot;</emphasis>&#32;+<emphasis class="stringliteral">&quot;reg;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;RegExp&#32;search&#32;on&#32;DB.trie&#32;\n&quot;</emphasis>&#32;+&#32;<emphasis class="stringliteral">&quot;get_all;&lt;trie&gt;&#32;-&gt;Get&#32;all&#32;tables&#32;in&#32;a&#32;db.trie&#32;\n&quot;</emphasis>
+561 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_DB_info&#32;=&#32;str_DB_info&#32;+&#32;<emphasis class="stringliteral">&quot;insert;&lt;trie&gt;&#32;-&gt;&#32;Inserts&#32;input&#32;container&#32;into&#32;the&#32;trie(table&#32;only).&#32;Returns&#32;inserted&#32;table&#32;\n&quot;</emphasis>&#32;+&#32;<emphasis class="stringliteral">&quot;get;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Returns&#32;table&#32;where&#32;table_label&#32;==&#32;string\n&quot;</emphasis>&#32;+&#32;<emphasis class="stringliteral">&apos;yield;&lt;trie&gt;&#32;-&gt;&#32;Regen&#32;trie&#32;cache&#32;and&#32;returns&#32;Trie&#32;root&#32;\n&apos;</emphasis>&#32;+&#32;<emphasis class="stringliteral">&apos;walkto;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Walk&#32;to&#32;string&#32;in&#32;current&#32;trie&#32;and&#32;returns&#32;node&#32;\n&apos;</emphasis>&#32;+&#32;<emphasis class="stringliteral">&apos;moonwalkto;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Walk&#32;to&#32;root&#32;in&#32;current&#32;trie&#32;and&#32;returns&#32;node&#32;\n&apos;</emphasis>&#32;+&#32;<emphasis class="stringliteral">&apos;delete;trie!&lt;string&gt;&#32;-&gt;&#32;Walk&#32;to&#32;node&#32;in&#32;trie&#32;and&#32;deletes&#32;data.&#32;Returns&#32;deleted&#32;node&#32;\n&apos;</emphasis>
+562 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+563 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Lista&#32;de&#32;queries&#32;-&gt;&#32;Table:</emphasis>
+564 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#key_col;&lt;null&#32;|&#32;col_name&gt;&#32;-&gt;&#32;Retorna&#32;todas&#32;colunas&#32;chave&#32;da&#32;tabela&#32;se&#32;nulo,&#32;ou&#32;todos&#32;os&#32;dados&#32;da&#32;coluna&#32;especificada</emphasis>
+565 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#key_row;&lt;null&#32;|a,b&#32;&gt;&#32;-&gt;&#32;Retorna&#32;todas&#32;as&#32;chaves&#32;da&#32;tabela&#32;se&#32;nulo,&#32;ou&#32;todas&#32;as&#32;chaves&#32;de&#32;indice&#32;entre&#32;a&#32;e&#32;b</emphasis>
+566 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#get_cell;&lt;y,x&gt;&#32;-&gt;&#32;Retorna&#32;celula&#32;na&#32;posicao&#32;y,x</emphasis>
+567 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#insert_cell;&lt;y,x&gt;&#32;-&gt;Inserts&#32;output&#32;cell&#32;into&#32;table&#32;and&#32;returns&#32;the&#32;inserted&#32;cell</emphasis>
+568 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#delete_cell;&lt;y,x&gt;&#32;-&gt;&#32;Deletes&#32;cell&#32;at&#32;X,y&#32;and&#32;returns&#32;the&#32;deleted&#32;cell</emphasis>
+569 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#get_cells;&lt;uy,ux,ly,lx&gt;&#32;-&gt;&#32;Gets&#32;a&#32;list&#32;containing&#32;the&#32;cells&#32;starting&#32;at&#32;&lt;uy,ux&gt;&#32;and&#32;ending&#32;at&#32;&lt;ly,lx&gt;</emphasis>
+570 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+571 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_t_query_1&#32;=&#32;<emphasis class="stringliteral">&apos;key_col;&lt;null&#32;|&#32;col_name&gt;&#32;-&gt;Returns&#32;every&#32;key_col&#32;if&#32;null&#32;or(|)&#32;every&#32;cell&#32;in&#32;a&#32;key_col&#32;if&#32;not&#32;null\n&apos;</emphasis>
+572 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_t_query_2&#32;=&#32;<emphasis class="stringliteral">&apos;key_row;&lt;null&#32;|a,b&#32;&gt;&#32;-&gt;&#32;Returns&#32;every&#32;Key&#32;if&#32;null&#32;|&#32;Every&#32;key&#32;from&#32;index&#32;a&#32;to&#32;b\n&apos;</emphasis>
+573 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_t_query_3&#32;=&#32;<emphasis class="stringliteral">&quot;insert_cell;&lt;y,x&gt;&#32;-&gt;Inserts&#32;output&#32;cell&#32;into&#32;table&#32;and&#32;returns&#32;the&#32;inserted&#32;cell\n&quot;</emphasis>
+574 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_t_query_4&#32;=&#32;<emphasis class="stringliteral">&quot;delete_cell;&lt;y,x&gt;&#32;-&gt;&#32;Deletes&#32;cell&#32;at&#32;X,y&#32;and&#32;returns&#32;the&#32;deleted&#32;cell\n&quot;</emphasis>
+575 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_t_query_5&#32;=&#32;<emphasis class="stringliteral">&apos;get_cells;&lt;uy,ux,ly,lx&gt;&#32;-&gt;Gets&#32;a&#32;list&#32;containing&#32;the&#32;cells&#32;starting&#32;at&#32;&lt;uy,ux&gt;&#32;and&#32;ending&#32;at&#32;&lt;ly,lx&gt;\n&apos;</emphasis>
+576 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_t_query_final&#32;=&#32;<emphasis class="stringliteral">&apos;get_cell;&lt;y,x&gt;&#32;-&gt;&#32;Returns&#32;Cell&#32;at&#32;y,x&#32;\n&apos;</emphasis>
+577 
+578 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_Table_info&#32;=&#32;&#32;str_t_query_1&#32;+&#32;str_t_query_2&#32;+&#32;str_t_query_3&#32;+&#32;str_t_query_4&#32;+str_t_query_5+&#32;str_t_query_final&#32;&#32;&#32;&#32;
+579 
+580 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+581 
+582 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#lista&#32;de&#32;queries&#32;-&gt;&#32;Cell:</emphasis>
+583 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#edit&lt;data&gt;&#32;-&gt;&#32;change&#32;a&#32;cell&#32;data</emphasis>
+584 
+585 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_Cell_info&#32;=&#32;<emphasis class="stringliteral">&apos;edit&lt;data&gt;&#32;-&gt;&#32;change&#32;a&#32;cell&#32;data&#32;\n&apos;</emphasis>
+586 
+587 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#lista&#32;de&#32;queries&#32;-&gt;&#32;List:</emphasis>
+588 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#unpack;&lt;null&gt;&#32;-&gt;&#32;creates&#32;a&#32;single&#32;list&#32;with&#32;every&#32;child&#32;in&#32;the&#32;list</emphasis>
+589 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#first;&lt;null&gt;&#32;-&gt;&#32;pop&#32;the&#32;first&#32;item&#32;in&#32;the&#32;list</emphasis>
+590 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#rest;&lt;null&gt;&#32;-&gt;&#32;returns&#32;listw/o&#32;first&#32;item</emphasis>
+591 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#select;&lt;index&gt;&#32;-&gt;&#32;copy&#32;item&#32;from&#32;index</emphasis>
+592 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#remove;&lt;index&gt;&#32;-&gt;&#32;remove&#32;selected&#32;item</emphasis>
+593 
+594 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_List_info&#32;=&#32;<emphasis class="stringliteral">&quot;unpack;&lt;null&gt;&#32;-&gt;&#32;creates&#32;a&#32;single&#32;list&#32;with&#32;every&#32;child&#32;in&#32;the&#32;list\nfirst;&lt;null&gt;&#32;-&gt;&#32;pop&#32;the&#32;first&#32;item&#32;in&#32;the&#32;list\nrest;&lt;null&gt;&#32;-&gt;&#32;returns&#32;list&#32;without&#32;first&#32;item\nselect;&lt;index&gt;&#32;-&gt;&#32;copy&#32;item&#32;from&#32;index\nremove;&lt;index&gt;&#32;-&gt;&#32;remove&#32;selected&#32;item\n&quot;</emphasis>
+595 
+596 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#lista&#32;de&#32;queries:&#32;-&gt;&#32;Dict:</emphasis>
+597 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#pop;&lt;null&gt;&#32;remove&#32;a&#32;random&#32;item&#32;from&#32;dict</emphasis>
+598 
+599 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_Dict_info&#32;=&#32;<emphasis class="stringliteral">&apos;pop;&lt;null&gt;&#32;remove&#32;a&#32;random&#32;item&#32;from&#32;dict&apos;</emphasis>
+600 
+601 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#lista&#32;de&#32;queries&#32;-&gt;&#32;Node:</emphasis>
+602 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#get_all;&lt;null&gt;&#32;get&#32;all&#32;data&#32;below&#32;a&#32;node</emphasis>
+603 
+604 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_Node_info&#32;=&#32;<emphasis class="stringliteral">&quot;get_all;&lt;null&gt;&#32;get&#32;all&#32;data&#32;below&#32;a&#32;node\n&quot;</emphasis>
+605 
+606 
+607 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Db&#32;queries&#32;start&#32;with&#32;a&#32;@&#32;here:\n&#32;DB&#32;commands:&quot;</emphasis>,(12,4))
+608 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_DB_info,(14,6))
+609 
+610 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Table&#32;commands:&quot;</emphasis>,(26,4))
+611 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_Table_info,(27,5))
+612 
+613 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;List&#32;commands:&quot;</emphasis>,(34,4))
+614 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_List_info,(35,5))
+615 
+616 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Cell&#32;commands:&quot;</emphasis>,(41,4))
+617 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_Cell_info,(42,5))
+618 
+619 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Dict&#32;commands:&quot;</emphasis>,(44,4))
+620 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_Dict_info,(45,5))
+621 
+622 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;Node&#32;commands:&quot;</emphasis>,(47,4))
+623 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_Node_info,(48,5))
+624 
+625 
+626 
+627 
+628 
+629 
+630 
+631 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;chr(c)&#32;==&#32;<emphasis class="stringliteral">&apos;0&apos;</emphasis>:
+632 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;local_exit&#32;=&#32;<emphasis class="keyword">True</emphasis>
+633 &#32;&#32;&#32;&#32;
+634 
+635 
+636 
+637 <emphasis class="keyword">def&#32;</emphasis>draw_state(stdscr,&#32;state_dict):
+638 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Desenha&#32;gui&#32;na&#32;tela&#32;e&#32;atualiza&#32;os&#32;estados&#32;visiveis&#32;ao&#32;usuario&apos;&apos;&apos;</emphasis>
+639 
+640 &#32;&#32;&#32;&#32;clear_container_area(stdscr)
+641 
+642 &#32;&#32;&#32;&#32;<emphasis class="comment">#Linha&#32;separando&#32;input&#32;do&#32;usuario</emphasis>
+643 &#32;&#32;&#32;&#32;str_user_input_line&#32;=&#32;drawline(72)&#32;+&#32;<emphasis class="stringliteral">&quot;User&#32;input&#32;area&quot;</emphasis>&#32;+&#32;drawline(72)
+644 &#32;&#32;&#32;&#32;loc_user_input_line&#32;=&#32;(50,0)
+645 
+646 &#32;&#32;&#32;&#32;<emphasis class="comment">#Linha&#32;seperando&#32;area&#32;de&#32;estados</emphasis>
+647 &#32;&#32;&#32;&#32;str_state_area_line&#32;=&#32;drawbar(50)&#32;+&#32;<emphasis class="stringliteral">&quot;+&quot;</emphasis>
+648 &#32;&#32;&#32;&#32;loc_state_area_line&#32;=&#32;(0,120)
+649 
+650 &#32;&#32;&#32;&#32;<emphasis class="comment">#Linha&#32;separando&#32;area&#32;de&#32;tabela</emphasis>
+651 &#32;&#32;&#32;&#32;loc_table_area_line&#32;=&#32;(10,0)
+652 &#32;&#32;&#32;&#32;str_table_area_line&#32;=&#32;drawline(53)&#32;+&#32;<emphasis class="stringliteral">&quot;Table&#32;data&#32;area&quot;</emphasis>&#32;+&#32;drawline(52)&#32;+&#32;<emphasis class="stringliteral">&quot;+&quot;</emphasis>
+653 
+654 &#32;&#32;&#32;&#32;<emphasis class="comment">#Linha&#32;horizontal&#32;de&#32;estados</emphasis>
+655 &#32;&#32;&#32;&#32;loc_h_state_area_line&#32;=&#32;(0,120)
+656 &#32;&#32;&#32;&#32;str_h_state_area_line&#32;=&#32;<emphasis class="stringliteral">&quot;+&quot;</emphasis>&#32;+&#32;drawline(12)&#32;+&#32;<emphasis class="stringliteral">&quot;Container&#32;area&quot;</emphasis>&#32;+&#32;drawline(13)
+657 
+658 &#32;&#32;&#32;&#32;<emphasis class="comment">#Area&#32;de&#32;estados&#32;vai&#32;de&#32;(0,120)&#32;até&#32;(49,120)</emphasis>
+659 &#32;&#32;&#32;&#32;<emphasis class="comment">#Total&#32;=&#32;40*50&#32;=&#32;2000&#32;caracteres&#32;para&#32;a&#32;area&#32;de&#32;estados</emphasis>
+660 &#32;&#32;&#32;&#32;<emphasis class="comment">#Divididos&#32;em&#32;10&#32;celulas&#32;de&#32;48*4</emphasis>
+661 &#32;&#32;&#32;&#32;
+662 &#32;&#32;&#32;&#32;loc_first_container&#32;=&#32;(1,122)
+663 
+664 &#32;&#32;&#32;&#32;offset_container_y&#32;=&#32;6
+665 
+666 
+667 &#32;&#32;&#32;&#32;<emphasis class="comment">#Trata&#32;x&#32;e&#32;y&#32;do&#32;container&#32;como&#32;offset&#32;de&#32;loc_fisrt&#32;container</emphasis>
+668 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;n,tuple&#32;<emphasis class="keywordflow">in</emphasis>&#32;enumerate(state_dict[<emphasis class="stringliteral">&apos;containers&apos;</emphasis>].items()):
+669 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Desenha&#32;containers</emphasis>
+670 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+671 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key&#32;=&#32;tuple[0]
+672 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;value&#32;=&#32;tuple[1]
+673 
+674 
+675 
+676 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;current_offset&#32;=&#32;offset_container_y&#32;*&#32;n
+677 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_current_conteiner_label&#32;=&#32;<emphasis class="stringliteral">&quot;Container&#32;&quot;</emphasis>&#32;+&#32;str(key)&#32;+&#32;<emphasis class="stringliteral">&quot;:&quot;</emphasis>
+678 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+679 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_current_conteiner_name&#32;=&#32;list(value.name)
+680 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_current_conteiner_name_1&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>.join(str_current_conteiner_name[0:36])
+681 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_current_conteiner_name_2&#32;=&#32;<emphasis class="stringliteral">&apos;&apos;</emphasis>.join(str_current_conteiner_name[36:72])
+682 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_current_conteiner_name_3&#32;=&#32;<emphasis class="stringliteral">&apos;&apos;</emphasis>.join(str_current_conteiner_name[72:108])
+683 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_line&#32;=&#32;drawline(39)
+684 
+685 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_current_conteiner_type&#32;=&#32;<emphasis class="stringliteral">&quot;Type&#32;:&#32;&quot;</emphasis>&#32;+&#32;value.type
+686 
+687 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;loc_current_conteiner_label&#32;=&#32;(loc_first_container[0]&#32;+&#32;current_offset,loc_first_container[1]-1)
+688 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;loc_current_conteiner_name_1&#32;=&#32;(loc_first_container[0]&#32;+&#32;current_offset&#32;+1,loc_first_container[1])
+689 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;loc_current_conteiner_name_2&#32;=&#32;(loc_first_container[0]&#32;+&#32;current_offset&#32;+2,loc_first_container[1])
+690 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;loc_current_conteiner_name_3&#32;=&#32;(loc_first_container[0]&#32;+&#32;current_offset&#32;+3,loc_first_container[1])
+691 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;loc_current_conteiner_type&#32;=&#32;(loc_first_container[0]&#32;+&#32;current_offset&#32;+&#32;4,loc_first_container[1])
+692 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;loc_line&#32;=&#32;(loc_first_container[0]&#32;+&#32;current_offset&#32;+&#32;5,loc_first_container[1]-1)
+693 
+694 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_current_conteiner_label,&#32;loc_current_conteiner_label)
+695 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_current_conteiner_name_1,loc_current_conteiner_name_1)
+696 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_current_conteiner_name_2,loc_current_conteiner_name_2)
+697 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_current_conteiner_name_3,loc_current_conteiner_name_3)
+698 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_current_conteiner_type,loc_current_conteiner_type)
+699 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_line,loc_line)
+700 
+701 
+702 &#32;&#32;&#32;&#32;write_stdscr(stdscr,str_user_input_line,loc_user_input_line)
+703 &#32;&#32;&#32;&#32;write_stdscr(stdscr,str_state_area_line,loc_state_area_line)
+704 &#32;&#32;&#32;&#32;write_stdscr(stdscr,str_table_area_line,loc_table_area_line)
+705 &#32;&#32;&#32;&#32;write_stdscr(stdscr,str_h_state_area_line,loc_h_state_area_line)
+706 &#32;&#32;&#32;&#32;stdscr.refresh()
+707 
+708 &#32;&#32;&#32;&#32;
+709 <emphasis class="keyword">def&#32;</emphasis>restore_cursor(stdscr,state_dict):
+710 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Restore&#32;cursor&#32;to&#32;input_line&#32;pos&apos;&apos;&apos;</emphasis>
+711 &#32;&#32;&#32;&#32;stdscr.move((state_dict[<emphasis class="stringliteral">&apos;loc_data_entry&apos;</emphasis>])[0],(state_dict[<emphasis class="stringliteral">&apos;loc_data_entry&apos;</emphasis>])[1])
+712 
+713 
+714 <emphasis class="keyword">def&#32;</emphasis>restore_cursor(stdscr):
+715 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;restore&#32;cursor&#32;w/o&#32;statedict&apos;&apos;&apos;</emphasis>
+716 &#32;&#32;&#32;&#32;stdscr.move(52,0)
+717 
+718 
+719 <emphasis class="keyword">def&#32;</emphasis>get_input(stdscr):
+720 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;input_area&#32;=&#32;curses.newwin(1,&#32;118,&#32;53,&#32;1)
+721 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ret_input_box&#32;=&#32;curses.textpad.rectangle(stdscr,52,0,54,120)
+722 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;input_box&#32;=&#32;curses.textpad.Textbox(input_area)
+723 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;stdscr.refresh()
+724 
+725 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;input_txt&#32;=&#32;input_box.edit()
+726 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;stdscr.keypad(<emphasis class="keyword">False</emphasis>)
+727 
+728 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Por&#32;algum&#32;motivo&#32;as&#32;strings&#32;vem&#32;duplicadas.&#32;Trata&#32;esse&#32;bug(?)</emphasis>
+729 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;input_txt&#32;=&#32;list(str(input_txt).rstrip().lstrip())
+730 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;metade&#32;=&#32;int(len(input_txt)/2)
+731 
+732 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;input_txt&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>.join(input_txt[:metade])
+733 
+734 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Limpa&#32;area&#32;de&#32;input</emphasis>
+735 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;stdscr.refresh()
+736 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clear_input_area(stdscr)
+737 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;curses.cbreak()
+738 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;curses.noecho()
+739 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;restore_cursor(stdscr)
+740 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;input_txt
+741 &#32;&#32;&#32;&#32;&#32;
+742 <emphasis class="keyword">def&#32;</emphasis>drawline(intr):
+743 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Returns&#32;the&#32;&apos;-&apos;&#32;char&#32;repeated&#32;n&#32;times&#32;in&#32;a&#32;string&apos;&apos;&apos;</emphasis>
+744 &#32;&#32;&#32;&#32;returns&#32;=&#32;<emphasis class="stringliteral">&apos;&apos;</emphasis>
+745 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;x&#32;<emphasis class="keywordflow">in</emphasis>&#32;range(intr):
+746 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;returns&#32;=&#32;returns&#32;+&#32;<emphasis class="stringliteral">&apos;-&apos;</emphasis>
+747 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;returns
+748 
+749 <emphasis class="keyword">def&#32;</emphasis>drawbar(intr):
+750 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Returns&#32;the&#32;&apos;-&apos;&#32;char&#32;repeated&#32;n&#32;times&#32;in&#32;a&#32;string&apos;&apos;&apos;</emphasis>
+751 &#32;&#32;&#32;&#32;returns&#32;=&#32;<emphasis class="stringliteral">&apos;&apos;</emphasis>
+752 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;x&#32;<emphasis class="keywordflow">in</emphasis>&#32;range(intr):
+753 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;returns&#32;=&#32;returns&#32;+&#32;<emphasis class="stringliteral">&apos;|\n&apos;</emphasis>
+754 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;returns
+755 
+756 <emphasis class="keyword">def&#32;</emphasis>clear_menu_area(stdscr):
+757 &#32;&#32;&#32;&#32;str_clr_menu_area&#32;=&#32;<emphasis class="stringliteral">&quot;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\n&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\n&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\n&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\n&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\n&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\n&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\n&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\n&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\n&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\n&quot;</emphasis>
+758 &#32;&#32;&#32;&#32;loc_clr_menu_area&#32;=&#32;(0,0)
+759 &#32;&#32;&#32;&#32;write_stdscr(stdscr,str_clr_menu_area,loc_clr_menu_area)
+760 
+761 <emphasis class="keyword">def&#32;</emphasis>clear_table_area(stdscr):
+762 &#32;&#32;&#32;&#32;
+763 &#32;&#32;&#32;&#32;str_clr_table_line&#32;=&#32;<emphasis class="stringliteral">&quot;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\n&quot;</emphasis>
+764 &#32;&#32;&#32;&#32;str_clr_table_line_x_5&#32;=&#32;str_clr_table_line&#32;+&#32;str_clr_table_line&#32;+&#32;str_clr_table_line&#32;+&#32;str_clr_table_line&#32;+&#32;str_clr_table_line
+765 &#32;&#32;&#32;&#32;str_clr_table_area&#32;=&#32;&#32;str_clr_table_line_x_5&#32;+&#32;str_clr_table_line_x_5&#32;+&#32;str_clr_table_line_x_5&#32;+&#32;str_clr_table_line_x_5&#32;+&#32;str_clr_table_line_x_5&#32;+&#32;str_clr_table_line_x_5&#32;+&#32;str_clr_table_line_x_5&#32;+&#32;str_clr_table_line&#32;+&#32;str_clr_table_line&#32;+&#32;str_clr_table_line
+766 &#32;&#32;&#32;&#32;loc_clr_table_area&#32;=&#32;(11,0)
+767 
+768 &#32;&#32;&#32;&#32;write_stdscr(stdscr,str_clr_table_area,loc_clr_table_area)
+769 
+770 <emphasis class="keyword">def&#32;</emphasis>clear_container_area(stdscr):
+771 &#32;&#32;&#32;&#32;<emphasis class="comment">#container&#32;area:&#32;From&#32;0,120&#32;to&#32;50,160</emphasis>
+772 &#32;&#32;&#32;&#32;str_clr_table_line&#32;=&#32;<emphasis class="stringliteral">&quot;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\n&quot;</emphasis>
+773 &#32;&#32;&#32;&#32;str_clr_table_line_x_5&#32;=&#32;str_clr_table_line&#32;+&#32;str_clr_table_line&#32;&#32;+&#32;str_clr_table_line&#32;+&#32;<emphasis class="stringliteral">&quot;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&quot;</emphasis>
+774 &#32;&#32;&#32;&#32;loc_clr_table_area&#32;=&#32;(0,120)
+775 
+776 &#32;&#32;&#32;&#32;write_stdscr(stdscr,str_clr_table_line_x_5,loc_clr_table_area)
+777 
+778 <emphasis class="keyword">def&#32;</emphasis>clear_input_area(stdscr):
+779 &#32;&#32;&#32;&#32;<emphasis class="comment">#Input&#32;é&#32;do&#32;50,0&#32;ao&#32;55,120</emphasis>
+780 &#32;&#32;&#32;&#32;str_clr_table_line&#32;=&#32;<emphasis class="stringliteral">&quot;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\n&quot;</emphasis>
+781 &#32;&#32;&#32;&#32;str_clr_table_line_x_4&#32;=&#32;str_clr_table_line&#32;+&#32;str_clr_table_line&#32;+&#32;str_clr_table_line&#32;+&#32;<emphasis class="stringliteral">&quot;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&quot;</emphasis>
+782 &#32;&#32;&#32;&#32;loc_clr_table_area&#32;=&#32;(51,0)
+783 &#32;&#32;&#32;&#32;write_stdscr(stdscr,str_clr_table_line_x_4,loc_clr_table_area)
+784 
+785 <emphasis class="keyword">def&#32;</emphasis>draw_table(stdscr,table_container):
+786 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Draw&#32;a&#32;table&#32;in&#32;the&#32;table&#32;area&#32;from&#32;table_container&#32;data&apos;&apos;&apos;</emphasis>
+787 &#32;&#32;&#32;&#32;
+788 &#32;&#32;&#32;&#32;table&#32;=&#32;table_container.data
+789 
+790 &#32;&#32;&#32;&#32;
+791 
+792 
+793 &#32;&#32;&#32;&#32;cell_size&#32;=&#32;int(110/(table.bound_y&#32;+&#32;2))
+794 
+795 
+796 
+797 &#32;&#32;&#32;&#32;<emphasis class="comment">#Linhas&#32;e&#32;barras&#32;da&#32;tabela</emphasis>
+798 &#32;&#32;&#32;&#32;table_line&#32;=&#32;<emphasis class="stringliteral">&quot;+&quot;</emphasis>&#32;+&#32;drawline(table.bound_y&#32;*&#32;(cell_size+2)&#32;-&#32;1)&#32;+&#32;<emphasis class="stringliteral">&quot;+&quot;</emphasis>
+799 &#32;&#32;&#32;&#32;table_bar&#32;=&#32;drawbar(table.bound_x&#32;+1)
+800 
+801 &#32;&#32;&#32;&#32;loc_upper_table_line&#32;=&#32;(13,3)
+802 &#32;&#32;&#32;&#32;loc_lower_table_line&#32;=&#32;(13+table.bound_x+2,3)
+803 
+804 &#32;&#32;&#32;&#32;loc_left_bar&#32;=&#32;(14,3)
+805 &#32;&#32;&#32;&#32;loc_right_bar&#32;=&#32;(14,(table.bound_y)&#32;*&#32;(cell_size+2)&#32;+&#32;3)
+806 
+807 &#32;&#32;&#32;&#32;write_stdscr(stdscr,table_line,loc_upper_table_line)
+808 &#32;&#32;&#32;&#32;write_stdscr(stdscr,table_line,loc_lower_table_line)
+809 &#32;&#32;&#32;&#32;
+810 &#32;&#32;&#32;&#32;write_stdscr(stdscr,table_bar,loc_left_bar)
+811 &#32;&#32;&#32;&#32;write_stdscr(stdscr,table_bar,loc_right_bar)
+812 
+813 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;X&#32;<emphasis class="keywordflow">in</emphasis>&#32;range(table.bound_x):
+814 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;Y&#32;<emphasis class="keywordflow">in</emphasis>&#32;range&#32;(table.bound_y):
+815 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;loc&#32;=&#32;(loc_upper_table_line[0]+X+1,1+loc_upper_table_line[1]+Y*cell_size)
+816 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+817 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,<emphasis class="stringliteral">&quot;&#32;&quot;</emphasis>+&#32;str(table.table_data[X][Y].data)[:cell_size]&#32;+&#32;<emphasis class="stringliteral">&quot;&#32;&quot;</emphasis>,loc)
+818 
+819 <emphasis class="keyword">def&#32;</emphasis>draw_cell(stdscr,&#32;y&#32;,x&#32;,&#32;container):
+820 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Desenha&#32;celula&#32;na&#32;tela&apos;&apos;&apos;</emphasis>
+821 &#32;&#32;&#32;&#32;
+822 
+823 
+824 &#32;&#32;&#32;&#32;<emphasis class="comment">#+-------------------</emphasis>
+825 &#32;&#32;&#32;&#32;<emphasis class="comment">#|Key_row&#32;&#32;&#32;|&#32;Key_Col</emphasis>
+826 &#32;&#32;&#32;&#32;<emphasis class="comment">#|-------------------</emphasis>
+827 &#32;&#32;&#32;&#32;<emphasis class="comment">#|Key[-len-]|&#32;Data</emphasis>
+828 &#32;&#32;&#32;&#32;<emphasis class="comment">#+-------------------</emphasis>
+829 &#32;&#32;&#32;&#32;cell_container&#32;=&#32;container.data
+830 
+831 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;(cell_container.cell_type&#32;!=&#32;<emphasis class="stringliteral">&apos;Blank&apos;</emphasis>)&#32;<emphasis class="keywordflow">and</emphasis>&#32;(cell_container.cell_type&#32;!=&#32;<emphasis class="stringliteral">&apos;Merge&apos;</emphasis>)&#32;:
+832 
+833 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+834 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if(cell_container.cell_type&#32;==&#32;<emphasis class="stringliteral">&quot;Key&quot;</emphasis>):
+835 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;data&#32;=&#32;<emphasis class="stringliteral">&quot;&lt;Cell.child_nodes&gt;&quot;</emphasis>
+836 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key_row_data&#32;=&#32;str(cell_container.parent_node.data)
+837 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key&#32;=&#32;str(cell_container.data)
+838 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key_col_data&#32;=&#32;<emphasis class="stringliteral">&quot;Data&quot;</emphasis>
+839 
+840 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;elif(cell_container.cell_type&#32;==&#32;<emphasis class="stringliteral">&quot;Key_Col&quot;</emphasis>):
+841 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;data&#32;=&#32;<emphasis class="stringliteral">&quot;&lt;Cell.child_nodes&gt;&quot;</emphasis>
+842 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key_row_data&#32;=&#32;str(cell_container.table_label)
+843 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key&#32;=&#32;str(cell_container.data)
+844 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key_col_data&#32;=&#32;<emphasis class="stringliteral">&quot;Data&quot;</emphasis>
+845 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+846 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+847 
+848 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key_col_first_parent&#32;=&#32;cell_container.key_col.parent_node
+849 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key_col_second_parent&#32;=&#32;key_col_first_parent.parent_node
+850 &#32;&#32;&#32;&#32;
+851 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key_col_label_t&#32;=&#32;str(aux_lib.get_name(cell_container))
+852 
+853 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Label&#32;truncada&#32;par&#32;6&#32;char</emphasis>
+854 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key_col_label_t&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>.join(list(key_col_label_t)[:5])
+855 
+856 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Segundo&#32;pai&#32;trunkado&#32;para&#32;6&#32;char</emphasis>
+857 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key_col_second_parent_t&#32;=&#32;str(key_col_second_parent.data)
+858 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key_col_second_parent_t&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>.join(list(key_col_second_parent_t)[:5])
+859 
+860 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Primeiro&#32;pai&#32;trunkada&#32;para&#32;8&#32;char</emphasis>
+861 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key_col_first_parent_t&#32;=&#32;str(key_col_first_parent.data)
+862 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key_col_first_parent_t&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>.join(list(key_col_first_parent_t)[:8])
+863 
+864 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Se&#32;segundo&#32;pai&#32;é&#32;label</emphasis>
+865 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if(key_col_label_t&#32;==&#32;key_col_second_parent_t):
+866 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key_col_data&#32;=&#32;key_col_label_t&#32;+&#32;<emphasis class="stringliteral">&quot;-&quot;</emphasis>&#32;+&#32;key_col_first_parent_t&#32;+&#32;<emphasis class="stringliteral">&quot;-&quot;</emphasis>&#32;+&#32;str(cell_container.key_col.data)
+867 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+868 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key_col_data&#32;=&#32;key_col_label_t&#32;+&#32;<emphasis class="stringliteral">&quot;-&quot;</emphasis>&#32;+&#32;key_col_second_parent_t&#32;+&#32;<emphasis class="stringliteral">&quot;-&quot;</emphasis>&#32;+&#32;key_col_first_parent_t&#32;+&#32;<emphasis class="stringliteral">&quot;-&quot;</emphasis>&#32;+&#32;str(cell_container.key_col.data)
+869 
+870 
+871 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#key_col_data&#32;=&#32;str(cell_container.key_col.data)</emphasis>
+872 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key_row_data&#32;=&#32;str(cell_container.key_row.parent_node.data)
+873 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;data&#32;=&#32;str(cell_container.data)
+874 
+875 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key&#32;=&#32;str(cell_container.parent_node.data)
+876 
+877 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key_len&#32;=&#32;len(list(key))
+878 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;data_len&#32;=&#32;len(list(data))
+879 &#32;&#32;&#32;&#32;
+880 
+881 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Trunka&#32;tamanhos</emphasis>
+882 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key_col_data&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>.join(list(key_col_data)[:(38&#32;-&#32;(key_len+1))])
+883 
+884 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;key_row_data&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>.join(list(key_row_data)[:key_len])
+885 
+886 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+887 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;loc_upper_cell_line&#32;=&#32;(y,x)
+888 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;loc_middle_cell_line&#32;=&#32;(y+2,x)
+889 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;loc_lower_cell_line&#32;=&#32;(y+4,x)
+890 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;loc_left_bar&#32;=&#32;(y,x)
+891 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;loc_right_bar&#32;=&#32;(y,x+38)
+892 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;loc_middle_bar&#32;=&#32;(y,x+key_len+1)
+893 &#32;&#32;&#32;&#32;
+894 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_middle_bar&#32;=&#32;<emphasis class="stringliteral">&quot;-\n|\n-\n|\n-&quot;</emphasis>
+895 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_line&#32;=&#32;drawline(38)
+896 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_bar&#32;=&#32;<emphasis class="stringliteral">&quot;+\n&quot;</emphasis>&#32;+drawbar(3)&#32;+&#32;<emphasis class="stringliteral">&quot;+\n&quot;</emphasis>
+897 
+898 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,key_row_data,(loc_left_bar[0]&#32;+&#32;1,&#32;loc_left_bar[1]&#32;+&#32;1))
+899 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,key_col_data,(loc_left_bar[0]&#32;+&#32;1,&#32;loc_middle_bar[1]&#32;+&#32;1))
+900 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,key,(loc_left_bar[0]&#32;+&#32;3,&#32;loc_left_bar[1]&#32;+&#32;1))
+901 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,data,(loc_left_bar[0]&#32;+&#32;3,&#32;loc_middle_bar[1]&#32;+&#32;1))
+902 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_line,loc_upper_cell_line)
+903 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_line,loc_middle_cell_line)
+904 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_line,loc_lower_cell_line)
+905 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_bar,loc_right_bar)
+906 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_bar,loc_upper_cell_line)
+907 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_middle_bar,loc_middle_bar)
+908 
+909 <emphasis class="keyword">def&#32;</emphasis>draw_container(stdscr,&#32;container):
+910 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Desenha&#32;container&#32;na&#32;tela,&#32;na&#32;area&#32;de&#32;tabela&apos;&apos;&apos;</emphasis>
+911 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;container.type&#32;==&#32;<emphasis class="stringliteral">&apos;Table&apos;</emphasis>:
+912 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clear_table_area(stdscr)
+913 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;draw_table(stdscr,container)
+914 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;container.type&#32;==&#32;<emphasis class="stringliteral">&apos;Cell&apos;</emphasis>:
+915 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clear_table_area(stdscr)
+916 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;draw_cell(stdscr,13,3,container)
+917 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;container.type&#32;==&#32;<emphasis class="stringliteral">&apos;Cell_List&apos;</emphasis>:
+918 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clear_table_area(stdscr)
+919 
+920 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Desenha&#32;as&#32;6&#32;primeiras&#32;celulas&#32;se&#32;lista</emphasis>
+921 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;y_pos&#32;=&#32;13
+922 
+923 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Limpa&#32;lista&#32;de&#32;celulas&#32;vazias</emphasis>
+924 
+925 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cleaned_list&#32;=&#32;[]
+926 
+927 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;cell&#32;<emphasis class="keywordflow">in</emphasis>&#32;container.data:
+928 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;(cell.cell_type&#32;!=&#32;<emphasis class="stringliteral">&quot;Blank&quot;</emphasis>)&#32;<emphasis class="keywordflow">and</emphasis>&#32;(cell.cell_type&#32;!=&#32;<emphasis class="stringliteral">&quot;Merge&quot;</emphasis>):
+929 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cleaned_list.append(cell)
+930 
+931 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;t_list&#32;=&#32;cleaned_list[:7]
+932 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;y_list&#32;=&#32;cleaned_list[7:15]
+933 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;u_list&#32;=&#32;cleaned_list[15:23]
+934 
+935 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;cell&#32;<emphasis class="keywordflow">in</emphasis>&#32;t_list:
+936 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;type(cell)&#32;==&#32;<link linkend="class_tabela_1_1_cell">aux_lib.Cell</link>:
+937 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;draw_cell(stdscr,y_pos,3,<link linkend="classmenus_1_1_container">Container</link>(cell))
+938 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;(cell.cell_type&#32;!=&#32;<emphasis class="stringliteral">&quot;Blank&quot;</emphasis>)&#32;<emphasis class="keywordflow">and</emphasis>&#32;(cell.cell_type&#32;!=&#32;<emphasis class="stringliteral">&quot;Merge&quot;</emphasis>):
+939 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;y_pos&#32;=&#32;y_pos&#32;+&#32;4
+940 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+941 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;y_pos&#32;=&#32;13
+942 
+943 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;cell&#32;<emphasis class="keywordflow">in</emphasis>&#32;y_list:
+944 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;type(cell)&#32;==&#32;<link linkend="class_tabela_1_1_cell">aux_lib.Cell</link>:
+945 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;draw_cell(stdscr,y_pos,41,<link linkend="classmenus_1_1_container">Container</link>(cell))
+946 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;(cell.cell_type&#32;!=&#32;<emphasis class="stringliteral">&quot;Blank&quot;</emphasis>)&#32;<emphasis class="keywordflow">and</emphasis>&#32;(cell.cell_type&#32;!=&#32;<emphasis class="stringliteral">&quot;Merge&quot;</emphasis>):
+947 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;y_pos&#32;=&#32;y_pos&#32;+&#32;4
+948 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+949 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;y_pos&#32;=&#32;13
+950 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;cell&#32;<emphasis class="keywordflow">in</emphasis>&#32;u_list:
+951 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;type(cell)&#32;==&#32;<link linkend="class_tabela_1_1_cell">aux_lib.Cell</link>:
+952 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;draw_cell(stdscr,y_pos,79,<link linkend="classmenus_1_1_container">Container</link>(cell))
+953 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;(cell.cell_type&#32;!=&#32;<emphasis class="stringliteral">&quot;Blank&quot;</emphasis>)&#32;<emphasis class="keywordflow">and</emphasis>&#32;(cell.cell_type&#32;!=&#32;<emphasis class="stringliteral">&quot;Merge&quot;</emphasis>):
+954 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;y_pos&#32;=&#32;y_pos&#32;+&#32;4
+955 
+956 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;container.type&#32;==&#32;<emphasis class="stringliteral">&quot;Data_Dict&quot;</emphasis>:
+957 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;clear_table_area(stdscr)
+958 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;y_pos&#32;=&#32;13
+959 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;x_pos&#32;=&#32;2
+960 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+961 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;key,&#32;value&#32;<emphasis class="keywordflow">in</emphasis>&#32;container.data.items():
+962 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_output&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>.join(list(str(key))[:90])&#32;+&#32;<emphasis class="stringliteral">&quot;:&quot;</emphasis>&#32;+&#32;str(value)
+963 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#trunka</emphasis>
+964 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;str_output&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>.join(list(str_output)[:114])
+965 
+966 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Trata&#32;fim&#32;da&#32;tabela</emphasis>
+967 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;if(y_pos&#32;&gt;&#32;48):
+968 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">break</emphasis>
+969 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+970 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+971 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+972 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;write_stdscr(stdscr,str_output,(y_pos,x_pos))
+973 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;y_pos&#32;=&#32;y_pos&#32;+&#32;1
+974 
+975 <emphasis class="keyword">def&#32;</emphasis>query_table(query,&#32;container_i,&#32;container_o):
+976 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Parses&#32;a&#32;string&#32;into&#32;a&#32;query&#32;and&#32;query&#32;a&#32;table&apos;&apos;&apos;</emphasis>
+977 
+978 &#32;&#32;&#32;&#32;<emphasis class="comment">#Queries&#32;são&#32;formatadas&#32;da&#32;seguinte&#32;maneira:</emphasis>
+979 &#32;&#32;&#32;&#32;<emphasis class="comment">#&#32;Separador&#32;de&#32;queries&#32;-&gt;&#32;#</emphasis>
+980 &#32;&#32;&#32;&#32;<emphasis class="comment">#&#32;Separador&#32;de&#32;&lt;tipo,&#32;query&gt;&#32;&#32;-&gt;&#32;;</emphasis>
+981 &#32;&#32;&#32;&#32;<emphasis class="comment">#&#32;Dado&#32;contido&#32;no&#32;container&#32;&quot;n&quot;(somente&#32;no&#32;campo&#32;de&#32;dado&#32;da&#32;query)&#32;-&gt;&#32;!</emphasis>
+982 
+983 &#32;&#32;&#32;&#32;<emphasis class="comment">#Separa&#32;queries</emphasis>
+984 &#32;&#32;&#32;&#32;query_list&#32;=&#32;query.split(<emphasis class="stringliteral">&quot;#&quot;</emphasis>)
+985 
+986 &#32;&#32;&#32;&#32;<emphasis class="comment">#Executa&#32;as&#32;queries&#32;sequencialmente&#32;</emphasis>
+987 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;item&#32;<emphasis class="keywordflow">in</emphasis>&#32;query_list:
+988 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(query_key,query_data)&#32;&#32;=&#32;item.split(<emphasis class="stringliteral">&apos;;&apos;</emphasis>)
+989 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;container_o&#32;=&#32;__query_table(query_key,query_data,container_i,container_o)
+990 &#32;&#32;&#32;&#32;
+991 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;container_o
+992 &#32;&#32;
+993 <emphasis class="keyword">def&#32;</emphasis>__query_table(query_key,query_data,container,container_o):
+994 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Função&#32;auxiliar&#32;para&#32;executar&#32;uma&#32;query&#32;sobre&#32;o&#32;container&#32;recebido.&#32;Salva&#32;o&#32;resultado&#32;da&#32;query&#32;no&#32;proprio&#32;container.&apos;&apos;&apos;</emphasis>
+995 &#32;&#32;&#32;&#32;
+996 &#32;&#32;&#32;&#32;cell_container&#32;=&#32;[]
+997 &#32;&#32;&#32;&#32;<emphasis class="comment">#Lista&#32;de&#32;queries:</emphasis>
+998 &#32;&#32;&#32;&#32;<emphasis class="comment">#key_col;&lt;null&#32;|&#32;col_name&gt;&#32;-&gt;&#32;Retorna&#32;todas&#32;colunas&#32;chave&#32;da&#32;tabela&#32;se&#32;nulo,&#32;ou&#32;todos&#32;os&#32;dados&#32;da&#32;coluna&#32;especificada</emphasis>
+999 &#32;&#32;&#32;&#32;<emphasis class="comment">#key_row;&lt;null&#32;|a,b&#32;&gt;&#32;-&gt;&#32;Retorna&#32;todas&#32;as&#32;chaves&#32;da&#32;tabela&#32;se&#32;nulo,&#32;ou&#32;todas&#32;as&#32;chaves&#32;de&#32;indice&#32;entre&#32;a&#32;e&#32;b</emphasis>
+1000 &#32;&#32;&#32;&#32;<emphasis class="comment">#get_cell;&lt;y,x&gt;&#32;-&gt;&#32;Retorna&#32;celula&#32;na&#32;posicao&#32;y,x</emphasis>
+1001 &#32;&#32;&#32;&#32;<emphasis class="comment">#insert_cell;&lt;y,x&gt;&#32;-&gt;Inserts&#32;output&#32;cell&#32;into&#32;table&#32;and&#32;returns&#32;the&#32;inserted&#32;cell</emphasis>
+1002 &#32;&#32;&#32;&#32;<emphasis class="comment">#delete_cell;&lt;y,x&gt;&#32;-&gt;&#32;Deletes&#32;cell&#32;at&#32;X,y&#32;and&#32;returns&#32;the&#32;deleted&#32;cell</emphasis>
+1003 &#32;&#32;&#32;&#32;<emphasis class="comment">#get_cells;&lt;uy,ux,ly,lx&gt;&#32;-&gt;&#32;Gets&#32;a&#32;list&#32;containing&#32;the&#32;cells&#32;starting&#32;at&#32;&lt;uy,ux&gt;&#32;and&#32;ending&#32;at&#32;&lt;ly,lx&gt;</emphasis>
+1004 
+1005 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;key_col&apos;</emphasis>:
+1006 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;<emphasis class="keywordflow">not</emphasis>&#32;bool(query_data):
+1007 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(container.data.key_cols)
+1008 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+1009 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+1010 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;item&#32;<emphasis class="keywordflow">in</emphasis>&#32;container.data.key_cols:
+1011 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;item.data&#32;==&#32;query_data:
+1012 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;n_item&#32;<emphasis class="keywordflow">in</emphasis>&#32;item.child_nodes:
+1013 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cell_container.append(n_item)
+1014 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Remove&#32;duplicados</emphasis>
+1015 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cell_container&#32;=&#32;list(set(cell_container))
+1016 
+1017 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(cell_container)
+1018 &#32;&#32;&#32;&#32;<emphasis class="comment">#key_row;&lt;null&#32;|a,b&#32;&gt;&#32;-&gt;&#32;Retorna&#32;todas&#32;as&#32;chaves&#32;da&#32;tabela&#32;se&#32;nulo,&#32;ou&#32;todas&#32;as&#32;chaves&#32;de&#32;indice&#32;entre&#32;a&#32;e&#32;b</emphasis>
+1019 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;query_key&#32;==<emphasis class="stringliteral">&apos;key_row&apos;</emphasis>:
+1020 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;<emphasis class="keywordflow">not</emphasis>&#32;bool(query_data):
+1021 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(container.data.key_row.child_nodes)
+1022 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+1023 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(a,b)&#32;=&#32;query_data.split(<emphasis class="stringliteral">&apos;,&apos;</emphasis>)
+1024 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;key,item&#32;<emphasis class="keywordflow">in</emphasis>&#32;enumerate(container.data.key_row.child_nodes):
+1025 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;key&#32;&gt;=&#32;int(a)&#32;<emphasis class="keywordflow">and</emphasis>&#32;key&#32;&lt;&#32;int(b):
+1026 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cell_container.append(item)
+1027 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(cell_container)
+1028 
+1029 &#32;&#32;&#32;&#32;<emphasis class="comment">#get_cell;&lt;y,x&gt;&#32;-&gt;&#32;Retorna&#32;celula&#32;na&#32;posicao&#32;y,x</emphasis>
+1030 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;get_cell&apos;</emphasis>:
+1031 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(y,x)&#32;=&#32;query_data.split(<emphasis class="stringliteral">&apos;,&apos;</emphasis>)
+1032 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(container.data.table_data[int(y)][int(x)])
+1033 
+1034 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;get_cells&apos;</emphasis>:
+1035 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(uy,ux,ly,lx)&#32;=&#32;query_data.split(<emphasis class="stringliteral">&apos;,&apos;</emphasis>)
+1036 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;offset_y&#32;=&#32;int(ly)-int(uy)&#32;+&#32;1
+1037 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;offset_x&#32;=&#32;int(lx)-int(ux)&#32;+&#32;1
+1038 
+1039 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;y&#32;<emphasis class="keywordflow">in</emphasis>&#32;range(offset_y):
+1040 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;x&#32;<emphasis class="keywordflow">in</emphasis>&#32;range&#32;(offset_x):
+1041 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cell_container.append(container.data.table_data[int(uy)+y][int(ux)+x])
+1042 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(cell_container)
+1043 
+1044 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;insert_cell&apos;</emphasis>:
+1045 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(y,x)&#32;=&#32;query_data.split(<emphasis class="stringliteral">&apos;,&apos;</emphasis>)
+1046 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;container.data.table_data[int(y)][int(x)]&#32;=&#32;container_o.data
+1047 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(container.data.table_data[int(y)][int(x)])
+1048 
+1049 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;delete_cell&apos;</emphasis>:
+1050 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(y,x)&#32;=&#32;query_data.split(<emphasis class="stringliteral">&apos;,&apos;</emphasis>)
+1051 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Marca&#32;como&#32;deletedo</emphasis>
+1052 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ret&#32;=&#32;<link linkend="classmenus_1_1_container">Container</link>(container.data.table_data[int(y)][int(x)])
+1053 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;container.data.table_data[int(y)][int(x)].cell_type&#32;=&#32;<emphasis class="stringliteral">&quot;Blank&quot;</emphasis>
+1054 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;container.data.table_data[int(y)][int(x)].data&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>
+1055 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+1056 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;ret
+1057 
+1058 <emphasis class="keyword">def&#32;</emphasis>query_dict(query,&#32;container_i,&#32;container_o):
+1059 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Parses&#32;a&#32;string&#32;into&#32;a&#32;query&#32;and&#32;query&#32;a&#32;table&apos;&apos;&apos;</emphasis>
+1060 
+1061 &#32;&#32;&#32;&#32;<emphasis class="comment">#Queries&#32;são&#32;formatadas&#32;da&#32;seguinte&#32;maneira:</emphasis>
+1062 &#32;&#32;&#32;&#32;<emphasis class="comment">#&#32;Separador&#32;de&#32;queries&#32;-&gt;&#32;#</emphasis>
+1063 &#32;&#32;&#32;&#32;<emphasis class="comment">#&#32;Separador&#32;de&#32;&lt;tipo,&#32;query&gt;&#32;&#32;-&gt;&#32;;</emphasis>
+1064 &#32;&#32;&#32;&#32;<emphasis class="comment">#&#32;Dado&#32;contido&#32;no&#32;container&#32;&quot;n&quot;(somente&#32;no&#32;campo&#32;de&#32;dado&#32;da&#32;query)&#32;-&gt;&#32;!</emphasis>
+1065 
+1066 &#32;&#32;&#32;&#32;<emphasis class="comment">#Separa&#32;queries</emphasis>
+1067 &#32;&#32;&#32;&#32;query_list&#32;=&#32;query.split(<emphasis class="stringliteral">&quot;#&quot;</emphasis>)
+1068 
+1069 &#32;&#32;&#32;&#32;<emphasis class="comment">#Executa&#32;as&#32;queries&#32;sequencialmente&#32;</emphasis>
+1070 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;item&#32;<emphasis class="keywordflow">in</emphasis>&#32;query_list:
+1071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(query_key,query_data)&#32;&#32;=&#32;item.split(<emphasis class="stringliteral">&apos;;&apos;</emphasis>)
+1072 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;container_o&#32;=&#32;__query_dict(query_key,query_data,container_i,container_o)
+1073 &#32;&#32;&#32;&#32;
+1074 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;container_o
+1075 
+1076 <emphasis class="keyword">def&#32;</emphasis>__query_dict(query_key,query_data,container,container_o):
+1077 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Função&#32;auxiliar&#32;para&#32;executar&#32;uma&#32;query&#32;sobre&#32;o&#32;container&#32;recebido.&#32;Salva&#32;o&#32;resultado&#32;da&#32;query&#32;no&#32;proprio&#32;container.&apos;&apos;&apos;</emphasis>
+1078 &#32;&#32;&#32;&#32;cell_container&#32;=&#32;[]
+1079 
+1080 &#32;&#32;&#32;&#32;<emphasis class="comment">#lista&#32;de&#32;queries:</emphasis>
+1081 &#32;&#32;&#32;&#32;<emphasis class="comment">#pop;&lt;null&gt;&#32;remove&#32;a&#32;random&#32;item&#32;from&#32;dict</emphasis>
+1082 
+1083 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;pop&apos;</emphasis>:
+1084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(container.data.popitem()[1])
+1085 &#32;&#32;&#32;&#32;
+1086 <emphasis class="keyword">def&#32;</emphasis>query_node(query,&#32;container_i,&#32;container_o):
+1087 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Parses&#32;a&#32;string&#32;into&#32;a&#32;query&#32;and&#32;query&#32;a&#32;node&apos;&apos;&apos;</emphasis>
+1088 
+1089 &#32;&#32;&#32;&#32;<emphasis class="comment">#Queries&#32;são&#32;formatadas&#32;da&#32;seguinte&#32;maneira:</emphasis>
+1090 &#32;&#32;&#32;&#32;<emphasis class="comment">#&#32;Separador&#32;de&#32;queries&#32;-&gt;&#32;#</emphasis>
+1091 &#32;&#32;&#32;&#32;<emphasis class="comment">#&#32;Separador&#32;de&#32;&lt;tipo,&#32;query&gt;&#32;&#32;-&gt;&#32;;</emphasis>
+1092 &#32;&#32;&#32;&#32;<emphasis class="comment">#&#32;Dado&#32;contido&#32;no&#32;container&#32;&quot;n&quot;(somente&#32;no&#32;campo&#32;de&#32;dado&#32;da&#32;query)&#32;-&gt;&#32;!</emphasis>
+1093 
+1094 &#32;&#32;&#32;&#32;<emphasis class="comment">#Separa&#32;queries</emphasis>
+1095 &#32;&#32;&#32;&#32;query_list&#32;=&#32;query.split(<emphasis class="stringliteral">&quot;#&quot;</emphasis>)
+1096 
+1097 &#32;&#32;&#32;&#32;<emphasis class="comment">#Executa&#32;as&#32;queries&#32;sequencialmente&#32;</emphasis>
+1098 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;item&#32;<emphasis class="keywordflow">in</emphasis>&#32;query_list:
+1099 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(query_key,query_data)&#32;&#32;=&#32;item.split(<emphasis class="stringliteral">&apos;;&apos;</emphasis>)
+1100 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;container_o&#32;=&#32;__query_node(query_key,query_data,container_i,container_o)
+1101 &#32;&#32;&#32;&#32;
+1102 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;container_o
+1103 
+1104 <emphasis class="keyword">def&#32;</emphasis>__query_node(query_key,query_data,container,container_o):
+1105 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Função&#32;auxiliar&#32;para&#32;executar&#32;uma&#32;query&#32;sobre&#32;o&#32;container&#32;recebido.&#32;Salva&#32;o&#32;resultado&#32;da&#32;query&#32;no&#32;proprio&#32;container.&apos;&apos;&apos;</emphasis>
+1106 &#32;&#32;&#32;&#32;cell_container&#32;=&#32;[]
+1107 
+1108 &#32;&#32;&#32;&#32;<emphasis class="comment">#lista&#32;de&#32;queries:</emphasis>
+1109 &#32;&#32;&#32;&#32;<emphasis class="comment">#get_all;&lt;null&gt;&#32;get&#32;all&#32;data&#32;below&#32;a&#32;node</emphasis>
+1110 
+1111 
+1112 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;get_all&apos;</emphasis>:
+1113 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ret&#32;=&#32;aux_lib.get_all_data(container.data)
+1114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(ret)
+1115 
+1116 <emphasis class="keyword">def&#32;</emphasis>query_list(query,&#32;container_i,&#32;container_o):
+1117 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Parses&#32;a&#32;string&#32;into&#32;a&#32;query&#32;and&#32;query&#32;a&#32;list&apos;&apos;&apos;</emphasis>
+1118 
+1119 &#32;&#32;&#32;&#32;<emphasis class="comment">#Queries&#32;são&#32;formatadas&#32;da&#32;seguinte&#32;maneira:</emphasis>
+1120 &#32;&#32;&#32;&#32;<emphasis class="comment">#&#32;Separador&#32;de&#32;queries&#32;-&gt;&#32;#</emphasis>
+1121 &#32;&#32;&#32;&#32;<emphasis class="comment">#&#32;Separador&#32;de&#32;&lt;tipo,&#32;query&gt;&#32;&#32;-&gt;&#32;;</emphasis>
+1122 &#32;&#32;&#32;&#32;<emphasis class="comment">#&#32;Dado&#32;contido&#32;no&#32;container&#32;&quot;n&quot;(somente&#32;no&#32;campo&#32;de&#32;dado&#32;da&#32;query)&#32;-&gt;&#32;!</emphasis>
+1123 
+1124 &#32;&#32;&#32;&#32;<emphasis class="comment">#Separa&#32;queries</emphasis>
+1125 &#32;&#32;&#32;&#32;query_list&#32;=&#32;query.split(<emphasis class="stringliteral">&quot;#&quot;</emphasis>)
+1126 
+1127 &#32;&#32;&#32;&#32;<emphasis class="comment">#Executa&#32;as&#32;queries&#32;sequencialmente&#32;</emphasis>
+1128 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;item&#32;<emphasis class="keywordflow">in</emphasis>&#32;query_list:
+1129 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(query_key,query_data)&#32;&#32;=&#32;item.split(<emphasis class="stringliteral">&apos;;&apos;</emphasis>)
+1130 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;container_o&#32;=&#32;__query_list(query_key,query_data,container_i,container_o)
+1131 &#32;&#32;&#32;&#32;
+1132 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;container_o
+1133 
+1134 <emphasis class="keyword">def&#32;</emphasis>__query_list(query_key,query_data,container,container_o):
+1135 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Função&#32;auxiliar&#32;para&#32;executar&#32;uma&#32;query&#32;sobre&#32;o&#32;container&#32;recebido.&#32;Salva&#32;o&#32;resultado&#32;da&#32;query&#32;no&#32;proprio&#32;container.&apos;&apos;&apos;</emphasis>
+1136 &#32;&#32;&#32;&#32;cell_container&#32;=&#32;[]
+1137 
+1138 &#32;&#32;&#32;&#32;<emphasis class="comment">#lista&#32;de&#32;queries:</emphasis>
+1139 &#32;&#32;&#32;&#32;<emphasis class="comment">#unpack;&lt;null&gt;&#32;-&gt;&#32;creates&#32;a&#32;single&#32;list&#32;with&#32;every&#32;child&#32;in&#32;the&#32;list</emphasis>
+1140 &#32;&#32;&#32;&#32;<emphasis class="comment">#first;&lt;null&gt;&#32;-&gt;&#32;pop&#32;the&#32;first&#32;item&#32;in&#32;the&#32;list</emphasis>
+1141 &#32;&#32;&#32;&#32;<emphasis class="comment">#rest;&lt;null&gt;&#32;-&gt;&#32;returns&#32;listw/o&#32;first&#32;item</emphasis>
+1142 &#32;&#32;&#32;&#32;<emphasis class="comment">#select;&lt;index&gt;&#32;-&gt;&#32;copy&#32;item&#32;from&#32;index</emphasis>
+1143 &#32;&#32;&#32;&#32;<emphasis class="comment">#remove;&lt;index&gt;&#32;-&gt;&#32;remove&#32;selected&#32;item</emphasis>
+1144 
+1145 
+1146 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;unpack&apos;</emphasis>:
+1147 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;item&#32;<emphasis class="keywordflow">in</emphasis>&#32;container.data:
+1148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;child&#32;<emphasis class="keywordflow">in</emphasis>&#32;item.child_nodes:
+1149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;cell_container.append(child)
+1150 
+1151 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;first&apos;</emphasis>:
+1152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(container.data.pop(0))
+1153 
+1154 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;rest&apos;</emphasis>:
+1155 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(container.data[1:])
+1156 
+1157 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;select&apos;</emphasis>:
+1158 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(container.data[int(query_data)])
+1159 
+1160 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;remove&apos;</emphasis>:
+1161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(container.data.pop(int(query_data)))
+1162 &#32;&#32;&#32;&#32;
+1163 <emphasis class="keyword">def&#32;</emphasis>query_cell(query,&#32;container_i,&#32;container_o):
+1164 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Parses&#32;a&#32;string&#32;into&#32;a&#32;query&#32;and&#32;query&#32;a&#32;cell&apos;&apos;&apos;</emphasis>
+1165 
+1166 &#32;&#32;&#32;&#32;<emphasis class="comment">#Queries&#32;são&#32;formatadas&#32;da&#32;seguinte&#32;maneira:</emphasis>
+1167 &#32;&#32;&#32;&#32;<emphasis class="comment">#&#32;Separador&#32;de&#32;queries&#32;-&gt;&#32;#</emphasis>
+1168 &#32;&#32;&#32;&#32;<emphasis class="comment">#&#32;Separador&#32;de&#32;&lt;tipo,&#32;query&gt;&#32;&#32;-&gt;&#32;;</emphasis>
+1169 &#32;&#32;&#32;&#32;<emphasis class="comment">#&#32;Dado&#32;contido&#32;no&#32;container&#32;&quot;n&quot;(somente&#32;no&#32;campo&#32;de&#32;dado&#32;da&#32;query)&#32;-&gt;&#32;!</emphasis>
+1170 
+1171 &#32;&#32;&#32;&#32;<emphasis class="comment">#Separa&#32;queries</emphasis>
+1172 &#32;&#32;&#32;&#32;query_list&#32;=&#32;query.split(<emphasis class="stringliteral">&quot;#&quot;</emphasis>)
+1173 
+1174 &#32;&#32;&#32;&#32;<emphasis class="comment">#Executa&#32;as&#32;queries&#32;sequencialmente&#32;</emphasis>
+1175 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;item&#32;<emphasis class="keywordflow">in</emphasis>&#32;query_list:
+1176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(query_key,query_data)&#32;&#32;=&#32;item.split(<emphasis class="stringliteral">&apos;;&apos;</emphasis>)
+1177 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;container_o&#32;=&#32;__query_cell(query_key,query_data,container_i,container_o)
+1178 &#32;&#32;&#32;&#32;
+1179 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;container_o
+1180 
+1181 <emphasis class="keyword">def&#32;</emphasis>__query_cell(query_key,query_data,container,container_o):
+1182 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Função&#32;auxiliar&#32;para&#32;executar&#32;uma&#32;query&#32;sobre&#32;o&#32;container&#32;recebido.&#32;Salva&#32;o&#32;resultado&#32;da&#32;query&#32;no&#32;proprio&#32;container.&apos;&apos;&apos;</emphasis>
+1183 &#32;&#32;&#32;&#32;cell_container&#32;=&#32;[]
+1184 
+1185 &#32;&#32;&#32;&#32;<emphasis class="comment">#lista&#32;de&#32;queries:</emphasis>
+1186 &#32;&#32;&#32;&#32;<emphasis class="comment">#edit&lt;data&gt;&#32;-&gt;&#32;change&#32;a&#32;cell&#32;data</emphasis>
+1187 
+1188 
+1189 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;edit&apos;</emphasis>:
+1190 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;container.data.data&#32;=&#32;query_data
+1191 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ret&#32;=&#32;container.data
+1192 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(ret)
+1193 
+1194 <emphasis class="keyword">def&#32;</emphasis>query_run(query,&#32;container_i,container_o,db):
+1195 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Runs&#32;a&#32;query&#32;depending&#32;on&#32;input&#32;object&#32;type&apos;&apos;&apos;</emphasis>
+1196 
+1197 &#32;&#32;&#32;&#32;<emphasis class="comment">#db&#32;queries&#32;are&#32;started&#32;by&#32;@</emphasis>
+1198 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;<emphasis class="stringliteral">&apos;@&apos;</emphasis>&#32;<emphasis class="keywordflow">in</emphasis>&#32;query[0]:
+1199 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;container_o&#32;=&#32;query_db(query[1:],container_i,container_o,db)
+1200 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+1201 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;(container_i.type&#32;==&#32;<emphasis class="stringliteral">&quot;Table&quot;</emphasis>):
+1202 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;container_o&#32;=&#32;query_table(query,container_i,container_o)
+1203 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;(container_i.type&#32;==&#32;<emphasis class="stringliteral">&quot;Data_Dict&quot;</emphasis>):
+1204 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;container_o&#32;=&#32;query_dict(query,container_i,container_o)
+1205 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;(container_i.type&#32;==&#32;<emphasis class="stringliteral">&quot;Node&quot;</emphasis>):
+1206 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;container_o&#32;=&#32;query_node(query,container_i,container_o)
+1207 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;(container_i.type&#32;==&#32;<emphasis class="stringliteral">&quot;Cell_List&quot;</emphasis>):
+1208 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;container_o&#32;=&#32;query_list(query,container_i,container_o)
+1209 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;(container_i.type&#32;==&#32;<emphasis class="stringliteral">&quot;Cell&quot;</emphasis>):
+1210 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;container_o&#32;=&#32;query_cell(query,container_i,container_o)
+1211 
+1212 
+1213 
+1214 &#32;&#32;&#32;&#32;
+1215 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+1216 
+1217 
+1218 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;container_o
+1219 
+1220 <emphasis class="keyword">def&#32;</emphasis>query_db(query,&#32;container_i,&#32;container_o,&#32;db):
+1221 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Parses&#32;a&#32;string&#32;into&#32;a&#32;query&#32;and&#32;query&#32;a&#32;table&apos;&apos;&apos;</emphasis>
+1222 &#32;&#32;&#32;&#32;query_list&#32;=&#32;query.split(<emphasis class="stringliteral">&quot;#&quot;</emphasis>)
+1223 
+1224 &#32;&#32;&#32;&#32;<emphasis class="comment">#Executa&#32;as&#32;queries&#32;sequencialmente&#32;</emphasis>
+1225 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">for</emphasis>&#32;item&#32;<emphasis class="keywordflow">in</emphasis>&#32;query_list:
+1226 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(query_key,query_data)&#32;&#32;=&#32;item.split(<emphasis class="stringliteral">&apos;;&apos;</emphasis>)
+1227 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;container_o&#32;=&#32;__query_db(query_key,query_data,container_i,container_o,&#32;db)
+1228 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;container_o
+1229 
+1230 <emphasis class="keyword">def&#32;</emphasis>__query_db(query_key,query_data,container,container_o,&#32;db):
+1231 
+1232 &#32;&#32;&#32;&#32;<emphasis class="comment">#Lista&#32;de&#32;queries:</emphasis>
+1233 &#32;&#32;&#32;&#32;<emphasis class="comment">#&lt;trie&gt;&#32;options&#32;:&#32;tables,key_rows,key_cols,super_key</emphasis>
+1234 &#32;&#32;&#32;&#32;<emphasis class="comment">#pre;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Prefix&#32;search&#32;on&#32;DB.trie</emphasis>
+1235 &#32;&#32;&#32;&#32;<emphasis class="comment">#suf;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Suffix&#32;search&#32;on&#32;DB.trie</emphasis>
+1236 &#32;&#32;&#32;&#32;<emphasis class="comment">#reg;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;RegExp&#32;search&#32;on&#32;DB.trie</emphasis>
+1237 &#32;&#32;&#32;&#32;<emphasis class="comment">#get_all;&lt;trie&gt;&#32;-&gt;Get&#32;all&#32;tables&#32;in&#32;a&#32;db.trie</emphasis>
+1238 &#32;&#32;&#32;&#32;<emphasis class="comment">#insert;&lt;trie&gt;&#32;-&gt;&#32;Inserts&#32;input&#32;container&#32;into&#32;the&#32;trie(table&#32;only).&#32;Returns&#32;inserted&#32;table</emphasis>
+1239 &#32;&#32;&#32;&#32;<emphasis class="comment">#get;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Returns&#32;table&#32;where&#32;table_label&#32;==&#32;string</emphasis>
+1240 &#32;&#32;&#32;&#32;<emphasis class="comment">#yield;&lt;trie&gt;&#32;-&gt;&#32;Regen&#32;trie&#32;cache&#32;and&#32;returns&#32;Trie&#32;root</emphasis>
+1241 &#32;&#32;&#32;&#32;<emphasis class="comment">#walkto;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Walk&#32;to&#32;string&#32;in&#32;current&#32;trie&#32;and&#32;returns&#32;node</emphasis>
+1242 &#32;&#32;&#32;&#32;<emphasis class="comment">#moonwalkto;&lt;trie&gt;!&lt;string&gt;&#32;-&gt;&#32;Walk&#32;to&#32;root&#32;in&#32;current&#32;trie&#32;and&#32;returns&#32;node</emphasis>
+1243 &#32;&#32;&#32;&#32;<emphasis class="comment">#delete;trie!&lt;string&gt;&#32;-&gt;&#32;Walk&#32;to&#32;node&#32;in&#32;trie&#32;and&#32;deletes&#32;data.&#32;Returns&#32;deleted&#32;node&#32;</emphasis>
+1244 
+1245 &#32;&#32;&#32;&#32;<emphasis class="stringliteral">&apos;&apos;&apos;Aux&#32;to&#32;query_db&apos;&apos;&apos;</emphasis>
+1246 &#32;&#32;&#32;&#32;cell_container&#32;=&#32;[]
+1247 
+1248 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;<emphasis class="stringliteral">&apos;!&apos;</emphasis>&#32;<emphasis class="keywordflow">not</emphasis>&#32;<emphasis class="keywordflow">in</emphasis>&#32;query_data:
+1249 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;q_trie&#32;=&#32;query_data
+1250 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">else</emphasis>:
+1251 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;(q_trie,&#32;query_data)&#32;=&#32;query_data.split(<emphasis class="stringliteral">&apos;!&apos;</emphasis>)
+1252 
+1253 &#32;&#32;&#32;&#32;<emphasis class="comment">#Tries&#32;dict</emphasis>
+1254 &#32;&#32;&#32;&#32;tries&#32;=&#32;{<emphasis class="stringliteral">&apos;tables&apos;</emphasis>:db.tables,<emphasis class="stringliteral">&apos;key_rows&apos;</emphasis>:db.key_rows,<emphasis class="stringliteral">&apos;key_cols&apos;</emphasis>:db.key_cols,<emphasis class="stringliteral">&apos;super_key&apos;</emphasis>:db.super_key}
+1255 
+1256 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;pre&apos;</emphasis>:
+1257 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Trie&#32;selecionada</emphasis>
+1258 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ret&#32;=&#32;aux_lib.prefix_search(tries[q_trie],query_data)
+1259 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(ret)
+1260 
+1261 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;get&apos;</emphasis>:
+1262 &#32;&#32;&#32;&#32;<emphasis class="comment">#Trie&#32;selecionada</emphasis>
+1263 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ret&#32;=&#32;tries[q_trie].strings_dict[query_data]
+1264 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(ret)
+1265 &#32;&#32;&#32;&#32;
+1266 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;yield&apos;</emphasis>:
+1267 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;tries[q_trie].yield_strings(tries[q_trie].root)
+1268 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ret&#32;=&#32;tries[q_trie].root
+1269 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+1270 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(ret)
+1271 
+1272 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;walkto&apos;</emphasis>:
+1273 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#tries[q_trie].yield_strings(tries[q_trie].root)</emphasis>
+1274 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ret&#32;=&#32;aux_lib.walk_to(tries[q_trie].root,query_data)
+1275 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(ret)
+1276 
+1277 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;delete&apos;</emphasis>:
+1278 &#32;&#32;&#32;&#32;<emphasis class="comment">#tries[q_trie].yield_strings(tries[q_trie].root)</emphasis>
+1279 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ret&#32;=&#32;<link linkend="classmenus_1_1_container">Container</link>(aux_lib.walk_to(tries[q_trie].root,query_data))
+1280 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;del_n&#32;=&#32;aux_lib.walk_to(tries[q_trie].root,query_data)
+1281 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;del_n.data&#32;=&#32;<emphasis class="stringliteral">&quot;&quot;</emphasis>
+1282 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;ret
+1283 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+1284 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;moonwalkto&apos;</emphasis>:
+1285 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#tries[q_trie].yield_strings(tries[q_trie].root)</emphasis>
+1286 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ret&#32;=&#32;aux_lib.moonwalk_to(tries[q_trie].root,query_data)
+1287 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(ret)
+1288 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+1289 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">if</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;reg&apos;</emphasis>:
+1290 &#32;&#32;&#32;&#32;<emphasis class="comment">#Trie&#32;selecionada</emphasis>
+1291 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ret&#32;=&#32;aux_lib.regex_search(tries[q_trie],query_data)
+1292 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(ret)
+1293 &#32;&#32;&#32;&#32;
+1294 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;suf&apos;</emphasis>:
+1295 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="comment">#Trie&#32;selecionada</emphasis>
+1296 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ret&#32;=&#32;aux_lib.suffix_search(tries[q_trie],query_data)
+1297 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(ret)
+1298 
+1299 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;get_all&apos;</emphasis>:
+1300 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;ret&#32;=&#32;aux_lib.get_all_data(tries[q_trie].root)
+1301 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;<link linkend="classmenus_1_1_container">Container</link>(ret)
+1302 
+1303 &#32;&#32;&#32;&#32;<emphasis class="keywordflow">elif</emphasis>&#32;query_key&#32;==&#32;<emphasis class="stringliteral">&apos;insert&apos;</emphasis>:
+1304 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;aux_lib.insert(container.data.table_label,container.data,tries[q_trie].root)
+1305 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis class="keywordflow">return</emphasis>&#32;container
+1306 
+1307 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;
+1308 
+1309 
+1310 
+1311 
+1312 
+1313 &#32;&#32;&#32;&#32;
+    </computeroutput></literallayout>
+</section>

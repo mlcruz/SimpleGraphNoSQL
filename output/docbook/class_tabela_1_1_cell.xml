@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="class_tabela_1_1_cell">
+<title>Tabela::Cell class Reference</title>
+        <section>
+            <title>Public Attributes</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>data_boundary<para><emphasis>Inicializa celula, definindo atribuitos e o tipo da celula
+self.cell_type define o tipo da variavel:
+Tipos possiveis:  Leaf -&gt; Representa uma celula do excel contendo dados e mais nada.</emphasis></para></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>blank_boundary</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>originx</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>originy</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>sizex</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>sizey</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>x</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>y</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>bounds</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>cell_type</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>data</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>table_label</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>parent_node</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>child_nodes</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>key_row</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>key_col</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>cell_name</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="class_tabela_1_1_cell_1a0cc729a89011b7ebd701ca6f1405f122">__init__</link> (
+self , sheet , X , Y )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <simplesect>
+            <title>Detailed Description</title>
+
+<para><literallayout>Classe que representa uma celula da tabela. Recebe um objeto do tipo sheet do xrld como entrada
+    e uma posicao X referente a linha e Y referente a celula. Cria um objeto do tipo celula classificando o tipo de celula e guardando dados</literallayout> </para>
+                <para>Definition at line 14 of file Tabela.py</para>
+                <para>The Documentation for this struct was generated from the following file: </para>
+                <para><itemizedlist><listitem><para>Tabela.py</para></listitem></itemizedlist></para>
+        </simplesect>
+        <section>
+            <title>Member Data Documentation</title>
+            <simplesect>
+                <title>Tabela.Cell::data_boundary</title>                
+<para>É relacionada a duas chaves, uma de linha(key) e outra de coluna(key_col) : Key_Row -&gt; Representa uma chave que ordena outras chaves(exemplo: ANO). Uma por tabela Key_Col -&gt;Representa uma chave que dá sentido a uma coluna. Podem existir varias por tabela Key -&gt; Representa uma chave presente em uma Key_col Super_Key -&gt; Representa uma chave que é pai de outras chaves ou de uma chave coluna. Label -&gt; Representa o nome da tabela, é a raiz da arvore e pai de todos os outros nodos Merge -&gt; Representa uma celula que foi unida uma outra celula e não tem dados Blank -&gt;Não faz parte da tabela, dado vazio que pode ser removido sem alterações </para>
+
+                <para>Definition at line 47 of file Tabela.py</para>
+                <para>The Documentation for this struct was generated from the following file: </para>
+                <para><itemizedlist><listitem><para>Tabela.py</para></listitem></itemizedlist></para>
+            </simplesect>
+        </section>
+            <section xml:id="class_tabela_1_1_cell_1a0cc729a89011b7ebd701ca6f1405f122">
+                <title>def Tabela.Cell.__init__ (self, sheet, X, Y)</title> <emphasis></emphasis>
+                
+            </section>
+</section>

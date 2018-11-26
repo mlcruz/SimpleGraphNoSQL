@@ -1055,7 +1055,6 @@ def __query_table(query_key,query_data,container,container_o):
         
         return ret
 
-
 def query_dict(query, container_i, container_o):
     '''Parses a string into a query and query a table'''
 
@@ -1083,8 +1082,6 @@ def __query_dict(query_key,query_data,container,container_o):
 
     if query_key == 'pop':
         return Container(container.data.popitem()[1])
-
-
     
 def query_node(query, container_i, container_o):
     '''Parses a string into a query and query a node'''
@@ -1162,7 +1159,6 @@ def __query_list(query_key,query_data,container,container_o):
 
     if query_key == 'remove':
         return Container(container.data.pop(int(query_data)))
-
     
 def query_cell(query, container_i, container_o):
     '''Parses a string into a query and query a cell'''

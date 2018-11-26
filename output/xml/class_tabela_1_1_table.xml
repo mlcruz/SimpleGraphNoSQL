@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="class_tabela_1_1_table" kind="class" language="Python" prot="public">
+    <compoundname>Tabela::Table</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">object</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_tabela_1_1_table_1ab9ebb4ae6437d100c1ebdf046fa43bff" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>Tabela.Table::loc_source</definition>
+        <argsstring></argsstring>
+        <name>loc_source</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" line="287" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" bodystart="287" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_tabela_1_1_table_1acf4034972f8ca45d84f255eee35be31d" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>Tabela.Table::table_label</definition>
+        <argsstring></argsstring>
+        <name>table_label</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" line="288" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" bodystart="288" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_tabela_1_1_table_1a8f4f53b31818b05a2d512a4ffe670ed3" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>Tabela.Table::table_data</definition>
+        <argsstring></argsstring>
+        <name>table_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" line="289" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" bodystart="289" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_tabela_1_1_table_1a6d45ff17a28fa07c40cebc2af231a645" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>Tabela.Table::bound_x</definition>
+        <argsstring></argsstring>
+        <name>bound_x</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" line="290" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" bodystart="290" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_tabela_1_1_table_1ac28a8176c31fa193847311967c5d993a" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>Tabela.Table::bound_y</definition>
+        <argsstring></argsstring>
+        <name>bound_y</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" line="291" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" bodystart="291" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_tabela_1_1_table_1a38f8e9cd9b88c014664c0d908f8b931c" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>Tabela.Table::key_cols</definition>
+        <argsstring></argsstring>
+        <name>key_cols</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" line="292" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" bodystart="292" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_tabela_1_1_table_1a8432925ee02ec678d2b2f823749c85bb" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>Tabela.Table::key_row</definition>
+        <argsstring></argsstring>
+        <name>key_row</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" line="293" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" bodystart="293" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_tabela_1_1_table_1a3528cb5d55a61bad4dba988b698445f2" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>Tabela.Table::keys</definition>
+        <argsstring></argsstring>
+        <name>keys</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" line="294" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" bodystart="294" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_tabela_1_1_table_1a10c29642d83aa4daf8124db325f0a761" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def Tabela.Table.__init__</definition>
+        <argsstring>(self, raw_table)</argsstring>
+        <name>__init__</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>raw_table</type>
+          <defname>raw_table</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Inicializa Tabela com dados da raw table</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" line="285" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" bodystart="285" bodyend="296"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Classe que representa uma tabela logica. Recebema uma Raw_Table e remove os campos desnecessarios Pode ser picklada</verbatim> </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="20">
+        <label>Tabela.Table</label>
+        <link refid="class_tabela_1_1_table"/>
+        <childnode refid="21" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>object</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="22">
+        <label>Tabela.Table</label>
+        <link refid="class_tabela_1_1_table"/>
+        <childnode refid="23" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>object</label>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" line="282" column="1" bodyfile="C:/Users/PC/source/repos/Trabalho_final_cpd/SimpleGraphNoSQL/Tabela.py" bodystart="282" bodyend="297"/>
+    <listofallmembers>
+      <member refid="class_tabela_1_1_table_1a10c29642d83aa4daf8124db325f0a761" prot="public" virt="non-virtual"><scope>Tabela::Table</scope><name>__init__</name></member>
+      <member refid="class_tabela_1_1_table_1a6d45ff17a28fa07c40cebc2af231a645" prot="public" virt="non-virtual"><scope>Tabela::Table</scope><name>bound_x</name></member>
+      <member refid="class_tabela_1_1_table_1ac28a8176c31fa193847311967c5d993a" prot="public" virt="non-virtual"><scope>Tabela::Table</scope><name>bound_y</name></member>
+      <member refid="class_tabela_1_1_table_1a38f8e9cd9b88c014664c0d908f8b931c" prot="public" virt="non-virtual"><scope>Tabela::Table</scope><name>key_cols</name></member>
+      <member refid="class_tabela_1_1_table_1a8432925ee02ec678d2b2f823749c85bb" prot="public" virt="non-virtual"><scope>Tabela::Table</scope><name>key_row</name></member>
+      <member refid="class_tabela_1_1_table_1a3528cb5d55a61bad4dba988b698445f2" prot="public" virt="non-virtual"><scope>Tabela::Table</scope><name>keys</name></member>
+      <member refid="class_tabela_1_1_table_1ab9ebb4ae6437d100c1ebdf046fa43bff" prot="public" virt="non-virtual"><scope>Tabela::Table</scope><name>loc_source</name></member>
+      <member refid="class_tabela_1_1_table_1a8f4f53b31818b05a2d512a4ffe670ed3" prot="public" virt="non-virtual"><scope>Tabela::Table</scope><name>table_data</name></member>
+      <member refid="class_tabela_1_1_table_1acf4034972f8ca45d84f255eee35be31d" prot="public" virt="non-virtual"><scope>Tabela::Table</scope><name>table_label</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

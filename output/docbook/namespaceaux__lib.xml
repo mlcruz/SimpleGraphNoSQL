@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="namespaceaux__lib">
+<title>aux_lib</title>
+        <section>
+            <title>Functions</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="aux__lib_8py_1a901a6b4b3f04f27eb8c1af8d5e79b03e">generate_num</link> (
+tab_loc )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="aux__lib_8py_1ac9518f4193e8fdf95c0d221220382959">generate_loc</link> (
+tab_loc )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="aux__lib_8py_1a14b1bddc4d9359b0659e27e285c3304e">save_trie</link> (
+trie , loc )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="aux__lib_8py_1ab7a47b47c761e7f7552e6e53a3b73799">load_trie</link> (
+loc )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="aux__lib_8py_1a804c7ea1653177c19f29aac9c92e5560">generate_table_trie</link> (
+loc )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="aux__lib_8py_1ae66bc734553d97786c8374529ba818a5">write_stdscr</link> (
+stdscr , string , loc )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="aux__lib_8py_1a840bf91ce062a53e3f2de1b28f333035">write_stdscr_a</link> (
+stdscr , string , loc , attrb )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+</section>

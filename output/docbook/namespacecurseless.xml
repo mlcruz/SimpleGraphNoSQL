@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="namespacecurseless">
+<title>curseless</title>
+        <section>
+            <title>Variables</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string <link linkend="curseless_8py_1a783eb06794b8285219b167030f90bb85">prefix_loc</link><para><emphasis>Prefixo do local das tabelas fonte para a extração de dados.</emphasis></para>
+</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="curseless_8py_1a773b6138277a7e072d93fedde4bd2edf">teste</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="curseless_8py_1a2c4b753bf7b23fd5adb129d307dd0164">db_teste</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="curseless_8py_1abb864a6764e82541dbf5f7217d5afcab">t</link><para><emphasis>INICIALIZA REPL###################.</emphasis></para>
+</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="curseless_8py_1a773c9d42f18e74b621ab68f8ce7056e5">l</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+</section>
