@@ -249,9 +249,10 @@ def access_table(stdscr,state_dict):
             str_query_1 = 'key_col;<null | col_name> ->Returns every key_col if null or(|) every cell in a key_col if not null\n'
             str_query_2 = 'key_row;<null |a,b > -> Returns every Key if null | Every key from index a to b\n'
             str_query_3 = "insert_cell;<y,x> ->Inserts output cell into table and returns the inserted cell\n"
+            str_query_4 = "delete_cell;<y,x> -> Deletes cell at X,y and returns the deleted cell\n"
             str_query_final = 'get_cell;<y,x> -> Returns Cell at y,x'
 
-            str_query_all = str_query_1 + str_query_2 + str_query_3 + str_query_final
+            str_query_all = str_query_1 + str_query_2 + str_query_3 + str_query_4 + str_query_final
             loc_query_all = (2,20)
             
 
@@ -406,6 +407,15 @@ def clear_menu_area(stdscr):
 def clear_table_area(stdscr):
     ##Table area: From 10,0 to 50,120
     str_clr_table_line = "                                                                                                                      \n"
+    str_clr_table_line_x_5 = str_clr_table_line + str_clr_table_line + str_clr_table_line + str_clr_table_line + str_clr_table_line
+    str_clr_table_area =  str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line + str_clr_table_line + str_clr_table_line
+    loc_clr_table_area = (11,0)
+
+    write_stdscr(stdscr,str_clr_table_area,loc_clr_table_area)
+
+def clear_container_area(stdscr):
+    ##Table area: From 0,120 to 50,160
+    str_clr_table_line = "                                        \n"
     str_clr_table_line_x_5 = str_clr_table_line + str_clr_table_line + str_clr_table_line + str_clr_table_line + str_clr_table_line
     str_clr_table_area =  str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line + str_clr_table_line + str_clr_table_line
     loc_clr_table_area = (11,0)
@@ -637,6 +647,8 @@ def __query_table(query_key,query_data,container,container_o):
     #key_row;<null |a,b > -> Retorna todas as chaves da tabela se nulo, ou todas as chaves de indice entre a e b
     #get_cell;<y,x> -> Retorna celula na posicao y,x
     #insert_cell;<y,x> ->Inserts output cell into table and returns the inserted cell
+    #delete_cell;<y,x> -> Deletes cell at X,y and returns the deleted cell
+    #get_cells;<uy,ux,ly,lx> -> Gets a list containing the cells starting at <uy,ux> and ending at <ly,lx>
 
     if query_key == 'key_col':
         if not bool(query_data):
@@ -648,7 +660,7 @@ def __query_table(query_key,query_data,container,container_o):
                     for n_item in item.child_nodes:
                         cell_container.append(n_item)
             #Remove duplicados
-            cell_contaier = list(set(cell_container))
+            cell_container = list(set(cell_container))
 
             return Container(cell_container)
     #key_row;<null |a,b > -> Retorna todas as chaves da tabela se nulo, ou todas as chaves de indice entre a e b
@@ -667,10 +679,34 @@ def __query_table(query_key,query_data,container,container_o):
         (y,x) = query_data.split(',')
         return Container(container.data.table_data[int(y)][int(x)])
 
+
+    elif query_key == 'get_cells':
+        (uy,ux,ly,lx) = query_data.split(',')
+        offset_y = int(ly)-int(uy) + 1
+        offset_x = int(lx)-int(ux) + 1
+
+        for y in range(offset_y):
+            for x in range (offset_x):
+                cell_container.append(container.data.table_data[int(uy)+y][int(ux)+x])
+        return Container(cell_container)
+
+
+        
+        #return Container(container.data.table_data[int(y)][int(x)])
+
     elif query_key == 'insert_cell':
         (y,x) = query_data.split(',')
         container.data.table_data[int(y)][int(x)] = container_o.data
         return Container(container.data.table_data[int(y)][int(x)])
+
+    elif query_key == 'delete_cell':
+        (y,x) = query_data.split(',')
+        #Marca como deletedo
+        ret = Container(container.data.table_data[int(y)][int(x)])
+        container.data.table_data[int(y)][int(x)].cell_type = "Blank"
+        container.data.table_data[int(y)][int(x)].data = ""
+        
+        return ret
 
 
 
