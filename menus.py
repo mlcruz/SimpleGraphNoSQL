@@ -119,7 +119,7 @@ def start_menu(state_dict):
     state_dict['containers']['a'] = Container(t)
     state_dict['containers']['b'] = Container(t.table_data[8][0].child_nodes)
     state_dict['containers']['c'] = Container(t.table_data[8][3])
-
+    state_dict['containers']['k'] = Container(t.table_data[1][0].child_nodes)
     state_dict['containers']['d'] = Container(state_dict['db'].tables.strings_dict)
     
     state_dict['containers']['n'] = Container(aux_lib.walk_to(state_dict['db'].tables.root,'brasil: dispendio nacional em ciencia e tecnologia (c&t) por atividade'))
@@ -435,7 +435,7 @@ def run_query_menu(stdscr,state_dict):
 def draw_state(stdscr, state_dict):
     '''Desenha gui na tela e atualiza os estados visiveis ao usuario'''
 
-    
+    clear_container_area(stdscr)
 
     #Linha separando input do usuario
     str_user_input_line = drawline(72) + "User input area" + drawline(72)
@@ -557,13 +557,12 @@ def clear_table_area(stdscr):
     write_stdscr(stdscr,str_clr_table_area,loc_clr_table_area)
 
 def clear_container_area(stdscr):
-    ##Table area: From 0,120 to 50,160
+    #container area: From 0,120 to 50,160
     str_clr_table_line = "                                        \n"
-    str_clr_table_line_x_5 = str_clr_table_line + str_clr_table_line + str_clr_table_line + str_clr_table_line + str_clr_table_line
-    str_clr_table_area =  str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line_x_5 + str_clr_table_line + str_clr_table_line + str_clr_table_line
-    loc_clr_table_area = (11,0)
+    str_clr_table_line_x_5 = str_clr_table_line + str_clr_table_line  + str_clr_table_line + "                                        "
+    loc_clr_table_area = (0,120)
 
-    write_stdscr(stdscr,str_clr_table_area,loc_clr_table_area)
+    write_stdscr(stdscr,str_clr_table_line_x_5,loc_clr_table_area)
 
 def clear_input_area(stdscr):
     #Input é do 50,0 ao 55,120
@@ -883,6 +882,120 @@ def restore_cursor(stdscr,state_dict):
 def restore_cursor(stdscr):
     stdscr.move(52,0)
 
+
+def query_node(query, container_i, container_o):
+    '''Parses a string into a query and query a node'''
+
+    #Queries são formatadas da seguinte maneira:
+    # Separador de queries -> #
+    # Separador de <tipo, query>  -> ;
+    # Dado contido no container "n"(somente no campo de dado da query) -> !
+
+    #Separa queries
+    query_list = query.split("#")
+
+    #Executa as queries sequencialmente 
+    for item in query_list:
+        (query_key,query_data)  = item.split(';')
+        container_o = __query_node(query_key,query_data,container_i,container_o)
+    
+    return container_o
+
+def __query_node(query_key,query_data,container,container_o):
+    '''Função auxiliar para executar uma query sobre o container recebido. Salva o resultado da query no proprio container.'''
+    cell_container = []
+
+    #lista de queries:
+    #get_all;<null> get all data below a node
+
+
+    if query_key == 'get_all':
+        ret = aux_lib.get_all_data(container.data)
+        return Container(ret)
+
+def query_list(query, container_i, container_o):
+    '''Parses a string into a query and query a list'''
+
+    #Queries são formatadas da seguinte maneira:
+    # Separador de queries -> #
+    # Separador de <tipo, query>  -> ;
+    # Dado contido no container "n"(somente no campo de dado da query) -> !
+
+    #Separa queries
+    query_list = query.split("#")
+
+    #Executa as queries sequencialmente 
+    for item in query_list:
+        (query_key,query_data)  = item.split(';')
+        container_o = __query_list(query_key,query_data,container_i,container_o)
+    
+    return container_o
+
+def __query_list(query_key,query_data,container,container_o):
+    '''Função auxiliar para executar uma query sobre o container recebido. Salva o resultado da query no proprio container.'''
+    cell_container = []
+
+    #lista de queries:
+    #unpack;<null> -> creates a single list with every child in the list
+    #first;<null> -> pop the first item in the list
+    #rest;<null> -> returns listw/o first item
+    #select;<index> -> copy item from index
+    #remove;<index> -> remove selected item
+
+
+    if query_key == 'unpack':
+        for item in container.data:
+            for child in item.child_nodes:
+                cell_container.append(child)
+
+    if query_key == 'first':
+        return Container(container.data.pop(0))
+
+    if query_key == 'rest':
+        return Container(container.data[1:])
+
+    if query_key == 'select':
+        return Container(container.data[int(query_data)])
+
+    if query_key == 'remove':
+        return Container(container.data.pop(int(query_data)))
+
+
+
+    
+def query_cell(query, container_i, container_o):
+    '''Parses a string into a query and query a cell'''
+
+    #Queries são formatadas da seguinte maneira:
+    # Separador de queries -> #
+    # Separador de <tipo, query>  -> ;
+    # Dado contido no container "n"(somente no campo de dado da query) -> !
+
+    #Separa queries
+    query_list = query.split("#")
+
+    #Executa as queries sequencialmente 
+    for item in query_list:
+        (query_key,query_data)  = item.split(';')
+        container_o = __query_cell(query_key,query_data,container_i,container_o)
+    
+    return container_o
+
+def __query_cell(query_key,query_data,container,container_o):
+    '''Função auxiliar para executar uma query sobre o container recebido. Salva o resultado da query no proprio container.'''
+    cell_container = []
+
+    #lista de queries:
+    #edit<
+
+
+    if query_key == 'get_all':
+        ret = aux_lib.get_all_data(container.data)
+        return Container(ret)
+
+
+
+
 def query_run(query, container_i,container_o,db):
     '''Runs a query depending on input object type'''
 
@@ -894,6 +1007,15 @@ def query_run(query, container_i,container_o,db):
             container_o = query_table(query,container_i,container_o)
         elif (container_i.type == "Data_Dict"):
             container_o = query_dict(query,container_i,container_o)
+        elif (container_i.type == "Node"):
+            container_o = query_node(query,container_i,container_o)
+        elif (container_i.type == "Cell_List"):
+            container_o = query_list(query,container_i,container_o)
+        elif (container_i.type == "Cell"):
+            container_o = query_cell(query,container_i,container_o)
+
+
+
     
         
 
