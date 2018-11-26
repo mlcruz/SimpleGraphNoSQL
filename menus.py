@@ -814,7 +814,11 @@ def __query_db(query_key,query_data,container,container_o, db):
     #reg;<trie>!<string> -> RegExp search on DB.trie
     #get_all;<trie> ->Get all tables in a db.trie
     #insert;<trie> -> Inserts input container into the trie(table only). Returns inserted table
-    
+    #get;<trie>!<string> -> Returns table where table_label == string
+    #yield;<trie> -> Regen trie cache and returns Trie root
+    #walkto;<trie>!<string> -> Walk to string in current trie and returns node
+    #moonwalkto;<trie>!<string> -> Walk to root in current trie and returns node
+    #delete;trie!<string> -> Walk to node in trie and deletes data. Returns deleted node 
 
     '''Aux to query_db'''
     cell_container = []
@@ -832,6 +836,34 @@ def __query_db(query_key,query_data,container,container_o, db):
         ret = aux_lib.prefix_search(tries[q_trie],query_data)
         return Container(ret)
 
+    if query_key == 'get':
+    #Trie selecionada
+        ret = tries[q_trie].strings_dict[query_data]
+        return Container(ret)
+    
+    if query_key == 'yield':
+        tries[q_trie].yield_strings(tries[q_trie].root)
+        ret = tries[q_trie].root
+        
+        return Container(ret)
+
+    if query_key == 'walkto':
+        #tries[q_trie].yield_strings(tries[q_trie].root)
+        ret = aux_lib.walk_to(tries[q_trie].root,query_data)
+        return Container(ret)
+
+    if query_key == 'delete':
+    #tries[q_trie].yield_strings(tries[q_trie].root)
+        ret = Container(aux_lib.walk_to(tries[q_trie].root,query_data))
+        del_n = aux_lib.walk_to(tries[q_trie].root,query_data)
+        del_n.data = ""
+        return ret
+        
+    if query_key == 'moonwalkto':
+        #tries[q_trie].yield_strings(tries[q_trie].root)
+        ret = aux_lib.moonwalk_to(tries[q_trie].root,query_data)
+        return Container(ret)
+        
     if query_key == 'reg':
     #Trie selecionada
         ret = aux_lib.regex_search(tries[q_trie],query_data)
