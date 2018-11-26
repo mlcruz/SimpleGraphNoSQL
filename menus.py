@@ -134,7 +134,7 @@ def main_menu(stdscr, state_dict):
 
     #Strings e locais
 
-    str_menu_principal = "[a-z]:Draw container\n1:Access Table\n2:Access Db\n3:Run Query\n9:Save Current DB\n-:clear table area\n0:Exit"
+    str_menu_principal = "[a-z]:Draw container\n1:Access Table\n2:Access Db\n3:Run Query\n4:Help\n9:Save Current DB\n-:clear table area\n0:Exit"
     loc_menu_principal = (0,0)
 
     str_saving = "Saving db...\n"
@@ -167,16 +167,16 @@ def main_menu(stdscr, state_dict):
             #Se é letra, desenha container
             if(chr(c) in state_dict['containers'].keys()):
                 draw_container(stdscr,state_dict['containers'][chr(c)])
-        if chr(c) == '-':
+        elif chr(c) == '-':
             clear_table_area(stdscr)
 
-        if chr(c) == '1':
+        elif chr(c) == '1':
             access_table(stdscr, state_dict)
-        if chr(c) == '2':
+        elif chr(c) == '2':
             access_db(stdscr, state_dict)
-        if chr(c) == '3':
+        elif chr(c) == '3':
             run_query_menu(stdscr,state_dict)
-        if chr(c) == '0':
+        elif chr(c) == '0':
             state_dict['f_exit'] = True
             local_exit = True
         elif chr(c) == '9':
@@ -188,6 +188,87 @@ def main_menu(stdscr, state_dict):
             write_stdscr(stdscr,"                      \n                      ",loc_done)
             aux_lib.save_trie(state_dict['table_trie'],loc)
             write_stdscr(stdscr,str_done,loc_done)
+        
+        elif chr(c) == '4':
+            clear_table_area(stdscr)
+        #Lista de queries -> DB:
+        #<trie> options : tables,key_rows,key_cols,super_key
+        #pre;<trie>!<string> -> Prefix search on DB.trie
+        #suf;<trie>!<string> -> Suffix search on DB.trie
+        #reg;<trie>!<string> -> RegExp search on DB.trie
+        #get_all;<trie> ->Get all tables in a db.trie
+        #insert;<trie> -> Inserts input container into the trie(table only). Returns inserted table
+        #get;<trie>!<string> -> Returns table where table_label == string
+        #yield;<trie> -> Regen trie cache and returns Trie root
+        #walkto;<trie>!<string> -> Walk to string in current trie and returns node
+        #moonwalkto;<trie>!<string> -> Walk to root in current trie and returns node
+        #delete;trie!<string> -> Walk to node in trie and deletes data. Returns deleted node
+
+            str_DB_info = "<trie> options : tables,key_rows,key_cols,super_key \n"  + "pre;<trie>!<string> -> Prefix search on DB.trie \n" + "suf;<trie>!<string> -> Suffix search on DB.trie \n" +"reg;<trie>!<string> -> RegExp search on DB.trie \n" + "get_all;<trie> ->Get all tables in a db.trie \n"
+            str_DB_info = str_DB_info + "insert;<trie> -> Inserts input container into the trie(table only). Returns inserted table \n" + "get;<trie>!<string> -> Returns table where table_label == string\n" + 'yield;<trie> -> Regen trie cache and returns Trie root \n' + 'walkto;<trie>!<string> -> Walk to string in current trie and returns node \n' + 'moonwalkto;<trie>!<string> -> Walk to root in current trie and returns node \n' + 'delete;trie!<string> -> Walk to node in trie and deletes data. Returns deleted node \n'
+        
+        #Lista de queries -> Table:
+        #key_col;<null | col_name> -> Retorna todas colunas chave da tabela se nulo, ou todos os dados da coluna especificada
+        #key_row;<null |a,b > -> Retorna todas as chaves da tabela se nulo, ou todas as chaves de indice entre a e b
+        #get_cell;<y,x> -> Retorna celula na posicao y,x
+        #insert_cell;<y,x> ->Inserts output cell into table and returns the inserted cell
+        #delete_cell;<y,x> -> Deletes cell at X,y and returns the deleted cell
+        #get_cells;<uy,ux,ly,lx> -> Gets a list containing the cells starting at <uy,ux> and ending at <ly,lx>
+            
+            str_t_query_1 = 'key_col;<null | col_name> ->Returns every key_col if null or(|) every cell in a key_col if not null\n'
+            str_t_query_2 = 'key_row;<null |a,b > -> Returns every Key if null | Every key from index a to b\n'
+            str_t_query_3 = "insert_cell;<y,x> ->Inserts output cell into table and returns the inserted cell\n"
+            str_t_query_4 = "delete_cell;<y,x> -> Deletes cell at X,y and returns the deleted cell\n"
+            str_t_query_5 = 'get_cells;<uy,ux,ly,lx> ->Gets a list containing the cells starting at <uy,ux> and ending at <ly,lx>\n'
+            str_t_query_final = 'get_cell;<y,x> -> Returns Cell at y,x \n'
+
+            str_Table_info =  str_t_query_1 + str_t_query_2 + str_t_query_3 + str_t_query_4 +str_t_query_5+ str_t_query_final    
+
+            
+
+        #lista de queries -> Cell:
+        #edit<data> -> change a cell data
+
+            str_Cell_info = 'edit<data> -> change a cell data \n'
+
+        #lista de queries -> List:
+        #unpack;<null> -> creates a single list with every child in the list
+        #first;<null> -> pop the first item in the list
+        #rest;<null> -> returns listw/o first item
+        #select;<index> -> copy item from index
+        #remove;<index> -> remove selected item
+
+            str_List_info = "unpack;<null> -> creates a single list with every child in the list\nfirst;<null> -> pop the first item in the list\nrest;<null> -> returns list without first item\nselect;<index> -> copy item from index\nremove;<index> -> remove selected item\n"
+
+        #lista de queries: -> Dict:
+        #pop;<null> remove a random item from dict
+
+            str_Dict_info = 'pop;<null> remove a random item from dict'
+
+        #lista de queries -> Node:
+        #get_all;<null> get all data below a node
+
+            str_Node_info = "get_all;<null> get all data below a node\n"
+
+
+            write_stdscr(stdscr,"DB commands:",(12,4))
+            write_stdscr(stdscr,str_DB_info,(14,6))
+
+            write_stdscr(stdscr,"Table commands:",(26,4))
+            write_stdscr(stdscr,str_Table_info,(27,5))
+
+            write_stdscr(stdscr,"List commands:",(34,4))
+            write_stdscr(stdscr,str_List_info,(35,5))
+
+            write_stdscr(stdscr,"Cell commands:",(41,4))
+            write_stdscr(stdscr,str_Cell_info,(42,5))
+
+            write_stdscr(stdscr,"Dict commands:",(44,4))
+            write_stdscr(stdscr,str_Dict_info,(45,5))
+
+            write_stdscr(stdscr,"Node commands:",(47,4))
+            write_stdscr(stdscr,str_Node_info,(48,5))
+
 
 
 def access_table(stdscr,state_dict):
@@ -196,7 +277,7 @@ def access_table(stdscr,state_dict):
     curses.cbreak()
     curses.noecho()
 
-    str_access_menu = "[a-z]: Container containing a table object\n1:Query Table\n2:Set Container\n0:back"
+    str_access_menu = "[a-z]: Container containing a table object\n1:Query Table\n2:Set Container\n3:Help\n0:back"
     loc_access_menu = (0 ,0)
     set_container = ""
 
@@ -246,19 +327,7 @@ def access_table(stdscr,state_dict):
             stdscr.keypad(True)
             #restore_cursor(stdscr,state_dict)
             clear_input_area(stdscr)
-            
-            str_query_1 = 'key_col;<null | col_name> ->Returns every key_col if null or(|) every cell in a key_col if not null\n'
-            str_query_2 = 'key_row;<null |a,b > -> Returns every Key if null | Every key from index a to b\n'
-            str_query_3 = "insert_cell;<y,x> ->Inserts output cell into table and returns the inserted cell\n"
-            str_query_4 = "delete_cell;<y,x> -> Deletes cell at X,y and returns the deleted cell\n"
-            str_query_5 = 'get_cells;<uy,ux,ly,lx> ->Gets a list containing the cells starting at <uy,ux> and ending at <ly,lx>\n'
-            str_query_final = 'get_cell;<y,x> -> Returns Cell at y,x'
-
-            str_query_all = str_query_1 + str_query_2 + str_query_3 + str_query_4 +str_query_5+ str_query_final
-            loc_query_all = (2,20)
-            
-
-            write_stdscr(stdscr,str_query_all,loc_query_all)
+           
             write_stdscr(stdscr,"Enter Query. CTRL+G to exit. Control-H	to delete",(51,40))
             
             str_query = get_input(stdscr)
@@ -278,6 +347,31 @@ def access_table(stdscr,state_dict):
                 stdscr.getch()
             
             draw_state(stdscr,state_dict)
+        
+        elif chr(c) == '3':
+            clear_table_area(stdscr)
+        
+        #Lista de queries -> Table:
+        #key_col;<null | col_name> -> Retorna todas colunas chave da tabela se nulo, ou todos os dados da coluna especificada
+        #key_row;<null |a,b > -> Retorna todas as chaves da tabela se nulo, ou todas as chaves de indice entre a e b
+        #get_cell;<y,x> -> Retorna celula na posicao y,x
+        #insert_cell;<y,x> ->Inserts output cell into table and returns the inserted cell
+        #delete_cell;<y,x> -> Deletes cell at X,y and returns the deleted cell
+        #get_cells;<uy,ux,ly,lx> -> Gets a list containing the cells starting at <uy,ux> and ending at <ly,lx>
+            
+            str_t_query_1 = 'key_col;<null | col_name> ->Returns every key_col if null or(|) every cell in a key_col if not null\n'
+            str_t_query_2 = 'key_row;<null |a,b > -> Returns every Key if null | Every key from index a to b\n'
+            str_t_query_3 = "insert_cell;<y,x> ->Inserts output cell into table and returns the inserted cell\n"
+            str_t_query_4 = "delete_cell;<y,x> -> Deletes cell at X,y and returns the deleted cell\n"
+            str_t_query_5 = 'get_cells;<uy,ux,ly,lx> ->Gets a list containing the cells starting at <uy,ux> and ending at <ly,lx>\n'
+            str_t_query_final = 'get_cell;<y,x> -> Returns Cell at y,x \n'
+
+            str_Table_info =  str_t_query_1 + str_t_query_2 + str_t_query_3 + str_t_query_4 +str_t_query_5+ str_t_query_final    
+
+   
+            write_stdscr(stdscr,"Table commands:",(26,4))
+            write_stdscr(stdscr,str_Table_info,(27,5))
+
             
 def access_db(stdscr, state_dict):
     '''Menu representando as opções de busca no banco de dados'''
@@ -285,7 +379,7 @@ def access_db(stdscr, state_dict):
     curses.cbreak()
     curses.noecho()
 
-    str_access_menu = "[a-z]: Set output container  \n1:Query Db\n2:Set input container\n0:back"
+    str_access_menu = "[a-z]: Set output container  \n1:Query Db\n2:Set input container\n3:Help\n0:back"
     loc_access_menu = (0 ,0)
     set_container_i = ""
     set_container_o = ""
@@ -349,6 +443,28 @@ def access_db(stdscr, state_dict):
                 str_input_container = "Input Container: ["+ set_container_i + ']'
                 draw_container(stdscr,state_dict['containers'][chr(c)])
 
+        elif chr(c) == '3':
+
+        #Lista de queries -> DB:
+        #<trie> options : tables,key_rows,key_cols,super_key
+        #pre;<trie>!<string> -> Prefix search on DB.trie
+        #suf;<trie>!<string> -> Suffix search on DB.trie
+        #reg;<trie>!<string> -> RegExp search on DB.trie
+        #get_all;<trie> ->Get all tables in a db.trie
+        #insert;<trie> -> Inserts input container into the trie(table only). Returns inserted table
+        #get;<trie>!<string> -> Returns table where table_label == string
+        #yield;<trie> -> Regen trie cache and returns Trie root
+        #walkto;<trie>!<string> -> Walk to string in current trie and returns node
+        #moonwalkto;<trie>!<string> -> Walk to root in current trie and returns node
+        #delete;trie!<string> -> Walk to node in trie and deletes data. Returns deleted node
+            clear_table_area(stdscr)
+            str_DB_info = "<trie> options : tables,key_rows,key_cols,super_key \n"  + "pre;<trie>!<string> -> Prefix search on DB.trie \n" + "suf;<trie>!<string> -> Suffix search on DB.trie \n" +"reg;<trie>!<string> -> RegExp search on DB.trie \n" + "get_all;<trie> ->Get all tables in a db.trie \n"
+            str_DB_info = str_DB_info + "insert;<trie> -> Inserts input container into the trie(table only). Returns inserted table \n" + "get;<trie>!<string> -> Returns table where table_label == string\n" + 'yield;<trie> -> Regen trie cache and returns Trie root \n' + 'walkto;<trie>!<string> -> Walk to string in current trie and returns node \n' + 'moonwalkto;<trie>!<string> -> Walk to root in current trie and returns node \n' + 'delete;trie!<string> -> Walk to node in trie and deletes data. Returns deleted node \n'
+        
+
+            write_stdscr(stdscr,"DB commands:",(12,4))
+            write_stdscr(stdscr,str_DB_info,(14,6))
+
 
         elif chr(c) == '0':
             local_exit = True
@@ -360,7 +476,7 @@ def run_query_menu(stdscr,state_dict):
     curses.cbreak()
     curses.noecho()
 
-    str_access_menu = "[a-z]: Set output container  \n1:Run Query\n2:Set input container\n0:back"
+    str_access_menu = "[a-z]: Set output container  \n1:Run Query\n2:Set input container\n3:Help\n0:back"
     loc_access_menu = (0 ,0)
     set_container_i = ""
     set_container_o = ""
@@ -424,6 +540,92 @@ def run_query_menu(stdscr,state_dict):
                 set_container_i = chr(c)
                 str_input_container = "Input Container: ["+ set_container_i + ']'
                 draw_container(stdscr,state_dict['containers'][chr(c)])
+
+
+        elif chr(c) == '3':
+            clear_table_area(stdscr)
+        #Lista de queries -> DB:
+        #<trie> options : tables,key_rows,key_cols,super_key
+        #pre;<trie>!<string> -> Prefix search on DB.trie
+        #suf;<trie>!<string> -> Suffix search on DB.trie
+        #reg;<trie>!<string> -> RegExp search on DB.trie
+        #get_all;<trie> ->Get all tables in a db.trie
+        #insert;<trie> -> Inserts input container into the trie(table only). Returns inserted table
+        #get;<trie>!<string> -> Returns table where table_label == string
+        #yield;<trie> -> Regen trie cache and returns Trie root
+        #walkto;<trie>!<string> -> Walk to string in current trie and returns node
+        #moonwalkto;<trie>!<string> -> Walk to root in current trie and returns node
+        #delete;trie!<string> -> Walk to node in trie and deletes data. Returns deleted node
+
+            str_DB_info = "<trie> options : tables,key_rows,key_cols,super_key \n"  + "pre;<trie>!<string> -> Prefix search on DB.trie \n" + "suf;<trie>!<string> -> Suffix search on DB.trie \n" +"reg;<trie>!<string> -> RegExp search on DB.trie \n" + "get_all;<trie> ->Get all tables in a db.trie \n"
+            str_DB_info = str_DB_info + "insert;<trie> -> Inserts input container into the trie(table only). Returns inserted table \n" + "get;<trie>!<string> -> Returns table where table_label == string\n" + 'yield;<trie> -> Regen trie cache and returns Trie root \n' + 'walkto;<trie>!<string> -> Walk to string in current trie and returns node \n' + 'moonwalkto;<trie>!<string> -> Walk to root in current trie and returns node \n' + 'delete;trie!<string> -> Walk to node in trie and deletes data. Returns deleted node \n'
+        
+        #Lista de queries -> Table:
+        #key_col;<null | col_name> -> Retorna todas colunas chave da tabela se nulo, ou todos os dados da coluna especificada
+        #key_row;<null |a,b > -> Retorna todas as chaves da tabela se nulo, ou todas as chaves de indice entre a e b
+        #get_cell;<y,x> -> Retorna celula na posicao y,x
+        #insert_cell;<y,x> ->Inserts output cell into table and returns the inserted cell
+        #delete_cell;<y,x> -> Deletes cell at X,y and returns the deleted cell
+        #get_cells;<uy,ux,ly,lx> -> Gets a list containing the cells starting at <uy,ux> and ending at <ly,lx>
+            
+            str_t_query_1 = 'key_col;<null | col_name> ->Returns every key_col if null or(|) every cell in a key_col if not null\n'
+            str_t_query_2 = 'key_row;<null |a,b > -> Returns every Key if null | Every key from index a to b\n'
+            str_t_query_3 = "insert_cell;<y,x> ->Inserts output cell into table and returns the inserted cell\n"
+            str_t_query_4 = "delete_cell;<y,x> -> Deletes cell at X,y and returns the deleted cell\n"
+            str_t_query_5 = 'get_cells;<uy,ux,ly,lx> ->Gets a list containing the cells starting at <uy,ux> and ending at <ly,lx>\n'
+            str_t_query_final = 'get_cell;<y,x> -> Returns Cell at y,x \n'
+
+            str_Table_info =  str_t_query_1 + str_t_query_2 + str_t_query_3 + str_t_query_4 +str_t_query_5+ str_t_query_final    
+
+            
+
+        #lista de queries -> Cell:
+        #edit<data> -> change a cell data
+
+            str_Cell_info = 'edit<data> -> change a cell data \n'
+
+        #lista de queries -> List:
+        #unpack;<null> -> creates a single list with every child in the list
+        #first;<null> -> pop the first item in the list
+        #rest;<null> -> returns listw/o first item
+        #select;<index> -> copy item from index
+        #remove;<index> -> remove selected item
+
+            str_List_info = "unpack;<null> -> creates a single list with every child in the list\nfirst;<null> -> pop the first item in the list\nrest;<null> -> returns list without first item\nselect;<index> -> copy item from index\nremove;<index> -> remove selected item\n"
+
+        #lista de queries: -> Dict:
+        #pop;<null> remove a random item from dict
+
+            str_Dict_info = 'pop;<null> remove a random item from dict'
+
+        #lista de queries -> Node:
+        #get_all;<null> get all data below a node
+
+            str_Node_info = "get_all;<null> get all data below a node\n"
+
+
+            write_stdscr(stdscr,"Db queries start with a @ here:\n DB commands:",(12,4))
+            write_stdscr(stdscr,str_DB_info,(14,6))
+
+            write_stdscr(stdscr,"Table commands:",(26,4))
+            write_stdscr(stdscr,str_Table_info,(27,5))
+
+            write_stdscr(stdscr,"List commands:",(34,4))
+            write_stdscr(stdscr,str_List_info,(35,5))
+
+            write_stdscr(stdscr,"Cell commands:",(41,4))
+            write_stdscr(stdscr,str_Cell_info,(42,5))
+
+            write_stdscr(stdscr,"Dict commands:",(44,4))
+            write_stdscr(stdscr,str_Dict_info,(45,5))
+
+            write_stdscr(stdscr,"Node commands:",(47,4))
+            write_stdscr(stdscr,str_Node_info,(48,5))
+
+
+
+
+
 
 
         elif chr(c) == '0':
@@ -503,6 +705,15 @@ def draw_state(stdscr, state_dict):
     write_stdscr(stdscr,str_h_state_area_line,loc_h_state_area_line)
     stdscr.refresh()
 
+    
+def restore_cursor(stdscr,state_dict):
+    '''Restore cursor to input_line pos'''
+    stdscr.move((state_dict['loc_data_entry'])[0],(state_dict['loc_data_entry'])[1])
+
+
+def restore_cursor(stdscr):
+    '''restore cursor w/o statedict'''
+    stdscr.move(52,0)
 
 
 def get_input(stdscr):
@@ -874,15 +1085,7 @@ def __query_dict(query_key,query_data,container,container_o):
         return Container(container.data.popitem()[1])
 
 
-
-def restore_cursor(stdscr,state_dict):
-    stdscr.move((state_dict['loc_data_entry'])[0],(state_dict['loc_data_entry'])[1])
-
-
-def restore_cursor(stdscr):
-    stdscr.move(52,0)
-
-
+    
 def query_node(query, container_i, container_o):
     '''Parses a string into a query and query a node'''
 
@@ -960,8 +1163,6 @@ def __query_list(query_key,query_data,container,container_o):
     if query_key == 'remove':
         return Container(container.data.pop(int(query_data)))
 
-
-
     
 def query_cell(query, container_i, container_o):
     '''Parses a string into a query and query a cell'''
@@ -986,15 +1187,13 @@ def __query_cell(query_key,query_data,container,container_o):
     cell_container = []
 
     #lista de queries:
-    #edit<
+    #edit<data> -> change a cell data
 
 
-    if query_key == 'get_all':
-        ret = aux_lib.get_all_data(container.data)
+    if query_key == 'edit':
+        container.data.data = query_data
+        ret = container.data
         return Container(ret)
-
-
-
 
 def query_run(query, container_i,container_o,db):
     '''Runs a query depending on input object type'''
