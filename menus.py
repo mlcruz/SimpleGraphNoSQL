@@ -195,7 +195,7 @@ def access_table(stdscr,state_dict):
     curses.cbreak()
     curses.noecho()
 
-    str_access_menu = "[a-z]: Container containing a table object\n1:Query Table\n6:Set Container\n0:back"
+    str_access_menu = "[a-z]: Container containing a table object\n1:Query Table\n2:Set Container\n0:back"
     loc_access_menu = (0 ,0)
     set_container = ""
 
@@ -231,7 +231,7 @@ def access_table(stdscr,state_dict):
 
         elif chr(c) == '0':
             local_exit = True
-        elif chr(c) == '6':
+        elif chr(c) == '2':
             write_stdscr(stdscr,"Press any key to save as container key",(4,60))
             c = stdscr.getch()
             set_container = chr(c)
@@ -245,15 +245,33 @@ def access_table(stdscr,state_dict):
             stdscr.keypad(True)
             #restore_cursor(stdscr,state_dict)
             clear_input_area(stdscr)
-           
+            
+            str_query_1 = 'key_col;<null | col_name> ->Returns every key_col if null or(|) every cell in a key_col if not null\n'
+            str_query_2 = 'key_row;<null |a,b > -> Returns every Key if null | Every key from index a to b\n'
+            str_query_3 = "insert_cell;<y,x> ->Inserts output cell into table and returns the inserted cell\n"
+            str_query_final = 'get_cell;<y,x> -> Returns Cell at y,x'
+
+            str_query_all = str_query_1 + str_query_2 + str_query_3 + str_query_final
+            loc_query_all = (2,20)
+            
+
+            write_stdscr(stdscr,str_query_all,loc_query_all)
             write_stdscr(stdscr,"Enter Query. CTRL+G to exit. Control-H	to delete",(51,40))
             
             str_query = get_input(stdscr)
+
+            #Lista de queries:
+            #key_col;<null | col_name> -> Retorna todas colunas chave da tabela se nulo, ou todos os dados da coluna especificada
+            #key_row;<null |a,b > -> Retorna todas as chaves da tabela se nulo, ou todas as chaves de indice entre a e b
+            #get_cell;<y,x> -> Retorna celula na posicao y,x
+
+
+
             try:
                 state_dict['containers'][set_container] = query_table(str_query,state_dict['containers'][set_table],state_dict['containers'][set_container])
                 write_stdscr(stdscr,"Success!",(4,60))
             except:
-                write_stdscr(stdscr,"Failed to run query. Press any key to continue",(4,60))
+                write_stdscr(stdscr,"Failed to run query. Press any key to continue",(9,60))
                 stdscr.getch()
 
             draw_state(stdscr,state_dict)
@@ -605,22 +623,21 @@ def query_table(query, container_i, container_o):
     #Executa as queries sequencialmente 
     for item in query_list:
         (query_key,query_data)  = item.split(';')
-        container_o = __query_table(query_key,query_data,container_i)
+        container_o = __query_table(query_key,query_data,container_i,container_o)
     
     return container_o
 
     
-def __query_table(query_key,query_data,container):
-    '''Função auxiliar para executar uma query sobre o container recebido. Salva o resultado da query no proprio container'''
+def __query_table(query_key,query_data,container,container_o):
+    '''Função auxiliar para executar uma query sobre o container recebido. Salva o resultado da query no proprio container.'''
     
     cell_container = []
     #Lista de queries:
     #key_col;<null | col_name> -> Retorna todas colunas chave da tabela se nulo, ou todos os dados da coluna especificada
     #key_row;<null |a,b > -> Retorna todas as chaves da tabela se nulo, ou todas as chaves de indice entre a e b
     #get_cell;<y,x> -> Retorna celula na posicao y,x
+    #insert_cell;<y,x> ->Inserts output cell into table and returns the inserted cell
 
-    #key = 'key_col'
-    #key_col;<null | col_name> -> Retorna todas colunas chave da tabela se nulo, ou todos os dados da coluna especificada
     if query_key == 'key_col':
         if not bool(query_data):
             return Container(container.data.key_cols)
@@ -635,15 +652,29 @@ def __query_table(query_key,query_data,container):
 
             return Container(cell_container)
     #key_row;<null |a,b > -> Retorna todas as chaves da tabela se nulo, ou todas as chaves de indice entre a e b
-    if query_key =='key_row':
+    elif query_key =='key_row':
         if not bool(query_data):
-            return Container(container.key_row.child_nodes)
+            return Container(container.data.key_row.child_nodes)
         else:
             (a,b) = query_data.split(',')
-            for key,item in enumerate(container.key_row.child_nodes):
+            for key,item in enumerate(container.data.key_row.child_nodes):
                 if key >= int(a) and key < int(b):
                     cell_container.append(item)
             return Container(cell_container)
+
+    #get_cell;<y,x> -> Retorna celula na posicao y,x
+    elif query_key == 'get_cell':
+        (y,x) = query_data.split(',')
+        return Container(container.data.table_data[int(y)][int(x)])
+
+    elif query_key == 'insert_cell':
+        (y,x) = query_data.split(',')
+        container.data.table_data[int(y)][int(x)] = container_o.data
+        return Container(container.data.table_data[int(y)][int(x)])
+
+
+
+
                     
 
 
