@@ -809,8 +809,12 @@ def __query_db(query_key,query_data,container,container_o, db):
 
     #Lista de queries:
     #<trie> options : tables,key_rows,key_cols,super_key
-    #pre;<trie>!<string> -> Prefix search on DB.trie 
-    #get_all;<trie> ->Get all tables in a db
+    #pre;<trie>!<string> -> Prefix search on DB.trie
+    #suf;<trie>!<string> -> Suffix search on DB.trie
+    #reg;<trie>!<string> -> RegExp search on DB.trie
+    #get_all;<trie> ->Get all tables in a db.trie
+    #insert;<trie> -> Inserts input container into the trie(table only). Returns inserted table
+    
 
     '''Aux to query_db'''
     cell_container = []
@@ -827,9 +831,25 @@ def __query_db(query_key,query_data,container,container_o, db):
         #Trie selecionada
         ret = aux_lib.prefix_search(tries[q_trie],query_data)
         return Container(ret)
-    if query_key == 'get_all':
+
+    if query_key == 'reg':
+    #Trie selecionada
+        ret = aux_lib.regex_search(tries[q_trie],query_data)
+        return Container(ret)
+    
+    elif query_key == 'suf':
+        #Trie selecionada
+        ret = aux_lib.suffix_search(tries[q_trie],query_data)
+        return Container(ret)
+
+    elif query_key == 'get_all':
         ret = aux_lib.get_all_data(tries[q_trie].root)
         return Container(ret)
+
+    elif query_key == 'insert':
+        aux_lib.insert(container.data.table_label,container.data,tries[q_trie].root)
+        return container
+
         
 
 
