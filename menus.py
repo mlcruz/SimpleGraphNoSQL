@@ -78,6 +78,8 @@ class Container(object):
 
             self.name = "".join(list(data_string)[0:108])
             self.type = "Data_Dict"
+        else:
+            self.type = "Empty"
 
 ##Menus
 def start_menu(state_dict):
@@ -122,9 +124,6 @@ def start_menu(state_dict):
     
     state_dict['containers']['n'] = Container(aux_lib.walk_to(state_dict['db'].tables.root,'brasil: dispendio nacional em ciencia e tecnologia (c&t) por atividade'))
 
-    state_dict['containers']['g'] = Container(t.table_data[3][2].child_nodes)
-    state_dict['containers']['s'] = Container(t.table_data[1][1].child_nodes)
-    state_dict['containers']['k'] = Container(t.table_data[1][0].child_nodes)
     
 def main_menu(stdscr, state_dict):
     '''Função que representa o menu principal e seus estados'''
@@ -135,7 +134,7 @@ def main_menu(stdscr, state_dict):
 
     #Strings e locais
 
-    str_menu_principal = "[a-z]:Draw container\n1:Access Table\n2:Search DB\n3:Search Table\n9:Save Current DB\n-:clear table area\n0:Exit"
+    str_menu_principal = "[a-z]:Draw container\n1:Access Table\n2:Access Db\n3:Run Query\n9:Save Current DB\n-:clear table area\n0:Exit"
     loc_menu_principal = (0,0)
 
     str_saving = "Saving db...\n"
@@ -174,7 +173,7 @@ def main_menu(stdscr, state_dict):
         if chr(c) == '1':
             access_table(stdscr, state_dict)
         if chr(c) == '2':
-            search_db(stdscr, state_dict)
+            access_db(stdscr, state_dict)
         if chr(c) == '0':
             state_dict['f_exit'] = True
             local_exit = True
@@ -250,9 +249,10 @@ def access_table(stdscr,state_dict):
             str_query_2 = 'key_row;<null |a,b > -> Returns every Key if null | Every key from index a to b\n'
             str_query_3 = "insert_cell;<y,x> ->Inserts output cell into table and returns the inserted cell\n"
             str_query_4 = "delete_cell;<y,x> -> Deletes cell at X,y and returns the deleted cell\n"
+            str_query_5 = 'get_cells;<uy,ux,ly,lx> ->Gets a list containing the cells starting at <uy,ux> and ending at <ly,lx>\n'
             str_query_final = 'get_cell;<y,x> -> Returns Cell at y,x'
 
-            str_query_all = str_query_1 + str_query_2 + str_query_3 + str_query_4 + str_query_final
+            str_query_all = str_query_1 + str_query_2 + str_query_3 + str_query_4 +str_query_5+ str_query_final
             loc_query_all = (2,20)
             
 
@@ -274,16 +274,90 @@ def access_table(stdscr,state_dict):
             except:
                 write_stdscr(stdscr,"Failed to run query. Press any key to continue",(9,60))
                 stdscr.getch()
-
+            
             draw_state(stdscr,state_dict)
             
-def search_db(stdscr, state_dict):
+def access_db(stdscr, state_dict):
     '''Menu representando as opções de busca no banco de dados'''
 
-    curses.nocbreak()
-    curses.echo()
+    curses.cbreak()
+    curses.noecho()
 
-    str_menu_db = "1:Search Table trie\n2:Search Key_cols\n3:Seach Key_rows\n4:Search Super_keys"
+    str_access_menu = "[a-z]: Set output container  \n1:Query Db\n2:Set input container\n0:back"
+    loc_access_menu = (0 ,0)
+    set_container_i = ""
+    set_container_o = ""
+
+
+    str_output_container = "Output Container: []"
+    loc_output_container = (7,0)
+    str_input_container = "Input Container: []"
+    loc_input_container = (8,0)
+   
+    local_exit = False
+    while(local_exit == False):
+        clear_menu_area(stdscr)
+        write_stdscr(stdscr,str_output_container,loc_output_container)
+        write_stdscr(stdscr,str_input_container,loc_input_container)
+        write_stdscr(stdscr,str_access_menu,loc_access_menu)
+        c = stdscr.getch()
+
+        #Trata letras de a até z
+        if (c > 96) and (c < 123):           
+            set_container_o = chr(c)
+            str_output_container = "Output Container: [" + set_container_o+ "]"
+            write_stdscr(stdscr,str_output_container,loc_output_container)
+        
+        elif chr(c) == '1':
+            #Inicializa tratamento de querry
+            curses.nocbreak()
+            curses.echo()
+
+            stdscr.keypad(True)
+            #restore_cursor(stdscr,state_dict)
+            clear_input_area(stdscr)
+
+            write_stdscr(stdscr,"Enter Query",(51,40))
+
+            str_query = get_input(stdscr)
+            
+            #Se não existe container de saida
+            if not (set_container_o in state_dict['containers'].keys()):
+                state_dict['containers'][set_container_o] = Container("")
+            
+
+
+            try:
+                state_dict['containers'][set_container_o] = query_db(str_query,state_dict['containers'][set_container_i],state_dict['containers'][set_container_o],state_dict['db'])
+                write_stdscr(stdscr,"Success!",(4,60))
+            except:
+                write_stdscr(stdscr,"Failed to run query. Press any key to continue",(9,60))
+                stdscr.getch()
+            
+            draw_state(stdscr,state_dict)
+
+
+
+
+        elif chr(c) == '2':
+            write_stdscr(stdscr,"Press any key to save as container key",(4,60))
+            c = stdscr.getch()
+            if(chr(c) in state_dict['containers'].keys()):
+                set_container_i = chr(c)
+                str_input_container = "Input Container: ["+ set_container_i + ']'
+                draw_container(stdscr,state_dict['containers'][chr(c)])
+
+
+        elif chr(c) == '0':
+            local_exit = True
+            
+
+
+
+
+
+
+
 
 
 
@@ -620,7 +694,7 @@ def draw_container(stdscr, container):
             y_pos = y_pos + 1
 
 def query_table(query, container_i, container_o):
-    '''Parses a string into a querry table'''
+    '''Parses a string into a query and query a table'''
 
     #Queries são formatadas da seguinte maneira:
     # Separador de queries -> #
@@ -636,8 +710,7 @@ def query_table(query, container_i, container_o):
         container_o = __query_table(query_key,query_data,container_i,container_o)
     
     return container_o
-
-    
+  
 def __query_table(query_key,query_data,container,container_o):
     '''Função auxiliar para executar uma query sobre o container recebido. Salva o resultado da query no proprio container.'''
     
@@ -679,7 +752,6 @@ def __query_table(query_key,query_data,container,container_o):
         (y,x) = query_data.split(',')
         return Container(container.data.table_data[int(y)][int(x)])
 
-
     elif query_key == 'get_cells':
         (uy,ux,ly,lx) = query_data.split(',')
         offset_y = int(ly)-int(uy) + 1
@@ -689,10 +761,6 @@ def __query_table(query_key,query_data,container,container_o):
             for x in range (offset_x):
                 cell_container.append(container.data.table_data[int(uy)+y][int(ux)+x])
         return Container(cell_container)
-
-
-        
-        #return Container(container.data.table_data[int(y)][int(x)])
 
     elif query_key == 'insert_cell':
         (y,x) = query_data.split(',')
@@ -709,23 +777,63 @@ def __query_table(query_key,query_data,container,container_o):
         return ret
 
 
-
-
-                    
-
-
-
-
-
-
-
-
-
-
-
 def restore_cursor(stdscr,state_dict):
     stdscr.move((state_dict['loc_data_entry'])[0],(state_dict['loc_data_entry'])[1])
 
 
 def restore_cursor(stdscr):
     stdscr.move(52,0)
+
+def query_run(query, container_i,container_o):
+    '''Runs a query depending on input object type'''
+
+    if (container_i.type == "Table"):
+        container_o = query_table(query,container_i,container_o)
+    #elif (container_i.type == "Cell"):
+        
+
+
+    return container_o
+
+def query_db(query, container_i, container_o, db):
+    '''Parses a string into a query and query a table'''
+    query_list = query.split("#")
+
+    #Executa as queries sequencialmente 
+    for item in query_list:
+        (query_key,query_data)  = item.split(';')
+        container_o = __query_db(query_key,query_data,container_i,container_o, db)
+    return container_o
+
+def __query_db(query_key,query_data,container,container_o, db):
+
+    #Lista de queries:
+    #<trie> options : tables,key_rows,key_cols,super_key
+    #pre;<trie>!<string> -> Prefix search on DB.trie 
+    #get_all;<trie> ->Get all tables in a db
+
+    '''Aux to query_db'''
+    cell_container = []
+
+    if '!' not in query_data:
+        q_trie = query_data
+    else:
+        (q_trie, query_data) = query_data.split('!')
+
+    #Tries dict
+    tries = {'tables':db.tables,'key_rows':db.key_rows,'key_cols':db.key_cols,'super_key':db.super_key}
+
+    if query_key == 'pre':
+        #Trie selecionada
+        ret = aux_lib.prefix_search(tries[q_trie],query_data)
+        return Container(ret)
+    if query_key == 'get_all':
+        ret = aux_lib.get_all_data(tries[q_trie].root)
+        return Container(ret)
+        
+
+
+
+
+
+    
