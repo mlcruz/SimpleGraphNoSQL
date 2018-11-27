@@ -1,0 +1,22 @@
+Utilizando python 3.6 para windows 64 bits(não testei no linux, mas utilizei a curses para windows)
+
+
+1)instalar manualmente pelo pip os seguintes pacotes:
+
+curses - https://www.lfd.uci.edu/~gohlke/pythonlibs/#curses
+
+instalar pelo pip(PyPi) os seguintes pacotes:
+
+dill - https://pypi.org/project/dill/
+
+easygui -  https://pypi.org/project/easygui/
+
+xlrd - https://pypi.org/project/xlrd/
+
+regex - https://pypi.org/project/regex/
+
+curses.textpad 
+
+2)Executar main.py
+
+Opcional: Abrir o projeto pyproj no visual studio e executar
