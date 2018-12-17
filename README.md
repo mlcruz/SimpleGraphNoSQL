@@ -19,7 +19,7 @@ Files:
 
 ![File structure](https://raw.githubusercontent.com/mlcruz/SimpleGraphNoSQL/master/folders.png)
 
-
+Curses Interface:
 
 ![Main screen](https://raw.githubusercontent.com/mlcruz/SimpleGraphNoSQL/master/prog.png)
 
