@@ -8,7 +8,7 @@ So far i have implemented a very limited proof-of-concept subset of queries, and
 to be heavily refactored and optimized. This project originaly started as a final project for my "Data search and classification" 
 class, but its scope ended up being heavily expanded so i could experiment with graph dbs and managing states in memory.
 
-There is plenty of room for optimization, even if some data structures are (almost)optimal. The original lab report(in portugeuse) can be find in the relatorio.pdf file
+There is plenty of room for optimization, even if some data structures are (almost)optimal. The original lab report(in portugeuse) can be find in the relatorio.pdf file and includes some information about how the program works.
 
 
 
