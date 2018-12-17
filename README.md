@@ -13,9 +13,10 @@ There is plenty of room for optimization, even if some data structures are (almo
 
 Includes:curses, dill, easygui, xlrd, regex
 
-
-
 Files:
+
+
+
 ![File structure](https://raw.githubusercontent.com/mlcruz/SimpleGraphNoSQL/master/folders.png)
 
 
