@@ -12,5 +12,5 @@ There is plenty of room for optimization, even if some data structures are (almo
 
 
 
-
+![Tela de ajuda](https://raw.githubusercontent.com/mlcruz/SimpleGraphNoSQL/master/prog.png)
 
