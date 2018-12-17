@@ -15,7 +15,10 @@ Includes:curses, dill, easygui, xlrd, regex
 
 
 
+Files:
+![File structure](https://raw.githubusercontent.com/mlcruz/SimpleGraphNoSQL/master/prog.png)
 
 
-![Tela de ajuda](https://raw.githubusercontent.com/mlcruz/SimpleGraphNoSQL/master/prog.png)
+
+![Main screen](https://raw.githubusercontent.com/mlcruz/SimpleGraphNoSQL/master/prog.png)
 
