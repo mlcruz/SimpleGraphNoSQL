@@ -1,5 +1,5 @@
 # SimpleGraphNoSQL
-Python library implementing a simple NoSql database(+ curses interface based on a graph model, using excel files as source. 
+Python library implementing a simple NoSql database(+ curses interface) based on a graph model, using excel files as source. 
 
 The program takes a folder containing excel tables as source and generates a queryable, NoSQL graph database. The database
 can be accesed by a curses frontend, and uses modified B+ and Trie trees to index and order data. 
