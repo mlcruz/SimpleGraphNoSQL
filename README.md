@@ -11,6 +11,9 @@ class, but its scope ended up being heavily expanded so i could experiment with 
 There is plenty of room for optimization, even if some data structures are (almost)optimal. The original lab report(in portugeuse) can be find in the relatorio.pdf file and includes some information about how the program works.
 
 
+Includes:curses, dill, easygui, xlrd, regex
+
+
 
 
 
